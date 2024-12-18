@@ -63,8 +63,8 @@ public class HotbarManager : MonoBehaviour
 
             if (SceneManager.GetActiveScene().name == "ShopScene")
             {
-                slot.transform.Find("Texts").transform.Find("Action Name").GetComponent<TextMeshProUGUI>().text = FindAnyObjectByType<ShopManager>().GetActionDisplayName(action);
-                slot.transform.Find("Action Image").GetComponent<Image>().overrideSprite = FindAnyObjectByType<ShopManager>().GetActionImage(action);
+                slot.transform.Find("Texts").transform.Find("Action Name").GetComponent<TextMeshProUGUI>().text = FindAnyObjectByType<ShopManager>().FindItem(action).displayName;
+                slot.transform.Find("Action Image").GetComponent<Image>().overrideSprite = FindAnyObjectByType<ShopManager>().FindItem(action).image;
                 slot.transform.Find("Action Image").GetComponent<Image>().preserveAspect = true;
 
                 if (action.actionType == PlayerBase.ActionType.ACTIVE)
