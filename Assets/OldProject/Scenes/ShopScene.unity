@@ -255,85 +255,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 80152069}
   m_CullTransparentMesh: 1
---- !u!1001 &131626157
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 2102460365194555068, guid: 86b5e03058826fa47abc3c555286ee76, type: 3}
-      propertyPath: m_Name
-      value: Combat UI
-      objectReference: {fileID: 0}
-    - target: {fileID: 4445338213239201112, guid: 86b5e03058826fa47abc3c555286ee76, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5838785314503126080, guid: 86b5e03058826fa47abc3c555286ee76, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6117016437605025760, guid: 86b5e03058826fa47abc3c555286ee76, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 820.1922
-      objectReference: {fileID: 0}
-    - target: {fileID: 6117016437605025760, guid: 86b5e03058826fa47abc3c555286ee76, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 428.5551
-      objectReference: {fileID: 0}
-    - target: {fileID: 6117016437605025760, guid: 86b5e03058826fa47abc3c555286ee76, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 2.7597792
-      objectReference: {fileID: 0}
-    - target: {fileID: 6117016437605025760, guid: 86b5e03058826fa47abc3c555286ee76, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6117016437605025760, guid: 86b5e03058826fa47abc3c555286ee76, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6117016437605025760, guid: 86b5e03058826fa47abc3c555286ee76, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6117016437605025760, guid: 86b5e03058826fa47abc3c555286ee76, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6117016437605025760, guid: 86b5e03058826fa47abc3c555286ee76, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6117016437605025760, guid: 86b5e03058826fa47abc3c555286ee76, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6117016437605025760, guid: 86b5e03058826fa47abc3c555286ee76, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6761013163731173553, guid: 86b5e03058826fa47abc3c555286ee76, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6932886324099496443, guid: 86b5e03058826fa47abc3c555286ee76, type: 3}
-      propertyPath: m_Player
-      value: 
-      objectReference: {fileID: 435037521}
-    - target: {fileID: 9204683591655732369, guid: 86b5e03058826fa47abc3c555286ee76, type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 1254678791811635064, guid: 86b5e03058826fa47abc3c555286ee76, type: 3}
-    - {fileID: 2230147773704059257, guid: 86b5e03058826fa47abc3c555286ee76, type: 3}
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 86b5e03058826fa47abc3c555286ee76, type: 3}
 --- !u!1 &135505432
 GameObject:
   m_ObjectHideFlags: 0
@@ -1217,15 +1138,124 @@ MonoBehaviour:
   player: {fileID: 435037521}
   boughtItem: {fileID: 1195563168}
   currentXP: {fileID: 1208965283}
-  moveImage: {fileID: 21300000, guid: 80a31360147518a4c878052c987d2472, type: 3}
-  gunImage: {fileID: 21300000, guid: 04c9e5448c757a54a9482dd91faef38a, type: 3}
-  shotgunImage: {fileID: 21300000, guid: 982cfee97721db245a0c0ea21a8fbddc, type: 3}
-  healImage: {fileID: 21300000, guid: 800fb34dc71becd4f98a6c0c7bca341b, type: 3}
-  recoveryImage: {fileID: 21300000, guid: c736331b63dca6144ad0525e3e96d8da, type: 3}
-  speedUpImage: {fileID: 21300000, guid: b9bc929fd54993045b339890237facb5, type: 3}
-  restImage: {fileID: 21300000, guid: 252812397870d2842ba9b8bd138af9f6, type: 3}
-  maxHPImage: {fileID: 21300000, guid: 4cb56cf2a0681824facd7f87a5ac7886, type: 3}
-  manaImage: {fileID: 21300000, guid: d34f683dd9279764eb05181899c20099, type: 3}
+  items:
+  - action:
+      actionType: 0
+      action: 0
+      player: {fileID: 0}
+      key: 0
+      style:
+        prefab: {fileID: 0}
+        range: 0
+        damage: 0
+      cost: 0
+    image: {fileID: 21300000, guid: 80a31360147518a4c878052c987d2472, type: 3}
+    basePrice: 10
+    displayName: Move
+  - action:
+      actionType: 0
+      action: 1
+      player: {fileID: 0}
+      key: 0
+      style:
+        prefab: {fileID: 4841340973275302747, guid: 8c280260248f7e449925f58bc503ee3b, type: 3}
+        range: 0
+        damage: 0
+      cost: 0
+    image: {fileID: 21300000, guid: 04c9e5448c757a54a9482dd91faef38a, type: 3}
+    basePrice: 0
+    displayName: Gun
+  - action:
+      actionType: 0
+      action: 1
+      player: {fileID: 0}
+      key: 0
+      style:
+        prefab: {fileID: 4841340973275302747, guid: 10864d5b051bdc44e928dd42003a1950, type: 3}
+        range: 0
+        damage: 0
+      cost: 0
+    image: {fileID: 21300000, guid: 982cfee97721db245a0c0ea21a8fbddc, type: 3}
+    basePrice: 0
+    displayName: Shotgun
+  - action:
+      actionType: 1
+      action: 2
+      player: {fileID: 0}
+      key: 0
+      style:
+        prefab: {fileID: 0}
+        range: 0
+        damage: 0
+      cost: 0
+    image: {fileID: 21300000, guid: 800fb34dc71becd4f98a6c0c7bca341b, type: 3}
+    basePrice: 0
+    displayName: Heal
+  - action:
+      actionType: 2
+      action: 5
+      player: {fileID: 0}
+      key: 0
+      style:
+        prefab: {fileID: 0}
+        range: 0
+        damage: 0
+      cost: 0
+    image: {fileID: 21300000, guid: c736331b63dca6144ad0525e3e96d8da, type: 3}
+    basePrice: 0
+    displayName: Recovery
+  - action:
+      actionType: 2
+      action: 4
+      player: {fileID: 0}
+      key: 0
+      style:
+        prefab: {fileID: 0}
+        range: 0
+        damage: 0
+      cost: 0
+    image: {fileID: 21300000, guid: 252812397870d2842ba9b8bd138af9f6, type: 3}
+    basePrice: 0
+    displayName: Rest
+  - action:
+      actionType: 2
+      action: 8
+      player: {fileID: 0}
+      key: 0
+      style:
+        prefab: {fileID: 0}
+        range: 0
+        damage: 0
+      cost: 0
+    image: {fileID: 21300000, guid: 4cb56cf2a0681824facd7f87a5ac7886, type: 3}
+    basePrice: 0
+    displayName: Max HP UP
+  - action:
+      actionType: 2
+      action: 7
+      player: {fileID: 0}
+      key: 0
+      style:
+        prefab: {fileID: 0}
+        range: 0
+        damage: 0
+      cost: 0
+    image: {fileID: 21300000, guid: d34f683dd9279764eb05181899c20099, type: 3}
+    basePrice: 0
+    displayName: Mana Potion
+  - action:
+      actionType: 2
+      action: 6
+      player: {fileID: 0}
+      key: 0
+      style:
+        prefab: {fileID: 0}
+        range: 0
+        damage: 0
+      cost: 0
+    image: {fileID: 21300000, guid: b9bc929fd54993045b339890237facb5, type: 3}
+    basePrice: 0
+    displayName: Speed UP
   rerollPrice: 1
 --- !u!114 &1232424836
 MonoBehaviour:
@@ -2220,4 +2250,3 @@ SceneRoots:
   - {fileID: 1247574952}
   - {fileID: 2105453033}
   - {fileID: 1594014333}
-  - {fileID: 131626157}
