@@ -346,6 +346,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioMixer: {fileID: 24100000, guid: 45b75f7574a90e4458d75870f0902f17, type: 2}
+  masterVolumeSlider: {fileID: 0}
+  soundFXVolumeSlider: {fileID: 0}
+  musicVolumeSlider: {fileID: 0}
 --- !u!4 &533759385
 Transform:
   m_ObjectHideFlags: 0
