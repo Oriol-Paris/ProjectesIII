@@ -32,6 +32,7 @@ public class EnemyMovement : MonoBehaviour
     void Update()
     {
         moveTime = Time.deltaTime * velocity;
+       
 
         if (enemyStats.isAlive)
         {
@@ -45,7 +46,7 @@ public class EnemyMovement : MonoBehaviour
             {
                 this.GetComponent<Animator>().SetBool("isMoving", true);
                 PlayerPos = Player.GetPosition();
-                transform.position = Vector3.MoveTowards(transform.position, PlayerPos, moveTime);
+                transform.position = Vector3.MoveTowards(transform.position, PlayerPos, moveTime); //Bad usage of moveTime, using moveTime as distance when it's actually a velocity (check line 34)
             }
             else
             {

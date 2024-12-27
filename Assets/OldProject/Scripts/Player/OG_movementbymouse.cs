@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class OG_MovementByMouse : MonoBehaviour
@@ -21,6 +22,9 @@ public class OG_MovementByMouse : MonoBehaviour
     private CombatManager combatManager;
     private PlayerActionManager playerActionManager;
 
+    private List<Vector3> curvePointsWorldRef;
+    private List<Vector3> curvePointsPlayerRef;
+
     // Timer variables
     [SerializeField] public float movementTimeLimit = 5f; // Adjustable time limit
     public float timer;
@@ -29,6 +33,8 @@ public class OG_MovementByMouse : MonoBehaviour
 
     void Start()
     {
+        curvePointsPlayerRef = new List<Vector3>();
+
         this.enabled = false;
         placeSelected = false;
         playerPosition = transform.position;
@@ -55,6 +61,8 @@ public class OG_MovementByMouse : MonoBehaviour
         mousePosition = Camera.main.ScreenToWorldPoint(new Vector3(mousePosition.x, mousePosition.y, 10));
         mousePosition.z = 0;
 
+        
+
         if (Input.GetMouseButtonDown(0) && !placeSelected)
         {
             positionDesired = mousePosition;
@@ -70,6 +78,7 @@ public class OG_MovementByMouse : MonoBehaviour
 
             t = 0;
             controlPoint = (playerPosition + positionDesired) / 2 + new Vector3(0, -1f, 0);
+            
             lineRenderer.enabled = true;
         }
 
@@ -83,6 +92,27 @@ public class OG_MovementByMouse : MonoBehaviour
                 mousePosition = playerPosition + direction * range;
             }
 
+            
+            Vector3 controlPoint1 = (playerPosition + mousePosition) / 2 + new Vector3(0, -1f, 0);
+            Vector3 controlPoint2 = (playerPosition + mousePosition) / 4 + new Vector3(0, -1f, 0);
+            Vector3 controlPoint3 = ((playerPosition + mousePosition) / 4) * 3 + new Vector3(0, -1f, 0);
+            Vector3 controlPoint4 = (playerPosition + mousePosition) + new Vector3(0, -1f, 0);
+            if (!curvePointsPlayerRef.Contains(controlPoint1))
+            {
+                curvePointsPlayerRef.Add(controlPoint1);
+                curvePointsPlayerRef.Add(controlPoint2);
+                curvePointsPlayerRef.Add(controlPoint3);
+                curvePointsPlayerRef.Add(controlPoint4);
+            }
+            else
+            {
+                curvePointsPlayerRef[0] = controlPoint1;
+                curvePointsPlayerRef[1] = controlPoint2;
+                curvePointsPlayerRef[2] = controlPoint3;
+                curvePointsPlayerRef[3] = controlPoint4;
+                
+            }
+            Debug.Log(curvePointsPlayerRef[0].x);
             UpdateLineRenderer(mousePosition);
         }
 
@@ -131,6 +161,7 @@ public class OG_MovementByMouse : MonoBehaviour
             t = Mathf.Clamp01(t + tIncrement);
 
             Vector3 newPosition = Vector3.MoveTowards(transform.position, BezierCurve(t, playerPosition, controlPoint, destination), velocity);
+            //for (; )
             playerActionManager.UpdateAction(newPosition, t);
 
             if (t >= 1f)
