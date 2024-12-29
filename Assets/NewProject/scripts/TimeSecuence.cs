@@ -4,8 +4,10 @@ using UnityEngine;
 public class TimeSecuence : MonoBehaviour
 {
     [SerializeField]
-    private float actualTime;
-    float totalTime = 3;
+    public float actualTime;
+    public float totalTime = 3;
+
+    public MovPlayer movPlayer;
 
     public GameObject player;
 
@@ -31,10 +33,16 @@ public class TimeSecuence : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Space)) AddAction("shoot");
             if (Input.GetKeyDown(KeyCode.E)) AddAction("pick_up");
+            if(Input.GetKeyDown(KeyCode.W))
+            {
+                Vector3 targetPosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10));
+                float rang = 10f;
+                movPlayer.StartMov(targetPosition, rang);
+            }
         }
 
 
-        if (Input.GetKeyDown(KeyCode.Return))
+        if (Input.GetKeyDown(KeyCode.LeftControl))
         {
             PassTurm();
         }
@@ -51,7 +59,7 @@ public class TimeSecuence : MonoBehaviour
         }
         else
         {
-            Debug.Log("No hay tiempo suficiente para esta acción.");
+            Debug.Log("tus muertos");
         }
     }
 
