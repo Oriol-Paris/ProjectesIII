@@ -1,4 +1,6 @@
+using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class TimeSecuence : MonoBehaviour
@@ -6,23 +8,32 @@ public class TimeSecuence : MonoBehaviour
     [SerializeField]
     public float actualTime;
     public float totalTime = 3;
+    float rang = 10f;
+
+    public Vector3 lastPosition;
 
     public MovPlayer movPlayer;
 
     public GameObject player;
 
+    public shootPlayer shootPl;
+
     private List<string> actions = new List<string>();
+
+    private List<Vector3> movPosiotion = new List<Vector3>();
 
     private Dictionary<string, float> actionCosts = new Dictionary<string, float>
     {
        
         { "shoot", 0.75f },
-        { "pick_up", 1.0f }
+        { "pick_up", 1.0f },
+        { "move", 0.0f }
     };
 
     void Start()
     {
         actualTime = totalTime;
+        lastPosition = transform.position;
     }
 
    
@@ -31,13 +42,22 @@ public class TimeSecuence : MonoBehaviour
 
         if (actualTime > 0)
         {
-            if (Input.GetKeyDown(KeyCode.Space)) AddAction("shoot");
-            if (Input.GetKeyDown(KeyCode.E)) AddAction("pick_up");
-            if(Input.GetKeyDown(KeyCode.W))
+            if (Input.GetKeyDown(KeyCode.Space)&& AddAction("shoot"))
             {
-                Vector3 targetPosition = Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10));
-                float rang = 10f;
-                movPlayer.StartMov(targetPosition, rang);
+
+                shootPl.PreShoot(lastPosition);
+            }
+
+            
+           
+            if(Input.GetKeyDown(KeyCode.W) && AddAction("move"))
+            {
+               
+                Vector3 targetPosition = ( Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10)));
+                movPlayer.PreStartMov(lastPosition, targetPosition,rang);
+                lastPosition = targetPosition;
+
+
             }
         }
 
@@ -48,43 +68,68 @@ public class TimeSecuence : MonoBehaviour
         }
     }
 
-    void AddAction(string action)
+    bool AddAction(string action)
     {
         if (actualTime >= actionCosts[action])
         {
             actions.Add(action);
             actualTime -= actionCosts[action];
-          
+          return true;
           
         }
         else
         {
             Debug.Log("tus muertos");
+            return false;
         }
     }
 
-    void ExecuteActions()
+    IEnumerator ExecuteActions()
     {
+        int movCount = 0;
+        int shootCount = 0;
+       
         foreach (string action in actions)
         {
+          
             switch (action)
             {
                 
                 case "shoot":
+
                     Debug.Log("¡Disparo!");
+                    shootPl.Shoot(shootCount);
+                    yield return new WaitForSeconds(0.75f);
+                    shootCount++;
                     break;
                 case "pick_up":
                     Debug.Log("Objeto recogido");
                     break;
+                case "move":
+
+                  
+                  
+                    while (movPlayer.t < 1f) // Espera a que termine el movimiento
+                    {
+                       
+                        movPlayer.UpdateMovement(movCount);
+                        yield return null; // Espera un frame
+                    }
+                    movPlayer.StopMovment();
+                    Debug.Log(movCount);
+                    movCount++;
+                    break;
             }
         }
         actions.Clear();
+       
     }
 
 
     void PassTurm()
     {
-        ExecuteActions();
+        Debug.Log("aaaaaaa");
+        StartCoroutine(ExecuteActions());
         actualTime = totalTime;
     }
 }

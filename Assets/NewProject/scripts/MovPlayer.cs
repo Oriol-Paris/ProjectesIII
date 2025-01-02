@@ -1,4 +1,7 @@
+using System;
 using System.Collections.Generic;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class MovPlayer : MonoBehaviour
@@ -7,7 +10,7 @@ public class MovPlayer : MonoBehaviour
     public Vector3 mousePosition;
     public Vector3 positionDesired;
 
-    public bool isMoving;
+  
     public float t;
     [SerializeField] private float maxDistance = 10f; 
     [SerializeField] private float velocity = 5f;
@@ -16,60 +19,44 @@ public class MovPlayer : MonoBehaviour
     
     public TimeSecuence timeSceuence;
 
-    private float currentTime;
+    private float currentTime = 3;
 
 
     private Vector3 controlPoint;
+
+    private List<Tuple<Vector3, Vector3, Vector3>> MovList = new List<Tuple<Vector3, Vector3, Vector3>>();
+
+    private List<LineRenderer> lineList = new List<LineRenderer>();
+
+   
 
 
     void Start()
     {
         playerPosition = transform.position;
-        lineRenderer.enabled = false;
+       
         t = 0;
-        currentTime = timeSceuence.totalTime;
+       
     }
 
     void Update()
     {
-        if (isMoving)
-        {
-            UpdateMovement();
-        }
+     
     }
 
-
-    public void StartMov(Vector3 targetPosition, float rang)
+    public void PreStartMov(Vector3 lastPosition,Vector3 targetPosition, float rang)
     {
-        playerPosition = transform.position;
-
-        float distanceToTarget = Vector3.Distance(playerPosition, targetPosition);
-        if(distanceToTarget > rang)
-        {
-            Vector3 direction = (targetPosition - playerPosition).normalized;
-            targetPosition = playerPosition + direction * rang;
-        }
-
-        positionDesired = targetPosition;
-        controlPoint = (playerPosition + positionDesired) / 2 + new Vector3(0, -1f, 0);
-        float timeRequired = CalculateTiemConsum(Vector3.Distance(playerPosition, positionDesired));
-        Debug.Log (timeRequired);
-        if (currentTime >= timeRequired)
-        {
-            currentTime -= timeRequired;
-
-            UpdateLineRenderer(playerPosition, controlPoint, positionDesired);
-            lineRenderer.enabled = true;
-            isMoving = true;
-            t = 0;
-        }
-
-        else
-        {
-            Debug.Log("se te quedo larga XD");
-        }
+        CanWalk(lastPosition, targetPosition, rang);
     }
 
+
+    public void StartMov()
+    {
+      
+    }
+
+
+   
 
     private float CalculateTiemConsum(float dist)
     {
@@ -79,29 +66,39 @@ public class MovPlayer : MonoBehaviour
         return Mathf.Clamp((dist / maxDist) * timeSceuence.totalTime, 0, timeSceuence.totalTime);
     }
 
-    private void UpdateMovement()
+    public void UpdateMovement(int movCount)
     {
-        float distanceToTarget = Vector3.Distance(playerPosition, positionDesired);
-        float tIncrement = (velocity * Time.deltaTime) / distanceToTarget;
-        t = Mathf.Clamp01(t + tIncrement);
+       
+            var firstItem = MovList[movCount];
+            Vector3 _playerPosition = firstItem.Item1;
+            Vector3 _controlPoint = firstItem.Item2;
+            Vector3 _positionDesired = firstItem.Item3;
 
-        Vector3 newPosition = BezierCurve(t, playerPosition, controlPoint, positionDesired);
-        transform.position = newPosition;
 
-        if(t >= 1f)
-        {
-            StopMovment();
-        }
+            float distanceToTarget = Vector3.Distance(_playerPosition, _positionDesired);
+            float tIncrement = (velocity * Time.deltaTime) / distanceToTarget;
+
+            t = Mathf.Clamp01(t + tIncrement);
+
+            Vector3 newPosition = BezierCurve(t, _playerPosition, _controlPoint, _positionDesired);
+            transform.position = newPosition;
 
         
+            Directorio.Apuntar(gameObject, transform.position, _positionDesired);
+
+
+
+
+
     }
 
-    private void StopMovment()
+    public void StopMovment()
     {
-        isMoving = false;
-        t = 0;
-        lineRenderer.enabled=false;
-        playerPosition = transform.position;
+       
+         t = 0f;
+        LineRenderer.Destroy(lineList[0]);
+        lineList.RemoveAt(0);
+
         timeSceuence.actualTime = currentTime;
     }
 
@@ -109,9 +106,21 @@ public class MovPlayer : MonoBehaviour
 
     private void UpdateLineRenderer(Vector3 p0, Vector3 p1, Vector3 p2)
     {
+       
+        LineRenderer newLineRenderer = Instantiate(lineRenderer, p0, Quaternion.identity);
+        newLineRenderer.transform.SetParent(transform);
+
+        lineList.Add(newLineRenderer);
+
+
         List<Vector3> smoothCurvePoints = GenerateBezierCurve(p0, p1, p2, curveResolution);
-        lineRenderer.positionCount = smoothCurvePoints.Count;
-        lineRenderer.SetPositions(smoothCurvePoints.ToArray());
+
+       
+        newLineRenderer.positionCount = smoothCurvePoints.Count;
+        newLineRenderer.SetPositions(smoothCurvePoints.ToArray());
+
+      
+        
     }
 
 
@@ -141,5 +150,42 @@ public class MovPlayer : MonoBehaviour
         p += 2 * u * t * p1;
         p += tt * p2;
         return p;
+    }
+
+
+
+    private void CanWalk(Vector3 lastPosition, Vector3 targetPosition, float rang)
+    {
+        playerPosition = lastPosition;
+        currentTime = timeSceuence.actualTime;
+
+        float distanceToTarget = Vector3.Distance(playerPosition, targetPosition);
+        if (distanceToTarget > rang)
+        {
+            Vector3 direction = (targetPosition - playerPosition).normalized;
+            targetPosition = playerPosition + direction * rang;
+        }
+
+        positionDesired = targetPosition;
+        controlPoint = (playerPosition + positionDesired) / 2 + new Vector3(0, -1f, 0);
+        float timeRequired = CalculateTiemConsum(Vector3.Distance(playerPosition, positionDesired));
+        Debug.Log(timeRequired);
+        if (currentTime >= timeRequired)
+        {
+            currentTime -= timeRequired;
+
+            UpdateLineRenderer(playerPosition, controlPoint, positionDesired);
+           
+          
+           
+            MovList.Add(Tuple.Create(playerPosition, controlPoint, positionDesired));
+           
+            timeSceuence.actualTime = currentTime;
+        }
+
+        else
+        {
+            Debug.Log("se te quedo larga XD");
+        }
     }
 }
