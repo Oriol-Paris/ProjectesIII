@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class OG_MovementByMouse : MonoBehaviour
@@ -9,258 +8,136 @@ public class OG_MovementByMouse : MonoBehaviour
     public Vector3 playerPosition;
     public bool placeSelected;
     public bool isMoving;
+    public bool isDragging;
     public bool isResting;
     public float t; // Parameter to control position along the curve
     [SerializeField] public float velocity; // Speed in units per second
     [SerializeField] LineRenderer lineRenderer;
-    public Vector3 controlPoint;
-    [SerializeField] public int curveResolution = 20; // Higher number for smoother curve in LineRenderer
-    private float playerVelocity;
-    private float bulletVelocity;
+    [SerializeField] public int curveResolution = 20; // Resolution for curve smoothness
     [SerializeField] private PlayerBase playerBase;
 
     private CombatManager combatManager;
     private PlayerActionManager playerActionManager;
-
-    private List<Vector3> curvePointsWorldRef;
-    private List<Vector3> curvePointsPlayerRef;
+    private List<Vector3> curvePoints; // Points defining the curve
+    private List<BulletPrefab> bullets = new List<BulletPrefab>();
 
     // Timer variables
-    [SerializeField] public float movementTimeLimit = 5f; // Adjustable time limit
+    [SerializeField] public float movementTimeLimit = 5f;
     public float timer;
-
-    private List<BulletPrefab> bullets = new List<BulletPrefab>();
 
     void Start()
     {
-        curvePointsPlayerRef = new List<Vector3>();
-
-        this.enabled = false;
+        curvePoints = new List<Vector3>();
         placeSelected = false;
         playerPosition = transform.position;
-
-        playerVelocity = velocity;
-        playerBase = GetComponent<PlayerBase>();
-        bulletVelocity = playerVelocity;
-
-        combatManager = FindAnyObjectByType<CombatManager>();
-        playerActionManager = GetComponent<PlayerActionManager>();
-
-        timer = movementTimeLimit; // Initialize timer
-        this.enabled = true;
     }
 
     void Update()
     {
-        if (combatManager != null && combatManager.allEnemiesDead)
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray, out RaycastHit hit))
         {
-            return; // Do not allow any mouse interactions if victory condition is met
+            mousePosition = hit.point;
         }
 
-        mousePosition = Input.mousePosition;
-        mousePosition = Camera.main.ScreenToWorldPoint(new Vector3(mousePosition.x, mousePosition.y, 10));
-        mousePosition.z = 0;
-
-        
-
-        if (Input.GetMouseButtonDown(0) && !placeSelected)
+        if (Input.GetMouseButtonDown(0))
         {
+            // Define initial straight line trajectory
+            isDragging = false;
+            placeSelected = false;
             positionDesired = mousePosition;
-            playerPosition = transform.position;
 
-            float range = playerBase.GetRange();
-            float distanceToTarget = Vector3.Distance(playerPosition, positionDesired);
-            if (distanceToTarget > range)
-            {
-                Vector3 direction = (positionDesired - playerPosition).normalized;
-                positionDesired = playerPosition + direction * range;
-            }
+            curvePoints.Clear();
+            curvePoints.Add(playerPosition);
+            curvePoints.Add(positionDesired);
 
-            t = 0;
-            controlPoint = (playerPosition + positionDesired) / 2 + new Vector3(0, -1f, 0);
-            
-            lineRenderer.enabled = true;
+            UpdateLineRenderer();
         }
 
-        if (Input.GetMouseButton(0) && !placeSelected)
+        if (Input.GetMouseButton(0))
         {
-            float range = playerBase.GetRange();
-            float distanceToTarget = Vector3.Distance(playerPosition, mousePosition);
-            if (distanceToTarget > range)
-            {
-                Vector3 direction = (mousePosition - playerPosition).normalized;
-                mousePosition = playerPosition + direction * range;
-            }
-
-            
-            Vector3 controlPoint1 = (playerPosition + mousePosition) / 2 + new Vector3(0, -1f, 0);
-            Vector3 controlPoint2 = (playerPosition + mousePosition) / 4 + new Vector3(0, -1f, 0);
-            Vector3 controlPoint3 = ((playerPosition + mousePosition) / 4) * 3 + new Vector3(0, -1f, 0);
-            Vector3 controlPoint4 = (playerPosition + mousePosition) + new Vector3(0, -1f, 0);
-            if (!curvePointsPlayerRef.Contains(controlPoint1))
-            {
-                curvePointsPlayerRef.Add(controlPoint1);
-                curvePointsPlayerRef.Add(controlPoint2);
-                curvePointsPlayerRef.Add(controlPoint3);
-                curvePointsPlayerRef.Add(controlPoint4);
-            }
-            else
-            {
-                curvePointsPlayerRef[0] = controlPoint1;
-                curvePointsPlayerRef[1] = controlPoint2;
-                curvePointsPlayerRef[2] = controlPoint3;
-                curvePointsPlayerRef[3] = controlPoint4;
-                
-            }
-            Debug.Log(curvePointsPlayerRef[0].x);
-            UpdateLineRenderer(mousePosition);
+            isDragging = true;
+            UpdateCurve();
+            UpdateLineRenderer();
         }
 
-        if (Input.GetMouseButtonUp(0) && !isMoving)
+        if (Input.GetMouseButtonUp(0))
         {
-            positionDesired = mousePosition;
-            float range = playerBase.GetRange();
-            float distanceToTarget = Vector3.Distance(playerPosition, positionDesired);
-            if (distanceToTarget > range)
-            {
-                Vector3 direction = (positionDesired - playerPosition).normalized;
-                positionDesired = playerPosition + direction * range;
-                placeSelected = true;
-                lineRenderer.enabled = false;
-            }
-            else
-            {
-                positionDesired = mousePosition;
-                placeSelected = true;
-                lineRenderer.enabled = false;
-            }
+            placeSelected = true;
+            isDragging = false;
+            t = 0f;
         }
 
         if (placeSelected)
         {
-            playerBase.SetInAction(true);
-            isMoving = true;
-            lineRenderer.enabled = false;
-
-            Vector3 destination = positionDesired;
-            RaycastHit hit;
-
-            if (destination.x < playerPosition.x)
-                playerBase.GetComponent<SpriteRenderer>().flipX = true;
-            else
-                playerBase.GetComponent<SpriteRenderer>().flipX = false;
-
-            if (Physics.Raycast(playerPosition, (destination - playerPosition).normalized, out hit, Vector3.Distance(playerPosition, destination)))
-            {
-                destination = hit.point;
-            }
-
-            float distanceToTarget = Vector3.Distance(playerPosition, destination);
-            float tIncrement = (velocity * Time.deltaTime) / distanceToTarget;
-
-            t = Mathf.Clamp01(t + tIncrement);
-
-            Vector3 newPosition = Vector3.MoveTowards(transform.position, BezierCurve(t, playerPosition, controlPoint, destination), velocity);
-            //for (; )
-            playerActionManager.UpdateAction(newPosition, t);
-
-            if (t >= 1f)
-            {
-                StopMovement();
-            }
-            else
-            {
-                timer -= Time.deltaTime; // Decrease timer
-                if (timer <= 0f)
-                {
-                    StopMovement();
-                }
-            }
-        }
-        else if (!isMoving && !placeSelected)
-        {
-            // Resume all bullets when player starts moving again
-            foreach (var bullet in bullets)
-            {
-                if(bullet != null)
-                bullet.Resume();
-            }
-        }
-
-        // Check for rest action key press (W)
-        if (Input.GetKeyUp(KeyCode.W) && !placeSelected)
-        {
-            placeSelected = true;
-            t = 0;
-            isResting = true;
-            isMoving = true;
-            timer = movementTimeLimit+.5f; // Reset timer
-            placeSelected = true;
-        }
-
-        // Handle the rest action countdown
-        if (isResting && isMoving && placeSelected && timer > 0f)
-        {
-            t = 0;
-            timer -= Time.deltaTime; // Decrease timer
-            if (timer < 0f)
-            {
-                ExecuteRestAction();
-                StopMovement();
-            }
+            MoveAlongCurve();
         }
     }
 
-    private void StopMovement()
+    private void UpdateCurve()
     {
-        isResting = false;
-        playerBase.SetInAction(false);
-        placeSelected = false;
-        isMoving = false;
-        playerPosition = transform.position;
-        t = 1;
-        timer = movementTimeLimit; // Reset timer
-        playerActionManager.ResetFlags();
+        if (curvePoints.Count < 2) return;
 
-        // Pause all bullets
-        foreach (var bullet in bullets)
+        // Dynamically adjust the middle point to create a curve
+        Vector3 midPoint = (curvePoints[0] + curvePoints[curvePoints.Count - 1]) / 2;
+        Vector3 direction = (mousePosition - midPoint).normalized;
+
+        // Adjust the midpoint based on mouse movement to create curvature
+        float curveIntensity = Vector3.Distance(curvePoints[0], mousePosition) * 0.5f;
+        midPoint += direction * curveIntensity;
+
+        // Update curve points
+        if (curvePoints.Count == 3)
         {
-            if(bullet != null)
-            bullet.Pause();
+            curvePoints[1] = midPoint;
+        }
+        else if (curvePoints.Count > 3)
+        {
+            curvePoints[curvePoints.Count - 2] = midPoint;
+        }
+        else
+        {
+            curvePoints.Insert(1, midPoint);
         }
     }
 
-    private void UpdateLineRenderer(Vector3 targetPosition)
+    private void UpdateLineRenderer()
     {
-        float curveIntensity = Mathf.Clamp(Vector3.Distance(playerPosition, targetPosition) / 100f, 0, 2f);
-        controlPoint = positionDesired + new Vector3(0, -curveIntensity, 0);
-
-        List<Vector3> smoothCurvePoints = GenerateBezierCurve(playerPosition, controlPoint, targetPosition, curveResolution);
-        lineRenderer.positionCount = smoothCurvePoints.Count;
-        lineRenderer.SetPositions(smoothCurvePoints.ToArray());
+        lineRenderer.enabled = true;
+        lineRenderer.positionCount = curvePoints.Count;
+        lineRenderer.SetPositions(curvePoints.ToArray());
     }
 
-    private List<Vector3> GenerateBezierCurve(Vector3 p0, Vector3 p1, Vector3 p2, int resolution)
+    private void MoveAlongCurve()
     {
-        List<Vector3> points = new List<Vector3>();
-        for (int i = 0; i <= resolution; i++)
+        if (t >= 1f)
         {
-            float t = i / (float)resolution;
-            points.Add(BezierCurve(t, p0, p1, p2));
+            // Stop movement when reaching the end of the curve
+            placeSelected = false;
+            isMoving = false;
+            playerPosition = transform.position;
+            return;
         }
-        return points;
+
+        t += velocity * Time.deltaTime;
+
+        // Interpolate along the curve
+        Vector3 newPosition = CalculateQuadraticBezierPoint(t, curvePoints[0], curvePoints[1], curvePoints[2]);
+        transform.position = newPosition;
     }
 
-    private Vector3 BezierCurve(float t, Vector3 p0, Vector3 p1, Vector3 p2)
+    private Vector3 CalculateQuadraticBezierPoint(float t, Vector3 p0, Vector3 p1, Vector3 p2)
     {
+        // Quadratic Bezier formula
         float u = 1 - t;
         float tt = t * t;
         float uu = u * u;
 
-        Vector3 p = uu * p0;
-        p += 2 * u * t * p1;
-        p += tt * p2;
-        return p;
+        Vector3 point = uu * p0; // (1-t)^2 * p0
+        point += 2 * u * t * p1; // 2(1-t)t * p1
+        point += tt * p2; // t^2 * p2
+
+        return point;
     }
 
     public bool GetIsMoving() { return isMoving; }
@@ -285,7 +162,7 @@ public class OG_MovementByMouse : MonoBehaviour
             {
                 isMoving = false;
                 positionDesired = transform.position;
-                t = 1;
+                t = 1f;
             }
         }
     }

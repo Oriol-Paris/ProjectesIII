@@ -2,10 +2,11 @@ using UnityEngine;
 
 public class PathPreview : MonoBehaviour
 {
-    public Vector3 mousePosition; // Posición del ratón en el espacio mundial
+    public Vector3 mousePositionWorld; // Posición del ratón proyectada al espacio mundial
     public Vector3 playerPosition; // Posición actual del jugador
     public Vector3 positionDesired; // La posición objetivo deseada
     [SerializeField] private LineRenderer lineRenderer; // Referencia al LineRenderer para dibujar la vista previa del camino
+    [SerializeField] private LayerMask groundLayer; // Capa para determinar la superficie del suelo
     private float range = 5f; // Rango máximo de movimiento para el jugador
     private PlayerBase playerStats;
 
@@ -18,57 +19,51 @@ public class PathPreview : MonoBehaviour
 
     void Update()
     {
-        // Actualizar el rango desde el PlayerBase
+
+        // Actualizar el rango desde PlayerBase
         range = playerStats.GetRange();
 
         // Actualizar la posición del jugador
         playerPosition = transform.position;
 
-        // Obtener la posición del ratón en el espacio mundial
-        mousePosition = Input.mousePosition;
-        mousePosition = Camera.main.ScreenToWorldPoint(new Vector3(mousePosition.x, mousePosition.y, Camera.main.nearClipPlane));
-        mousePosition.z = 0; // Mantener en el plano 2D
+        // Proyectar la posición del ratón al espacio mundial usando un rayo
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, groundLayer))
+        {
+            mousePositionWorld = hit.point; // Obtener la posición del ratón en el espacio mundial
+        }
 
-        // Calcular la distancia entre el jugador y el ratón
-        float distanceToMouse = Vector3.Distance(playerPosition, mousePosition);
+        // Calcular la distancia entre el jugador y el punto del ratón
+        float distanceToMouse = Vector3.Distance(playerPosition, mousePositionWorld);
 
         // Limitar la posición deseada según el rango
         if (distanceToMouse > range)
         {
-            Vector3 direction = (mousePosition - playerPosition).normalized;
+            Vector3 direction = (mousePositionWorld - playerPosition).normalized;
             positionDesired = playerPosition + direction * range;
         }
         else
         {
-            positionDesired = mousePosition;
+            positionDesired = mousePositionWorld;
         }
 
-        // Mostrar la vista previa del camino
-        ShowPathPreview();
-
-        // Comenzar la vista previa al hacer clic con el botón izquierdo del ratón
-        if (Input.GetMouseButtonDown(0))
-        {
-            positionDesired = mousePosition; // Guardar la posición deseada al hacer clic
-        }
-
-        // Actualizar la vista previa mientras se arrastra el ratón
+        // Mostrar la vista previa al arrastrar o al hacer clic
         if (Input.GetMouseButton(0))
         {
-            ShowPathPreview(); // Continuar mostrando la vista previa
+            ShowPathPreview();
         }
 
-        // Liberar el botón del ratón (opcional: puedes deshabilitar la vista previa aquí)
+        // Ocultar la línea si se suelta el botón izquierdo (opcional)
         if (Input.GetMouseButtonUp(0))
         {
-            // Mantener la vista previa visible o realizar otras acciones al soltar el ratón
+            lineRenderer.enabled = false;
         }
     }
 
     // Función para mostrar la vista previa del camino con el LineRenderer
     void ShowPathPreview()
     {
-        lineRenderer.enabled = true; // Asegurarse de que el LineRenderer esté habilitado
+        lineRenderer.enabled = true; // Habilitar el LineRenderer
 
         // Configurar el LineRenderer para mostrar la línea desde el jugador hasta la posición deseada
         lineRenderer.positionCount = 2; // Dos puntos para una línea recta
