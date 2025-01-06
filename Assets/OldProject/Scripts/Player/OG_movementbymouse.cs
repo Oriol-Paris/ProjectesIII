@@ -34,13 +34,14 @@ public class OG_MovementByMouse : MonoBehaviour
 
     void Update()
     {
+        
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out RaycastHit hit))
         {
             mousePosition = hit.point;
         }
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0)&&!isMoving&&!placeSelected)
         {
             // Define initial straight line trajectory
             isDragging = false;
@@ -54,17 +55,18 @@ public class OG_MovementByMouse : MonoBehaviour
             UpdateLineRenderer();
         }
 
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0) && !isMoving)
         {
             isDragging = true;
             UpdateCurve();
             UpdateLineRenderer();
         }
 
-        if (Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonUp(0)&&!isMoving)
         {
             placeSelected = true;
             isDragging = false;
+            isMoving = true;
             t = 0f;
         }
 
@@ -78,15 +80,17 @@ public class OG_MovementByMouse : MonoBehaviour
     {
         if (curvePoints.Count < 2) return;
 
-        // Dynamically adjust the middle point to create a curve
-        Vector3 midPoint = (curvePoints[0] + curvePoints[curvePoints.Count - 1]) / 2;
-        Vector3 direction = (mousePosition - midPoint).normalized;
+        // Get direction from start to end point (player to mouse)
+        Vector3 startToMouse = mousePosition - curvePoints[0];
+        Vector3 direction = startToMouse.normalized;
 
         // Adjust the midpoint based on mouse movement to create curvature
         float curveIntensity = Vector3.Distance(curvePoints[0], mousePosition) * 0.5f;
-        midPoint += direction * curveIntensity;
 
-        // Update curve points
+        // The middle point now moves with the mouse, controlled by a factor of curve intensity
+        Vector3 midPoint = curvePoints[0] + direction * curveIntensity;
+
+        // Set the curve to create a "snake-like" bend
         if (curvePoints.Count == 3)
         {
             curvePoints[1] = midPoint;
@@ -100,6 +104,7 @@ public class OG_MovementByMouse : MonoBehaviour
             curvePoints.Insert(1, midPoint);
         }
     }
+
 
     private void UpdateLineRenderer()
     {

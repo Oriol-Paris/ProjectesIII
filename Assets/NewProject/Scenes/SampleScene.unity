@@ -153,7 +153,7 @@ MonoBehaviour:
   actualTime: 0
   totalTime: 3
   lastPosition: {x: 0, y: 0, z: 0}
-  movPlayer: {fileID: 279413756}
+  movPlayer: {fileID: 0}
   player: {fileID: 279413752}
   shootPl: {fileID: 279413757}
 --- !u!4 &279413754
@@ -605,13 +605,67 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8458478312620971982, guid: 135a33f42603095498418b3997897017, type: 3}
       propertyPath: velocity
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6993864842785556067, guid: 135a33f42603095498418b3997897017, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2100986612}
+    - targetCorrespondingSourceObject: {fileID: 6993864842785556067, guid: 135a33f42603095498418b3997897017, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2100986611}
   m_SourcePrefab: {fileID: 100100000, guid: 135a33f42603095498418b3997897017, type: 3}
+--- !u!1 &2100986600 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6993864842785556067, guid: 135a33f42603095498418b3997897017, type: 3}
+  m_PrefabInstance: {fileID: 662460616}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2100986609 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8458478312620971982, guid: 135a33f42603095498418b3997897017, type: 3}
+  m_PrefabInstance: {fileID: 662460616}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2100986600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: befa5a8330344994286e20c10a68831e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2100986611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2100986600}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44fc981e223626b4eb847658d7a1598f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  preShoot: {fileID: 8105682524678771348, guid: a4ef2995dd8a2fd4caab2662104f6144, type: 3}
+  bullet: {fileID: 7481981531327784538, guid: 882cb1c87ba6ab341aeeadc59838c3b9, type: 3}
+--- !u!114 &2100986612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2100986600}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3751eac9fad097647ad777670baae6d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actualTime: 0
+  totalTime: 3
+  lastPosition: {x: 0, y: 0, z: 0}
+  movPlayer: {fileID: 2100986609}
+  player: {fileID: 2100986600}
+  shootPl: {fileID: 2100986611}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
