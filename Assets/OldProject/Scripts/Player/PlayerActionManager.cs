@@ -33,7 +33,7 @@ public class PlayerActionManager : MonoBehaviour
     private Animator animationToExecute;
     [SerializeField] AudioClip[] shootClip;
     [SerializeField] AudioClip[] walkingClips;
-
+    
     private bool hasMoved = false;
     private bool hasShotAction = false;
     private bool hasHealed = false;
@@ -64,7 +64,7 @@ public class PlayerActionManager : MonoBehaviour
         InitializeActions();
         combatManager = FindAnyObjectByType<CombatManager>();
     }
-
+    
     private void InitializeActions()
     {
         foreach (var actionData in playerData.availableActions)

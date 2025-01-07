@@ -309,11 +309,11 @@ MonoBehaviour:
   playerPosition: {x: 0, y: 0, z: 0}
   placeSelected: 0
   isMoving: 0
+  isDragging: 0
   isResting: 0
   t: 0
   velocity: 3
   lineRenderer: {fileID: 1145941097933022349}
-  controlPoint: {x: 0, y: 0, z: 0}
   curveResolution: 25
   playerBase: {fileID: 8584045141074783902}
   movementTimeLimit: 1.5
@@ -533,10 +533,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65f5a2370e62d6a4db4eec9c8fac8380, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mousePosition: {x: 10, y: 5, z: 0}
+  mousePositionWorld: {x: 0, y: 0, z: 0}
   playerPosition: {x: 0, y: 0, z: 0}
   positionDesired: {x: 0, y: 0, z: 0}
   lineRenderer: {fileID: 1145941097933022349}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &1251141132472822132
 MonoBehaviour:
   m_ObjectHideFlags: 0
