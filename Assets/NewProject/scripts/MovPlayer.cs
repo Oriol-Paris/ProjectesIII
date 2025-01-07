@@ -17,7 +17,7 @@ public class MovPlayer : MonoBehaviour
     [SerializeField] private LineRenderer lineRenderer;
     [SerializeField] private int curveResolution = 0;
     
-    public TimeSecuence timeSceuence;
+    public TimeSequence timeSceuence;
 
     private float currentTime = 3;
 
@@ -99,7 +99,7 @@ public class MovPlayer : MonoBehaviour
         LineRenderer.Destroy(lineList[0]);
         lineList.RemoveAt(0);
 
-        timeSceuence.actualTime = currentTime;
+        timeSceuence.remainingTime = currentTime;
     }
 
     
@@ -157,7 +157,7 @@ public class MovPlayer : MonoBehaviour
     private void CanWalk(Vector3 lastPosition, Vector3 targetPosition, float rang)
     {
         playerPosition = lastPosition;
-        currentTime = timeSceuence.actualTime;
+        currentTime = timeSceuence.remainingTime;
 
         float distanceToTarget = Vector3.Distance(playerPosition, targetPosition);
         if (distanceToTarget > rang)
@@ -180,7 +180,7 @@ public class MovPlayer : MonoBehaviour
            
             MovList.Add(Tuple.Create(playerPosition, controlPoint, positionDesired));
            
-            timeSceuence.actualTime = currentTime;
+            timeSceuence.remainingTime = currentTime;
         }
 
         else

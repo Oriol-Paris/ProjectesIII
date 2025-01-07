@@ -1,135 +1,226 @@
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 
-public class TimeSecuence : MonoBehaviour
+public class TimeSequence : MonoBehaviour
 {
     [SerializeField]
-    public float actualTime;
-    public float totalTime = 3;
-    float rang = 10f;
+    public float totalTime = 5f; // Tiempo máximo disponible
+    public float remainingTime;
 
-    public Vector3 lastPosition;
+    [SerializeField]
+    private float velocity = 5f;
 
-    public MovPlayer movPlayer;
+    [SerializeField]
+    private LineRenderer lineRenderer;
 
-    public GameObject player;
+    [SerializeField]
+    private PlayerBase playerBase;
 
-    public shootPlayer shootPl;
+    [SerializeField]
+    private List<Action> actionList = new List<Action>(); // Lista de acciones visible en el editor
 
-    private List<string> actions = new List<string>();
+    private bool isExecuting = false;
 
-    private List<Vector3> movPosiotion = new List<Vector3>();
+    private Vector3 playerPosition;
+    private List<Vector3> currentCurvePoints = new List<Vector3>();
+    private float t;
 
-    private Dictionary<string, float> actionCosts = new Dictionary<string, float>
-    {
-       
-        { "shoot", 0.75f },
-        { "pick_up", 1.0f },
-        { "move", 0.0f }
-    };
+    // Referencia al script shootPlayer
+    [SerializeField]
+    private shootPlayer shootScript; // Aquí añades una referencia al script de disparo
+
+    private bool isAiming = false;
+    private Vector3 shootingDirection;
+    private Vector3 lastMoveDestination;
+
+    [SerializeField]
+    private OG_MovementByMouse movementScript; // Añadimos la referencia a OG_MovementByMouse
 
     void Start()
     {
-        actualTime = totalTime;
-        lastPosition = transform.position;
+        remainingTime = totalTime;
+        playerPosition = transform.position;
     }
 
-   
     void Update()
     {
-
-        if (actualTime > 0)
+        // Planificación de acciones mientras quede tiempo
+        if (!isExecuting)
         {
-            if (Input.GetKeyDown(KeyCode.Space)&& AddAction("shoot"))
-            {
-
-                shootPl.PreShoot(lastPosition);
-            }
-
-            
-           
-            if(Input.GetKeyDown(KeyCode.W) && AddAction("move"))
-            {
-               
-                Vector3 targetPosition = ( Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10)));
-                movPlayer.PreStartMov(lastPosition, targetPosition,rang);
-                lastPosition = targetPosition;
-
-
-            }
+            HandleInput();
         }
 
-
-        if (Input.GetKeyDown(KeyCode.LeftControl))
+        // Comenzar ejecución de acciones con un input específico
+        if (!isExecuting && actionList.Count > 0 && Input.GetKeyDown(KeyCode.Return)) // Enter para ejecutar
         {
-            PassTurm();
+            StartCoroutine(ExecuteActions());
         }
     }
 
-    bool AddAction(string action)
+    private void HandleInput()
     {
-        if (actualTime >= actionCosts[action])
+        if (Input.GetMouseButtonDown(0))
         {
-            actions.Add(action);
-            actualTime -= actionCosts[action];
-          return true;
-          
+            // Planificar un movimiento
+            Vector3 destination = GetMouseWorldPosition();
+            if (AddAction("move", destination))
+            {
+                lastMoveDestination = destination;  // Guardar la última posición de destino de movimiento
+                Debug.Log($"Movimiento planificado hacia {destination}");
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            // Planificar un disparo
+            if (AddAction("shoot"))
+            {
+                // Llamar al script shootPlayer para disparar, usando la última posición de movimiento
+                shootScript.PreShoot(lastMoveDestination);  // Apuntar desde la última posición del movimiento
+                isAiming = true;
+                Debug.Log("Apuntando para disparar");
+            }
+        }
+    }
+
+    private bool AddAction(string actionType, Vector3? targetPosition = null)
+    {
+        if (remainingTime >= 1.0f) // Este es el costo de la acción (puedes ajustarlo según el tipo de acción)
+        {
+            remainingTime -= 1.0f;
+            actionList.Add(new Action(actionType, targetPosition)); // Agregar a la lista visible
+            return true;
         }
         else
         {
-            Debug.Log("tus muertos");
+            Debug.Log("No hay tiempo suficiente para esta acción");
             return false;
         }
     }
 
-    IEnumerator ExecuteActions()
+    private IEnumerator ExecuteActions()
     {
-        int movCount = 0;
-        int shootCount = 0;
-       
-        foreach (string action in actions)
+        isExecuting = true;
+
+        while (actionList.Count > 0)
         {
-          
-            switch (action)
+            Action currentAction = actionList[0]; // Tomar la primera acción
+            actionList.RemoveAt(0); // Eliminar la acción de la lista
+
+            if (currentAction.Type == "move" && currentAction.TargetPosition.HasValue)
             {
-                
-                case "shoot":
+                // Ejecutar movimiento
+                yield return ExecuteMove(currentAction.TargetPosition.Value);
+            }
 
-                    Debug.Log("¡Disparo!");
-                    shootPl.Shoot(shootCount);
-                    yield return new WaitForSeconds(0.75f);
-                    shootCount++;
-                    break;
-                case "pick_up":
-                    Debug.Log("Objeto recogido");
-                    break;
-                case "move":
-
-                  
-                  
-                    while (movPlayer.t < 1f) // Espera a que termine el movimiento
-                    {
-                       
-                        movPlayer.UpdateMovement(movCount);
-                        yield return null; // Espera un frame
-                    }
-                    movPlayer.StopMovment();
-                    Debug.Log(movCount);
-                    movCount++;
-                    break;
+            if (currentAction.Type == "shoot")
+            {
+                // El disparo ya se ha planeado con la posición de destino de la acción de movimiento anterior
+                shootScript.Shoot();
+                yield return new WaitForSeconds(0.5f); // Simular un pequeño retraso antes de pasar a la siguiente acción
             }
         }
-        actions.Clear();
-       
+
+        // Regenerar los puntos de acción al final del turno
+        RegenerateActionPoints();
+        isExecuting = false;
     }
 
 
-    void PassTurm()
+    private IEnumerator ExecuteMove(Vector3 targetPosition)
     {
-        Debug.Log("aaaaaaa");
-        StartCoroutine(ExecuteActions());
-        actualTime = totalTime;
+        movementScript.SetPositionDesired(targetPosition); // Establece el destino en el script de movimiento
+
+        // Obtener la curva generada por OG_MovementByMouse
+        List<Vector3> curvePoints = movementScript.GetCurvePoints();
+        if (curvePoints.Count < 2) yield break;
+
+        // Ejecutar movimiento a lo largo de la curva
+        yield return MoveAlongCurveSequence(curvePoints, movementScript);
+    }
+
+    IEnumerator MoveAlongCurveSequence(List<Vector3> curvePoints, OG_MovementByMouse movementScript)
+    {
+        float t = 0f;
+        float velocity = movementScript.velocity;
+        int segmentCount = curvePoints.Count - 1;
+
+        while (t < 1f)
+        {
+            // Calcular segmento actual
+            float segmentLength = 1f / segmentCount;
+            int currentSegment = Mathf.FloorToInt(t / segmentLength);
+
+            if (currentSegment >= segmentCount - 1) break;
+
+            // Puntos del segmento actual
+            Vector3 p0 = curvePoints[currentSegment];
+            Vector3 p1 = curvePoints[currentSegment + 1];
+            Vector3 p2 = curvePoints[currentSegment + 2];
+
+            // Tiempo local dentro del segmento
+            float segmentT = (t - currentSegment * segmentLength) / segmentLength;
+
+            // Calcular posición
+            Vector3 newPosition = movementScript.CalculateQuadraticBezierPoint(segmentT, p0, p1, p2);
+            movementScript.transform.position = newPosition;
+
+            // Incrementar tiempo
+            t += velocity * Time.deltaTime / segmentCount;
+            yield return null; // Esperar al siguiente frame
+        }
+
+        // Finalizar movimiento
+        movementScript.transform.position = curvePoints[curvePoints.Count - 1];
+        movementScript.ResetMovementState(); // Agrega un método en OG_MovementByMouse para reiniciar el estado
+    }
+
+    private void RegenerateActionPoints()
+    {
+        // Regenerar puntos de acción al finalizar el turno
+        remainingTime = totalTime;
+        Debug.Log("Puntos de acción regenerados.");
+    }
+
+    private void UpdateLineRenderer()
+    {
+        lineRenderer.positionCount = currentCurvePoints.Count;
+        lineRenderer.SetPositions(currentCurvePoints.ToArray());
+    }
+
+    private Vector3 CalculateQuadraticBezierPoint(float t, Vector3 p0, Vector3 p1, Vector3 p2)
+    {
+        float u = 1 - t;
+        float tt = t * t;
+        float uu = u * u;
+
+        Vector3 point = uu * p0;
+        point += 2 * u * t * p1;
+        point += tt * p2;
+
+        return point;
+    }
+
+    private Vector3 GetMouseWorldPosition()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray, out RaycastHit hit))
+        {
+            return hit.point;
+        }
+        return Vector3.zero;
+    }
+
+    private class Action
+    {
+        public string Type { get; }
+        public Vector3? TargetPosition { get; }
+
+        public Action(string type, Vector3? targetPosition = null)
+        {
+            Type = type;
+            TargetPosition = targetPosition;
+        }
     }
 }

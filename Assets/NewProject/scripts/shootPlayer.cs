@@ -1,42 +1,64 @@
-using NUnit.Framework;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
+using System.Collections.Generic;
 
 public class shootPlayer : MonoBehaviour
 {
+    private List<Vector3> listOfShoot = new List<Vector3>();
+    private List<GameObject> visualPlayerAfterShoot = new List<GameObject>();
 
+    public GameObject preShoot; // Prefab para previsualización del disparo
+    public GameObject bullet;   // Prefab de la bala
+    private OG_MovementByMouse movementScript;
 
-    private List<Vector3> listOfShoot = new List<Vector3> { };
-    private List<GameObject> visualPlayerAfterShoot = new List<GameObject> { };
-
-    public GameObject preShoot;
-    public GameObject bullet;
-
-  
+    void Start()
+    {
+        movementScript = GetComponent<OG_MovementByMouse>();
+    }
 
     public void PreShoot(Vector3 lastPosition)
     {
-        listOfShoot.Add(Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10)));
+        Vector3 targetPosition = GetMouseTargetPosition(); // Obtener posición con Raycast
+        if (targetPosition != Vector3.zero)
+        {
+            listOfShoot.Add(targetPosition);
 
-        GameObject instantiatedObject = Instantiate(preShoot, lastPosition, Quaternion.identity);
-        visualPlayerAfterShoot.Add(instantiatedObject);
+            // Crear marcador visual (opcional)
+            GameObject instantiatedObject = Instantiate(preShoot, lastPosition, Quaternion.identity);
+            visualPlayerAfterShoot.Add(instantiatedObject);
 
-        Directorio.Apuntar(instantiatedObject, lastPosition, listOfShoot[listOfShoot.Count-1]);
+            // Dibujar una línea hacia el objetivo
+            Directorio.Apuntar(instantiatedObject, lastPosition, targetPosition);
+        }
+        else
+        {
+            Debug.LogWarning("No se detectó un objetivo válido para disparar.");
+        }
     }
 
-
-   
-
-    public void Shoot(int countShoot)
+    public void Shoot()
     {
-        Destroy(visualPlayerAfterShoot[0]);
-        visualPlayerAfterShoot.RemoveAt(0);
-        Directorio.Apuntar(gameObject,transform.position, listOfShoot[countShoot]);
-        GameObject instantiatedObject = Instantiate(bullet, transform.position, Quaternion.identity);
-        Directorio.Apuntar(instantiatedObject, transform.position, listOfShoot[countShoot]);
+        if (movementScript == null || movementScript.GetIsMoving()) return;
 
+        Vector3 targetPosition = GetMouseTargetPosition() ;
 
-      
+        GameObject instantiatedBullet = Instantiate(bullet, transform.position, Quaternion.identity);
+
+        BasicBullet bulletScript = instantiatedBullet.GetComponent<BasicBullet>();
+        if (bulletScript != null)
+        {
+            bulletScript.SetDirection(targetPosition);
+        }
+
+        Debug.Log($"Bala disparada hacia {targetPosition}");
+    }
+
+    private Vector3 GetMouseTargetPosition()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray, out RaycastHit hit))
+        {
+            return hit.point; // Posición 3D del objeto impactado
+        }
+        return Vector3.zero; // Si no impacta, retorna Vector3.zero
     }
 }
