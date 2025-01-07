@@ -57,12 +57,12 @@ public class OG_MovementByMouse : MonoBehaviour
 
         if (Input.GetMouseButton(0) && !isMoving)
         {
-            isDragging = true;
+            //isDragging = true;
             UpdateCurve();
             UpdateLineRenderer();
         }
 
-        if (Input.GetMouseButtonUp(0)&&!isMoving)
+        if (Input.GetMouseButtonUp(0) && !isMoving)
         {
             placeSelected = true;
             isDragging = false;
@@ -70,10 +70,10 @@ public class OG_MovementByMouse : MonoBehaviour
             t = 0f;
         }
 
-        if (placeSelected)
-        {
-            MoveAlongCurve();
-        }
+        //if (placeSelected)
+        //{
+        //    MoveAlongCurve();
+        //}
     }
 
     private void UpdateCurve()

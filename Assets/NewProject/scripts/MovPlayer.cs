@@ -2,39 +2,47 @@ using System;
 using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
+using UnityEditor.Rendering;
 using UnityEngine;
 
 public class MovPlayer : MonoBehaviour
 {
-    public Vector3 playerPosition;
     public Vector3 mousePosition;
     public Vector3 positionDesired;
+    public Vector3 playerPosition;
 
-  
+
+
     public float t;
-    [SerializeField] private float maxDistance = 10f; 
+    [SerializeField] private float maxDistance = 20f; 
     [SerializeField] private float velocity = 5f;
-    [SerializeField] private LineRenderer lineRenderer;
+    [SerializeField]  LineRenderer lineRenderer;
     [SerializeField] private int curveResolution = 0;
     
     public TimeSecuence timeSceuence;
 
     private float currentTime = 3;
 
+    public bool placeSelected;
+    public bool isMoving;
+    public bool isDragging;
+
 
     private Vector3 controlPoint;
 
-    private List<Tuple<Vector3, Vector3, Vector3>> MovList = new List<Tuple<Vector3, Vector3, Vector3>>();
+    public List<Tuple<Vector3, Vector3, Vector3>> MovList = new List<Tuple<Vector3, Vector3, Vector3>>();
 
     private List<LineRenderer> lineList = new List<LineRenderer>();
 
-   
+    [SerializeField] private List<Vector3> curvePoints = new List<Vector3>();
+
+
 
 
     void Start()
     {
         playerPosition = transform.position;
-       
+        //placeSelected = false;
         t = 0;
        
     }
@@ -44,48 +52,69 @@ public class MovPlayer : MonoBehaviour
      
     }
 
-    public void PreStartMov(Vector3 lastPosition,Vector3 targetPosition, float rang)
+    public void PreStartMov()
     {
-        CanWalk(lastPosition, targetPosition, rang);
+        CanWalk();
     }
 
 
     public void StartMov()
     {
+        placeSelected = true;
       
+
+
+    }
+
+    public void finish()
+    {
+        curvePoints.Clear();
+        MovList.Clear();
+        placeSelected = false;
+        isDragging = false;
+        DebugMovList();
     }
 
 
-   
+    private void DebugMovList()
+    {
+        Debug.Log($"MovList contiene {MovList.Count} elementos.");
+        for (int i = 0; i < MovList.Count; i++)
+        {
+            Debug.Log($"Movimiento {i}: Inicio {MovList[i].Item1}, Control {MovList[i].Item2}, Fin {MovList[i].Item3}");
+        }
+    }
+
+
+
 
     private float CalculateTiemConsum(float dist)
     {
         float maxDist = maxDistance;
-        Debug.Log(dist);
+      
 
         return Mathf.Clamp((dist / maxDist) * timeSceuence.totalTime, 0, timeSceuence.totalTime);
     }
 
     public void UpdateMovement(int movCount)
     {
+        Debug.Log(movCount);
+     
        
-            var firstItem = MovList[movCount];
-            Vector3 _playerPosition = firstItem.Item1;
-            Vector3 _controlPoint = firstItem.Item2;
-            Vector3 _positionDesired = firstItem.Item3;
 
+        var firstItem = MovList[movCount];
+        Vector3 _playerPosition = firstItem.Item1;
+        Vector3 _controlPoint = firstItem.Item2;
+        Vector3 _positionDesired = firstItem.Item3;
 
-            float distanceToTarget = Vector3.Distance(_playerPosition, _positionDesired);
-            float tIncrement = (velocity * Time.deltaTime) / distanceToTarget;
-
-            t = Mathf.Clamp01(t + tIncrement);
-
-            Vector3 newPosition = BezierCurve(t, _playerPosition, _controlPoint, _positionDesired);
-            transform.position = newPosition;
-
+       
         
-            Directorio.Apuntar(gameObject, transform.position, _positionDesired);
 
+        t += velocity * Time.deltaTime;
+
+        // Interpolate along the curve
+        Vector3 newPosition = BezierCurve(t, _playerPosition, _controlPoint, _positionDesired);
+        transform.position = newPosition;
 
 
 
@@ -94,51 +123,84 @@ public class MovPlayer : MonoBehaviour
 
     public void StopMovment()
     {
-       
-         t = 0f;
-        LineRenderer.Destroy(lineList[0]);
-        lineList.RemoveAt(0);
+
+        t = 0f;
+        //LineRenderer.Destroy(lineList[0]);
+        //lineList.RemoveAt(0);
 
         timeSceuence.actualTime = currentTime;
     }
 
-    
 
-    private void UpdateLineRenderer(Vector3 p0, Vector3 p1, Vector3 p2)
+    private float CalculateCurveLength()
     {
-       
-        LineRenderer newLineRenderer = Instantiate(lineRenderer, p0, Quaternion.identity);
-        newLineRenderer.transform.SetParent(transform);
+        if (curvePoints.Count < 3) return 0;
 
-        lineList.Add(newLineRenderer);
+        float length = 0f;
+        Vector3 previousPoint = curvePoints[0];
 
-
-        List<Vector3> smoothCurvePoints = GenerateBezierCurve(p0, p1, p2, curveResolution);
-
-       
-        newLineRenderer.positionCount = smoothCurvePoints.Count;
-        newLineRenderer.SetPositions(smoothCurvePoints.ToArray());
-
-      
-        
-    }
-
-
-
-
-    private List<Vector3> GenerateBezierCurve(Vector3 p0, Vector3 p1, Vector3 p2, int resolution)
-    {
-        List<Vector3> points = new List<Vector3>();
-        for(int i = 0; i <= resolution; i++)
+        int resolution = curveResolution > 0 ? curveResolution : 50; 
+        for (int i = 1; i <= resolution; i++)
         {
             float t = i / (float)resolution;
-            points.Add(BezierCurve(t, p0, p1, p2));
+            Vector3 currentPoint = BezierCurve(t, curvePoints[0], curvePoints[1], curvePoints[2]);
+            length += Vector3.Distance(previousPoint, currentPoint);
+            previousPoint = currentPoint;
         }
-        return points;
+
+        return length;
     }
 
 
+    private float CalculateStaminaConsumption(float distance)
+    {
+        // Ajustar este cálculo según la lógica de tu juego
+        float consumptionPerUnit = timeSceuence.totalTime / maxDistance;
+        return Mathf.Clamp(distance * consumptionPerUnit, 0, timeSceuence.totalTime);
+    }
 
+
+    private void UpdateCurve()
+    {
+        if (curvePoints.Count < 2) return;
+
+        // Get direction from start to end point (player to mouse)
+        Vector3 startToMouse = mousePosition - curvePoints[0];
+        Vector3 direction = startToMouse.normalized;
+
+        // Adjust the midpoint based on mouse movement to create curvature
+        float curveIntensity = Vector3.Distance(curvePoints[0], mousePosition) * 0.5f;
+
+        // The middle point now moves with the mouse, controlled by a factor of curve intensity
+        Vector3 midPoint = curvePoints[0] + direction * curveIntensity;
+
+        // Set the curve to create a "snake-like" bend
+        if (curvePoints.Count == 3)
+        {
+            curvePoints[1] = midPoint;
+        }
+        else if (curvePoints.Count > 3)
+        {
+            curvePoints[curvePoints.Count - 2] = midPoint;
+        }
+        else
+        {
+            curvePoints.Insert(1, midPoint);
+        }
+    }
+
+  
+
+    private void UpdateLineRendererr()
+    {
+        lineRenderer.enabled = true;
+        lineRenderer.positionCount = curvePoints.Count;
+        lineRenderer.SetPositions(curvePoints.ToArray());
+    }
+
+
+    public void SetPositionDesired(Vector3 position) { positionDesired = position; }
+    public Vector3 GetPositionDesired() { return positionDesired; }
 
     private Vector3 BezierCurve(float t, Vector3 p0, Vector3 p1, Vector3 p2)
     {
@@ -154,38 +216,76 @@ public class MovPlayer : MonoBehaviour
 
 
 
-    private void CanWalk(Vector3 lastPosition, Vector3 targetPosition, float rang)
+    private void CanWalk()
     {
-        playerPosition = lastPosition;
+
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray, out RaycastHit hit))
+        {
+            mousePosition = hit.point;
+        }
+        // playerPosition = lastPosition;
         currentTime = timeSceuence.actualTime;
-
-        float distanceToTarget = Vector3.Distance(playerPosition, targetPosition);
-        if (distanceToTarget > rang)
+       
+      
+       
+        if (!Input.GetMouseButton(0) && !isMoving && !placeSelected && !isDragging)
         {
-            Vector3 direction = (targetPosition - playerPosition).normalized;
-            targetPosition = playerPosition + direction * rang;
-        }
+            // Define initial straight line trajectory
+            isDragging = false;
+            placeSelected = false;
+            isDragging = false;
+            positionDesired = mousePosition;
 
-        positionDesired = targetPosition;
-        controlPoint = (playerPosition + positionDesired) / 2 + new Vector3(0, -1f, 0);
-        float timeRequired = CalculateTiemConsum(Vector3.Distance(playerPosition, positionDesired));
-        Debug.Log(timeRequired);
-        if (currentTime >= timeRequired)
-        {
-            currentTime -= timeRequired;
-
-            UpdateLineRenderer(playerPosition, controlPoint, positionDesired);
-           
+            curvePoints.Clear();
+            curvePoints.Add(playerPosition);
+            curvePoints.Add(positionDesired);
           
-           
-            MovList.Add(Tuple.Create(playerPosition, controlPoint, positionDesired));
-           
-            timeSceuence.actualTime = currentTime;
+            UpdateLineRendererr();
         }
 
-        else
+        if (Input.GetMouseButton(0) && !isMoving)
         {
-            Debug.Log("se te quedo larga XD");
+         
+           isDragging =true;
+            UpdateCurve();
+            UpdateLineRendererr();
         }
+
+        if (Input.GetMouseButtonUp(0) && !isMoving)
+        {
+            float curveLength = CalculateCurveLength();
+           
+
+            float timeConsumption = CalculateTiemConsum(curveLength);
+          
+
+            if (currentTime > timeConsumption)
+            {
+                MovList.Add(Tuple.Create(curvePoints[0], curvePoints[1], curvePoints[2]));
+                timeSceuence.AddAction("move");
+                Debug.Log($"Movimiento registrado. Consumo de estamina: {timeConsumption}");
+
+                // Deducir la estamina
+                currentTime -= timeConsumption;
+
+                timeSceuence.actualTime = currentTime;
+                playerPosition = positionDesired;
+               
+                t = 0f;
+            }
+            else
+            {
+                Debug.Log("No tienes suficiente estamina para realizar este trayecto.");
+               
+            }
+
+            isDragging = false;
+
+        }
+
+
+        
+
     }
 }

@@ -42,23 +42,16 @@ public class TimeSecuence : MonoBehaviour
 
         if (actualTime > 0)
         {
-            if (Input.GetKeyDown(KeyCode.Space)&& AddAction("shoot"))
+            if (Input.GetKeyDown(KeyCode.Space) )
             {
-
+                AddAction("shoot");
                 shootPl.PreShoot(lastPosition);
             }
 
             
            
-            if(Input.GetKeyDown(KeyCode.W) && AddAction("move"))
-            {
-               
-                Vector3 targetPosition = ( Camera.main.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, 10)));
-                movPlayer.PreStartMov(lastPosition, targetPosition,rang);
-                lastPosition = targetPosition;
-
-
-            }
+         
+            movPlayer.PreStartMov();
         }
 
 
@@ -68,20 +61,11 @@ public class TimeSecuence : MonoBehaviour
         }
     }
 
-    bool AddAction(string action)
+    public void AddAction(string action)
     {
-        if (actualTime >= actionCosts[action])
-        {
             actions.Add(action);
-            actualTime -= actionCosts[action];
-          return true;
-          
-        }
-        else
-        {
-            Debug.Log("tus muertos");
-            return false;
-        }
+           
+       
     }
 
     IEnumerator ExecuteActions()
@@ -107,21 +91,23 @@ public class TimeSecuence : MonoBehaviour
                     break;
                 case "move":
 
-                  
-                  
+                    movPlayer.StartMov();
+
                     while (movPlayer.t < 1f) // Espera a que termine el movimiento
                     {
-                       
+                      
                         movPlayer.UpdateMovement(movCount);
                         yield return null; // Espera un frame
                     }
                     movPlayer.StopMovment();
-                    Debug.Log(movCount);
+                   
                     movCount++;
                     break;
             }
         }
         actions.Clear();
+        movPlayer.finish();
+        
        
     }
 

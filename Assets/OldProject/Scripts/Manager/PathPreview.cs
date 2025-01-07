@@ -45,6 +45,7 @@ public class PathPreview : MonoBehaviour
         else
         {
             positionDesired = mousePositionWorld;
+            
         }
 
         // Mostrar la vista previa al arrastrar o al hacer clic
