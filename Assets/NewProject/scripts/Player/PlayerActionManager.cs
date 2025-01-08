@@ -28,6 +28,7 @@ public class PlayerActionManager : MonoBehaviour
     [SerializeField] private float walkSoundDelay;
     float actualWalkSoundDelay;
     private CombatManager combatManager;
+    [SerializeField] MovPlayer movePlayer;
     private bool hasShot = false; // Flag to track if a shot has been fired
     private bool actionPointReduced;
     private Animator animationToExecute;
@@ -110,6 +111,7 @@ public class PlayerActionManager : MonoBehaviour
         {
             SceneManager.LoadScene("Title Screen");
         }
+        UpdateAction(movePlayer.positionDesired, movePlayer.timeSceuence.actualTime);
     }
     public void UpdateAction(Vector3 newPos, float t)
     {
@@ -123,7 +125,7 @@ public class PlayerActionManager : MonoBehaviour
         if (currentAction.m_action == PlayerBase.ActionEnum.MOVE && (!player.GetComponent<OG_MovementByMouse>().isMoving || isMoving))
         {
             isMoving = true;
-            StartCoroutine(MoveCoroutine(newPos));
+            movePlayer.PreStartMov();
         }
 
         if (currentAction.m_action == PlayerBase.ActionEnum.SHOOT && (!player.GetComponent<OG_MovementByMouse>().isMoving || isShooting))
@@ -132,6 +134,7 @@ public class PlayerActionManager : MonoBehaviour
             {
                 isShooting = true;
                 hasShot = true; // Set the flag to indicate a shot has been fired
+                isMoving = false;
                 StartCoroutine(AttackCoroutine(PlayerBase.ActionEnum.SHOOT, newPos));
             }
         }
@@ -140,14 +143,14 @@ public class PlayerActionManager : MonoBehaviour
         {
             if (currentAction.m_cost <= playerData.actionPoints)
             {
-                isMoving = true;
+                isMoving = false;
                 StartCoroutine(AttackCoroutine(PlayerBase.ActionEnum.MELEE, newPos));
             }
         }
 
         if (currentAction.m_action == PlayerBase.ActionEnum.HEAL && isHealing)
         {
-            isMoving = true;
+            isMoving = false;
             StartCoroutine(HealCoroutine(newPos));
         }
 
@@ -168,7 +171,7 @@ public class PlayerActionManager : MonoBehaviour
         activeActions[PlayerBase.ActionEnum.MOVE].Execute(player, newPos);
         if (actualWalkSoundDelay < 0)
         {
-            SoundEffectsManager.instance.PlaySoundFXClip(walkingClips, transform, 1f);
+            //SoundEffectsManager.instance.PlaySoundFXClip(walkingClips, transform, 1f);
             actualWalkSoundDelay = walkSoundDelay;
         }
         else
@@ -203,7 +206,7 @@ public class PlayerActionManager : MonoBehaviour
         if (action == PlayerBase.ActionEnum.SHOOT)
         {
             ((ShootAction)activeActions[PlayerBase.ActionEnum.SHOOT]).bulletPrefab = player.activeStyle.prefab;
-            SoundEffectsManager.instance.PlaySoundFXClip(shootClip, transform, 1f);
+            //SoundEffectsManager.instance.PlaySoundFXClip(shootClip, transform, 1f);
             activeActions[PlayerBase.ActionEnum.SHOOT].Execute(player, newPos);
         }
         else

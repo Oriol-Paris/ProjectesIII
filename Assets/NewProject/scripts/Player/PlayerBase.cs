@@ -47,7 +47,7 @@ public class PlayerBase : MonoBehaviour
     public PlayerActionManager turnsDone;
 
     public Action activeAction { get; private set; }
-    private List<Action> availableActions = new List<Action>();
+    public List<Action> availableActions = new List<Action>();
 
     private bool isInAction;
     private bool isAlive;
@@ -183,6 +183,8 @@ public class PlayerBase : MonoBehaviour
     public bool GetIsAlive() { return isAlive; }
     public Action GetAction() { return activeAction; }
     public bool GetInAction() { return isInAction; }
+
+    public List<Action> GetAvailableActions() { return availableActions; }
 
     #endregion
 

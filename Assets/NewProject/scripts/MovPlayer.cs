@@ -72,7 +72,7 @@ public class MovPlayer : MonoBehaviour
         MovList.Clear();
         placeSelected = false;
         isDragging = false;
-        DebugMovList();
+        //DebugMovList();
     }
 
 
@@ -98,36 +98,28 @@ public class MovPlayer : MonoBehaviour
 
     public void UpdateMovement(int movCount)
     {
-        Debug.Log(movCount);
-     
-       
-
-        var firstItem = MovList[movCount];
-        Vector3 _playerPosition = firstItem.Item1;
-        Vector3 _controlPoint = firstItem.Item2;
-        Vector3 _positionDesired = firstItem.Item3;
-
-       
         
 
-        t += velocity * Time.deltaTime;
-
-        // Interpolate along the curve
-        Vector3 newPosition = BezierCurve(t, _playerPosition, _controlPoint, _positionDesired);
-        transform.position = newPosition;
-
-
+            var firstItem = MovList[movCount];
+            Vector3 _playerPosition = firstItem.Item1;
+            Vector3 _controlPoint = firstItem.Item2;
+            Vector3 _positionDesired = firstItem.Item3;
+            //Debug.Log(movCount);
 
 
+
+            t += velocity * Time.deltaTime;
+
+            // Interpolate along the curve
+            Vector3 newPosition = BezierCurve(t, _playerPosition, _controlPoint, _positionDesired);
+            transform.position = newPosition;
+        
+        
     }
 
     public void StopMovment()
     {
-
         t = 0f;
-        //LineRenderer.Destroy(lineList[0]);
-        //lineList.RemoveAt(0);
-
         timeSceuence.actualTime = currentTime;
     }
 
@@ -154,7 +146,7 @@ public class MovPlayer : MonoBehaviour
 
     private float CalculateStaminaConsumption(float distance)
     {
-        // Ajustar este cálculo según la lógica de tu juego
+        // Ajustar este cï¿½lculo segï¿½n la lï¿½gica de tu juego
         float consumptionPerUnit = timeSceuence.totalTime / maxDistance;
         return Mathf.Clamp(distance * consumptionPerUnit, 0, timeSceuence.totalTime);
     }
@@ -240,7 +232,7 @@ public class MovPlayer : MonoBehaviour
             curvePoints.Clear();
             curvePoints.Add(playerPosition);
             curvePoints.Add(positionDesired);
-          
+           
             UpdateLineRendererr();
         }
 
@@ -263,7 +255,7 @@ public class MovPlayer : MonoBehaviour
             if (currentTime > timeConsumption)
             {
                 MovList.Add(Tuple.Create(curvePoints[0], curvePoints[1], curvePoints[2]));
-                timeSceuence.AddAction("move", positionDesired);
+                timeSceuence.AddAction(PlayerBase.ActionEnum.MOVE, positionDesired);
                 Debug.Log($"Movimiento registrado. Consumo de estamina: {timeConsumption}");
 
                 // Deducir la estamina

@@ -3,6 +3,7 @@ using UnityEngine;
 
 public class ShootAction : ActiveAction
 {
+    public BulletPrefab bullet;
     public GameObject spawnedBullet;
     public GameObject bulletPrefab;
     public List<Vector3> offsets = new List<Vector3>
@@ -57,14 +58,16 @@ public class ShootAction : ActiveAction
         {
             // Instantiate the bullet at the player's position
             GameObject bulletInstance = Instantiate(bulletPrefab, player.transform.position, Quaternion.identity);
+            // Determine the type of bullet and call the appropriate Shoot method
+            bullet = bulletInstance.GetComponent<BulletPrefab>();
             Debug.Log("Bullet instantiated at player's position.");
 
-            // Determine the type of bullet and call the appropriate Shoot method
-            BulletPrefab bullet = bulletInstance.GetComponent<BulletPrefab>();
+            
             if (bullet != null)
             {
                 if (bullet is GunBullet)
                 {
+                    
                     bullet.Shoot(direction);
                     movementScript.RegisterBullet(bullet);
                 }

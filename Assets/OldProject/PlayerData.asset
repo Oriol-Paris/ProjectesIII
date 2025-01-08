@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 3
   maxHealth: 3
-  actionPoints: 3
+  actionPoints: 100
   maxActionPoints: 3
   lastLevel: 
   levelCompleted: 1
@@ -73,4 +73,13 @@ MonoBehaviour:
       prefab: {fileID: 4841340973275302747, guid: 8c280260248f7e449925f58bc503ee3b, type: 3}
       range: 6
       damage: 1
+    cost: 1
+  - actionType: 0
+    action: 1
+    player: {fileID: 0}
+    key: 51
+    style:
+      prefab: {fileID: 4841340973275302747, guid: 10864d5b051bdc44e928dd42003a1950, type: 3}
+      range: 3
+      damage: 2
     cost: 1

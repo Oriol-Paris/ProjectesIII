@@ -465,9 +465,33 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1251202436317223770, guid: 135a33f42603095498418b3997897017, type: 3}
-      propertyPath: m_Enabled
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 2100986629}
+    - target: {fileID: 1251202436317223770, guid: 135a33f42603095498418b3997897017, type: 3}
+      propertyPath: isMoving
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1251202436317223770, guid: 135a33f42603095498418b3997897017, type: 3}
+      propertyPath: isHealing
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1251202436317223770, guid: 135a33f42603095498418b3997897017, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1251202436317223770, guid: 135a33f42603095498418b3997897017, type: 3}
+      propertyPath: isShooting
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1251202436317223770, guid: 135a33f42603095498418b3997897017, type: 3}
+      propertyPath: movePlayer
+      value: 
+      objectReference: {fileID: 2100986622}
+    - target: {fileID: 1251202436317223770, guid: 135a33f42603095498418b3997897017, type: 3}
+      propertyPath: actionManager
+      value: 
+      objectReference: {fileID: 2100986612}
     - target: {fileID: 2768622952647292837, guid: 135a33f42603095498418b3997897017, type: 3}
       propertyPath: m_Layer
       value: 0
@@ -542,8 +566,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8584045141074783902, guid: 135a33f42603095498418b3997897017, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8584045141074783902, guid: 135a33f42603095498418b3997897017, type: 3}
+      propertyPath: turnsDone
+      value: 
+      objectReference: {fileID: 2100986630}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -600,6 +628,8 @@ MonoBehaviour:
   movPlayer: {fileID: 2100986622}
   player: {fileID: 2100986600}
   shootPl: {fileID: 2100986611}
+  playerBase: {fileID: 2100986629}
+  actionManager: {fileID: 2100986630}
 --- !u!114 &2100986622
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -625,6 +655,28 @@ MonoBehaviour:
   isMoving: 0
   isDragging: 0
   curvePoints: []
+--- !u!114 &2100986629 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8584045141074783902, guid: 135a33f42603095498418b3997897017, type: 3}
+  m_PrefabInstance: {fileID: 662460616}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2100986600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa45039ced6d3494a9722175dca2c5f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2100986630 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1251202436317223770, guid: 135a33f42603095498418b3997897017, type: 3}
+  m_PrefabInstance: {fileID: 662460616}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2100986600}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f263461156138f44afbe9f44d9f2293, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

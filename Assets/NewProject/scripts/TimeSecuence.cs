@@ -18,34 +18,49 @@ public class TimeSecuence : MonoBehaviour
 
     public shootPlayer shootPl;
 
-    private List<string> actions = new List<string>();
+    private List<PlayerBase.ActionEnum> actions = new List<PlayerBase.ActionEnum>();
     private List<Vector3> actionTargets = new List<Vector3>();
 
-    private Dictionary<string, float> actionCosts = new Dictionary<string, float>
-    {
-        { "shoot", 0.75f },
-        { "pick_up", 1.0f },
-        { "move", 0.0f }
-    };
+    [SerializeField] private PlayerBase playerBase;
+    [SerializeField] private PlayerActionManager actionManager;
+
+    private PlayerBase.Action selectedAction;
 
     void Start()
     {
         actualTime = totalTime;
         lastPosition = transform.position;
+
+        playerBase = player.GetComponent<PlayerBase>();
+        actionManager = player.GetComponent<PlayerActionManager>();
     }
 
     void Update()
     {
         if (actualTime > 0)
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            // Check for action selection
+            foreach (var action in playerBase.availableActions)
             {
-                Vector3 targetPosition = GetMouseTargetPosition();
-                AddAction("shoot", targetPosition);
-                shootPl.PreShoot(lastPosition);
+                if (Input.GetKeyDown(action.m_key))
+                {
+                    selectedAction = action;
+                    Debug.Log("Selected action: " + selectedAction.m_action);
+                }
             }
 
-            movPlayer.PreStartMov();
+            // Check for mouse click to store the selected action
+            if (selectedAction.m_action != PlayerBase.ActionEnum.MOVE && Input.GetMouseButtonDown(0))
+            {
+                Vector3 targetPosition = GetMouseTargetPosition();
+                AddAction(selectedAction.m_action, targetPosition);
+                Debug.Log("Stored action: " + selectedAction.m_action + " at position: " + targetPosition);
+                //selectedAction = PlayerBase.Action.nothing; // Reset the selected action
+            }
+
+            
+                //movPlayer.PreStartMov();
+            
         }
 
         if (Input.GetKeyDown(KeyCode.LeftControl))
@@ -54,44 +69,47 @@ public class TimeSecuence : MonoBehaviour
         }
     }
 
-    public void AddAction(string action, Vector3 targetPosition)
+    public void AddAction(PlayerBase.ActionEnum action, Vector3 targetPosition)
     {
         actions.Add(action);
         actionTargets.Add(targetPosition);
+        Debug.Log("HOLA");
     }
 
     IEnumerator ExecuteActions()
     {
         int movCount = 0;
         int shootCount = 0;
+        Debug.Log(actions.Count);
 
         for (int i = 0; i < actions.Count; i++)
         {
-            string action = actions[i];
+            PlayerBase.ActionEnum action = actions[i];
+            Debug.Log(action.ToString());
             Vector3 targetPosition = actionTargets[i];
 
             switch (action)
             {
-                case "shoot":
-                    Debug.Log("¡Disparo!");
-                    shootPl.Shoot(targetPosition);
-                    yield return new WaitForSeconds(0.75f);
+                case PlayerBase.ActionEnum.SHOOT:
+                    //Debug.Log("Executing shoot action");
+                    actionManager.UpdateAction(targetPosition, 1f); // Execute the shoot action
+                    StartCoroutine(actionManager.AttackCoroutine(action, targetPosition));
+                       yield return new WaitForSeconds(0.75f);
                     shootCount++;
                     break;
-                case "pick_up":
-                    Debug.Log("Objeto recogido");
-                    break;
-                case "move":
-                    movPlayer.StartMov();
+                case PlayerBase.ActionEnum.MOVE:
+                    //Debug.Log("Executing move action");
+                    //movPlayer.StartMov();
 
-                    while (movPlayer.t < 1f) // Espera a que termine el movimiento
+                    while (movPlayer.t < 1f) // Wait for the movement to finish
                     {
                         movPlayer.UpdateMovement(movCount);
-                        yield return null; // Espera un frame
+                        yield return null; // Wait for a frame
                     }
                     movPlayer.StopMovment();
                     movCount++;
                     break;
+                // Add other cases for different actions if needed
             }
         }
         actions.Clear();
@@ -101,7 +119,7 @@ public class TimeSecuence : MonoBehaviour
 
     void PassTurn()
     {
-        Debug.Log("aaaaaaa");
+        Debug.Log("Executing stored actions");
         StartCoroutine(ExecuteActions());
         actualTime = totalTime;
     }
@@ -111,8 +129,8 @@ public class TimeSecuence : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out RaycastHit hit))
         {
-            return hit.point; // Posición 3D del objeto impactado
+            return hit.point; // 3D position of the hit object
         }
-        return Vector3.zero; // Si no impacta, retorna Vector3.zero
+        return Vector3.zero; // Return Vector3.zero if no hit
     }
 }
