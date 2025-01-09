@@ -25,11 +25,14 @@ public class OG_MovementByMouse : MonoBehaviour
     [SerializeField] public float movementTimeLimit = 5f;
     public float timer;
 
+
+
     void Start()
     {
         curvePoints = new List<Vector3>();
         placeSelected = false;
         playerPosition = transform.position;
+        
     }
 
     void Update()

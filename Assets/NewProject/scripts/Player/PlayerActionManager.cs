@@ -10,6 +10,21 @@ public class PlayerActionManager : MonoBehaviour
 {
     #region VARIABLES
 
+    public Vector3 mousePosition;
+    public Vector3 positionDesired;
+    public Vector3 playerPosition;
+
+    [SerializeField] LineRenderer lineRenderer;
+    
+
+
+    [SerializeField] private List<Vector3> curvePoints = new List<Vector3>();
+
+
+    public TimeSecuence timeSceuence;
+    private float currentTime = 3;
+  
+
     [SerializeField] private PlayerBase player;
     [SerializeField] private Dialogue dialogueManager;
     public Animator fx;
@@ -132,10 +147,13 @@ public class PlayerActionManager : MonoBehaviour
         {
             if (currentAction.m_cost <= playerData.actionPoints && !hasShot)
             {
+                Debug.Log("aaaaaaaaaaaa");
                 isShooting = true;
                 hasShot = true; // Set the flag to indicate a shot has been fired
                 isMoving = false;
-                StartCoroutine(AttackCoroutine(PlayerBase.ActionEnum.SHOOT, newPos));
+                preShoot();
+                //StartCoroutine(AttackCoroutine(PlayerBase.ActionEnum.SHOOT, newPos));
+                
             }
         }
 
@@ -164,6 +182,37 @@ public class PlayerActionManager : MonoBehaviour
                 enemy.DecideAction();
             }
         }
+    }
+
+    private void UpdateLineRendererr()
+    {
+        lineRenderer.enabled = true;
+        lineRenderer.positionCount = curvePoints.Count;
+        lineRenderer.SetPositions(curvePoints.ToArray());
+    }
+
+    private void preShoot()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray, out RaycastHit hit))
+        {
+            mousePosition = hit.point;
+        }
+         playerPosition = movePlayer.playerPosition;
+        currentTime = timeSceuence.actualTime;
+
+        if (!Input.GetMouseButton(0) && !isMoving)
+        {
+            
+            positionDesired = mousePosition;
+
+            curvePoints.Clear();
+            curvePoints.Add(playerPosition);
+            curvePoints.Add(positionDesired);
+
+            UpdateLineRendererr();
+        }
+
     }
 
     private IEnumerator MoveCoroutine(Vector3 newPos)

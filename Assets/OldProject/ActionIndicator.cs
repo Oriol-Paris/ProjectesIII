@@ -15,7 +15,7 @@ public class ActionIndicator : MonoBehaviour
     void Update()
     {
         if(enemyMovementShooter.enemyStats.isAlive) {
-            if (!enemyMovementShooter.closestPlayer.isMoving)
+            if (!enemyMovementShooter.closestPlayer.isExecuting)
             {
                 actionIndicator.enabled = true;
                 switch (enemyMovementShooter.turnAction)

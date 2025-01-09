@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 3
   maxHealth: 3
-  actionPoints: 100
+  actionPoints: 5
   maxActionPoints: 3
   lastLevel: 
   levelCompleted: 1

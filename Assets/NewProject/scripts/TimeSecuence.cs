@@ -9,7 +9,7 @@ public class TimeSecuence : MonoBehaviour
     public float actualTime;
     public float totalTime = 3;
     float rang = 10f;
-
+    public bool isExecuting;
     public Vector3 lastPosition;
 
     public MovPlayer movPlayer;
@@ -28,6 +28,7 @@ public class TimeSecuence : MonoBehaviour
 
     void Start()
     {
+        isExecuting = false;
         actualTime = totalTime;
         lastPosition = transform.position;
 
@@ -90,9 +91,11 @@ public class TimeSecuence : MonoBehaviour
 
             switch (action)
             {
+
+
                 case PlayerBase.ActionEnum.SHOOT:
                     //Debug.Log("Executing shoot action");
-                    actionManager.UpdateAction(targetPosition, 1f); // Execute the shoot action
+                    //actionManager.UpdateAction(targetPosition, 1f); // Execute the shoot action
                     StartCoroutine(actionManager.AttackCoroutine(action, targetPosition));
                        yield return new WaitForSeconds(0.75f);
                     shootCount++;
@@ -115,10 +118,12 @@ public class TimeSecuence : MonoBehaviour
         actions.Clear();
         actionTargets.Clear();
         movPlayer.finish();
+        isExecuting = false;
     }
 
     void PassTurn()
     {
+        isExecuting = true;
         Debug.Log("Executing stored actions");
         StartCoroutine(ExecuteActions());
         actualTime = totalTime;
@@ -133,4 +138,7 @@ public class TimeSecuence : MonoBehaviour
         }
         return Vector3.zero; // Return Vector3.zero if no hit
     }
+
+
+    public bool GetIsExecuting() {  return isExecuting; }
 }
