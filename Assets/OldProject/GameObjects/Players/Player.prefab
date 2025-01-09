@@ -333,6 +333,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f263461156138f44afbe9f44d9f2293, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mousePosition: {x: 0, y: 0, z: 0}
+  positionDesired: {x: 0, y: 0, z: 0}
+  playerPosition: {x: 0, y: 0, z: 0}
+  lineRenderer: {fileID: 0}
+  curvePoints: []
+  timeSceuence: {fileID: 0}
   player: {fileID: 0}
   dialogueManager: {fileID: 0}
   fx: {fileID: 6904931311285059048}
@@ -546,6 +552,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   actualTime: 0
   totalTime: 3
+  isExecuting: 0
   lastPosition: {x: 0, y: 0, z: 0}
   movPlayer: {fileID: 4476756505495577889}
   player: {fileID: 6993864842785556067}
