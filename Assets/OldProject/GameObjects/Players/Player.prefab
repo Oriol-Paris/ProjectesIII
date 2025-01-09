@@ -339,6 +339,7 @@ MonoBehaviour:
   turnAdded: 0
   turnsDone: 0
   walkSoundDelay: 0
+  movePlayer: {fileID: 0}
   shootClip:
   - {fileID: 8300000, guid: 6a3e850acd190164d9bea800f4e24812, type: 3}
   walkingClips:
@@ -365,6 +366,7 @@ MonoBehaviour:
   range: 3
   exp: 0
   turnsDone: {fileID: 0}
+  availableActions: []
   victory: 0
   defeat: 0
   damageClips:
