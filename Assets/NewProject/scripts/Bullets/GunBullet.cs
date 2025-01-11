@@ -2,14 +2,14 @@ using UnityEngine;
 
 public class GunBullet : BulletPrefab
 {
-    private Vector3 targetPosition; // Target position the bullet is moving towards
-    //private float lifetime = 5f; // Lifetime in seconds before auto-destruction
+    private Vector3 direction; // Direction the bullet is moving towards
 
     void Start()
     {
         isHit = false;
         speed = 10f;
-        if(isFromPlayer) {
+        if (isFromPlayer)
+        {
             for (int i = 0; i < playerData.availableActions.Count; i++)
             {
                 if (playerData.availableActions[i].style.prefab == playerData.gun.prefab)
@@ -18,26 +18,20 @@ public class GunBullet : BulletPrefab
                 }
             }
         }
+
+        // Destroy the bullet after a certain time to prevent it from existing indefinitely
+        Destroy(gameObject, 5f);
     }
 
     void Update()
     {
         if (IsPaused()) return;
 
-        // Move towards the target position
-        transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
-
-        // Decrease lifetime over time
-        //lifetime -= Time.deltaTime;
-
-        // Check if the bullet has reached its destination, hit something, or if its lifetime has expired
-        if (isHit || Vector3.Distance(transform.position, targetPosition) < 0.1f)
-        {
-            DestroyBullet();
-        }
+        // Move the bullet in the set direction
+        transform.position += direction * speed * Time.deltaTime;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter(Collider collision)
     {
         if (collision.gameObject.CompareTag("Walls"))
         {
@@ -57,7 +51,7 @@ public class GunBullet : BulletPrefab
             PlayerBase player = collision.gameObject.GetComponent<PlayerBase>();
             if (player != null)
             {
-                player.Damage(FindAnyObjectByType<CombatManager>().enemyStatMultiplier >= 1.5f? 2 : 1);
+                player.Damage(FindAnyObjectByType<CombatManager>().enemyStatMultiplier >= 1.5f ? 2 : 1);
                 isHit = true;
             }
         }
@@ -65,9 +59,8 @@ public class GunBullet : BulletPrefab
 
     public override void Shoot(Vector3 direction)
     {
-        // Store the original direction and target position
-        originalDirection = direction;
-        targetPosition = transform.position + direction.normalized * 20f; 
+        // Store the direction
+        this.direction = direction.normalized;
     }
 
     private void DestroyBullet()

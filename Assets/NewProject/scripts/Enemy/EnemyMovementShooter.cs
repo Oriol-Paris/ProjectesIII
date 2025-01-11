@@ -7,8 +7,8 @@ public class EnemyMovementShooter : MonoBehaviour
     public enum TurnActions { APPROACH, SHOOT, BACK_AWAY, NOTHING };
     public TurnActions turnAction;
 
-    [SerializeField] private List<OG_MovementByMouse> players; // Array of player references
-    public OG_MovementByMouse closestPlayer;
+    [SerializeField] private List<TimeSecuence> players; // Array of player references
+    public TimeSecuence closestPlayer;
     private Vector3 closestPlayerPos;
     private float moveTime;
     public EnemyBase enemyStats;
@@ -28,8 +28,8 @@ public class EnemyMovementShooter : MonoBehaviour
         enemyStats = GetComponent<EnemyBase>();
 
         // Get all OG_MovementByMouse objects in the scene and add them to the players list
-        OG_MovementByMouse[] playersArray = GameObject.FindObjectsByType<OG_MovementByMouse>(FindObjectsSortMode.None);
-        foreach (OG_MovementByMouse player in playersArray)
+        TimeSecuence[] playersArray = GameObject.FindObjectsByType<TimeSecuence>(FindObjectsSortMode.None);
+        foreach (TimeSecuence player in playersArray)
         {
             players.Add(player);
         }
@@ -46,7 +46,7 @@ public class EnemyMovementShooter : MonoBehaviour
 
         if (enemyStats.isAlive && closestPlayer != null)
         {
-            if (closestPlayer.isMoving)
+            if (closestPlayer.isExecuting)
             {
                 ExecuteAction();
             } else
@@ -85,12 +85,12 @@ public class EnemyMovementShooter : MonoBehaviour
 
         foreach (var player in players)
         {
-            float distance = Vector3.Distance(transform.position, player.GetPosition());
+            float distance = Vector3.Distance(transform.position, player.transform.position);
             if (distance < closestDistance)
             {
                 closestDistance = distance;
                 closestPlayer = player;
-                closestPlayerPos = player.GetPosition();
+                closestPlayerPos = player.transform.position;
             }
         }
     }
@@ -114,14 +114,14 @@ public class EnemyMovementShooter : MonoBehaviour
         if(!hasShot)
         {
             Debug.Log("BANG");
-            SoundEffectsManager.instance.PlaySoundFXClip(shootingClips, transform,1f);
+            //SoundEffectsManager.instance.PlaySoundFXClip(shootingClips, transform,1f);
             GameObject bullet = Instantiate(bulletShot, transform.position, Quaternion.identity);
             GunBullet bulletScript = bullet.GetComponent<GunBullet>();
             bulletScript.isFromPlayer = false;
             bulletScript.Shoot((closestPlayerPos - transform.position).normalized); // Set bullet direction
 
             // Register the bullet with the closest player's movement script
-            closestPlayer.RegisterBullet(bulletScript);
+            //closestPlayer.RegisterBullet(bulletScript);
 
             hasShot = true; // Mark that it has shot this turn
         }
@@ -132,10 +132,10 @@ public class EnemyMovementShooter : MonoBehaviour
     {
         //Debug.Log("RELOAD");
         isReloading = true;
-        yield return new WaitUntil(() => closestPlayer.GetIsMoving() == false);
-        yield return new WaitUntil(() => closestPlayer.GetIsMoving() == true);
-        yield return new WaitUntil(() => closestPlayer.GetIsMoving() == false);
-        yield return new WaitUntil(() => closestPlayer.GetIsMoving() == false);
+        yield return new WaitUntil(() => closestPlayer.GetIsExecuting() == false);
+        yield return new WaitUntil(() => closestPlayer.GetIsExecuting() == true);
+        yield return new WaitUntil(() => closestPlayer.GetIsExecuting() == false);
+        yield return new WaitUntil(() => closestPlayer.GetIsExecuting() == false);
         
         isReloading = false;
         hasShot = false; // Reset shooting state for the next turn
@@ -146,7 +146,7 @@ public class EnemyMovementShooter : MonoBehaviour
         fx.SetTrigger("playFX");
         this.GetComponent<Animator>().SetTrigger("attack");
         yield return new WaitForSeconds(0.3f);
-        closestPlayerPos = closestPlayer.GetPosition();
+        closestPlayerPos = closestPlayer.transform.position;
 
         Shoot();
 

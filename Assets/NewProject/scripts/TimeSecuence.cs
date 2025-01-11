@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor.U2D.Sprites;
 using UnityEngine;
 
 public class TimeSecuence : MonoBehaviour
@@ -9,7 +10,7 @@ public class TimeSecuence : MonoBehaviour
     public float actualTime;
     public float totalTime = 3;
     float rang = 10f;
-
+    public bool isExecuting;
     public Vector3 lastPosition;
 
     public MovPlayer movPlayer;
@@ -18,104 +19,123 @@ public class TimeSecuence : MonoBehaviour
 
     public shootPlayer shootPl;
 
-    private List<string> actions = new List<string>();
+    private List<PlayerBase.ActionEnum> actions = new List<PlayerBase.ActionEnum>();
+    private List<Vector3> actionTargets = new List<Vector3>();
+    private List<PlayerData.BulletStyle> bulletStyles = new List<PlayerData.BulletStyle>(); // Add this line
 
-    private List<Vector3> movPosiotion = new List<Vector3>();
-
-    private Dictionary<string, float> actionCosts = new Dictionary<string, float>
-    {
-       
-        { "shoot", 0.75f },
-        { "pick_up", 1.0f },
-        { "move", 0.0f }
-    };
+    [SerializeField] private PlayerBase playerBase;
+    [SerializeField] private PlayerActionManager actionManager;
+    private PlayerBase.Action selectedAction;
 
     void Start()
     {
+        isExecuting = false;
         actualTime = totalTime;
         lastPosition = transform.position;
+
+        playerBase = player.GetComponent<PlayerBase>();
+        actionManager = player.GetComponent<PlayerActionManager>();
+        
     }
 
-   
     void Update()
     {
+        
 
         if (actualTime > 0)
         {
-            if (Input.GetKeyDown(KeyCode.Space) )
+            // Check for action selection
+            foreach (var action in playerBase.availableActions)
             {
-                AddAction("shoot");
-                shootPl.PreShoot(lastPosition);
+                if (Input.GetKeyDown(action.m_key))
+                {
+                    selectedAction = action;
+                    Debug.Log("Selected action: " + selectedAction.m_action);
+                }
             }
 
-            
-           
-         
-            movPlayer.PreStartMov();
+            // Check for mouse click to store the selected action
+            if (selectedAction.m_action != PlayerBase.ActionEnum.MOVE && Input.GetMouseButtonDown(0))
+            {
+                Vector3 targetPosition = GetMouseTargetPosition();
+                AddAction(selectedAction.m_action, targetPosition, selectedAction.m_style); // Modify this line
+                Debug.Log("Stored action: " + selectedAction.m_action + " at position: " + targetPosition);
+                //selectedAction = PlayerBase.Action.nothing; // Reset the selected action
+            }
         }
 
-
-        if (Input.GetKeyDown(KeyCode.LeftControl))
+        if (Input.GetKeyDown(KeyCode.LeftControl) && !isExecuting)
         {
-            PassTurm();
+            PassTurn();
         }
     }
 
-    public void AddAction(string action)
+    public void AddAction(PlayerBase.ActionEnum action, Vector3 targetPosition, PlayerData.BulletStyle bulletStyle) // Modify this line
     {
-            actions.Add(action);
-           
-       
+        actions.Add(action);
+        actionTargets.Add(targetPosition);
+        bulletStyles.Add(bulletStyle); // Add this line
+        Debug.Log("HOLA");
     }
 
     IEnumerator ExecuteActions()
     {
         int movCount = 0;
         int shootCount = 0;
-       
-        foreach (string action in actions)
+        Debug.Log(actions.Count);
+
+        for (int i = 0; i < actions.Count; i++)
         {
-          
+            PlayerBase.ActionEnum action = actions[i];
+            Debug.Log(action.ToString());
+            Vector3 targetPosition = actionTargets[i];
+            PlayerData.BulletStyle bulletStyle = bulletStyles[i]; // Add this line
+
             switch (action)
             {
-                
-                case "shoot":
-
-                    Debug.Log("¡Disparo!");
-                    shootPl.Shoot(shootCount);
+                case PlayerBase.ActionEnum.SHOOT:
+                    Debug.Log("Using bullet style: " + bulletStyle.prefab.name); // Add this line
+                    ((ShootAction)actionManager.activeActions[PlayerBase.ActionEnum.SHOOT]).bulletPrefab = bulletStyle.prefab; // Add this line
+                    StartCoroutine(actionManager.AttackCoroutine(action, targetPosition,bulletStyle));
                     yield return new WaitForSeconds(0.75f);
                     shootCount++;
                     break;
-                case "pick_up":
-                    Debug.Log("Objeto recogido");
-                    break;
-                case "move":
-
-                    movPlayer.StartMov();
-
-                    while (movPlayer.t < 1f) // Espera a que termine el movimiento
+                case PlayerBase.ActionEnum.MOVE:
+                    while (movPlayer.t < 1f) // Wait for the movement to finish
                     {
-                      
                         movPlayer.UpdateMovement(movCount);
-                        yield return null; // Espera un frame
+                        yield return null; // Wait for a frame
                     }
                     movPlayer.StopMovment();
-                   
                     movCount++;
                     break;
+                // Add other cases for different actions if needed
             }
         }
         actions.Clear();
+        actionTargets.Clear();
+        bulletStyles.Clear(); // Add this line
         movPlayer.finish();
-        
-       
+        isExecuting = false;
     }
 
-
-    void PassTurm()
+    void PassTurn()
     {
-        Debug.Log("aaaaaaa");
+        isExecuting = true;
+        Debug.Log("Executing stored actions");
         StartCoroutine(ExecuteActions());
         actualTime = totalTime;
     }
+
+    private Vector3 GetMouseTargetPosition()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray, out RaycastHit hit))
+        {
+            return hit.point; // 3D position of the hit object
+        }
+        return Vector3.zero; // Return Vector3.zero if no hit
+    }
+
+    public bool GetIsExecuting() { return isExecuting; }
 }

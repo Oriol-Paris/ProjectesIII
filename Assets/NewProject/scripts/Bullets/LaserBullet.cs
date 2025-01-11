@@ -26,7 +26,7 @@ public class LaserBullet : BulletPrefab
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Walls"))
         {
