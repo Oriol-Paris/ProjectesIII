@@ -162,7 +162,7 @@ public class PlayerActionManager : MonoBehaviour
             if (currentAction.m_cost <= playerData.actionPoints)
             {
                 isMoving = false;
-                StartCoroutine(AttackCoroutine(PlayerBase.ActionEnum.MELEE, newPos));
+                StartCoroutine(AttackCoroutine(PlayerBase.ActionEnum.MELEE, newPos,null));
             }
         }
 
@@ -245,7 +245,7 @@ public class PlayerActionManager : MonoBehaviour
         }
     }
 
-    public IEnumerator AttackCoroutine(PlayerBase.ActionEnum action, Vector3 newPos)
+    public IEnumerator AttackCoroutine(PlayerBase.ActionEnum action, Vector3 newPos,PlayerData.BulletStyle style)
     {
         this.GetComponent<Animator>().SetTrigger("attack");
         fx.SetTrigger("playFX");
@@ -254,7 +254,7 @@ public class PlayerActionManager : MonoBehaviour
 
         if (action == PlayerBase.ActionEnum.SHOOT)
         {
-            ((ShootAction)activeActions[PlayerBase.ActionEnum.SHOOT]).bulletPrefab = player.activeStyle.prefab;
+            ((ShootAction)activeActions[PlayerBase.ActionEnum.SHOOT]).bulletPrefab = style.prefab;
             //SoundEffectsManager.instance.PlaySoundFXClip(shootClip, transform, 1f);
             activeActions[PlayerBase.ActionEnum.SHOOT].Execute(player, newPos);
         }

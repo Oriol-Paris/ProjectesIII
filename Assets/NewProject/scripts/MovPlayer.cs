@@ -255,7 +255,7 @@ public class MovPlayer : MonoBehaviour
             if (currentTime > timeConsumption)
             {
                 MovList.Add(Tuple.Create(curvePoints[0], curvePoints[1], curvePoints[2]));
-                timeSceuence.AddAction(PlayerBase.ActionEnum.MOVE, positionDesired);
+                timeSceuence.AddAction(PlayerBase.ActionEnum.MOVE, positionDesired,null);
                 Debug.Log($"Movimiento registrado. Consumo de estamina: {timeConsumption}");
 
                 // Deducir la estamina

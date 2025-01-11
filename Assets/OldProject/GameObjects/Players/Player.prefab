@@ -302,7 +302,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6993864842785556067}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: befa5a8330344994286e20c10a68831e, type: 3}
   m_Name: 
@@ -336,10 +336,10 @@ MonoBehaviour:
   mousePosition: {x: 0, y: 0, z: 0}
   positionDesired: {x: 0, y: 0, z: 0}
   playerPosition: {x: 0, y: 0, z: 0}
-  lineRenderer: {fileID: 0}
+  lineRenderer: {fileID: 1145941097933022349}
   curvePoints: []
-  timeSceuence: {fileID: 0}
-  player: {fileID: 0}
+  timeSceuence: {fileID: 7189739028029077113}
+  player: {fileID: 8584045141074783902}
   dialogueManager: {fileID: 0}
   fx: {fileID: 6904931311285059048}
   isMoving: 1
@@ -348,7 +348,7 @@ MonoBehaviour:
   turnAdded: 0
   turnsDone: 0
   walkSoundDelay: 0
-  movePlayer: {fileID: 0}
+  movePlayer: {fileID: 4476756505495577889}
   shootClip:
   - {fileID: 8300000, guid: 6a3e850acd190164d9bea800f4e24812, type: 3}
   walkingClips:
@@ -374,7 +374,7 @@ MonoBehaviour:
   maxActionPoints: 0
   range: 3
   exp: 0
-  turnsDone: {fileID: 0}
+  turnsDone: {fileID: 1251202436317223770}
   availableActions: []
   victory: 0
   defeat: 0
@@ -533,10 +533,10 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!114 &7189739028029077113
 MonoBehaviour:
@@ -559,6 +559,7 @@ MonoBehaviour:
   shootPl: {fileID: 6045879003536822004}
   playerBase: {fileID: 8584045141074783902}
   actionManager: {fileID: 1251202436317223770}
+  combatManager: {fileID: 0}
 --- !u!114 &6045879003536822004
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -593,7 +594,7 @@ MonoBehaviour:
   velocity: 2
   lineRenderer: {fileID: 1145941097933022349}
   curveResolution: 20
-  timeSceuence: {fileID: 0}
+  timeSceuence: {fileID: 7189739028029077113}
   placeSelected: 0
   isMoving: 0
   isDragging: 0

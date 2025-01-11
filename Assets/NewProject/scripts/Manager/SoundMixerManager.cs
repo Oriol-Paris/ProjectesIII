@@ -11,38 +11,43 @@ public class SoundMixerManager : MonoBehaviour
 
     private void Start()
     {
-        // Set slider min and max values
-        masterVolumeSlider.minValue = -80f;
-        masterVolumeSlider.maxValue = 20f;
-        soundFXVolumeSlider.minValue = -80f;
-        soundFXVolumeSlider.maxValue = 20f;
-        musicVolumeSlider.minValue = -80f;
-        musicVolumeSlider.maxValue = 20f;
+        if (masterVolumeSlider != null && soundFXVolumeSlider != null && musicVolumeSlider != null)
+        {
+            // Set slider min and max values
+            masterVolumeSlider.minValue = -80f;
+            masterVolumeSlider.maxValue = 20f;
+            soundFXVolumeSlider.minValue = -80f;
+            soundFXVolumeSlider.maxValue = 20f;
+            musicVolumeSlider.minValue = -80f;
+            musicVolumeSlider.maxValue = 20f;
 
-        // Add listeners to sliders to call respective methods when value changes
-        masterVolumeSlider.onValueChanged.AddListener(SetMasterVolume);
-        soundFXVolumeSlider.onValueChanged.AddListener(SetSoundFXVolume);
-        musicVolumeSlider.onValueChanged.AddListener(SetMusicVolume);
+            // Add listeners to sliders to call respective methods when value changes
+            masterVolumeSlider.onValueChanged.AddListener(SetMasterVolume);
+            soundFXVolumeSlider.onValueChanged.AddListener(SetSoundFXVolume);
+            musicVolumeSlider.onValueChanged.AddListener(SetMusicVolume);
 
-        // Initialize slider values based on current mixer values
-        float masterVolume;
-        audioMixer.GetFloat("MasterVolume", out masterVolume);
-        masterVolumeSlider.value = masterVolume;
+            // Initialize slider values based on current mixer values
+            float masterVolume;
+            audioMixer.GetFloat("MasterVolume", out masterVolume);
+            masterVolumeSlider.value = masterVolume;
 
-        float soundFXVolume;
-        audioMixer.GetFloat("soundFXVolume", out soundFXVolume);
-        soundFXVolumeSlider.value = soundFXVolume;
+            float soundFXVolume;
+            audioMixer.GetFloat("soundFXVolume", out soundFXVolume);
+            soundFXVolumeSlider.value = soundFXVolume;
 
-        float musicVolume;
-        audioMixer.GetFloat("MusicVolume", out musicVolume);
-        musicVolumeSlider.value = musicVolume;
+            float musicVolume;
+            audioMixer.GetFloat("MusicVolume", out musicVolume);
+            musicVolumeSlider.value = musicVolume;
+        }
     }
 
     private void Update()
     {
+        if(masterVolumeSlider != null&&soundFXVolumeSlider!=null&&musicVolumeSlider!=null) { 
         SetMasterVolume(masterVolumeSlider.value);
         SetSoundFXVolume(soundFXVolumeSlider.value);
         SetMusicVolume(musicVolumeSlider.value);
+        }
     }
 
     public void SetMasterVolume(float level)

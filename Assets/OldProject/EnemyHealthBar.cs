@@ -10,7 +10,7 @@ public class EnemyHealthBar : MonoBehaviour
         enemyStats = GetComponentInParent<EnemyBase>();
         if(enemyStats != null )
         {
-            Debug.Log("Stats captured correctly");
+            
         }
         healthBar = GetComponent<SpriteRenderer>();
         healthBar.size = new Vector2(enemyStats.GetHealth(),healthBar.size.y);

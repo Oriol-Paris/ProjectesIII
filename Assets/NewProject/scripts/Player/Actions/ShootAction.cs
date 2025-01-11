@@ -39,7 +39,7 @@ public class ShootAction : ActiveAction
             foreach (var offset in offsets)
             {
                 GameObject shotgunBulletInstance = Instantiate(bulletPrefab, player.transform.position, Quaternion.identity);
-                Debug.Log("Shotgun bullet instantiated.");
+                //Debug.Log("Shotgun bullet instantiated.");
                 Shotgun shotgunBullet = shotgunBulletInstance.GetComponent<Shotgun>();
                 if (shotgunBullet != null)
                 {
@@ -52,7 +52,7 @@ public class ShootAction : ActiveAction
                     Debug.LogError("Shotgun component not found on the instantiated bullet.");
                 }
             }
-            Debug.Log($"Shotgun fired {bulletCount} bullets.");
+            //Debug.Log($"Shotgun fired {bulletCount} bullets.");
         }
         else
         {

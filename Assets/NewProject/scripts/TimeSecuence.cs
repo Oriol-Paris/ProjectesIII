@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor.U2D.Sprites;
 using UnityEngine;
 
 public class TimeSecuence : MonoBehaviour
@@ -20,10 +21,10 @@ public class TimeSecuence : MonoBehaviour
 
     private List<PlayerBase.ActionEnum> actions = new List<PlayerBase.ActionEnum>();
     private List<Vector3> actionTargets = new List<Vector3>();
+    private List<PlayerData.BulletStyle> bulletStyles = new List<PlayerData.BulletStyle>(); // Add this line
 
     [SerializeField] private PlayerBase playerBase;
     [SerializeField] private PlayerActionManager actionManager;
-
     private PlayerBase.Action selectedAction;
 
     void Start()
@@ -34,10 +35,13 @@ public class TimeSecuence : MonoBehaviour
 
         playerBase = player.GetComponent<PlayerBase>();
         actionManager = player.GetComponent<PlayerActionManager>();
+        
     }
 
     void Update()
     {
+        
+
         if (actualTime > 0)
         {
             // Check for action selection
@@ -54,26 +58,23 @@ public class TimeSecuence : MonoBehaviour
             if (selectedAction.m_action != PlayerBase.ActionEnum.MOVE && Input.GetMouseButtonDown(0))
             {
                 Vector3 targetPosition = GetMouseTargetPosition();
-                AddAction(selectedAction.m_action, targetPosition);
+                AddAction(selectedAction.m_action, targetPosition, selectedAction.m_style); // Modify this line
                 Debug.Log("Stored action: " + selectedAction.m_action + " at position: " + targetPosition);
                 //selectedAction = PlayerBase.Action.nothing; // Reset the selected action
             }
-
-            
-                //movPlayer.PreStartMov();
-            
         }
 
-        if (Input.GetKeyDown(KeyCode.LeftControl))
+        if (Input.GetKeyDown(KeyCode.LeftControl) && !isExecuting)
         {
             PassTurn();
         }
     }
 
-    public void AddAction(PlayerBase.ActionEnum action, Vector3 targetPosition)
+    public void AddAction(PlayerBase.ActionEnum action, Vector3 targetPosition, PlayerData.BulletStyle bulletStyle) // Modify this line
     {
         actions.Add(action);
         actionTargets.Add(targetPosition);
+        bulletStyles.Add(bulletStyle); // Add this line
         Debug.Log("HOLA");
     }
 
@@ -88,22 +89,18 @@ public class TimeSecuence : MonoBehaviour
             PlayerBase.ActionEnum action = actions[i];
             Debug.Log(action.ToString());
             Vector3 targetPosition = actionTargets[i];
+            PlayerData.BulletStyle bulletStyle = bulletStyles[i]; // Add this line
 
             switch (action)
             {
-
-
                 case PlayerBase.ActionEnum.SHOOT:
-                    //Debug.Log("Executing shoot action");
-                    //actionManager.UpdateAction(targetPosition, 1f); // Execute the shoot action
-                    StartCoroutine(actionManager.AttackCoroutine(action, targetPosition));
-                       yield return new WaitForSeconds(0.75f);
+                    Debug.Log("Using bullet style: " + bulletStyle.prefab.name); // Add this line
+                    ((ShootAction)actionManager.activeActions[PlayerBase.ActionEnum.SHOOT]).bulletPrefab = bulletStyle.prefab; // Add this line
+                    StartCoroutine(actionManager.AttackCoroutine(action, targetPosition,bulletStyle));
+                    yield return new WaitForSeconds(0.75f);
                     shootCount++;
                     break;
                 case PlayerBase.ActionEnum.MOVE:
-                    //Debug.Log("Executing move action");
-                    //movPlayer.StartMov();
-
                     while (movPlayer.t < 1f) // Wait for the movement to finish
                     {
                         movPlayer.UpdateMovement(movCount);
@@ -117,6 +114,7 @@ public class TimeSecuence : MonoBehaviour
         }
         actions.Clear();
         actionTargets.Clear();
+        bulletStyles.Clear(); // Add this line
         movPlayer.finish();
         isExecuting = false;
     }
@@ -139,6 +137,5 @@ public class TimeSecuence : MonoBehaviour
         return Vector3.zero; // Return Vector3.zero if no hit
     }
 
-
-    public bool GetIsExecuting() {  return isExecuting; }
+    public bool GetIsExecuting() { return isExecuting; }
 }
