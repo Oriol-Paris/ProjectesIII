@@ -559,7 +559,6 @@ MonoBehaviour:
   shootPl: {fileID: 6045879003536822004}
   playerBase: {fileID: 8584045141074783902}
   actionManager: {fileID: 1251202436317223770}
-  combatManager: {fileID: 0}
 --- !u!114 &6045879003536822004
 MonoBehaviour:
   m_ObjectHideFlags: 0
