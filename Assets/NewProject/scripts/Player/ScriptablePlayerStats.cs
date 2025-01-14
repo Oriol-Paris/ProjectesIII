@@ -55,17 +55,6 @@ public class PlayerData : ScriptableObject
         public BulletStyle style;
         public int cost;
 
-        public static bool operator==(ActionData a, ActionData b)
-        {
-            if (a.action == b.action && a.style.prefab == b.style.prefab)
-                return true;
-            return false;
-        }
-        public static bool operator !=(ActionData a, ActionData b)
-        {
-            if (a.action == b.action && a.style.prefab == b.style.prefab)
-                return false;
-            return true;
-        }
+        
     }
 }
