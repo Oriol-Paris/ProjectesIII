@@ -382,6 +382,10 @@ PrefabInstance:
       propertyPath: damageClip
       value: 
       objectReference: {fileID: 8300000, guid: 94e3b24d75a0cda4980ec5134a8e6da9, type: 3}
+    - target: {fileID: 8094846091851707121, guid: a363a223813dbe94c98929e069052f54, type: 3}
+      propertyPath: m_UseGravity
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
