@@ -140,6 +140,10 @@ PrefabInstance:
       propertyPath: health
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 4733029159631704140, guid: 40da685f188bc2e4bb1c0608ce87ae0a, type: 3}
+      propertyPath: Player
+      value: 
+      objectReference: {fileID: 2096507416}
     - target: {fileID: 5779656468157418596, guid: 40da685f188bc2e4bb1c0608ce87ae0a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -435,6 +439,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -5676328429409097243, guid: a363a223813dbe94c98929e069052f54, type: 3}
+      propertyPath: closestPlayer
+      value: 
+      objectReference: {fileID: 2096507416}
     - target: {fileID: -5676328429409097243, guid: a363a223813dbe94c98929e069052f54, type: 3}
       propertyPath: shootingClips.Array.size
       value: 1
@@ -1898,6 +1906,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -5676328429409097243, guid: a363a223813dbe94c98929e069052f54, type: 3}
+      propertyPath: closestPlayer
+      value: 
+      objectReference: {fileID: 2096507416}
     - target: {fileID: 1319166369091725921, guid: a363a223813dbe94c98929e069052f54, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -2253,6 +2265,17 @@ MonoBehaviour:
   - {x: -0.33091855, y: 0.41592672, z: 0}
   - {x: -0.49946725, y: 0.28411916, z: 0}
   - {x: -0.46964994, y: -0.2608116, z: 0}
+--- !u!114 &2096507416 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7189739028029077113, guid: 135a33f42603095498418b3997897017, type: 3}
+  m_PrefabInstance: {fileID: 2096507413}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2096507414}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3751eac9fad097647ad777670baae6d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2106340985
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -125,8 +125,8 @@ MonoBehaviour:
   oldRange: 4
   shootingRange: 5
   spriteRenderer: {fileID: 7086546256689271642}
-  collider: {fileID: 0}
-  rb2d: {fileID: 0}
+  collider: {fileID: 535729429190450929}
+  rb2d: {fileID: 1201100579626055862}
   isAlive: 1
   damageClips:
   - {fileID: 8300000, guid: 94e3b24d75a0cda4980ec5134a8e6da9, type: 3}
