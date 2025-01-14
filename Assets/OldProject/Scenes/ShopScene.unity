@@ -1138,124 +1138,15 @@ MonoBehaviour:
   player: {fileID: 435037521}
   boughtItem: {fileID: 1195563168}
   currentXP: {fileID: 1208965283}
-  items:
-  - action:
-      actionType: 0
-      action: 0
-      player: {fileID: 0}
-      key: 0
-      style:
-        prefab: {fileID: 0}
-        range: 0
-        damage: 0
-      cost: 0
-    image: {fileID: 21300000, guid: 80a31360147518a4c878052c987d2472, type: 3}
-    basePrice: 10
-    displayName: Move
-  - action:
-      actionType: 0
-      action: 1
-      player: {fileID: 0}
-      key: 0
-      style:
-        prefab: {fileID: 4841340973275302747, guid: 8c280260248f7e449925f58bc503ee3b, type: 3}
-        range: 0
-        damage: 0
-      cost: 0
-    image: {fileID: 21300000, guid: 04c9e5448c757a54a9482dd91faef38a, type: 3}
-    basePrice: 0
-    displayName: Gun
-  - action:
-      actionType: 0
-      action: 1
-      player: {fileID: 0}
-      key: 0
-      style:
-        prefab: {fileID: 4841340973275302747, guid: 10864d5b051bdc44e928dd42003a1950, type: 3}
-        range: 0
-        damage: 0
-      cost: 0
-    image: {fileID: 21300000, guid: 982cfee97721db245a0c0ea21a8fbddc, type: 3}
-    basePrice: 0
-    displayName: Shotgun
-  - action:
-      actionType: 1
-      action: 2
-      player: {fileID: 0}
-      key: 0
-      style:
-        prefab: {fileID: 0}
-        range: 0
-        damage: 0
-      cost: 0
-    image: {fileID: 21300000, guid: 800fb34dc71becd4f98a6c0c7bca341b, type: 3}
-    basePrice: 0
-    displayName: Heal
-  - action:
-      actionType: 2
-      action: 5
-      player: {fileID: 0}
-      key: 0
-      style:
-        prefab: {fileID: 0}
-        range: 0
-        damage: 0
-      cost: 0
-    image: {fileID: 21300000, guid: c736331b63dca6144ad0525e3e96d8da, type: 3}
-    basePrice: 0
-    displayName: Recovery
-  - action:
-      actionType: 2
-      action: 4
-      player: {fileID: 0}
-      key: 0
-      style:
-        prefab: {fileID: 0}
-        range: 0
-        damage: 0
-      cost: 0
-    image: {fileID: 21300000, guid: 252812397870d2842ba9b8bd138af9f6, type: 3}
-    basePrice: 0
-    displayName: Rest
-  - action:
-      actionType: 2
-      action: 8
-      player: {fileID: 0}
-      key: 0
-      style:
-        prefab: {fileID: 0}
-        range: 0
-        damage: 0
-      cost: 0
-    image: {fileID: 21300000, guid: 4cb56cf2a0681824facd7f87a5ac7886, type: 3}
-    basePrice: 0
-    displayName: Max HP UP
-  - action:
-      actionType: 2
-      action: 7
-      player: {fileID: 0}
-      key: 0
-      style:
-        prefab: {fileID: 0}
-        range: 0
-        damage: 0
-      cost: 0
-    image: {fileID: 21300000, guid: d34f683dd9279764eb05181899c20099, type: 3}
-    basePrice: 0
-    displayName: Mana Potion
-  - action:
-      actionType: 2
-      action: 6
-      player: {fileID: 0}
-      key: 0
-      style:
-        prefab: {fileID: 0}
-        range: 0
-        damage: 0
-      cost: 0
-    image: {fileID: 21300000, guid: b9bc929fd54993045b339890237facb5, type: 3}
-    basePrice: 0
-    displayName: Speed UP
+  moveImage: {fileID: 21300000, guid: 80a31360147518a4c878052c987d2472, type: 3}
+  gunImage: {fileID: 21300000, guid: 04c9e5448c757a54a9482dd91faef38a, type: 3}
+  shotgunImage: {fileID: 21300000, guid: 982cfee97721db245a0c0ea21a8fbddc, type: 3}
+  healImage: {fileID: 21300000, guid: 800fb34dc71becd4f98a6c0c7bca341b, type: 3}
+  recoveryImage: {fileID: 21300000, guid: c736331b63dca6144ad0525e3e96d8da, type: 3}
+  speedUpImage: {fileID: 21300000, guid: b9bc929fd54993045b339890237facb5, type: 3}
+  restImage: {fileID: 21300000, guid: 252812397870d2842ba9b8bd138af9f6, type: 3}
+  maxHPImage: {fileID: 21300000, guid: 4cb56cf2a0681824facd7f87a5ac7886, type: 3}
+  manaImage: {fileID: 21300000, guid: d34f683dd9279764eb05181899c20099, type: 3}
   rerollPrice: 1
 --- !u!114 &1232424836
 MonoBehaviour:
