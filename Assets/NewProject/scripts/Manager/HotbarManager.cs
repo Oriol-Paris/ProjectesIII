@@ -83,9 +83,20 @@ public class HotbarManager : MonoBehaviour
             }
             else
             {
-                if(action.action == FindAnyObjectByType<PlayerBase>().GetAction().m_action && action.style.prefab == FindAnyObjectByType<PlayerBase>().GetAction().m_style.prefab)
+                if(action.action == FindAnyObjectByType<PlayerBase>().GetAction().m_action)
                 {
-                    slot.GetComponent<Image>().color = Color.yellow;
+                    if(action.style.prefab == null)
+                    {
+                        slot.GetComponent<Image>().color = Color.yellow;
+                    }
+                    else if(action.style.prefab == FindAnyObjectByType<PlayerBase>().GetAction().m_style.prefab)
+                    {
+                        slot.GetComponent<Image>().color = Color.yellow;
+                    }
+                    else
+                    {
+                        slot.GetComponent<Image>().color = Color.white;
+                    }
                 }
 
                 slot.transform.Find("Action Image").GetComponent<Image>().enabled = false;
@@ -121,6 +132,12 @@ public class HotbarManager : MonoBehaviour
                 if (inputText != null)
                 {
                     string inputKey = action.key.ToString();  // Accede a la clave de la acción, que es el input asignado
+
+                    if(inputKey.Contains("Alpha"))
+                    {
+                        inputKey = inputKey[5].ToString();
+                    }
+
                     inputText.text = inputKey;  // Muestra el input asignado a la acción
                 }
             }
