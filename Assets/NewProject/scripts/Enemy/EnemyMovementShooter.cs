@@ -146,13 +146,18 @@ public class EnemyMovementShooter : MonoBehaviour
         fx.SetTrigger("playFX");
         this.GetComponent<Animator>().SetTrigger("attack");
         yield return new WaitForSeconds(0.3f);
+        if(closestPlayer.isExecuting) { 
         closestPlayerPos = closestPlayer.transform.position;
 
-        Shoot();
+            Shoot();
 
-        fx.ResetTrigger("playFX");
-
-        StartCoroutine(Reload());
+            fx.ResetTrigger("playFX");
+    
+            StartCoroutine(Reload());
+        } else
+        {
+            DecideAction();
+        }
     }
 
     public void DecideAction()

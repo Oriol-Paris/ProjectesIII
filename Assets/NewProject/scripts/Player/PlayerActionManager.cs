@@ -16,9 +16,10 @@ public class PlayerActionManager : MonoBehaviour
     public Vector3 playerPosition;
 
     [SerializeField] LineRenderer lineRenderer;
+    [SerializeField] LineRenderer shootLineRenderer;
 
 
-
+    [SerializeField] public List<Vector3> shootpoints = new List<Vector3>();
     [SerializeField] private List<Vector3> curvePoints = new List<Vector3>();
 
     [SerializeField] public List<GameObject> visualPlayerAfterShoot = new List<GameObject>();
@@ -194,6 +195,7 @@ public class PlayerActionManager : MonoBehaviour
         lineRenderer.enabled = true;
         lineRenderer.positionCount = curvePoints.Count;
         lineRenderer.SetPositions(curvePoints.ToArray());
+        
     }
 
     private void preShoot()
@@ -214,9 +216,11 @@ public class PlayerActionManager : MonoBehaviour
             positionDesired = mousePosition;
 
             curvePoints.Clear();
+           
             curvePoints.Add(playerPosition);
             curvePoints.Add(positionDesired);
-
+           
+            
             UpdateLineRendererr();
         }
 
@@ -227,7 +231,11 @@ public class PlayerActionManager : MonoBehaviour
             {
                 GameObject instantiatedObject = Instantiate(prefPreShoot, playerPosition, Quaternion.identity);
 
-              
+                shootpoints.Add(playerPosition);
+                shootpoints.Add(positionDesired);
+                shootLineRenderer.enabled = true;
+                shootLineRenderer.positionCount = shootpoints.Count;
+                shootLineRenderer.SetPositions(shootpoints.ToArray());
                 visualPlayerAfterShoot.Add(instantiatedObject);
 
 
@@ -273,6 +281,7 @@ public class PlayerActionManager : MonoBehaviour
 
     public IEnumerator AttackCoroutine(PlayerBase.ActionEnum action, Vector3 newPos, PlayerData.BulletStyle style)
     {
+        shootLineRenderer.enabled = false;
         this.GetComponent<Animator>().SetTrigger("attack");
         fx.SetTrigger("playFX");
 
@@ -283,6 +292,7 @@ public class PlayerActionManager : MonoBehaviour
             ((ShootAction)activeActions[PlayerBase.ActionEnum.SHOOT]).bulletPrefab = style.prefab;
             //SoundEffectsManager.instance.PlaySoundFXClip(shootClip, transform, 1f);
             activeActions[PlayerBase.ActionEnum.SHOOT].Execute(player, newPos);
+            
         }
         else
         {
@@ -331,6 +341,7 @@ public class PlayerActionManager : MonoBehaviour
         hasShot = false; // Reset the flag when the player stops moving
         turnAdded = false;
         actionPointReduced = false;
+        
     }
 
     public PlayerBase GetPlayer() { return player; }

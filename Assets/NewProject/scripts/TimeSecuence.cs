@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using UnityEditor.U2D.Sprites;
+
 using UnityEngine;
 
 public class TimeSecuence : MonoBehaviour
@@ -116,6 +116,7 @@ public class TimeSecuence : MonoBehaviour
         actionTargets.Clear();
         bulletStyles.Clear(); // Add this line
         movPlayer.finish();
+        actionManager.shootpoints.Clear();
         isExecuting = false;
     }
 
@@ -138,4 +139,17 @@ public class TimeSecuence : MonoBehaviour
     }
 
     public bool GetIsExecuting() { return isExecuting; }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Walls")
+        {
+            actions.Clear();
+            actionTargets.Clear();
+            bulletStyles.Clear(); // Add this line
+            movPlayer.finish();
+            isExecuting = false;
+            StopAllCoroutines();
+        }
+    }
 }

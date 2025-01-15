@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
-using TMPro;
-using Unity.VisualScripting;
-using UnityEditor.Rendering;
+
 using UnityEngine;
 
 public class MovPlayer : MonoBehaviour
@@ -296,5 +294,13 @@ public class MovPlayer : MonoBehaviour
         newLine.positionCount = curvePoints.Count;
         newLine.SetPositions(curvePoints.ToArray());
         lineList.Add(newLine);
+    }
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Walls")
+        {
+            StopMovment();
+            StopAllCoroutines();
+        }
     }
 }
