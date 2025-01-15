@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem.XR;
@@ -15,15 +16,18 @@ public class PlayerActionManager : MonoBehaviour
     public Vector3 playerPosition;
 
     [SerializeField] LineRenderer lineRenderer;
-    
+
 
 
     [SerializeField] private List<Vector3> curvePoints = new List<Vector3>();
 
+    [SerializeField] public List<GameObject> visualPlayerAfterShoot = new List<GameObject>();
+
+    public GameObject prefPreShoot;
 
     public TimeSecuence timeSceuence;
     private float currentTime = 3;
-  
+
 
     [SerializeField] private PlayerBase player;
     [SerializeField] private Dialogue dialogueManager;
@@ -40,6 +44,8 @@ public class PlayerActionManager : MonoBehaviour
     public bool turnAdded = false;
     public int turnsDone = 0;
 
+    public float costShoot = 0.4f;
+
     [SerializeField] private float walkSoundDelay;
     float actualWalkSoundDelay;
     private CombatManager combatManager;
@@ -49,7 +55,7 @@ public class PlayerActionManager : MonoBehaviour
     private Animator animationToExecute;
     [SerializeField] AudioClip[] shootClip;
     [SerializeField] AudioClip[] walkingClips;
-    
+
     private bool hasMoved = false;
     private bool hasShotAction = false;
     private bool hasHealed = false;
@@ -80,7 +86,7 @@ public class PlayerActionManager : MonoBehaviour
         InitializeActions();
         combatManager = FindAnyObjectByType<CombatManager>();
     }
-    
+
     private void InitializeActions()
     {
         foreach (var actionData in playerData.availableActions)
@@ -145,16 +151,15 @@ public class PlayerActionManager : MonoBehaviour
 
         if (currentAction.m_action == PlayerBase.ActionEnum.SHOOT && (!player.GetComponent<OG_MovementByMouse>().isMoving || isShooting))
         {
-            if (currentAction.m_cost <= playerData.actionPoints && !hasShot)
-            {
-                Debug.Log("aaaaaaaaaaaa");
-                isShooting = true;
-                hasShot = true; // Set the flag to indicate a shot has been fired
-                isMoving = false;
-                preShoot();
-                //StartCoroutine(AttackCoroutine(PlayerBase.ActionEnum.SHOOT, newPos));
-                
-            }
+
+            Debug.Log("aaaaaaaaaaaa");
+            isShooting = true;
+            hasShot = true; // Set the flag to indicate a shot has been fired
+            isMoving = false;
+            preShoot();
+            //StartCoroutine(AttackCoroutine(PlayerBase.ActionEnum.SHOOT, newPos));
+
+
         }
 
         if (currentAction.m_action == PlayerBase.ActionEnum.MELEE && (!player.GetComponent<OG_MovementByMouse>().GetIsMoving() || isMoving))
@@ -162,7 +167,7 @@ public class PlayerActionManager : MonoBehaviour
             if (currentAction.m_cost <= playerData.actionPoints)
             {
                 isMoving = false;
-                StartCoroutine(AttackCoroutine(PlayerBase.ActionEnum.MELEE, newPos,null));
+                StartCoroutine(AttackCoroutine(PlayerBase.ActionEnum.MELEE, newPos, null));
             }
         }
 
@@ -193,17 +198,19 @@ public class PlayerActionManager : MonoBehaviour
 
     private void preShoot()
     {
+        Debug.Log("aaaaa");
+
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out RaycastHit hit))
         {
             mousePosition = hit.point;
         }
-         playerPosition = movePlayer.playerPosition;
+        playerPosition = movePlayer.playerPosition;
         currentTime = timeSceuence.actualTime;
 
         if (!Input.GetMouseButton(0) && !isMoving)
         {
-            
+
             positionDesired = mousePosition;
 
             curvePoints.Clear();
@@ -213,6 +220,25 @@ public class PlayerActionManager : MonoBehaviour
             UpdateLineRendererr();
         }
 
+        if (Input.GetMouseButtonUp(0) && !isMoving)
+        {
+
+            if (currentTime > costShoot)
+            {
+                GameObject instantiatedObject = Instantiate(prefPreShoot, playerPosition, Quaternion.identity);
+
+              
+                visualPlayerAfterShoot.Add(instantiatedObject);
+
+
+                currentTime -= costShoot;
+
+                timeSceuence.actualTime = currentTime;
+
+
+            }
+
+        }
     }
 
     private IEnumerator MoveCoroutine(Vector3 newPos)
@@ -235,17 +261,17 @@ public class PlayerActionManager : MonoBehaviour
             playerData.actionPoints++;
             playerData.actionPoints = Mathf.Min(playerData.actionPoints, playerData.maxActionPoints);
         }
-       
+
         if (!hasMoved)
         {
             hasMoved = true;
             yield return new WaitForSeconds(1.5f); // Adjust the delay as needed
-            if (dialogueManager != null) 
-            dialogueManager.ActionCompleted(PlayerBase.ActionEnum.MOVE);
+            if (dialogueManager != null)
+                dialogueManager.ActionCompleted(PlayerBase.ActionEnum.MOVE);
         }
     }
 
-    public IEnumerator AttackCoroutine(PlayerBase.ActionEnum action, Vector3 newPos,PlayerData.BulletStyle style)
+    public IEnumerator AttackCoroutine(PlayerBase.ActionEnum action, Vector3 newPos, PlayerData.BulletStyle style)
     {
         this.GetComponent<Animator>().SetTrigger("attack");
         fx.SetTrigger("playFX");
@@ -272,13 +298,13 @@ public class PlayerActionManager : MonoBehaviour
             playerData.actionPoints -= player.GetAction().m_cost;
         }
 
-       
+
         if (action == PlayerBase.ActionEnum.SHOOT && !hasShotAction)
         {
             hasShotAction = true;
             yield return new WaitForSeconds(1.0f); // Adjust the delay as needed
-            if(dialogueManager != null)
-            dialogueManager.ActionCompleted(action);
+            if (dialogueManager != null)
+                dialogueManager.ActionCompleted(action);
         }
     }
 

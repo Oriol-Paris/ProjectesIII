@@ -72,6 +72,11 @@ public class MovPlayer : MonoBehaviour
         MovList.Clear();
         placeSelected = false;
         isDragging = false;
+        foreach (var line in lineList)
+        {
+            Destroy(line.gameObject);
+        }
+        lineList.Clear();
         //DebugMovList();
     }
 
@@ -121,6 +126,7 @@ public class MovPlayer : MonoBehaviour
     {
         t = 0f;
         timeSceuence.actualTime = currentTime;
+        
     }
 
 
@@ -265,6 +271,8 @@ public class MovPlayer : MonoBehaviour
                 playerPosition = positionDesired;
                
                 t = 0f;
+
+                InstantiateLineMovment();
             }
             else
             {
@@ -279,5 +287,14 @@ public class MovPlayer : MonoBehaviour
 
         
 
+    }
+
+    private void InstantiateLineMovment()
+    {
+        var newLine = Instantiate(lineRenderer);
+        lineRenderer.enabled = true;
+        newLine.positionCount = curvePoints.Count;
+        newLine.SetPositions(curvePoints.ToArray());
+        lineList.Add(newLine);
     }
 }

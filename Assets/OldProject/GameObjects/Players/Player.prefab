@@ -338,6 +338,8 @@ MonoBehaviour:
   playerPosition: {x: 0, y: 0, z: 0}
   lineRenderer: {fileID: 1145941097933022349}
   curvePoints: []
+  visualPlayerAfterShoot: []
+  prefPreShoot: {fileID: 8692861098284185572, guid: 1846c6badfef9834b9070ae3d6268d06, type: 3}
   timeSceuence: {fileID: 7189739028029077113}
   player: {fileID: 8584045141074783902}
   dialogueManager: {fileID: 0}
@@ -347,6 +349,7 @@ MonoBehaviour:
   isHealing: 1
   turnAdded: 0
   turnsDone: 0
+  costShoot: 0.4
   walkSoundDelay: 0
   movePlayer: {fileID: 4476756505495577889}
   shootClip:
