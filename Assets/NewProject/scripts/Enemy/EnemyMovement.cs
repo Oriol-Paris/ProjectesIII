@@ -9,7 +9,7 @@ public class EnemyMovement : MonoBehaviour
     #region VARIABLES
 
     //[SerializeField]private MovementByMouse Player;
-    [SerializeField]private OG_MovementByMouse Player;
+    [SerializeField]private TimeSecuence Player;
     private Vector3 PlayerPos;
     float moveTime;
     EnemyBase enemyStats;
@@ -22,7 +22,7 @@ public class EnemyMovement : MonoBehaviour
 
     void Start()
     {
-        Player = FindAnyObjectByType<OG_MovementByMouse>();
+        Player = FindAnyObjectByType<TimeSecuence>();
         enemyStats = GetComponent<EnemyBase>();
 
         velocity = velocity * FindAnyObjectByType<CombatManager>().enemyStatMultiplier;
@@ -32,20 +32,21 @@ public class EnemyMovement : MonoBehaviour
     void Update()
     {
         moveTime = Time.deltaTime * velocity;
+       
 
         if (enemyStats.isAlive)
         {
-            if(PlayerPos.x < this.GetComponent<Rigidbody2D>().position.x)
+            if(PlayerPos.x < this.GetComponent<Rigidbody>().position.x)
                 this.GetComponent<SpriteRenderer>().flipX = true;
             else
                 this.GetComponent<SpriteRenderer>().flipX = false;
 
 
-            if ((Vector3.Distance(PlayerPos, transform.position) < range && Player.isMoving) || Player.GetComponent<PlayerBase>().GetInAction())
+            if ((Vector3.Distance(PlayerPos, transform.position) < range && Player.GetIsExecuting()) || Player.GetComponent<PlayerBase>().GetInAction())
             {
                 this.GetComponent<Animator>().SetBool("isMoving", true);
-                PlayerPos = Player.GetPosition();
-                transform.position = Vector3.MoveTowards(transform.position, PlayerPos, moveTime);
+                PlayerPos = Player.transform.position;
+                transform.position = Vector3.MoveTowards(transform.position, PlayerPos, moveTime); //Bad usage of moveTime, using moveTime as distance when it's actually a velocity (check line 34)
             }
             else
             {

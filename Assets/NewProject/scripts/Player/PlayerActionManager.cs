@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem.XR;
@@ -9,6 +10,24 @@ using UnityEngine.SceneManagement;
 public class PlayerActionManager : MonoBehaviour
 {
     #region VARIABLES
+
+    public Vector3 mousePosition;
+    public Vector3 positionDesired;
+    public Vector3 playerPosition;
+
+    [SerializeField] LineRenderer lineRenderer;
+
+
+
+    [SerializeField] private List<Vector3> curvePoints = new List<Vector3>();
+
+    [SerializeField] public List<GameObject> visualPlayerAfterShoot = new List<GameObject>();
+
+    public GameObject prefPreShoot;
+
+    public TimeSecuence timeSceuence;
+    private float currentTime = 3;
+
 
     [SerializeField] private PlayerBase player;
     [SerializeField] private Dialogue dialogueManager;
@@ -25,9 +44,12 @@ public class PlayerActionManager : MonoBehaviour
     public bool turnAdded = false;
     public int turnsDone = 0;
 
+    public float costShoot = 0.4f;
+
     [SerializeField] private float walkSoundDelay;
     float actualWalkSoundDelay;
     private CombatManager combatManager;
+    [SerializeField] MovPlayer movePlayer;
     private bool hasShot = false; // Flag to track if a shot has been fired
     private bool actionPointReduced;
     private Animator animationToExecute;
@@ -110,6 +132,7 @@ public class PlayerActionManager : MonoBehaviour
         {
             SceneManager.LoadScene("Title Screen");
         }
+        UpdateAction(movePlayer.positionDesired, movePlayer.timeSceuence.actualTime);
     }
     public void UpdateAction(Vector3 newPos, float t)
     {
@@ -123,31 +146,34 @@ public class PlayerActionManager : MonoBehaviour
         if (currentAction.m_action == PlayerBase.ActionEnum.MOVE && (!player.GetComponent<OG_MovementByMouse>().isMoving || isMoving))
         {
             isMoving = true;
-            StartCoroutine(MoveCoroutine(newPos));
+            movePlayer.PreStartMov();
         }
 
         if (currentAction.m_action == PlayerBase.ActionEnum.SHOOT && (!player.GetComponent<OG_MovementByMouse>().isMoving || isShooting))
         {
-            if (currentAction.m_cost <= playerData.actionPoints && !hasShot)
-            {
-                isShooting = true;
-                hasShot = true; // Set the flag to indicate a shot has been fired
-                StartCoroutine(AttackCoroutine(PlayerBase.ActionEnum.SHOOT, newPos));
-            }
+
+            Debug.Log("aaaaaaaaaaaa");
+            isShooting = true;
+            hasShot = true; // Set the flag to indicate a shot has been fired
+            isMoving = false;
+            preShoot();
+            //StartCoroutine(AttackCoroutine(PlayerBase.ActionEnum.SHOOT, newPos));
+
+
         }
 
         if (currentAction.m_action == PlayerBase.ActionEnum.MELEE && (!player.GetComponent<OG_MovementByMouse>().GetIsMoving() || isMoving))
         {
             if (currentAction.m_cost <= playerData.actionPoints)
             {
-                isMoving = true;
-                StartCoroutine(AttackCoroutine(PlayerBase.ActionEnum.MELEE, newPos));
+                isMoving = false;
+                StartCoroutine(AttackCoroutine(PlayerBase.ActionEnum.MELEE, newPos, null));
             }
         }
 
         if (currentAction.m_action == PlayerBase.ActionEnum.HEAL && isHealing)
         {
-            isMoving = true;
+            isMoving = false;
             StartCoroutine(HealCoroutine(newPos));
         }
 
@@ -163,12 +189,64 @@ public class PlayerActionManager : MonoBehaviour
         }
     }
 
+    private void UpdateLineRendererr()
+    {
+        lineRenderer.enabled = true;
+        lineRenderer.positionCount = curvePoints.Count;
+        lineRenderer.SetPositions(curvePoints.ToArray());
+    }
+
+    private void preShoot()
+    {
+        Debug.Log("aaaaa");
+
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray, out RaycastHit hit))
+        {
+            mousePosition = hit.point;
+        }
+        playerPosition = movePlayer.playerPosition;
+        currentTime = timeSceuence.actualTime;
+
+        if (!Input.GetMouseButton(0) && !isMoving)
+        {
+
+            positionDesired = mousePosition;
+
+            curvePoints.Clear();
+            curvePoints.Add(playerPosition);
+            curvePoints.Add(positionDesired);
+
+            UpdateLineRendererr();
+        }
+
+        if (Input.GetMouseButtonUp(0) && !isMoving)
+        {
+
+            if (currentTime > costShoot)
+            {
+                GameObject instantiatedObject = Instantiate(prefPreShoot, playerPosition, Quaternion.identity);
+
+              
+                visualPlayerAfterShoot.Add(instantiatedObject);
+
+
+                currentTime -= costShoot;
+
+                timeSceuence.actualTime = currentTime;
+
+
+            }
+
+        }
+    }
+
     private IEnumerator MoveCoroutine(Vector3 newPos)
     {
         activeActions[PlayerBase.ActionEnum.MOVE].Execute(player, newPos);
         if (actualWalkSoundDelay < 0)
         {
-            SoundEffectsManager.instance.PlaySoundFXClip(walkingClips, transform, 1f);
+            //SoundEffectsManager.instance.PlaySoundFXClip(walkingClips, transform, 1f);
             actualWalkSoundDelay = walkSoundDelay;
         }
         else
@@ -183,17 +261,17 @@ public class PlayerActionManager : MonoBehaviour
             playerData.actionPoints++;
             playerData.actionPoints = Mathf.Min(playerData.actionPoints, playerData.maxActionPoints);
         }
-       
+
         if (!hasMoved)
         {
             hasMoved = true;
             yield return new WaitForSeconds(1.5f); // Adjust the delay as needed
-            if (dialogueManager != null) 
-            dialogueManager.ActionCompleted(PlayerBase.ActionEnum.MOVE);
+            if (dialogueManager != null)
+                dialogueManager.ActionCompleted(PlayerBase.ActionEnum.MOVE);
         }
     }
 
-    public IEnumerator AttackCoroutine(PlayerBase.ActionEnum action, Vector3 newPos)
+    public IEnumerator AttackCoroutine(PlayerBase.ActionEnum action, Vector3 newPos, PlayerData.BulletStyle style)
     {
         this.GetComponent<Animator>().SetTrigger("attack");
         fx.SetTrigger("playFX");
@@ -202,8 +280,8 @@ public class PlayerActionManager : MonoBehaviour
 
         if (action == PlayerBase.ActionEnum.SHOOT)
         {
-            ((ShootAction)activeActions[PlayerBase.ActionEnum.SHOOT]).bulletPrefab = player.activeStyle.prefab;
-            SoundEffectsManager.instance.PlaySoundFXClip(shootClip, transform, 1f);
+            ((ShootAction)activeActions[PlayerBase.ActionEnum.SHOOT]).bulletPrefab = style.prefab;
+            //SoundEffectsManager.instance.PlaySoundFXClip(shootClip, transform, 1f);
             activeActions[PlayerBase.ActionEnum.SHOOT].Execute(player, newPos);
         }
         else
@@ -220,13 +298,13 @@ public class PlayerActionManager : MonoBehaviour
             playerData.actionPoints -= player.GetAction().m_cost;
         }
 
-       
+
         if (action == PlayerBase.ActionEnum.SHOOT && !hasShotAction)
         {
             hasShotAction = true;
             yield return new WaitForSeconds(1.0f); // Adjust the delay as needed
-            if(dialogueManager != null)
-            dialogueManager.ActionCompleted(action);
+            if (dialogueManager != null)
+                dialogueManager.ActionCompleted(action);
         }
     }
 

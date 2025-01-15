@@ -1,16 +1,21 @@
 using UnityEngine;
 
-public class LaserBullet : BulletPrefab
+public class Shotgun : BulletPrefab
 {
-    
     private Vector3 targetPosition;
-    private float lifetime = 5f;
+    private Vector3 offset;
 
     void Start()
     {
         isHit = false;
-        speed = 20f;
-        damage = FindObjectOfType<PlayerBase>().playerData.gun.damage;
+        speed = 10f;
+        for (int i = 0; i < playerData.availableActions.Count; i++)
+        {
+            if (playerData.availableActions[i].style.prefab == playerData.shotgun.prefab)
+            {
+                damage = playerData.availableActions[i].style.damage; break;
+            }
+        }
     }
 
     void Update()
@@ -18,15 +23,14 @@ public class LaserBullet : BulletPrefab
         if (IsPaused()) return;
 
         transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
-        lifetime -= Time.deltaTime;
 
-        if (isHit || Vector3.Distance(transform.position, targetPosition) < 0.1f || lifetime <= 0f)
+        if (isHit || Vector3.Distance(transform.position, targetPosition) < 0.1f)
         {
             DestroyBullet();
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter(Collider collision)
     {
         if (collision.gameObject.CompareTag("Walls"))
         {
@@ -54,8 +58,14 @@ public class LaserBullet : BulletPrefab
 
     public override void Shoot(Vector3 direction)
     {
-        // Store the original direction and target position
         originalDirection = direction;
-        targetPosition = transform.position + direction.normalized * 30f; // Laser has a longer range
+        targetPosition = transform.position + direction.normalized * 20f;
+    }
+
+    public void Shoot(Vector3 direction, Vector3 offset)
+    {
+        this.offset = offset;
+        originalDirection = direction + offset;
+        targetPosition = transform.position + (direction + offset).normalized * 20f;
     }
 }

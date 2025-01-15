@@ -261,12 +261,15 @@ GameObject:
   - component: {fileID: 8458478312620971982}
   - component: {fileID: 1251202436317223770}
   - component: {fileID: 8584045141074783902}
-  - component: {fileID: 2397320857897054631}
-  - component: {fileID: 1294959136354244614}
   - component: {fileID: 73541132482798089}
   - component: {fileID: 3499610218160799801}
   - component: {fileID: 498754982940256858}
   - component: {fileID: 1251141132472822132}
+  - component: {fileID: 7324284292620221592}
+  - component: {fileID: 5103112988284754988}
+  - component: {fileID: 7189739028029077113}
+  - component: {fileID: 6045879003536822004}
+  - component: {fileID: 4476756505495577889}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -299,7 +302,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6993864842785556067}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: befa5a8330344994286e20c10a68831e, type: 3}
   m_Name: 
@@ -309,11 +312,11 @@ MonoBehaviour:
   playerPosition: {x: 0, y: 0, z: 0}
   placeSelected: 0
   isMoving: 0
+  isDragging: 0
   isResting: 0
   t: 0
   velocity: 3
   lineRenderer: {fileID: 1145941097933022349}
-  controlPoint: {x: 0, y: 0, z: 0}
   curveResolution: 25
   playerBase: {fileID: 8584045141074783902}
   movementTimeLimit: 1.5
@@ -330,7 +333,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f263461156138f44afbe9f44d9f2293, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
+  mousePosition: {x: 0, y: 0, z: 0}
+  positionDesired: {x: 0, y: 0, z: 0}
+  playerPosition: {x: 0, y: 0, z: 0}
+  lineRenderer: {fileID: 1145941097933022349}
+  curvePoints: []
+  visualPlayerAfterShoot: []
+  prefPreShoot: {fileID: 8692861098284185572, guid: 1846c6badfef9834b9070ae3d6268d06, type: 3}
+  timeSceuence: {fileID: 7189739028029077113}
+  player: {fileID: 8584045141074783902}
   dialogueManager: {fileID: 0}
   fx: {fileID: 6904931311285059048}
   isMoving: 1
@@ -338,7 +349,9 @@ MonoBehaviour:
   isHealing: 1
   turnAdded: 0
   turnsDone: 0
+  costShoot: 0.4
   walkSoundDelay: 0
+  movePlayer: {fileID: 4476756505495577889}
   shootClip:
   - {fileID: 8300000, guid: 6a3e850acd190164d9bea800f4e24812, type: 3}
   walkingClips:
@@ -364,86 +377,14 @@ MonoBehaviour:
   maxActionPoints: 0
   range: 3
   exp: 0
-  turnsDone: {fileID: 0}
+  turnsDone: {fileID: 1251202436317223770}
+  availableActions: []
   victory: 0
   defeat: 0
   damageClips:
   - {fileID: 8300000, guid: 94e3b24d75a0cda4980ec5134a8e6da9, type: 3}
   - {fileID: 8300000, guid: fc8dae0e97caff040998967dcf1ff972, type: 3}
   - {fileID: 8300000, guid: f76dafa51ef36cc42a86cc9a6ecbabdc, type: 3}
---- !u!61 &2397320857897054631
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6993864842785556067}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
---- !u!50 &1294959136354244614
-Rigidbody2D:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6993864842785556067}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 4
 --- !u!95 &73541132482798089
 Animator:
   serializedVersion: 7
@@ -533,10 +474,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65f5a2370e62d6a4db4eec9c8fac8380, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mousePosition: {x: 10, y: 5, z: 0}
+  mousePositionWorld: {x: 0, y: 0, z: 0}
   playerPosition: {x: 0, y: 0, z: 0}
   positionDesired: {x: 0, y: 0, z: 0}
   lineRenderer: {fileID: 1145941097933022349}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!114 &1251141132472822132
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -549,6 +493,114 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 599239f003c2c9a4a938e6fcae556c2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!65 &7324284292620221592
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6993864842785556067}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 0.2}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &5103112988284754988
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6993864842785556067}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 112
+  m_CollisionDetection: 0
+--- !u!114 &7189739028029077113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6993864842785556067}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3751eac9fad097647ad777670baae6d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actualTime: 0
+  totalTime: 3
+  isExecuting: 0
+  lastPosition: {x: 0, y: 0, z: 0}
+  movPlayer: {fileID: 4476756505495577889}
+  player: {fileID: 6993864842785556067}
+  shootPl: {fileID: 6045879003536822004}
+  playerBase: {fileID: 8584045141074783902}
+  actionManager: {fileID: 1251202436317223770}
+--- !u!114 &6045879003536822004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6993864842785556067}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44fc981e223626b4eb847658d7a1598f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  preShoot: {fileID: 8105682524678771348, guid: a4ef2995dd8a2fd4caab2662104f6144, type: 3}
+  bullet: {fileID: 4841340973275302747, guid: 8c280260248f7e449925f58bc503ee3b, type: 3}
+--- !u!114 &4476756505495577889
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6993864842785556067}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2d0373a7b444224398a68a9bfe18b68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mousePosition: {x: 0, y: 0, z: 0}
+  positionDesired: {x: 0, y: 0, z: 0}
+  playerPosition: {x: 0, y: 0, z: 0}
+  t: 0
+  maxDistance: 20
+  velocity: 2
+  lineRenderer: {fileID: 1145941097933022349}
+  curveResolution: 20
+  timeSceuence: {fileID: 7189739028029077113}
+  placeSelected: 0
+  isMoving: 0
+  isDragging: 0
+  curvePoints: []
 --- !u!1001 &8433085831469232828
 PrefabInstance:
   m_ObjectHideFlags: 0

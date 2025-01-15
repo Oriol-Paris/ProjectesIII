@@ -5,31 +5,30 @@ using UnityEngine.UI;
 using static PlayerData;
 using UnityEngine.EventSystems;
 using System.Xml;
-using UnityEditor.Experimental.GraphView;
 
 public class ShopManager : MonoBehaviour
 {
-    [System.Serializable]
-    public class ShopItem
-    {
-        public ActionData action;
-        public Sprite image;
-        public int basePrice;
-        public string displayName;
-    }
-
     public TextMeshProUGUI rerollText;
     [SerializeField] private GameObject buttonPrefab; // Reference to the button prefab
     public Transform buttonContainer; // Reference to the container where buttons will be instantiated
     [SerializeField] public PlayerBase player;
     [SerializeField] public TextMeshProUGUI boughtItem;
     [SerializeField] public TextMeshProUGUI currentXP;
-
-    public List<ShopItem> items;
+    public Sprite moveImage;
+    public Sprite gunImage;
+    public Sprite shotgunImage;
+    public Sprite healImage;
+    public Sprite recoveryImage;
+    public Sprite speedUpImage;
+    public Sprite restImage;
+    public Sprite maxHPImage;
+    public Sprite manaImage;
 
     public int rerollPrice;
     bool actionExists;
-    private List<ShopItem> activeItems;
+    private List<PlayerData.ActionData> actionPool;
+    private List<PlayerData.ActionData> activeActions;
+    private List<int> pricePool;
     private List<GameObject> buttons;
 
     private Dictionary<PlayerData.ActionData, int> statIncreaseCount;
@@ -47,17 +46,6 @@ public class ShopManager : MonoBehaviour
         currentXP.text = "Current EXP: " + player.playerData.exp + "";
     }
 
-    public ShopItem FindItem(ActionData action)
-    {
-        foreach(ShopItem item in items)
-        {
-            if (item.action == action)
-                return item;
-        }
-
-        return null;
-    }
-
     public void Reroll()
     {
         if (player.playerData.exp >= rerollPrice)
@@ -73,6 +61,7 @@ public class ShopManager : MonoBehaviour
                 Destroy(button);
             }
             buttons.Clear();
+            pricePool.Clear();
 
             // Re-initialize the shop with new actions and prices
             InitializeShop();
@@ -82,20 +71,20 @@ public class ShopManager : MonoBehaviour
     public void BuyItem(TextMeshProUGUI itemText)
     {
         string itemName = itemText.text;
-        ShopItem itemData = items.Find(item => item.displayName == itemName);
+        PlayerData.ActionData actionData = actionPool.Find(action => GetActionDisplayName(action) == itemName);
         int index = buttons.FindIndex(button => button.transform.Find("Item Name").GetComponent<TextMeshProUGUI>().text == itemName);
-        if (itemData != null && player.playerData.exp >= CalculateActionPrice(items[index].action))
+        if (actionData != null && player.playerData.exp >= pricePool[index])
         {
             bool actionExists = false;
-            ActionData repeatAction = null;
+            PlayerData.ActionData repeatAction = null;
 
             foreach (var playerAction in player.playerData.availableActions)
             {
-                if(itemData.action.action == playerAction.action)
+                if (actionData.action == playerAction.action)
                 {
-                    if(itemData.action.action == PlayerBase.ActionEnum.SHOOT)
+                    if (actionData.action == PlayerBase.ActionEnum.SHOOT)
                     {
-                        if(itemData.action.style.prefab == playerAction.style.prefab)
+                        if (actionData.style.prefab == playerAction.style.prefab)
                         {
                             Debug.Log("MISMOESTILO");
                             actionExists = true;
@@ -116,7 +105,7 @@ public class ShopManager : MonoBehaviour
                 {
                     if (player.playerData.availableActions[i] == repeatAction)
                     {
-                        player.playerData.exp -= CalculateActionPrice(items[index].action);
+                        player.playerData.exp -= pricePool[index];
                         boughtItem.enabled = true;
                         IncreaseStat(player.playerData.availableActions[i]);
                         UpdatePrices();
@@ -125,16 +114,16 @@ public class ShopManager : MonoBehaviour
                 }
             }
 
-            if(itemData.action.actionType == PlayerBase.ActionType.SINGLE_USE)
+            if (actionData.actionType == PlayerBase.ActionType.SINGLE_USE)
             {
-                IncreaseStat(itemData.action);
+                IncreaseStat(actionData);
             }
 
             if (!actionExists && index != -1)
             {
-                player.playerData.exp -= CalculateActionPrice(items[index].action);
+                player.playerData.exp -= pricePool[index];
 
-                EquipNewAction(itemData.action);
+                EquipNewAction(actionData);
 
                 boughtItem.enabled = true;
                 boughtItem.text = "Just bought: " + itemName;
@@ -143,13 +132,13 @@ public class ShopManager : MonoBehaviour
             // Update prices after the item has been bought
             UpdatePrices();
         }
-        else if (player.exp < CalculateActionPrice(items[index].action))
+        else if (player.exp < pricePool[index])
             boughtItem.text = "Not enough experience";
     }
 
-    private void EquipNewAction(ActionData actionData)
+    private void EquipNewAction(PlayerData.ActionData actionData)
     {
-        if(actionData.actionType != PlayerBase.ActionType.SINGLE_USE)
+        if (actionData.actionType != PlayerBase.ActionType.SINGLE_USE)
         {
             actionData.key = (KeyCode)System.Enum.Parse(typeof(KeyCode), "Alpha" + (player.playerData.availableActions.Count));
             player.playerData.availableActions.Add(actionData);
@@ -160,11 +149,15 @@ public class ShopManager : MonoBehaviour
     private void IncreaseStat(PlayerData.ActionData actionData)
     {
         if (!statIncreaseCount.ContainsKey(actionData))
+        {
             statIncreaseCount[actionData] = 0;
+        }
 
         statIncreaseCount[actionData]++;
         if (statIncreaseCount[actionData] > 5 && (actionData.action == PlayerBase.ActionEnum.SHOOT || actionData.action == PlayerBase.ActionEnum.HEAL))
+        {
             actionData.cost += 1;  // Increase the cost of executing the action
+        }
 
         switch (actionData.action)
         {
@@ -204,16 +197,29 @@ public class ShopManager : MonoBehaviour
 
     private void InitializeShop()
     {
-        activeItems = new List<ShopItem>(4);
+        PlayerData.ActionData shotgunShot = new PlayerData.ActionData(PlayerBase.ActionType.ACTIVE, PlayerBase.ActionEnum.SHOOT, KeyCode.None, 1, player.playerData.shotgun);
+        PlayerData.ActionData gunShot = new PlayerData.ActionData(PlayerBase.ActionType.ACTIVE, PlayerBase.ActionEnum.SHOOT, KeyCode.None, 1, player.playerData.gun);
+        PlayerData.ActionData heal = new PlayerData.ActionData(PlayerBase.ActionType.PASSIVE, PlayerBase.ActionEnum.HEAL, KeyCode.None, 1, player.playerData.healStyle);
+        PlayerData.ActionData move = new PlayerData.ActionData(PlayerBase.ActionType.ACTIVE, PlayerBase.ActionEnum.MOVE, KeyCode.None, 1, player.playerData.moveStyle);
+        PlayerData.ActionData recovery = new PlayerData.ActionData(PlayerBase.ActionType.SINGLE_USE, PlayerBase.ActionEnum.RECOVERY, KeyCode.None, 1, player.playerData.moveStyle);
+        PlayerData.ActionData maxHpIncrease = new PlayerData.ActionData(PlayerBase.ActionType.SINGLE_USE, PlayerBase.ActionEnum.MAX_HP_INCREASE, KeyCode.None, 1, player.playerData.moveStyle);
+        PlayerData.ActionData manaPotion = new PlayerData.ActionData(PlayerBase.ActionType.SINGLE_USE, PlayerBase.ActionEnum.MANA_POTION, KeyCode.None, 1, player.playerData.moveStyle);
+        //PlayerData.ActionData speedUp = new PlayerData.ActionData(PlayerBase.ActionType.SINGLE_USE, PlayerBase.ActionEnum.SPEED_UP, KeyCode.None, 1, player.playerData.moveStyle);
+        actionPool = new List<PlayerData.ActionData>
+        {
+            shotgunShot, gunShot, heal, move, recovery, maxHpIncrease, manaPotion
+        };
+
+        activeActions = new List<ActionData>(4);
+        pricePool = new List<int>(4);
         buttons = new List<GameObject>(4);
 
         // Randomize actions and prices
         for (int i = 0; i < 4; i++) // Assuming there are only four buttons
         {
-            int randomIndex = Random.Range(0, items.Count);
-
-            ShopItem itemData = items[randomIndex];
-            activeItems.Add(itemData);
+            int randomIndex = Random.Range(0, actionPool.Count);
+            PlayerData.ActionData actionData = actionPool[randomIndex];
+            activeActions.Add(actionData);
 
             // Instantiate button
             GameObject button = Instantiate(buttonPrefab, buttonContainer);
@@ -221,16 +227,17 @@ public class ShopManager : MonoBehaviour
 
             // Set item text
             TextMeshProUGUI itemText = button.transform.Find("Item Name").GetComponent<TextMeshProUGUI>();
-            itemText.text = itemData.displayName;
+            itemText.text = GetActionDisplayName(actionData);
 
             //Set item image
             Image itemImage = button.transform.Find("Item Image").GetComponent<Image>();
-            itemImage.overrideSprite = items[randomIndex].image;
+            itemImage.overrideSprite = GetActionImage(actionData);
             itemImage.preserveAspect = true;
             //itemImage.SetNativeSize();
 
             // Set price text
-            int price = CalculateActionPrice(itemData.action);
+            int price = CalculateActionPrice(actionData);
+            pricePool.Add(price);
             TextMeshProUGUI priceText = button.transform.Find("Price").GetComponent<TextMeshProUGUI>();
             priceText.text = price.ToString() + " EXP";
 
@@ -239,9 +246,93 @@ public class ShopManager : MonoBehaviour
         }
     }
 
+    public string GetActionDisplayName(PlayerData.ActionData actionData)
+    {
+        if (actionData.action == PlayerBase.ActionEnum.SHOOT)
+        {
+            if (actionData.style.prefab == player.playerData.gun.prefab)
+            {
+                return "Gun";
+            }
+            else if (actionData.style.prefab == player.playerData.shotgun.prefab)
+            {
+                return "Shotgun";
+            }
+        }
+        else if (actionData.action == PlayerBase.ActionEnum.HEAL)
+        {
+            return "Heal";
+        }
+        else if (actionData.action == PlayerBase.ActionEnum.MOVE)
+        {
+            return "Move";
+        }
+        else if (actionData.action == PlayerBase.ActionEnum.RECOVERY)
+        {
+            return "Instant HP Recovery";
+        }
+        else if (actionData.action == PlayerBase.ActionEnum.SPEED_UP)
+        {
+            return "Speed Up";
+        }
+        else if (actionData.action == PlayerBase.ActionEnum.MAX_HP_INCREASE)
+        {
+            return "Max HP Up";
+        }
+        else if (actionData.action == PlayerBase.ActionEnum.MANA_POTION)
+        {
+            return "Mana Points Up";
+        }
+        return actionData.action.ToString();
+    }
+
+    public Sprite GetActionImage(PlayerData.ActionData actionData)
+    {
+        if (actionData.action == PlayerBase.ActionEnum.SHOOT)
+        {
+            if (actionData.style.prefab == player.playerData.gun.prefab)
+            {
+                return gunImage;
+            }
+            else if (actionData.style.prefab == player.playerData.shotgun.prefab)
+            {
+                return shotgunImage;
+            }
+        }
+        else if (actionData.action == PlayerBase.ActionEnum.HEAL)
+        {
+            return healImage;
+        }
+        else if (actionData.action == PlayerBase.ActionEnum.MOVE)
+        {
+            return moveImage;
+        }
+        else if (actionData.action == PlayerBase.ActionEnum.RECOVERY)
+        {
+            return recoveryImage;
+        }
+        else if (actionData.action == PlayerBase.ActionEnum.SPEED_UP)
+        {
+            return speedUpImage;
+        }
+        else if (actionData.action == PlayerBase.ActionEnum.REST)
+        {
+            return restImage;
+        }
+        else if (actionData.action == PlayerBase.ActionEnum.MAX_HP_INCREASE)
+        {
+            return maxHPImage;
+        }
+        else if (actionData.action == PlayerBase.ActionEnum.MANA_POTION)
+        {
+            return manaImage;
+        }
+        return null;
+    }
+
     int CalculateActionPrice(ActionData action)
     {
-        foreach(ActionData playerAction in FindAnyObjectByType<PlayerBase>().playerData.availableActions)
+        foreach (ActionData playerAction in FindAnyObjectByType<PlayerBase>().playerData.availableActions)
         {
             if (action.action == playerAction.action && action.style.prefab == playerAction.style.prefab)
             {
@@ -276,7 +367,13 @@ public class ShopManager : MonoBehaviour
 
     void UpdatePrices()
     {
-        for(int i = 0; i < buttons.Count; ++i)
-            buttons[i].transform.Find("Price").GetComponent<TextMeshProUGUI>().text = CalculateActionPrice(items[i].action).ToString() + " EXP";
+        pricePool.Clear();
+
+        for (int i = 0; i < buttons.Count; ++i)
+        {
+            int price = CalculateActionPrice(activeActions[i]);
+            pricePool.Add(price);
+            buttons[i].transform.Find("Price").GetComponent<TextMeshProUGUI>().text = price.ToString() + " EXP";
+        }
     }
 }

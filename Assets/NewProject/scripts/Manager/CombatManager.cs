@@ -49,21 +49,21 @@ public class CombatManager : MonoBehaviour
                 allPlayersDead = false;
         }
 
-        // Si todos los enemigos están muertos y aún no hemos calculado la experiencia
+        // Si todos los enemigos estï¿½n muertos y aï¿½n no hemos calculado la experiencia
         if (allEnemiesDead && !hasCalculatedExp)
         {
-            // Habilitar la condición de victoria
+            // Habilitar la condiciï¿½n de victoria
             winCondition.enabled = true;
             winCondition.GetComponentInChildren<TextMeshProUGUI>().text = "YOU WIN!";
 
 
-            // Realizar el cálculo de la experiencia
+            // Realizar el cï¿½lculo de la experiencia
             for (int i = 0; i < playerParty.Count; i++)
             {
                 playerParty[i].victory = true;
                 if (playerParty[i].GetIsAlive())
                 {
-                    playerParty[i].exp++;  // Sumar una experiencia básica
+                    playerParty[i].exp++;  // Sumar una experiencia bï¿½sica
                     int turnsExpDifference = numberOfTurns - playerParty[i].turnsDone.turnsDone;
                     turnsExpDifference = Mathf.Max(0, turnsExpDifference);
                     playerParty[i].exp += turnsExpDifference; // Ajustar por los turnos
@@ -71,12 +71,12 @@ public class CombatManager : MonoBehaviour
                 playerParty[i].playerData.exp = playerParty[i].exp;
             }
 
-            // Marcar que ya se calculó la experiencia
+            // Marcar que ya se calculï¿½ la experiencia
             hasCalculatedExp = true;
         }
         if (allPlayersDead)
         {
-            // Habilitar la condición de victoria
+            // Habilitar la condiciï¿½n de victoria
             winCondition.enabled = true;
             winCondition.GetComponentInChildren<TextMeshProUGUI>().text = "YOU LOSE";
             for (int i = 0;i< playerParty.Count;i++)
@@ -86,4 +86,5 @@ public class CombatManager : MonoBehaviour
             
         }
     }
+    public Canvas GetWinCondition() {  return winCondition; }
 }
