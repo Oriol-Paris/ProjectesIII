@@ -14,16 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 5
   maxHealth: 5
-  actionPoints: 2
+  actionPoints: 0
   maxActionPoints: 3
   maxTime: 3
-  lastLevel: Level 1
+  lastLevel: Level1
   levelCompleted: 1
   timesHealed: 0
   timesIncreasedMaxHP: 0
   timesIncreasedMana: 1
   baseRange: 6
-  exp: 10
+  exp: 0
   isAlive: 1
   victory: 0
   gun:
@@ -65,4 +65,13 @@ MonoBehaviour:
       prefab: {fileID: 4841340973275302747, guid: 8c280260248f7e449925f58bc503ee3b, type: 3}
       range: 6
       damage: 1
+    cost: 1
+  - actionType: 0
+    action: 1
+    player: {fileID: 0}
+    key: 51
+    style:
+      prefab: {fileID: 4841340973275302747, guid: 10864d5b051bdc44e928dd42003a1950, type: 3}
+      range: 3
+      damage: 2
     cost: 1

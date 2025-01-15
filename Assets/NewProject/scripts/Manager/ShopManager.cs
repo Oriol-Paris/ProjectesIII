@@ -140,7 +140,7 @@ public class ShopManager : MonoBehaviour
     {
         if (actionData.actionType != PlayerBase.ActionType.SINGLE_USE)
         {
-            actionData.key = (KeyCode)System.Enum.Parse(typeof(KeyCode), "Alpha" + (player.playerData.availableActions.Count));
+            actionData.key = (KeyCode)System.Enum.Parse(typeof(KeyCode), "Alpha" + (player.playerData.availableActions.Count+1));
             player.playerData.availableActions.Add(actionData);
             statIncreaseCount[actionData] = 0;  // Initialize the stat increase count
         }
