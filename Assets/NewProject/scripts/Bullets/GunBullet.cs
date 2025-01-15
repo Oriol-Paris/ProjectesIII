@@ -44,6 +44,7 @@ public class GunBullet : BulletPrefab
             {
                 enemy.Damage(damage);
                 isHit = true;
+                DestroyBullet();
             }
         }
         else
@@ -53,6 +54,7 @@ public class GunBullet : BulletPrefab
             {
                 player.Damage(FindAnyObjectByType<CombatManager>().enemyStatMultiplier >= 1.5f ? 2 : 1);
                 isHit = true;
+                DestroyBullet();
             }
         }
     }

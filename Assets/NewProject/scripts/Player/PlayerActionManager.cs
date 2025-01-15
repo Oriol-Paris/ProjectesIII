@@ -16,12 +16,14 @@ public class PlayerActionManager : MonoBehaviour
     public Vector3 playerPosition;
 
     [SerializeField] LineRenderer lineRenderer;
+    [SerializeField] LineRenderer shootLineRenderer;
 
 
-
+    [SerializeField] public List<Vector3> shootpoints = new List<Vector3>();
     [SerializeField] private List<Vector3> curvePoints = new List<Vector3>();
 
     [SerializeField] public List<GameObject> visualPlayerAfterShoot = new List<GameObject>();
+    [SerializeField] public List<LineRenderer> preShootPath = new List<LineRenderer>();
 
     public GameObject prefPreShoot;
 
@@ -133,7 +135,31 @@ public class PlayerActionManager : MonoBehaviour
             SceneManager.LoadScene("Title Screen");
         }
         UpdateAction(movePlayer.positionDesired, movePlayer.timeSceuence.actualTime);
+
+        //if(Input.GetKeyDown(KeyCode.C))
+        //{
+        //    movePlayer.finish();
+        //    ShootFinish();
+        //}
     }
+
+    private void ShootFinish()
+    {
+        foreach (var line in visualPlayerAfterShoot)
+        {
+            Destroy(line.gameObject);
+        }
+        visualPlayerAfterShoot.Clear();
+        lineRenderer.enabled = false;
+        shootpoints.Clear();
+        curvePoints.Clear();
+        //foreach (var line in algo)
+        //{
+        //    Destroy(line.gameObject);
+        //}
+
+    }
+
     public void UpdateAction(Vector3 newPos, float t)
     {
         if (combatManager != null && combatManager.allEnemiesDead)
@@ -194,6 +220,7 @@ public class PlayerActionManager : MonoBehaviour
         lineRenderer.enabled = true;
         lineRenderer.positionCount = curvePoints.Count;
         lineRenderer.SetPositions(curvePoints.ToArray());
+        
     }
 
     private void preShoot()
@@ -214,9 +241,11 @@ public class PlayerActionManager : MonoBehaviour
             positionDesired = mousePosition;
 
             curvePoints.Clear();
+           
             curvePoints.Add(playerPosition);
             curvePoints.Add(positionDesired);
-
+           
+            
             UpdateLineRendererr();
         }
 
@@ -226,11 +255,17 @@ public class PlayerActionManager : MonoBehaviour
             if (currentTime > costShoot)
             {
                 GameObject instantiatedObject = Instantiate(prefPreShoot, playerPosition, Quaternion.identity);
+                
+                shootpoints.Clear();
+                LineRenderer newLine = Instantiate(shootLineRenderer, playerPosition, Quaternion.identity);
+                newLine.enabled = true;
+                shootpoints.Add(playerPosition);
+                shootpoints.Add(positionDesired);
+                newLine.positionCount = shootpoints.Count;
+                newLine.SetPositions(shootpoints.ToArray());
+                preShootPath.Add(newLine);
 
-              
                 visualPlayerAfterShoot.Add(instantiatedObject);
-
-
                 currentTime -= costShoot;
 
                 timeSceuence.actualTime = currentTime;
@@ -270,9 +305,10 @@ public class PlayerActionManager : MonoBehaviour
                 dialogueManager.ActionCompleted(PlayerBase.ActionEnum.MOVE);
         }
     }
-
+    
     public IEnumerator AttackCoroutine(PlayerBase.ActionEnum action, Vector3 newPos, PlayerData.BulletStyle style)
     {
+        shootLineRenderer.enabled = false;
         this.GetComponent<Animator>().SetTrigger("attack");
         fx.SetTrigger("playFX");
 
@@ -283,6 +319,7 @@ public class PlayerActionManager : MonoBehaviour
             ((ShootAction)activeActions[PlayerBase.ActionEnum.SHOOT]).bulletPrefab = style.prefab;
             //SoundEffectsManager.instance.PlaySoundFXClip(shootClip, transform, 1f);
             activeActions[PlayerBase.ActionEnum.SHOOT].Execute(player, newPos);
+            
         }
         else
         {
@@ -331,6 +368,7 @@ public class PlayerActionManager : MonoBehaviour
         hasShot = false; // Reset the flag when the player stops moving
         turnAdded = false;
         actionPointReduced = false;
+        
     }
 
     public PlayerBase GetPlayer() { return player; }
