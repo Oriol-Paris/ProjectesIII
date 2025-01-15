@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Shotgun : BulletPrefab
 {
-    private float lifetime = 0.7f;
+    private float lifetime = 0.5f;
     private Vector3 targetPosition;
     private Vector3 offset;
 
