@@ -580,11 +580,6 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.3069967, y: 0.51930034, z: 0}
   - {x: -0.37776434, y: 0.51930034, z: 0}
---- !u!1 &485658494 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8425749002018942136, guid: 86b5e03058826fa47abc3c555286ee76, type: 3}
-  m_PrefabInstance: {fileID: 4102551693016585037}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &521229447
 GameObject:
   m_ObjectHideFlags: 0
@@ -45327,6 +45322,14 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4468085154192380507, guid: 86b5e03058826fa47abc3c555286ee76, type: 3}
+      propertyPath: playerData
+      value: 
+      objectReference: {fileID: 774920524}
+    - target: {fileID: 4468085154192380507, guid: 86b5e03058826fa47abc3c555286ee76, type: 3}
+      propertyPath: playerActionManager
+      value: 
+      objectReference: {fileID: 774920525}
     - target: {fileID: 4535277555018116947, guid: 86b5e03058826fa47abc3c555286ee76, type: 3}
       propertyPath: m_SizeDelta.x
       value: 940
@@ -45406,7 +45409,7 @@ PrefabInstance:
     - target: {fileID: 6931758853058128253, guid: 86b5e03058826fa47abc3c555286ee76, type: 3}
       propertyPath: hotbarPanel
       value: 
-      objectReference: {fileID: 485658494}
+      objectReference: {fileID: 0}
     - target: {fileID: 6931758853058128253, guid: 86b5e03058826fa47abc3c555286ee76, type: 3}
       propertyPath: actionSlotPrefab
       value: 

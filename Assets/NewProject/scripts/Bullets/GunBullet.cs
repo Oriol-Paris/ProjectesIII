@@ -30,7 +30,7 @@ public class GunBullet : BulletPrefab
         // Move the bullet in the set direction
         transform.position += direction * speed * Time.deltaTime;
     }
-
+    
     private void OnTriggerEnter(Collider collision)
     {
         if (collision.gameObject.CompareTag("Walls"))

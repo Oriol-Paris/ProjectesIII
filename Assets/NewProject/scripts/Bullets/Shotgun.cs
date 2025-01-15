@@ -52,6 +52,7 @@ public class Shotgun : BulletPrefab
             {
                 player.Damage();
                 isHit = true;
+                DestroyBullet();
             }
         }
     }

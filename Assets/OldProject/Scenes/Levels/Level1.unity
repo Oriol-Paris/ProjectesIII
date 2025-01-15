@@ -68851,7 +68851,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5103112988284754988, guid: 135a33f42603095498418b3997897017, type: 3}
       propertyPath: m_AngularDrag
-      value: 0
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 5103112988284754988, guid: 135a33f42603095498418b3997897017, type: 3}
       propertyPath: m_Constraints

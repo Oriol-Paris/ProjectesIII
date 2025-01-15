@@ -493,7 +493,7 @@ MonoBehaviour:
   turnAdded: 0
   turnsDone: 0
   costShoot: 0.4
-  walkSoundDelay: 0
+  walkSoundDelay: 0.2
   movePlayer: {fileID: 4476756505495577889}
   shootClip:
   - {fileID: 8300000, guid: 6a3e850acd190164d9bea800f4e24812, type: 3}
