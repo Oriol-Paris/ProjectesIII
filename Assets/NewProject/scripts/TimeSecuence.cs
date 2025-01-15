@@ -53,7 +53,13 @@ public class TimeSecuence : MonoBehaviour
                     Debug.Log("Selected action: " + selectedAction.m_action);
                 }
             }
+            if(actions.Count > 0&&Input.GetKeyDown(KeyCode.C)&&!isExecuting) {
 
+            
+                ResetTurn();
+
+
+            }
             // Check for mouse click to store the selected action
             if (selectedAction.m_action != PlayerBase.ActionEnum.MOVE && Input.GetMouseButtonDown(0))
             {
@@ -112,25 +118,20 @@ public class TimeSecuence : MonoBehaviour
                 // Add other cases for different actions if needed
             }
         }
-        actions.Clear();
-        actionTargets.Clear();
-        bulletStyles.Clear(); // Add this line
-        movPlayer.finish();
-        foreach (var line in actionManager.visualPlayerAfterShoot)
-        {
-            Destroy(line.gameObject);
-        }
-        actionManager.visualPlayerAfterShoot.Clear();
-        actionManager.shootpoints.Clear();
-        isExecuting = false;
+        ResetTurn();
     }
 
     void PassTurn()
     {
-        isExecuting = true;
+        if (actions.Count > 0)
+        {
+            isExecuting = true;
         Debug.Log("Executing stored actions");
+        
         StartCoroutine(ExecuteActions());
-        actualTime = totalTime;
+            actualTime = totalTime;
+        }
+        
     }
 
     private Vector3 GetMouseTargetPosition()
@@ -143,6 +144,26 @@ public class TimeSecuence : MonoBehaviour
         return Vector3.zero; // Return Vector3.zero if no hit
     }
 
+    private void ResetTurn()
+    {
+        actions.Clear();
+        actionTargets.Clear();
+        bulletStyles.Clear(); // Add this line
+        movPlayer.finish();
+        foreach (var line in actionManager.visualPlayerAfterShoot)
+        {
+            Destroy(line.gameObject);
+        }
+        foreach (var line in actionManager.preShootPath)
+        {
+            Destroy(line.gameObject);
+            
+        }
+        actionManager.preShootPath.Clear();
+        actionManager.visualPlayerAfterShoot.Clear();
+        actionManager.shootpoints.Clear();
+        isExecuting = false;
+    }
     public bool GetIsExecuting() { return isExecuting; }
 
     private void OnCollisionEnter(Collision collision)

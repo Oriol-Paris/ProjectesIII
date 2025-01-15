@@ -481,6 +481,7 @@ MonoBehaviour:
   shootpoints: []
   curvePoints: []
   visualPlayerAfterShoot: []
+  preShootPath: []
   prefPreShoot: {fileID: 8692861098284185572, guid: 1846c6badfef9834b9070ae3d6268d06, type: 3}
   timeSceuence: {fileID: 7189739028029077113}
   player: {fileID: 8584045141074783902}
@@ -619,7 +620,8 @@ MonoBehaviour:
   mousePositionWorld: {x: 0, y: 0, z: 0}
   playerPosition: {x: 0, y: 0, z: 0}
   positionDesired: {x: 0, y: 0, z: 0}
-  lineRenderer: {fileID: 1145941097933022349}
+  lineRenderer1: {fileID: 1145941097933022349}
+  lineRenderer2: {fileID: 8742842489441130784}
   groundLayer:
     serializedVersion: 2
     m_Bits: 0

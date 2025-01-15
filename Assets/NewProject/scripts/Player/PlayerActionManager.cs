@@ -23,6 +23,7 @@ public class PlayerActionManager : MonoBehaviour
     [SerializeField] private List<Vector3> curvePoints = new List<Vector3>();
 
     [SerializeField] public List<GameObject> visualPlayerAfterShoot = new List<GameObject>();
+    [SerializeField] public List<LineRenderer> preShootPath = new List<LineRenderer>();
 
     public GameObject prefPreShoot;
 
@@ -135,11 +136,11 @@ public class PlayerActionManager : MonoBehaviour
         }
         UpdateAction(movePlayer.positionDesired, movePlayer.timeSceuence.actualTime);
 
-        if(Input.GetKeyDown(KeyCode.C))
-        {
-            movePlayer.finish();
-            ShootFinish();
-        }
+        //if(Input.GetKeyDown(KeyCode.C))
+        //{
+        //    movePlayer.finish();
+        //    ShootFinish();
+        //}
     }
 
     private void ShootFinish()
@@ -254,15 +255,17 @@ public class PlayerActionManager : MonoBehaviour
             if (currentTime > costShoot)
             {
                 GameObject instantiatedObject = Instantiate(prefPreShoot, playerPosition, Quaternion.identity);
-
+                
+                shootpoints.Clear();
+                LineRenderer newLine = Instantiate(shootLineRenderer, playerPosition, Quaternion.identity);
+                newLine.enabled = true;
                 shootpoints.Add(playerPosition);
                 shootpoints.Add(positionDesired);
-                shootLineRenderer.enabled = true;
-                shootLineRenderer.positionCount = shootpoints.Count;
-                shootLineRenderer.SetPositions(shootpoints.ToArray());
+                newLine.positionCount = shootpoints.Count;
+                newLine.SetPositions(shootpoints.ToArray());
+                preShootPath.Add(newLine);
+
                 visualPlayerAfterShoot.Add(instantiatedObject);
-
-
                 currentTime -= costShoot;
 
                 timeSceuence.actualTime = currentTime;

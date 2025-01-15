@@ -5,7 +5,8 @@ public class PathPreview : MonoBehaviour
     public Vector3 mousePositionWorld; // Posición del ratón proyectada al espacio mundial
     public Vector3 playerPosition; // Posición actual del jugador
     public Vector3 positionDesired; // La posición objetivo deseada
-    [SerializeField] private LineRenderer lineRenderer; // Referencia al LineRenderer para dibujar la vista previa del camino
+    [SerializeField] private LineRenderer lineRenderer1; // Primer LineRenderer
+    [SerializeField] private LineRenderer lineRenderer2; // Segundo LineRenderer
     [SerializeField] private LayerMask groundLayer; // Capa para determinar la superficie del suelo
     private float range = 5f; // Rango máximo de movimiento para el jugador
     private PlayerBase playerStats;
@@ -14,12 +15,12 @@ public class PathPreview : MonoBehaviour
     {
         playerStats = GetComponent<PlayerBase>();
         playerPosition = transform.position; // Inicializar la posición del jugador
-        lineRenderer.enabled = false; // Comenzar con el LineRenderer deshabilitado
+        lineRenderer1.enabled = false; // Comenzar con el primer LineRenderer deshabilitado
+        lineRenderer2.enabled = false; // Comenzar con el segundo LineRenderer deshabilitado
     }
 
     void Update()
     {
-
         // Actualizar el rango desde PlayerBase
         range = playerStats.GetRange();
 
@@ -45,7 +46,6 @@ public class PathPreview : MonoBehaviour
         else
         {
             positionDesired = mousePositionWorld;
-            
         }
 
         // Mostrar la vista previa al arrastrar o al hacer clic
@@ -54,21 +54,27 @@ public class PathPreview : MonoBehaviour
             ShowPathPreview();
         }
 
-        // Ocultar la línea si se suelta el botón izquierdo (opcional)
+        // Ocultar las líneas si se suelta el botón izquierdo (opcional)
         if (Input.GetMouseButtonUp(0))
         {
-            lineRenderer.enabled = false;
+            lineRenderer1.enabled = false;
+            lineRenderer2.enabled = false;
         }
     }
 
-    // Función para mostrar la vista previa del camino con el LineRenderer
+    // Función para mostrar la vista previa del camino con ambos LineRenderers
     void ShowPathPreview()
     {
-        lineRenderer.enabled = true; // Habilitar el LineRenderer
+        lineRenderer1.enabled = true; // Habilitar el primer LineRenderer
+        lineRenderer2.enabled = true; // Habilitar el segundo LineRenderer
 
-        // Configurar el LineRenderer para mostrar la línea desde el jugador hasta la posición deseada
-        lineRenderer.positionCount = 2; // Dos puntos para una línea recta
-        lineRenderer.SetPosition(0, playerPosition); // Punto inicial (posición del jugador)
-        lineRenderer.SetPosition(1, positionDesired); // Punto final (posición deseada)
+        // Configurar ambos LineRenderers para mostrar la línea desde el jugador hasta la posición deseada
+        lineRenderer1.positionCount = 2; // Dos puntos para una línea recta
+        lineRenderer1.SetPosition(0, playerPosition); // Punto inicial (posición del jugador)
+        lineRenderer1.SetPosition(1, positionDesired); // Punto final (posición deseada)
+
+        lineRenderer2.positionCount = 2; // Dos puntos para una línea recta
+        //lineRenderer2.SetPosition(0, playerPosition); // Punto inicial (posición del jugador)
+        lineRenderer2.SetPosition(1, positionDesired); // Punto final (posición deseada)
     }
 }
