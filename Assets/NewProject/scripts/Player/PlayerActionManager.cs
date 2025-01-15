@@ -134,7 +134,31 @@ public class PlayerActionManager : MonoBehaviour
             SceneManager.LoadScene("Title Screen");
         }
         UpdateAction(movePlayer.positionDesired, movePlayer.timeSceuence.actualTime);
+
+        if(Input.GetKeyDown(KeyCode.C))
+        {
+            movePlayer.finish();
+            ShootFinish();
+        }
     }
+
+    private void ShootFinish()
+    {
+        foreach (var line in visualPlayerAfterShoot)
+        {
+            Destroy(line.gameObject);
+        }
+        visualPlayerAfterShoot.Clear();
+        lineRenderer.enabled = false;
+        shootpoints.Clear();
+        curvePoints.Clear();
+        //foreach (var line in algo)
+        //{
+        //    Destroy(line.gameObject);
+        //}
+
+    }
+
     public void UpdateAction(Vector3 newPos, float t)
     {
         if (combatManager != null && combatManager.allEnemiesDead)
@@ -278,7 +302,7 @@ public class PlayerActionManager : MonoBehaviour
                 dialogueManager.ActionCompleted(PlayerBase.ActionEnum.MOVE);
         }
     }
-
+    
     public IEnumerator AttackCoroutine(PlayerBase.ActionEnum action, Vector3 newPos, PlayerData.BulletStyle style)
     {
         shootLineRenderer.enabled = false;

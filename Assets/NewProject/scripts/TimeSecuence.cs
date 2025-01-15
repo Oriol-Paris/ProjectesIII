@@ -116,6 +116,11 @@ public class TimeSecuence : MonoBehaviour
         actionTargets.Clear();
         bulletStyles.Clear(); // Add this line
         movPlayer.finish();
+        foreach (var line in actionManager.visualPlayerAfterShoot)
+        {
+            Destroy(line.gameObject);
+        }
+        actionManager.visualPlayerAfterShoot.Clear();
         actionManager.shootpoints.Clear();
         isExecuting = false;
     }

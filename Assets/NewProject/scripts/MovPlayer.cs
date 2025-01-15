@@ -75,6 +75,9 @@ public class MovPlayer : MonoBehaviour
             Destroy(line.gameObject);
         }
         lineList.Clear();
+        playerPosition = transform.position;
+        currentTime = timeSceuence.totalTime;
+        timeSceuence.actualTime = currentTime;
         //DebugMovList();
     }
 
