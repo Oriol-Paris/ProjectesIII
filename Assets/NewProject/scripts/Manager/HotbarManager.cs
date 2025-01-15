@@ -83,6 +83,11 @@ public class HotbarManager : MonoBehaviour
             }
             else
             {
+                if(action.action == FindAnyObjectByType<PlayerBase>().GetAction().m_action && action.style.prefab == FindAnyObjectByType<PlayerBase>().GetAction().m_style.prefab)
+                {
+                    slot.GetComponent<Image>().color = Color.yellow;
+                }
+
                 slot.transform.Find("Action Image").GetComponent<Image>().enabled = false;
                 slot.transform.Find("Texts").transform.Find("Action Name").GetComponent<TextMeshProUGUI>().text = GetActionName(action);
                 slot.transform.Find("Texts").transform.Find("Action Name").position =

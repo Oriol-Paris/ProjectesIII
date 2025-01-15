@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe6b8f5bf0e5ea24fa2c8558c5c006ce, type: 3}
   m_Name: PlayerData
   m_EditorClassIdentifier: 
-  health: 3
+  health: 1
   maxHealth: 3
-  actionPoints: 5
+  actionPoints: 2
   maxActionPoints: 3
   lastLevel: 
   levelCompleted: 1
