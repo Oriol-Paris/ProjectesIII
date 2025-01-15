@@ -25,13 +25,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 389693110499696665}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.785, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalRotation: {x: 0.38268343, y: 0, z: 0, w: 0.92387956}
+  m_LocalPosition: {x: -0.005999883, y: 0.628, z: 0.3}
+  m_LocalScale: {x: 0.48483747, y: 0.48483747, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5779656468157418596}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 45, y: 0, z: 0}
 --- !u!212 &8927709480827289525
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -328,13 +328,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4429760746157634568}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.785, z: 0}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_LocalRotation: {x: 0.38268343, y: 0, z: 0, w: 0.92387956}
+  m_LocalPosition: {x: -0.006, y: 0.628, z: 0.3}
+  m_LocalScale: {x: 0.323225, y: 0.323225, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5779656468157418596}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 45, y: 0, z: 0}
 --- !u!212 &1102601332135823845
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -406,7 +406,7 @@ MonoBehaviour:
   fleeindicator: {fileID: -8612798535301835411, guid: 7c1fda7ec085f1240b841e8a13f76b51, type: 3}
   shootIndicator: {fileID: 5831601287507135270, guid: 05c10a90c6463fc4f9da8c9e6d310e1d, type: 3}
   waitindicator: {fileID: -4545164963265384688, guid: 709db180e71a47c4aadc363e99ecc592, type: 3}
-  enemyMovementShooter: {fileID: 0}
+  enemyMovementShooter: {fileID: -5676328429409097243}
 --- !u!1 &6609814708366440987
 GameObject:
   m_ObjectHideFlags: 0
