@@ -134,7 +134,11 @@ public class PlayerActionManager : MonoBehaviour
         {
             SceneManager.LoadScene("Title Screen");
         }
-        UpdateAction(movePlayer.positionDesired, movePlayer.timeSceuence.actualTime);
+        if (SceneManager.GetActiveScene().name != "ShopScene")
+        {
+            UpdateAction(movePlayer.positionDesired, movePlayer.timeSceuence.actualTime);
+        }
+            
 
         //if(Input.GetKeyDown(KeyCode.C))
         //{
@@ -317,7 +321,7 @@ public class PlayerActionManager : MonoBehaviour
         if (action == PlayerBase.ActionEnum.SHOOT)
         {
             ((ShootAction)activeActions[PlayerBase.ActionEnum.SHOOT]).bulletPrefab = style.prefab;
-            //SoundEffectsManager.instance.PlaySoundFXClip(shootClip, transform, 1f);
+            SoundEffectsManager.instance.PlaySoundFXClip(shootClip, transform, 1f);
             activeActions[PlayerBase.ActionEnum.SHOOT].Execute(player, newPos);
             
         }

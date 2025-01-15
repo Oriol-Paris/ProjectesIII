@@ -261,7 +261,7 @@ public class PlayerBase : MonoBehaviour
 
     public void InstantManaIncrease(int amount = 1)
     {
-        playerData.actionPoints += amount;
+        playerData.maxTime += amount;
 
         if(playerData.actionPoints > playerData.maxActionPoints)
             playerData.actionPoints = playerData.maxActionPoints;

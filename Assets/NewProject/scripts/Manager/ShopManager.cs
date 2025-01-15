@@ -189,8 +189,8 @@ public class ShopManager : MonoBehaviour
                 player.InstantMaxHPIncrease();
                 break;
             case PlayerBase.ActionEnum.MANA_POTION:
-                boughtItem.text = "Player Mana Up";
-                player.InstantManaIncrease(2);
+                boughtItem.text = "Player Time Up";
+                player.InstantManaIncrease();
                 break;
         }
     }
@@ -281,7 +281,7 @@ public class ShopManager : MonoBehaviour
         }
         else if (actionData.action == PlayerBase.ActionEnum.MANA_POTION)
         {
-            return "Mana Points Up";
+            return "Time Points Up";
         }
         return actionData.action.ToString();
     }
