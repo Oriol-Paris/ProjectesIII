@@ -277,6 +277,7 @@ public class MovPlayer : MonoBehaviour
             }
             else
             {
+                FindAnyObjectByType<UIBarManager>().NotEnoughStaminaAnim();
                 Debug.Log("No tienes suficiente estamina para realizar este trayecto.");
                
             }
@@ -306,4 +307,6 @@ public class MovPlayer : MonoBehaviour
             StopAllCoroutines();
         }
     }
+
+    public float GetCurrentTime() { return currentTime; }
 }

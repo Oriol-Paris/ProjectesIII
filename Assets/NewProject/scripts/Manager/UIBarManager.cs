@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,7 +7,7 @@ public class UIBarManager : MonoBehaviour
 {
     [SerializeField] private Image healthBar;
     [SerializeField] private Image actionPointBar;
-    [SerializeField] private Image actionPointBarBG;
+    [SerializeField] private Image actionPointAnimBar;
     [SerializeField] private Image timeBar;
     private PlayerData player;
     private TimeSecuence time;
@@ -17,6 +18,7 @@ public class UIBarManager : MonoBehaviour
     {
         player = FindAnyObjectByType<PlayerBase>().playerData;
         time = FindAnyObjectByType<MovPlayer>().timeSceuence;
+        actionPointAnimBar.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -30,5 +32,27 @@ public class UIBarManager : MonoBehaviour
         actionPointBar.fillAmount = Mathf.Lerp(actionPointBar.fillAmount, time.actualTime / (time.totalTime * 4.0f), lerpSpeed);
 
         timeBar.fillAmount = Mathf.Clamp01(1.0f - FindAnyObjectByType<MovPlayer>().t);
+    }
+
+    public void NotEnoughStaminaAnim()
+    {
+        StartCoroutine(StaminaAnim());
+    }
+
+    private IEnumerator StaminaAnim()
+    {
+        actionPointAnimBar.gameObject.SetActive(true);
+
+        yield return new WaitForSeconds(0.2f);
+
+        actionPointAnimBar.gameObject.SetActive(false);
+
+        yield return new WaitForSeconds(0.2f);
+
+        actionPointAnimBar.gameObject.SetActive(true);
+
+        yield return new WaitForSeconds(0.2f);
+
+        actionPointAnimBar.gameObject.SetActive(false);
     }
 }
