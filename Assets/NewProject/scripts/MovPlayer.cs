@@ -110,11 +110,11 @@ public class MovPlayer : MonoBehaviour
             Vector3 _playerPosition = firstItem.Item1;
             Vector3 _controlPoint = firstItem.Item2;
             Vector3 _positionDesired = firstItem.Item3;
-            //Debug.Log(movCount);
+        //Debug.Log(movCount);
 
+            this.GetComponent<PlayerActionManager>().WalkingSound();
 
-
-            t += velocity * Time.deltaTime;
+        t += velocity * Time.deltaTime;
 
             // Interpolate along the curve
             Vector3 newPosition = BezierCurve(t, _playerPosition, _controlPoint, _positionDesired);

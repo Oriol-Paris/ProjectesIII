@@ -371,6 +371,19 @@ public class PlayerActionManager : MonoBehaviour
         
     }
 
+    public void WalkingSound()
+    {
+        if (actualWalkSoundDelay < 0)
+        {
+            SoundEffectsManager.instance.PlaySoundFXClip(walkingClips, transform, 1f);
+            actualWalkSoundDelay = walkSoundDelay;
+        }
+        else
+        {
+            actualWalkSoundDelay -= Time.deltaTime;
+        }
+    }
+
     public PlayerBase GetPlayer() { return player; }
     public void EndTurn() { turnsDone++; } // Add this method to end the turn after resting
 }
