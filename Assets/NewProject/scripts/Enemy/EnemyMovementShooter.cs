@@ -167,26 +167,26 @@ public class EnemyMovementShooter : MonoBehaviour
 
         if (distanceToPlayer > range)
         {
-            Debug.Log("MOVING");
+           // Debug.Log("MOVING");
             // Move towards the player if out of range
             turnAction = TurnActions.APPROACH;
         }
         else if (distanceToPlayer < minDistance)
         {
-            Debug.Log("MOVING");
+           // Debug.Log("MOVING");
             // Move away from the player if too close
             turnAction = TurnActions.BACK_AWAY;    
         }
         else if (!hasShot && !isReloading) // Shoot only once per turn
         {
 
-            Debug.Log("PIUM");
+           // Debug.Log("PIUM");
             //In range, shoot
             turnAction = TurnActions.SHOOT;
         }
         else
         {
-            Debug.Log("NOTHING");
+            //Debug.Log("NOTHING");
             turnAction = TurnActions.NOTHING;
         }
     }

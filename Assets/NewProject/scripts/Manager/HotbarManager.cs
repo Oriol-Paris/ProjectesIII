@@ -39,7 +39,7 @@ public class HotbarManager : MonoBehaviour
     {
         if (playerData == null)
         {
-            Debug.LogError("Player is null in HotbarManager.");
+            //Debug.LogError("Player is null in HotbarManager.");
             return;
         }
 
