@@ -735,6 +735,8 @@ MonoBehaviour:
   mousePosition: {x: 0, y: 0, z: 0}
   positionDesired: {x: 0, y: 0, z: 0}
   playerPosition: {x: 0, y: 0, z: 0}
+  controlLiniarRender: {fileID: 0}
+  controlListMovment: {fileID: 0}
   t: 0
   maxDistance: 20
   velocity: 2

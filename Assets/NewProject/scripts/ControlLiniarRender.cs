@@ -24,7 +24,19 @@ public class ControlLiniarRender : MonoBehaviour
         
     }
 
-    public void NextMov() { Debug.Log(positionDesired); playerPosition = positionDesired; }
+    public void NextMov(bool isMoov) { 
+        Debug.Log(positionDesired);
+        if (isMoov)
+        {
+            playerPosition = positionDesired;
+        }
+
+
+        else
+        {
+            playerPosition = playerPosition;
+        }
+    }
 
     public void ControlLiniarRenderer()
     {
@@ -37,11 +49,13 @@ public class ControlLiniarRender : MonoBehaviour
 
     public void InstantiateLineMovment()
     {
+       
         var newLine = Instantiate(lineRenderer);
         lineRenderer.enabled = true;
         newLine.positionCount = curvePoints.Count;
         newLine.SetPositions(curvePoints.ToArray());
         lineList.Add(newLine);
+       
     }
 
     public void UpdateLineRendererr()
@@ -87,6 +101,7 @@ public class ControlLiniarRender : MonoBehaviour
        
     }
 
+  
     public float CalculateCurveLength()
     {
         if (curvePoints.Count < 3) return 0;
@@ -110,5 +125,13 @@ public class ControlLiniarRender : MonoBehaviour
     public List<Vector3> getCurvePoint() { return curvePoints; }
 
 
-
+    public void ResetControlLiniarRenderer()
+    {
+        curvePoints.Clear();
+        foreach (var line in lineList)
+        {
+            Destroy(line.gameObject);
+        }
+        lineList.Clear();
+    }
 }

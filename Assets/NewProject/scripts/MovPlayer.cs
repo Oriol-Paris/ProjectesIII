@@ -5,19 +5,18 @@ using UnityEngine;
 
 public class MovPlayer : MonoBehaviour
 {
-    public Vector3 mousePosition;
-    public Vector3 positionDesired;
-    public Vector3 playerPosition;
+
 
     public ControlLiniarRender controlLiniarRender;
     public ControlListMovment controlListMovment;
 
 
-    public float t = 0;
+    public float t;
     [SerializeField] private float maxDistance = 20f; 
-    [SerializeField] private float velocity = 5f;
-    [SerializeField]  LineRenderer lineRenderer;
-    [SerializeField] private int curveResolution = 0;
+    [SerializeField] private float velocity = 1f;
+    [SerializeField] private float tiemp = 0f;
+   
+   
     
     public TimeSecuence timeSceuence;
 
@@ -28,16 +27,19 @@ public class MovPlayer : MonoBehaviour
     public bool isDragging;
 
 
-    private Vector3 controlPoint;
+    
 
-    public List<Tuple<Vector3, Vector3, Vector3>> MovList = new List<Tuple<Vector3, Vector3, Vector3>>();
+  
 
-    private List<LineRenderer> lineList = new List<LineRenderer>();
+   
 
-    [SerializeField] private List<Vector3> curvePoints = new List<Vector3>();
+    
 
 
-    void Start(){}
+    void Start(){
+        velocity = 1f;
+        t = 0;
+    }
 
     void Update(){}
 
@@ -48,59 +50,43 @@ public class MovPlayer : MonoBehaviour
 
     public void finish()
     {
-        curvePoints.Clear();
-        MovList.Clear();
-        placeSelected = false;
-        isDragging = false;
-        foreach (var line in lineList)
-        {
-            Destroy(line.gameObject);
-        }
-        lineList.Clear();
-        playerPosition = transform.position;
-        currentTime = timeSceuence.totalTime;
-        timeSceuence.actualTime = currentTime;
-        //DebugMovList();
+        //playerPosition = transform.position;
+        controlLiniarRender.ResetControlLiniarRenderer();
+        controlListMovment.ResetControlListMovment();
     }
 
 
-    private void DebugMovList()
-    {
-        Debug.Log($"MovList contiene {MovList.Count} elementos.");
-        for (int i = 0; i < MovList.Count; i++)
-        {
-            Debug.Log($"Movimiento {i}: Inicio {MovList[i].Item1}, Control {MovList[i].Item2}, Fin {MovList[i].Item3}");
-        }
-    }
-
-
-
-
-    private float CalculateTiemConsum(float dist)
-    {
-        float maxDist = maxDistance;
- 
-        return Mathf.Clamp((dist / maxDist) * timeSceuence.totalTime, 0, timeSceuence.totalTime);
-    }
 
     public void UpdateMovement(int movCount)
     {
-        
+
+     
+        List<Tuple<Vector3, Vector3, Vector3>> MovList = controlListMovment.MovList;
             var firstItem = MovList[movCount];
             Vector3 _playerPosition = firstItem.Item1;
             Vector3 _controlPoint = firstItem.Item2;
             Vector3 _positionDesired = firstItem.Item3;
+
       
-
-            this.GetComponent<PlayerActionManager>().WalkingSound();
-
-             t += velocity * Time.deltaTime;
-
-            // Interpolate along the curve
-            Vector3 newPosition = Directorio.BezierCurve(t, _playerPosition, _controlPoint, _positionDesired);
-            transform.position = newPosition;
+        this.GetComponent<PlayerActionManager>().WalkingSound();
+        // float a = Directorio.ApproximateBezierLength(_playerPosition, _controlPoint,_positionDesired,1);
+        // Debug.Log(a);
+        float duration = controlListMovment.timeConsum[movCount]; // Tiempo deseado para el movimiento
+        float fixedDeltaTime = Time.deltaTime / duration;
         
-        
+        Debug.Log(velocity);
+        Debug.Log(controlListMovment.timeConsum[movCount]);
+
+        t += velocity * fixedDeltaTime;
+
+        t = Mathf.Clamp(t, 0f, 1f);
+       
+
+        Vector3 newPosition = Directorio.BezierCurve(t, _playerPosition, _controlPoint, _positionDesired);
+       
+        transform.position = newPosition;
+
+        tiemp += Time.deltaTime;
     }
 
     public void StopMovment()
@@ -111,9 +97,6 @@ public class MovPlayer : MonoBehaviour
     }
 
    
-
-    public void SetPositionDesired(Vector3 position) { positionDesired = position; }
-    public Vector3 GetPositionDesired() { return positionDesired; }
 
 
     private void CanWalk()
@@ -141,8 +124,13 @@ public class MovPlayer : MonoBehaviour
 
         if (Input.GetMouseButtonUp(0) && !isMoving)
         {
+         
+            float curveLength = controlLiniarRender.CalculateCurveLength();
 
-            controlListMovment.AddMovement(controlLiniarRender);
+            float timeConsumption = controlListMovment.CalculateStaminaConsumption(curveLength);
+
+            controlListMovment.AddMovement(controlLiniarRender,timeConsumption, PlayerBase.ActionEnum.MOVE);
+            t = 0f;
           
             isDragging = false;
 

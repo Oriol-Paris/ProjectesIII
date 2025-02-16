@@ -8,6 +8,7 @@ public class ControlListMovment : MonoBehaviour
     private float currentTime;
     
     public List<Tuple<Vector3, Vector3, Vector3>> MovList = new List<Tuple<Vector3, Vector3, Vector3>>();
+    public List<float> timeConsum = new List<float>();
 
     [SerializeField] private float maxDistance = 20f;
 
@@ -20,30 +21,34 @@ public class ControlListMovment : MonoBehaviour
         timeSceuence.actualTime = currentTime;
     }
 
-    public void AddMovement(ControlLiniarRender controlLiniarRender)
+    public void AddMovement(ControlLiniarRender controlLiniarRender, float timeConsumition, PlayerBase.ActionEnum action)
     {
         List<Vector3> curvePoints = controlLiniarRender.getCurvePoint();
-        float curveLength = controlLiniarRender.CalculateCurveLength();
-
-        float timeConsumption = CalculateStaminaConsumption(curveLength);
-
-
-        if (currentTime > timeConsumption)
+ 
+        if (currentTime > timeConsumition)
         {
-            Debug.Log("aaaaa");
-            MovList.Add(Tuple.Create(curvePoints[0], curvePoints[1], curvePoints[2]));
+            Debug.Log(curvePoints[0]);
+            Debug.Log(curvePoints[1]);
+           
 
-            timeSceuence.AddAction(PlayerBase.ActionEnum.MOVE, controlLiniarRender.positionDesired, null);
-            Debug.Log($"Movimiento registrado. Consumo de estamina: {timeConsumption}");
+            Vector3 point3 = curvePoints.Count > 2 ? curvePoints[2] : Vector3.zero;
+
+            MovList.Add(Tuple.Create(curvePoints[0], curvePoints[1], point3));
+
+            timeSceuence.AddAction(action);
+           
+            Debug.Log($"Movimiento registrado. Consumo de estamina: {timeConsumition}");
 
             // Deducir la estamina
-            currentTime -= timeConsumption;
+            currentTime -= timeConsumition;
+
+            timeConsum.Add(timeConsumition);
 
             timeSceuence.actualTime = currentTime;
+           
 
-
-            controlLiniarRender.NextMov();
-
+            controlLiniarRender.NextMov(point3 != Vector3.zero);
+          
             t = 0f;
 
 
@@ -61,10 +66,18 @@ public class ControlListMovment : MonoBehaviour
 
   
 
-    private float CalculateStaminaConsumption(float distance)
+    public float CalculateStaminaConsumption(float distance)
     {
-        // Ajustar este c�lculo seg�n la l�gica de tu juego
-        float consumptionPerUnit = timeSceuence.totalTime / maxDistance;
-        return Mathf.Clamp(distance * consumptionPerUnit, 0, timeSceuence.totalTime);
+        float maxDist = maxDistance;
+
+        return Mathf.Clamp((distance / maxDist) * timeSceuence.totalTime, 0, timeSceuence.totalTime);
+    }
+
+    public void ResetControlListMovment()
+    {  
+        MovList.Clear();
+        timeConsum.Clear();
+        currentTime = timeSceuence.totalTime;
+        timeSceuence.actualTime = currentTime;
     }
 }
