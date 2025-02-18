@@ -62,6 +62,8 @@ public class PlayerActionManager : MonoBehaviour
     private bool hasShotAction = false;
     private bool hasHealed = false;
 
+
+    public shootPlayer shootP;
     #endregion
 
     private void Awake()
@@ -136,7 +138,7 @@ public class PlayerActionManager : MonoBehaviour
         }
         if (SceneManager.GetActiveScene().name != "ShopScene")
         {
-            UpdateAction(movePlayer.positionDesired, movePlayer.timeSceuence.actualTime);
+            UpdateAction(Vector3.zero, movePlayer.timeSceuence.actualTime);
         }
             
 
@@ -182,11 +184,11 @@ public class PlayerActionManager : MonoBehaviour
         if (currentAction.m_action == PlayerBase.ActionEnum.SHOOT && (!player.GetComponent<OG_MovementByMouse>().isMoving || isShooting))
         {
 
-            Debug.Log("aaaaaaaaaaaa");
+           
             isShooting = true;
             hasShot = true; // Set the flag to indicate a shot has been fired
             isMoving = false;
-            preShoot();
+            shootP.preShoot();
             //StartCoroutine(AttackCoroutine(PlayerBase.ActionEnum.SHOOT, newPos));
 
 
@@ -227,58 +229,7 @@ public class PlayerActionManager : MonoBehaviour
         
     }
 
-    private void preShoot()
-    {
-        Debug.Log("aaaaa");
-
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out RaycastHit hit))
-        {
-            mousePosition = hit.point;
-        }
-        playerPosition = movePlayer.playerPosition;
-        currentTime = timeSceuence.actualTime;
-
-        if (!Input.GetMouseButton(0) && !isMoving)
-        {
-
-            positionDesired = mousePosition;
-
-            curvePoints.Clear();
-           
-            curvePoints.Add(playerPosition);
-            curvePoints.Add(positionDesired);
-           
-            
-            UpdateLineRendererr();
-        }
-
-        if (Input.GetMouseButtonUp(0) && !isMoving)
-        {
-
-            if (currentTime > costShoot)
-            {
-                GameObject instantiatedObject = Instantiate(prefPreShoot, playerPosition, Quaternion.identity);
-                
-                shootpoints.Clear();
-                LineRenderer newLine = Instantiate(shootLineRenderer, playerPosition, Quaternion.identity);
-                newLine.enabled = true;
-                shootpoints.Add(playerPosition);
-                shootpoints.Add(positionDesired);
-                newLine.positionCount = shootpoints.Count;
-                newLine.SetPositions(shootpoints.ToArray());
-                preShootPath.Add(newLine);
-
-                visualPlayerAfterShoot.Add(instantiatedObject);
-                currentTime -= costShoot;
-
-                timeSceuence.actualTime = currentTime;
-
-
-            }
-
-        }
-    }
+   
 
     private IEnumerator MoveCoroutine(Vector3 newPos)
     {
@@ -379,7 +330,7 @@ public class PlayerActionManager : MonoBehaviour
     {
         if (actualWalkSoundDelay < 0)
         {
-            SoundEffectsManager.instance.PlaySoundFXClip(walkingClips, transform, 1f);
+            //SoundEffectsManager.instance.PlaySoundFXClip(walkingClips, transform, 1f);
             actualWalkSoundDelay = walkSoundDelay;
         }
         else

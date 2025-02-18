@@ -25,7 +25,7 @@ public class ActionIndicator : MonoBehaviour
                 switch (enemyMovementShooter.turnAction)
                 {
                     case EnemyMovementShooter.TurnActions.APPROACH:
-                        Debug.Log("miau");
+                        //Debug.Log("miau");
                         currentActionIndicator.sprite = moveIndicator;
 
                         break;
