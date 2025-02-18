@@ -409,6 +409,8 @@ GameObject:
   - component: {fileID: 7189739028029077113}
   - component: {fileID: 6045879003536822004}
   - component: {fileID: 4476756505495577889}
+  - component: {fileID: 2554926273211331863}
+  - component: {fileID: 4528686633142332479}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -450,7 +452,7 @@ MonoBehaviour:
   mousePosition: {x: 0, y: 0, z: 0}
   positionDesired: {x: 0, y: 0, z: 0}
   playerPosition: {x: 0, y: 0, z: 0}
-  placeSelected: 0
+  placeSelected: 1
   isMoving: 0
   isDragging: 0
   isResting: 0
@@ -487,9 +489,9 @@ MonoBehaviour:
   player: {fileID: 8584045141074783902}
   dialogueManager: {fileID: 0}
   fx: {fileID: 6904931311285059048}
-  isMoving: 1
-  isShooting: 1
-  isHealing: 1
+  isMoving: 0
+  isShooting: 0
+  isHealing: 0
   turnAdded: 0
   turnsDone: 0
   costShoot: 0.4
@@ -501,6 +503,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 800348d9004d7344fbfe34d05735214e, type: 3}
   - {fileID: 8300000, guid: 3c86f529a7726ba449d33a82786f52eb, type: 3}
   - {fileID: 8300000, guid: 4776d3af08497d34585054155750bd88, type: 3}
+  shootP: {fileID: 6045879003536822004}
 --- !u!114 &8584045141074783902
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -514,9 +517,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerData: {fileID: 11400000, guid: 30cde2f3bd3a0de47a315ed687870d98, type: 2}
-  health: 5
+  health: 10
   maxHealth: 0
-  actionPoints: 0
+  actionPoints: 3
   maxActionPoints: 0
   range: 3
   exp: 0
@@ -612,7 +615,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6993864842785556067}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 65f5a2370e62d6a4db4eec9c8fac8380, type: 3}
   m_Name: 
@@ -718,8 +721,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44fc981e223626b4eb847658d7a1598f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  preShoot: {fileID: 8105682524678771348, guid: a4ef2995dd8a2fd4caab2662104f6144, type: 3}
-  bullet: {fileID: 4841340973275302747, guid: 8c280260248f7e449925f58bc503ee3b, type: 3}
+  controlLiniarRender: {fileID: 2554926273211331863}
+  controlListMovment: {fileID: 4528686633142332479}
+  fx: {fileID: 6904931311285059048}
+  bulletPrefab: {fileID: 4841340973275302747, guid: 8c280260248f7e449925f58bc503ee3b, type: 3}
 --- !u!114 &4476756505495577889
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -732,21 +737,51 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2d0373a7b444224398a68a9bfe18b68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mousePosition: {x: 0, y: 0, z: 0}
-  positionDesired: {x: 0, y: 0, z: 0}
-  playerPosition: {x: 0, y: 0, z: 0}
-  controlLiniarRender: {fileID: 0}
-  controlListMovment: {fileID: 0}
+  controlLiniarRender: {fileID: 2554926273211331863}
+  controlListMovment: {fileID: 4528686633142332479}
   t: 0
   maxDistance: 20
-  velocity: 2
-  lineRenderer: {fileID: 1145941097933022349}
-  curveResolution: 20
+  velocity: 1
+  tiemp: 0
   timeSceuence: {fileID: 7189739028029077113}
   placeSelected: 0
   isMoving: 0
   isDragging: 0
+--- !u!114 &2554926273211331863
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6993864842785556067}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6a36704461b4e24ebb49a430a568517, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mousePosition: {x: 0, y: 0, z: 0}
+  positionDesired: {x: 0, y: 0, z: 0}
+  playerPosition: {x: 0, y: 0, z: 0}
+  curveResolution: 0
+  lineRenderer: {fileID: 1145941097933022349}
+  lineList: []
   curvePoints: []
+--- !u!114 &4528686633142332479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6993864842785556067}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b29106fb42b4d6c4fb61201146a119db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeSceuence: {fileID: 7189739028029077113}
+  timeConsum: []
+  maxDistance: 20
+  t: 0
 --- !u!1001 &8433085831469232828
 PrefabInstance:
   m_ObjectHideFlags: 0
