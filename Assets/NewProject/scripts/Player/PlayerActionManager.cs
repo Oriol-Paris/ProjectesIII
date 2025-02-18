@@ -184,7 +184,7 @@ public class PlayerActionManager : MonoBehaviour
         if (currentAction.m_action == PlayerBase.ActionEnum.SHOOT && (!player.GetComponent<OG_MovementByMouse>().isMoving || isShooting))
         {
 
-           
+            //Debug.Log("aaaaaaaaaaaa");
             isShooting = true;
             hasShot = true; // Set the flag to indicate a shot has been fired
             isMoving = false;
