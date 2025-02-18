@@ -162,6 +162,8 @@ public class TimeSecuence : MonoBehaviour
         actionManager.visualPlayerAfterShoot.Clear();
         actionManager.shootpoints.Clear();
         isExecuting = false;
+
+        FindAnyObjectByType<TopBarManager>().ResetTopBar();
     }
     public bool GetIsExecuting() { return isExecuting; }
 

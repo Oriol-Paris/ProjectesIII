@@ -36,7 +36,9 @@ public class ControlListMovment : MonoBehaviour
             MovList.Add(Tuple.Create(curvePoints[0], curvePoints[1], point3));
 
             timeSceuence.AddAction(action);
-           
+
+            FindAnyObjectByType<TopBarManager>().AddAction(action);
+
             Debug.Log($"Movimiento registrado. Consumo de estamina: {timeConsumition}");
 
             // Deducir la estamina
