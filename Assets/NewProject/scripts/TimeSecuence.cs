@@ -13,6 +13,8 @@ public class TimeSecuence : MonoBehaviour
     public bool isExecuting;
     public Vector3 lastPosition;
 
+    public bool play = false;
+
     public MovPlayer movPlayer;
 
     public GameObject player;
@@ -83,6 +85,7 @@ public class TimeSecuence : MonoBehaviour
     {
         int movCount = 0;
         Debug.Log(actions.Count);
+        play = true;
 
         for (int i = 0; i < actions.Count; i++)
         {
@@ -145,6 +148,7 @@ public class TimeSecuence : MonoBehaviour
 
     private void ResetTurn()
     {
+        play = false;
         actions.Clear();
         actionTargets.Clear();
         bulletStyles.Clear(); // Add this line
