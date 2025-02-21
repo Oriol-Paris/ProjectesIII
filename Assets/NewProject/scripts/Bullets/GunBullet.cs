@@ -20,7 +20,7 @@ public class GunBullet : BulletPrefab
         }
 
         // Destroy the bullet after a certain time to prevent it from existing indefinitely
-        Destroy(gameObject, 5f);
+       // Destroy(gameObject, 5f);
     }
 
     void Update()
@@ -67,6 +67,6 @@ public class GunBullet : BulletPrefab
 
     private void DestroyBullet()
     {
-        Destroy(gameObject);
+      //  Destroy(gameObject);
     }
 }
