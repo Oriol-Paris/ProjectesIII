@@ -398,6 +398,7 @@ MonoBehaviour:
   - {fileID: 665313251192409754, guid: 3ace3637db6b2a5428d3b182be4eb4ce, type: 3}
   - {fileID: 665313251192409754, guid: 3ace3637db6b2a5428d3b182be4eb4ce, type: 3}
   - {fileID: 665313251192409754, guid: 3ace3637db6b2a5428d3b182be4eb4ce, type: 3}
+  playerBase: {fileID: 2100986629}
 --- !u!4 &618992118
 Transform:
   m_ObjectHideFlags: 0
@@ -555,11 +556,16 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 6993864842785556067, guid: 135a33f42603095498418b3997897017, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 2100986631}
+      addedObject: {fileID: 2100986644}
   m_SourcePrefab: {fileID: 100100000, guid: 135a33f42603095498418b3997897017, type: 3}
 --- !u!1 &662460617 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6993864842785556067, guid: 135a33f42603095498418b3997897017, type: 3}
+  m_PrefabInstance: {fileID: 662460616}
+  m_PrefabAsset: {fileID: 0}
+--- !u!120 &816343299 stripped
+LineRenderer:
+  m_CorrespondingSourceObject: {fileID: 1145941097933022349, guid: 135a33f42603095498418b3997897017, type: 3}
   m_PrefabInstance: {fileID: 662460616}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &1186428966 stripped
@@ -1059,19 +1065,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f263461156138f44afbe9f44d9f2293, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &2100986631
+--- !u!114 &2100986644
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 662460617}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f635ef693aabb83409defe24b14f8b45, type: 3}
+  m_Script: {fileID: 11500000, guid: befa5a8330344994286e20c10a68831e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  popUps: []
+  mousePosition: {x: 0, y: 0, z: 0}
+  positionDesired: {x: 0, y: 0, z: 0}
+  playerPosition: {x: 0, y: 0, z: 0}
+  placeSelected: 0
+  isMoving: 0
+  isDragging: 0
+  isResting: 0
+  t: 0
+  velocity: 0
+  lineRenderer: {fileID: 816343299}
+  curveResolution: 20
+  playerBase: {fileID: 2100986629}
+  movementTimeLimit: 5
+  timer: 0
 --- !u!1001 &8538204877290484201
 PrefabInstance:
   m_ObjectHideFlags: 0
