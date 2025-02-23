@@ -10,7 +10,7 @@ public class shootPlayer : MonoBehaviour
 
     public GameObject bulletPrefab;
 
-    private float bulletSpeed = 0.5f;
+    
 
     public void preShoot()
     {
@@ -42,9 +42,10 @@ public class shootPlayer : MonoBehaviour
 
         GameObject bullet = Instantiate(bulletPrefab, _playerPosition, Quaternion.identity);
 
-        Rigidbody rb = bullet.GetComponent<Rigidbody>();
+        
+        bullet.GetComponent<DestroyBullet>().setShootDirection(shootDirection);
 
-        rb.linearVelocity = shootDirection * bulletSpeed;
+        
 
     }
 
