@@ -29,11 +29,7 @@ public abstract class BulletPrefab : MonoBehaviour
         
     }
 
-    // Commenting out the OnBecameInvisible method for debugging
-    // private void OnBecameInvisible()
-    // {
-    //     DestroyBullet();
-    // }
+   
 
     public void SetFromPlayer(bool val) { isFromPlayer = val; }
     public abstract void Shoot(Vector3 direction);
