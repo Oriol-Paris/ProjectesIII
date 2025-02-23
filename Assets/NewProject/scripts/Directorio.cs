@@ -29,21 +29,7 @@ public class Directorio : MonoBehaviour
 
     }
 
-    public static float ApproximateBezierLength(Vector3 p0, Vector3 p1, Vector3 p2, int segments)
-    {
-        float length = 0f;
-        Vector3 previousPoint = p0;
-
-        for (int i = 1; i <= segments; i++)
-        {
-            float t = i / (float)segments;
-            Vector3 point = Directorio.BezierCurve(t, p0, p1, p2);
-            length += Vector3.Distance(previousPoint, point);
-            previousPoint = point;
-        }
-
-        return length;
-    }
+  
 
     public static Vector3 BezierCurve(float t, Vector3 p0, Vector3 p1, Vector3 p2)
     {

@@ -6,7 +6,7 @@ using System;
 
 public class Dialogue : MonoBehaviour
 {
-    [SerializeField] OG_MovementByMouse player;
+    //[SerializeField] OG_MovementByMouse player;
     public TextMeshProUGUI textComponent;
     public string[] intro;
     public string[] postWalk;
@@ -58,7 +58,7 @@ public class Dialogue : MonoBehaviour
     {
         index = 0;
         StartCoroutine(TypeLine());
-        player.enabled = false;
+       // player.enabled = false;
     }
 
     IEnumerator TypeLine()
@@ -81,7 +81,7 @@ public class Dialogue : MonoBehaviour
         else
         {
             gameObject.SetActive(false);
-            player.enabled = true;
+            //player.enabled = true;
         }
     }
 

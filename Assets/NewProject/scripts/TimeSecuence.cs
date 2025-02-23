@@ -9,7 +9,6 @@ public class TimeSecuence : MonoBehaviour
     [SerializeField]
     public float actualTime;
     public float totalTime = 3;
-    float rang = 10f;
     public bool isExecuting;
     public Vector3 lastPosition;
 
@@ -43,8 +42,7 @@ public class TimeSecuence : MonoBehaviour
 
     void Update()
     {
-        
-
+       
         if (actualTime > 0)
         {
             // Check for action selection
@@ -56,21 +54,10 @@ public class TimeSecuence : MonoBehaviour
                     Debug.Log("Selected action: " + selectedAction.m_action);
                 }
             }
-            if(actions.Count > 0&&Input.GetKeyDown(KeyCode.C)&&!isExecuting) {
-
-            
+            if(actions.Count > 0&&Input.GetKeyDown(KeyCode.C)&&!isExecuting) {   
                 ResetTurn();
-
-
             }
-            // Check for mouse click to store the selected action
-          /*  if (selectedAction.m_action != PlayerBase.ActionEnum.MOVE && Input.GetMouseButtonDown(0))
-            {
-                Vector3 targetPosition = GetMouseTargetPosition();
-                AddAction(selectedAction.m_action); // Modify this line
-                Debug.Log("Stored action: " + selectedAction.m_action + " at position: " + targetPosition);
-                //selectedAction = PlayerBase.Action.nothing; // Reset the selected action
-            }*/
+          
         }
 
         if (Input.GetKeyDown(KeyCode.LeftControl) && !isExecuting)
@@ -92,32 +79,29 @@ public class TimeSecuence : MonoBehaviour
            
             PlayerBase.ActionEnum action = actions[i];
             Debug.Log(action.ToString());
-           // Vector3 targetPosition = actionTargets[i];
-            //PlayerData.BulletStyle bulletStyle = bulletStyles[i]; // Add this line
+         
 
             switch (action)
             {
                 case PlayerBase.ActionEnum.SHOOT:
-                    //Debug.Log("Using bullet style: " + bulletStyle.prefab.name); // Add this line
-                    //((ShootAction)actionManager.activeActions[PlayerBase.ActionEnum.SHOOT]).bulletPrefab = bulletStyle.prefab; // Add this line
-                    // StartCoroutine(actionManager.AttackCoroutine(action, targetPosition,bulletStyle));
+                 
                     shootPl.UpdateShoot(movCount);
                     yield return new WaitForSeconds(0.75f);
                     movCount++;
                     break;
                 case PlayerBase.ActionEnum.MOVE:
 
-
-                    while (movPlayer.t < 1f) // Wait for the movement to finish
+                    Debug.Log("aaaaa");
+                    while (movPlayer.t < 1f) 
                     {
                       
                         movPlayer.UpdateMovement(movCount);
-                        yield return null; // Wait for a frame
+                        yield return null; 
                     }
                     movPlayer.StopMovment();
                     movCount++;
                     break;
-                // Add other cases for different actions if needed
+                
             }
         }
         ResetTurn();
@@ -134,16 +118,6 @@ public class TimeSecuence : MonoBehaviour
             actualTime = totalTime;
         }
         
-    }
-
-    private Vector3 GetMouseTargetPosition()
-    {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out RaycastHit hit))
-        {
-            return hit.point; // 3D position of the hit object
-        }
-        return Vector3.zero; // Return Vector3.zero if no hit
     }
 
     private void ResetTurn()

@@ -7,10 +7,10 @@ public class RestAction : ActiveAction
         player.Rest();
         
         // Set all relevant flags to ensure a turn is executed
-        var movementComponent = player.GetComponent<OG_MovementByMouse>();
+        //var movementComponent = player.GetComponent<OG_MovementByMouse>();
         var actionManager = player.GetComponent<PlayerActionManager>();
 
-        movementComponent.isMoving = true;
+        //movementComponent.isMoving = true;
         actionManager.isMoving = true;
         actionManager.isShooting = true;
         actionManager.isHealing = true;

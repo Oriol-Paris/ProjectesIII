@@ -10,6 +10,8 @@ public class DestroyBullet : MonoBehaviour
 
     private float bulletSpeed = 3.0f;
 
+    [SerializeField] private bool fromPlayer;
+
     void Start()
     {
         timeSecuence = FindFirstObjectByType<TimeSecuence>();
@@ -23,8 +25,8 @@ public class DestroyBullet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        if ( timeSecuence.play)
+
+        if (timeSecuence.play)
         {
             rb.linearVelocity = shootDirection * bulletSpeed;
             time += Time.deltaTime;
@@ -40,6 +42,34 @@ public class DestroyBullet : MonoBehaviour
             Debug.Log("aaaa0");
             Destroy(gameObject);
         }
-          
+
     }
+
+    private void OnTriggerEnter(Collider collision)
+    {
+        if (collision.gameObject.CompareTag("Walls"))
+        {
+            Destroy(gameObject);
+        }
+
+        if (fromPlayer) { 
+            EnemyBase hit = collision.gameObject.GetComponent<EnemyBase>();
+            hit.Damage(1);
+            Destroy(gameObject);
+        }
+
+        else { 
+            PlayerBase hit = collision.gameObject.GetComponent<PlayerBase>();
+            hit.Damage(1);
+            Destroy(gameObject);
+        }
+           
+      
+
+      
+
+
+
+    }
+
 }

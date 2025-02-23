@@ -87,11 +87,11 @@ public class PlayerActionManager : MonoBehaviour
 
         playerData = player.playerData; // Load playerData from PlayerBase
 
-        InitializeActions();
+        //InitializeActions();
         combatManager = FindAnyObjectByType<CombatManager>();
     }
 
-    private void InitializeActions()
+   /* private void InitializeActions()
     {
         foreach (var actionData in playerData.availableActions)
         {
@@ -129,7 +129,7 @@ public class PlayerActionManager : MonoBehaviour
                     // Add other cases if you have SingleUse or other action types
             }
         }
-    }
+    }*/
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -142,70 +142,47 @@ public class PlayerActionManager : MonoBehaviour
         }
             
 
-        //if(Input.GetKeyDown(KeyCode.C))
-        //{
-        //    movePlayer.finish();
-        //    ShootFinish();
-        //}
+      
     }
 
-    private void ShootFinish()
-    {
-        foreach (var line in visualPlayerAfterShoot)
-        {
-            Destroy(line.gameObject);
-        }
-        visualPlayerAfterShoot.Clear();
-        lineRenderer.enabled = false;
-        shootpoints.Clear();
-        curvePoints.Clear();
-        //foreach (var line in algo)
-        //{
-        //    Destroy(line.gameObject);
-        //}
-
-    }
+   
 
     public void UpdateAction(Vector3 newPos, float t)
     {
         if (combatManager != null && combatManager.allEnemiesDead)
         {
-            return; // Do not execute any actions if victory condition is met
+            return; 
         }
 
         var currentAction = player.GetAction();
 
-        if (currentAction.m_action == PlayerBase.ActionEnum.MOVE && (!player.GetComponent<OG_MovementByMouse>().isMoving || isMoving))
+        if (currentAction.m_action == PlayerBase.ActionEnum.MOVE )
         {
-            isMoving = true;
+          
             movePlayer.PreStartMov();
         }
 
-        if (currentAction.m_action == PlayerBase.ActionEnum.SHOOT && (!player.GetComponent<OG_MovementByMouse>().isMoving || isShooting))
+        if (currentAction.m_action == PlayerBase.ActionEnum.SHOOT )
         {
 
-            //Debug.Log("aaaaaaaaaaaa");
-            isShooting = true;
-            hasShot = true; // Set the flag to indicate a shot has been fired
-            isMoving = false;
             shootP.preShoot();
-            //StartCoroutine(AttackCoroutine(PlayerBase.ActionEnum.SHOOT, newPos));
+           
 
 
         }
 
-        if (currentAction.m_action == PlayerBase.ActionEnum.MELEE && (!player.GetComponent<OG_MovementByMouse>().GetIsMoving() || isMoving))
+        if (currentAction.m_action == PlayerBase.ActionEnum.MELEE )
         {
             if (currentAction.m_cost <= playerData.actionPoints)
             {
-                isMoving = false;
+              
                 StartCoroutine(AttackCoroutine(PlayerBase.ActionEnum.MELEE, newPos, null));
             }
         }
 
         if (currentAction.m_action == PlayerBase.ActionEnum.HEAL && isHealing)
         {
-            isMoving = false;
+           
             StartCoroutine(HealCoroutine(newPos));
         }
 
@@ -271,7 +248,7 @@ public class PlayerActionManager : MonoBehaviour
 
         if (action == PlayerBase.ActionEnum.SHOOT)
         {
-            ((ShootAction)activeActions[PlayerBase.ActionEnum.SHOOT]).bulletPrefab = style.prefab;
+            //((ShootAction)activeActions[PlayerBase.ActionEnum.SHOOT]).bulletPrefab = style.prefab;
             SoundEffectsManager.instance.PlaySoundFXClip(shootClip, transform, 1f);
             activeActions[PlayerBase.ActionEnum.SHOOT].Execute(player, newPos);
             

@@ -19,7 +19,7 @@ public class MeleeAction : ActiveAction
         // Move towards the target position
         while (Vector3.Distance(player.transform.position, targetPosition) > 0.1f && !enemyHit)
         {
-            player.transform.position = Vector3.MoveTowards(player.transform.position, targetPosition, player.GetComponent<OG_MovementByMouse>().velocity * Time.deltaTime);
+            //player.transform.position = Vector3.MoveTowards(player.transform.position, targetPosition, player.GetComponent<OG_MovementByMouse>().velocity * Time.deltaTime);
             yield return null;
 
             // Check for enemies at the current position
@@ -31,7 +31,7 @@ public class MeleeAction : ActiveAction
                 {
                     // Deal damage to the enemy
                     enemy.Damage((int)damage);
-                    player.GetComponent<OG_MovementByMouse>().SetPositionDesired(player.transform.position); 
+                    //player.GetComponent<OG_MovementByMouse>().SetPositionDesired(player.transform.position); 
                     // Apply knockback to the enemy
                     Vector3 knockbackDirection = (enemy.transform.position - player.transform.position).normalized;
                     Vector3 knockbackTarget = enemy.transform.position + knockbackDirection * knockbackForce;

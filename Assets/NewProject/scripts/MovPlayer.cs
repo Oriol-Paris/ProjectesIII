@@ -5,35 +5,17 @@ using UnityEngine;
 
 public class MovPlayer : MonoBehaviour
 {
-
-
     public ControlLiniarRender controlLiniarRender;
     public ControlListMovment controlListMovment;
-
 
     public float t;
     [SerializeField] private float maxDistance = 20f; 
     [SerializeField] private float velocity = 1f;
     [SerializeField] private float tiemp = 0f;
-   
-   
-    
+ 
     public TimeSecuence timeSceuence;
 
     private float currentTime = 3;
-
-    public bool placeSelected;
-    public bool isMoving;
-    public bool isDragging;
-
-
-    
-
-  
-
-   
-
-    
 
 
     void Start(){
@@ -41,12 +23,8 @@ public class MovPlayer : MonoBehaviour
         t = 0;
     }
 
-    void Update(){}
-
     public void PreStartMov() { CanWalk(); }
 
-
-    public void StartMov() { placeSelected = true; }
 
     public void finish()
     {
@@ -69,9 +47,8 @@ public class MovPlayer : MonoBehaviour
 
       
         this.GetComponent<PlayerActionManager>().WalkingSound();
-        // float a = Directorio.ApproximateBezierLength(_playerPosition, _controlPoint,_positionDesired,1);
-        // Debug.Log(a);
-        float duration = controlListMovment.timeConsum[movCount]; // Tiempo deseado para el movimiento
+       
+        float duration = controlListMovment.timeConsum[movCount];
         float fixedDeltaTime = Time.deltaTime / duration;
         
         Debug.Log(velocity);
@@ -105,24 +82,21 @@ public class MovPlayer : MonoBehaviour
         currentTime = timeSceuence.actualTime;
            
 
-        if (!Input.GetMouseButton(0) && !isMoving && !placeSelected && !isDragging)
+        if (!Input.GetMouseButton(0) )
         {
-           
-            isDragging = false;  
-            placeSelected = false;
+    
             controlLiniarRender.ControlLiniarRenderer();
             controlLiniarRender.UpdateLineRendererr();
         }
 
-        if (Input.GetMouseButton(0) && !isMoving)
+        if (Input.GetMouseButton(0))
         {
-         
-           isDragging =true;
+    
             controlLiniarRender.UpdateCurve();
             controlLiniarRender.UpdateLineRendererr();
         }
 
-        if (Input.GetMouseButtonUp(0) && !isMoving)
+        if (Input.GetMouseButtonUp(0))
         {
          
             float curveLength = controlLiniarRender.CalculateCurveLength();
@@ -131,13 +105,8 @@ public class MovPlayer : MonoBehaviour
 
             controlListMovment.AddMovement(controlLiniarRender,timeConsumption, PlayerBase.ActionEnum.MOVE);
             t = 0f;
-          
-            isDragging = false;
-
+ 
         }
-
-
-        
 
     }
 
@@ -151,5 +120,5 @@ public class MovPlayer : MonoBehaviour
         }
     }
 
-    public float GetCurrentTime() { return currentTime; }
+
 }

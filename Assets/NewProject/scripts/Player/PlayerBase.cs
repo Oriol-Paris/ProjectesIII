@@ -43,7 +43,7 @@ public class PlayerBase : MonoBehaviour
     public float maxActionPoints;
     public float range;
     public int exp = 0;
-    private OG_MovementByMouse checkMovement;
+   // private OG_MovementByMouse checkMovement;
     public PlayerActionManager turnsDone;
 
     public Action activeAction { get; private set; }
@@ -71,7 +71,7 @@ public class PlayerBase : MonoBehaviour
         
         isInAction = false;
         turnsDone = GetComponent<PlayerActionManager>();
-        checkMovement = GetComponent<OG_MovementByMouse>();
+        //checkMovement = GetComponent<OG_MovementByMouse>();
     }
 
     private void LoadPlayerData()
@@ -104,8 +104,8 @@ public class PlayerBase : MonoBehaviour
     {
         if (!victory && isAlive && !defeat)
         {
-            if (!checkMovement.GetIsMoving())
-            {
+            
+            
                 foreach (Action action in availableActions)
                 {
                     if (Input.GetKeyDown(action.m_key))
@@ -117,12 +117,12 @@ public class PlayerBase : MonoBehaviour
 
                         if (activeAction.m_action == ActionEnum.REST)
                         {
-                            checkMovement.ExecuteRestAction();
+                            //checkMovement.ExecuteRestAction();
                             turnsDone.EndTurn(); // End the turn after resting
                         }
                     }
                 }
-            }
+            
 
             range = activeAction.m_style != null ? activeAction.m_style.range : playerData.baseRange;
 

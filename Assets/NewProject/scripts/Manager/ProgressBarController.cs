@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public class ProgressBarController : MonoBehaviour
 {
     public Slider progressBar;
-    private OG_MovementByMouse movementScript;
+    //private OG_MovementByMouse movementScript;
 
     void Start()
     {
@@ -14,16 +14,16 @@ public class ProgressBarController : MonoBehaviour
         }
 
         // Find the OG_MovementByMouse script in the scene
-        movementScript = FindObjectOfType<OG_MovementByMouse>();
+       // movementScript = FindObjectOfType<OG_MovementByMouse>();
     }
 
     void Update()
     {
-        if (movementScript != null)
+       /* if (movementScript != null)
         {
             // Update the progress bar based on the timer
             float progress = Mathf.Clamp01(movementScript.t / movementScript.movementTimeLimit);
             progressBar.value = progress;
-        }
+        }*/
     }
 }

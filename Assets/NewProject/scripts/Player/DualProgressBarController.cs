@@ -5,7 +5,7 @@ public class DualProgressBarController : MonoBehaviour
 {
     public Slider tProgressBar;
     public Slider timerProgressBar;
-    private OG_MovementByMouse movementScript;
+    //private OG_MovementByMouse movementScript;
 
     void Start()
     {
@@ -16,12 +16,12 @@ public class DualProgressBarController : MonoBehaviour
         }
 
         // Find the OG_MovementByMouse script in the scene
-        movementScript = FindObjectOfType<OG_MovementByMouse>();
+       // movementScript = FindObjectOfType<OG_MovementByMouse>();
     }
 
     void Update()
     {
-        if (movementScript != null)
+       /* if (movementScript != null)
         {
             // Update the t progress bar based on the t value
             float tProgress = Mathf.Clamp01(movementScript.t);
@@ -30,6 +30,6 @@ public class DualProgressBarController : MonoBehaviour
             // Update the timer progress bar based on the timer value
             float timerProgress = Mathf.Clamp01(movementScript.timer / movementScript.movementTimeLimit);
             timerProgressBar.value = timerProgress;
-        }
+        }*/
     }
 }
