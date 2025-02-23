@@ -7,8 +7,10 @@ public class TutorialManager : MonoBehaviour
 {
     public GameObject[] popUps;
     public PlayerBase playerBase; // Reference to the PlayerBase component
+    public TimeSecuence timeSecuence; // Reference to the TimeSecuence component
 
-    private int popUpIndex;
+    private int popUpIndex = 0;
+    private bool actionsCompleted = false; // Flag to indicate when the required actions are completed
 
     // Dictionary to store the required number of actions for each popUpIndex
     private Dictionary<int, (PlayerBase.ActionEnum action, int count)> requiredActions = new Dictionary<int, (PlayerBase.ActionEnum action, int count)>
@@ -29,23 +31,28 @@ public class TutorialManager : MonoBehaviour
         {
             actionCounts[key] = 0;
         }
+
+        // Display the first popup
+        DisplayCurrentPopup();
     }
 
     private void Update()
     {
-        for (int i = 0; i < popUps.Length; i++)
+        CheckPlayerActions();
+
+        // Check if the required actions are completed and the sequence is not executing
+        if (actionsCompleted && timeSecuence.isExecuting == false)
         {
-            if (i == popUpIndex)
-            {
-                popUps[popUpIndex].SetActive(true);
-            }
-            else
-            {
-                popUps[i].SetActive(false);
-            }
+            Debug.Log("Actions completed");
+            actionsCompleted = false; // Reset the flag
+            popUpIndex++;
+            Debug.Log("FROM HERE");
+            DisplayCurrentPopup();
         }
 
-        CheckPlayerActions();
+        if(timeSecuence.isExecuting == true){
+            popUps[popUpIndex].SetActive(false);
+        }
     }
 
     private void CheckPlayerActions()
@@ -55,7 +62,7 @@ public class TutorialManager : MonoBehaviour
             var requiredAction = requiredActions[popUpIndex].action;
             var requiredCount = requiredActions[popUpIndex].count;
 
-            if (playerBase.GetAction().m_action == requiredAction && Input.GetMouseButtonUp(0))
+            if (playerBase.GetAction().m_action == requiredAction &&  (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)))
             {
                 actionCounts[popUpIndex]++;
                 Debug.Log($"{requiredAction} performed {actionCounts[popUpIndex]} times");
@@ -63,9 +70,25 @@ public class TutorialManager : MonoBehaviour
                 if (actionCounts[popUpIndex] >= requiredCount)
                 {
                     Debug.Log($"{requiredAction} sequence completed");
-                    popUpIndex++;
+                    actionsCompleted = true; // Set the flag to indicate that the required actions are completed
                 }
             }
+        }
+    }
+
+    private void DisplayCurrentPopup()
+    {
+        // Disable all popups
+        foreach (var popUp in popUps)
+        {
+            popUp.SetActive(false);
+        }
+
+        // Enable the current popup
+        if (popUpIndex < popUps.Length)
+        {
+            popUps[popUpIndex].SetActive(true);
+            Debug.Log("Displaying popUpIndex: " + popUpIndex);
         }
     }
 }
