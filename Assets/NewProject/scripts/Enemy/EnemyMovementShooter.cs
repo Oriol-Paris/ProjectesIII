@@ -59,6 +59,7 @@ public class EnemyMovementShooter : MonoBehaviour
     // Decides whether to shoot or move based on distance
     private void ExecuteAction()
     {
+        turnAction = TurnActions.SHOOT;
         switch (turnAction)
         {
             case TurnActions.APPROACH:
@@ -72,7 +73,7 @@ public class EnemyMovementShooter : MonoBehaviour
                 break;
 
             case TurnActions.BACK_AWAY:
-                MoveAwayFromPlayer();
+               MoveAwayFromPlayer();
                 this.GetComponent<Animator>().SetBool("isMoving", true);
                 break;
         }
