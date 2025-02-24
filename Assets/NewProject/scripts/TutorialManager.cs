@@ -50,8 +50,15 @@ public class TutorialManager : MonoBehaviour
             DisplayCurrentPopup();
         }
 
-        if(timeSecuence.isExecuting == true){
+        if (timeSecuence.isExecuting == true)
+        {
             popUps[popUpIndex].SetActive(false);
+        }
+
+        // Check if the Enter key is pressed to disable the current popup
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            DisableCurrentPopup();
         }
     }
 
@@ -62,7 +69,7 @@ public class TutorialManager : MonoBehaviour
             var requiredAction = requiredActions[popUpIndex].action;
             var requiredCount = requiredActions[popUpIndex].count;
 
-            if (playerBase.GetAction().m_action == requiredAction &&  (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)))
+            if (playerBase.GetAction().m_action == requiredAction && (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)))
             {
                 actionCounts[popUpIndex]++;
                 Debug.Log($"{requiredAction} performed {actionCounts[popUpIndex]} times");
@@ -89,6 +96,45 @@ public class TutorialManager : MonoBehaviour
         {
             popUps[popUpIndex].SetActive(true);
             Debug.Log("Displaying popUpIndex: " + popUpIndex);
+            ExecuteCustomLogicForPopup(popUpIndex); // Execute custom logic for the current popup
+        }
+    }
+
+    private void DisableCurrentPopup()
+    {
+        if (popUpIndex < popUps.Length)
+        {
+            popUps[popUpIndex].SetActive(false);
+            Debug.Log("Disabling popUpIndex: " + popUpIndex);
+        }
+    }
+
+    private void ExecuteCustomLogicForPopup(int index)
+    {
+        switch (index)
+        {
+            case 0:
+                // Custom logic for popup index 0
+                Debug.Log("Custom logic for popup index 0");
+                // Example: Activate a specific GameObject
+                // specificGameObject.SetActive(true);
+                break;
+            case 1:
+                // Custom logic for popup index 1
+                Debug.Log("Custom logic for popup index 1");
+                // Example: Activate another specific GameObject
+                // anotherSpecificGameObject.SetActive(true);
+                break;
+            case 2:
+                // Custom logic for popup index 2
+                Debug.Log("Custom logic for popup index 2");
+                // Example: Activate yet another specific GameObject
+                // yetAnotherSpecificGameObject.SetActive(true);
+                break;
+            // Add more cases as needed for other popup indices
+            default:
+                Debug.Log("No custom logic for this popup index");
+                break;
         }
     }
 }
