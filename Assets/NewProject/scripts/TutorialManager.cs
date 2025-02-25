@@ -13,13 +13,13 @@ public class TutorialManager : MonoBehaviour
     private int popUpIndex = 0;
     private bool actionsCompleted = false; // Flag to indicate when the required actions are completed
     private bool isInsideTrigger = false; // Flag to indicate if the player is inside the trigger
-
+    
     // Dictionary to store the required number of actions for each popUpIndex
     private Dictionary<int, (PlayerBase.ActionEnum action, int count)> requiredActions = new Dictionary<int, (PlayerBase.ActionEnum action, int count)>
     {
-        { 0, (PlayerBase.ActionEnum.MOVE, 1) }, // Requires 2 MOVE actions
-        { 1, (PlayerBase.ActionEnum.MOVE, 2) }, // Requires 1 SHOOT action
-        { 2, (PlayerBase.ActionEnum.SHOOT, 1) } // Requires 1 HEAL action
+        { 0, (PlayerBase.ActionEnum.MOVE, 1) }, // Requires 1 MOVE action
+        { 1, (PlayerBase.ActionEnum.MOVE, 2) }, // Requires 2 MOVE actions
+        { 2, (PlayerBase.ActionEnum.SHOOT, 1) } // Requires 1 SHOOT action
         // Add more entries as needed
     };
 
@@ -63,9 +63,12 @@ public class TutorialManager : MonoBehaviour
         {
             Debug.Log("Actions completed");
             actionsCompleted = false; // Reset the flag
-            popUpIndex++;
-            Debug.Log("FROM HERE");
-            DisplayCurrentPopup();
+            if (popUpIndex < 2)
+            {
+                popUpIndex++;
+                Debug.Log("FROM HERE");
+                DisplayCurrentPopup();
+            }
         }
 
         if (timeSecuence.isExecuting == true)

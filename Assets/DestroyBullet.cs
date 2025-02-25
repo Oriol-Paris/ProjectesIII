@@ -8,7 +8,7 @@ public class DestroyBullet : MonoBehaviour
     [SerializeField] private Vector3 shootDirection;
     [SerializeField] private float time;
 
-    private float bulletSpeed = 3.0f;
+    private float bulletSpeed = 6.0f;
 
     void Start()
     {

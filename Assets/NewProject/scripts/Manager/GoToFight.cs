@@ -12,23 +12,18 @@ public class GoToFight : MonoBehaviour
             switch (playerData.lastLevel)
             {
                 case "Level1":
-                    SceneManager.LoadScene("Level2");
+                    SceneManager.LoadScene("Node Map");
                     break;
                 case "Level2":
-                    SceneManager.LoadScene("Level3");
-                    break;
+                    SceneManager.LoadScene("Node Map"); break;
                 case "Level3":
-                    SceneManager.LoadScene("Level4");
-                    break;
+                    SceneManager.LoadScene("Node Map"); break;
                 case "Level4":
-                    SceneManager.LoadScene("Level5");
-                    break;
+                    SceneManager.LoadScene("Node Map"); break;
                 case "Level5":
-                    SceneManager.LoadScene("Level1");
-                    break;
+                    SceneManager.LoadScene("Node Map"); break;
                 case "Tutorial":
-                    SceneManager.LoadScene("Level1");
-                    break;
+                    SceneManager.LoadScene("Node Map"); break;
             }
         }
         else
