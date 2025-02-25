@@ -165,7 +165,7 @@ MonoBehaviour:
   playableLevelsSprite: {fileID: 21300000, guid: 36db4eeef78622b45b6254644acc598b, type: 3}
   eventLevelsSprite: {fileID: 21300000, guid: 2e4d9c4dbe135c54abc1b3f563bf8864, type: 3}
   shopLevelSprite: {fileID: 21300000, guid: 419585d7292b8f64ea2e669fc6610f64, type: 3}
-  nodeMapData: {fileID: 0}
+  nodeMapData: {fileID: 11400000, guid: 6ef68e3488c0059429efc21e0680add7, type: 2}
   cameraSpeed: 10
 --- !u!114 &131262006
 MonoBehaviour:
