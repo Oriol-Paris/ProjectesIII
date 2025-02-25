@@ -10,7 +10,7 @@ public class ChangeScene : MonoBehaviour
     {
         FindAnyObjectByType<PlayerBase>().playerData.lastLevel = SceneManager.GetActiveScene().name;
         FindAnyObjectByType<PlayerBase>().playerData.levelCompleted = FindAnyObjectByType<CombatManager>().allEnemiesDead;
-        SceneManager.LoadScene("ShopScene");
+        SceneManager.LoadScene("Node Map");
     }
 
     void Start()

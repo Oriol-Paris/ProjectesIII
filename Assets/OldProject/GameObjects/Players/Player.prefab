@@ -410,6 +410,7 @@ GameObject:
   - component: {fileID: 4476756505495577889}
   - component: {fileID: 2554926273211331863}
   - component: {fileID: 4528686633142332479}
+  - component: {fileID: 4026666568815950345}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -756,6 +757,32 @@ MonoBehaviour:
   timeConsum: []
   maxDistance: 20
   t: 0
+--- !u!114 &4026666568815950345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6993864842785556067}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: befa5a8330344994286e20c10a68831e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mousePosition: {x: 0, y: 0, z: 0}
+  positionDesired: {x: 0, y: 0, z: 0}
+  playerPosition: {x: 0, y: 0, z: 0}
+  placeSelected: 0
+  isMoving: 0
+  isDragging: 0
+  isResting: 0
+  t: 0
+  velocity: 0
+  lineRenderer: {fileID: 0}
+  curveResolution: 20
+  playerBase: {fileID: 0}
+  movementTimeLimit: 5
+  timer: 0
 --- !u!1001 &8433085831469232828
 PrefabInstance:
   m_ObjectHideFlags: 0
