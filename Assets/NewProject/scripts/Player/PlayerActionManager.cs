@@ -256,8 +256,7 @@ public class PlayerActionManager : MonoBehaviour
         {
             hasMoved = true;
             yield return new WaitForSeconds(1.5f); // Adjust the delay as needed
-            if (dialogueManager != null)
-                dialogueManager.ActionCompleted(PlayerBase.ActionEnum.MOVE);
+           
         }
     }
     
@@ -295,8 +294,7 @@ public class PlayerActionManager : MonoBehaviour
         {
             hasShotAction = true;
             yield return new WaitForSeconds(1.0f); // Adjust the delay as needed
-            if (dialogueManager != null)
-                dialogueManager.ActionCompleted(action);
+            
         }
     }
 
@@ -313,8 +311,7 @@ public class PlayerActionManager : MonoBehaviour
         if (!hasHealed)
         {
             hasHealed = true;
-            if (dialogueManager != null)
-                dialogueManager.ActionCompleted(PlayerBase.ActionEnum.HEAL);
+            
         }
     }
 

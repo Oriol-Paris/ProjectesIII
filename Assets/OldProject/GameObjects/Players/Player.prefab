@@ -397,7 +397,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7985519555228967366}
-  - component: {fileID: 8458478312620971982}
   - component: {fileID: 1251202436317223770}
   - component: {fileID: 8584045141074783902}
   - component: {fileID: 73541132482798089}
@@ -437,32 +436,6 @@ Transform:
   - {fileID: 4747154246722693345}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8458478312620971982
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6993864842785556067}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: befa5a8330344994286e20c10a68831e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mousePosition: {x: 0, y: 0, z: 0}
-  positionDesired: {x: 0, y: 0, z: 0}
-  playerPosition: {x: 0, y: 0, z: 0}
-  placeSelected: 1
-  isMoving: 0
-  isDragging: 0
-  isResting: 0
-  t: 0
-  velocity: 3
-  lineRenderer: {fileID: 1145941097933022349}
-  curveResolution: 25
-  playerBase: {fileID: 8584045141074783902}
-  movementTimeLimit: 1.5
-  timer: 0
 --- !u!114 &1251202436317223770
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -704,6 +677,7 @@ MonoBehaviour:
   totalTime: 3
   isExecuting: 0
   lastPosition: {x: 0, y: 0, z: 0}
+  play: 0
   movPlayer: {fileID: 4476756505495577889}
   player: {fileID: 6993864842785556067}
   shootPl: {fileID: 6045879003536822004}
