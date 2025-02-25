@@ -196,3 +196,4 @@ MonoBehaviour:
   timeSecuence: {fileID: 0}
   rb: {fileID: 2572626133480285931}
   shootDirection: {x: 0, y: 0, z: 0}
+  time: 0
