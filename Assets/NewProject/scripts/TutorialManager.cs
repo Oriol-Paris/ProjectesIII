@@ -64,23 +64,7 @@ public class TutorialManager : MonoBehaviour
 
     private void CheckPlayerActions()
     {
-        if (requiredActions.ContainsKey(popUpIndex))
-        {
-            var requiredAction = requiredActions[popUpIndex].action;
-            var requiredCount = requiredActions[popUpIndex].count;
-
-            if (playerBase.GetAction().m_action == requiredAction && (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)))
-            {
-                actionCounts[popUpIndex]++;
-                Debug.Log($"{requiredAction} performed {actionCounts[popUpIndex]} times");
-
-                if (actionCounts[popUpIndex] >= requiredCount)
-                {
-                    Debug.Log($"{requiredAction} sequence completed");
-                    actionsCompleted = true; // Set the flag to indicate that the required actions are completed
-                }
-            }
-        }
+        
     }
 
     private void DisplayCurrentPopup()
@@ -116,20 +100,65 @@ public class TutorialManager : MonoBehaviour
             case 0:
                 // Custom logic for popup index 0
                 Debug.Log("Custom logic for popup index 0");
-                // Example: Activate a specific GameObject
-                // specificGameObject.SetActive(true);
+                if (requiredActions.ContainsKey(popUpIndex))
+                {
+                    var requiredAction = requiredActions[popUpIndex].action;
+                    var requiredCount = requiredActions[popUpIndex].count;
+
+                    if (playerBase.GetAction().m_action == requiredAction && (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)))
+                    {
+                        actionCounts[popUpIndex]++;
+                        Debug.Log($"{requiredAction} performed {actionCounts[popUpIndex]} times");
+
+                        if (actionCounts[popUpIndex] >= requiredCount)
+                        {
+                            Debug.Log($"{requiredAction} sequence completed");
+                            actionsCompleted = true; // Set the flag to indicate that the required actions are completed
+                        }
+                    }
+                }
                 break;
             case 1:
                 // Custom logic for popup index 1
                 Debug.Log("Custom logic for popup index 1");
-                // Example: Activate another specific GameObject
-                // anotherSpecificGameObject.SetActive(true);
+                if (requiredActions.ContainsKey(popUpIndex))
+                {
+                    var requiredAction = requiredActions[popUpIndex].action;
+                    var requiredCount = requiredActions[popUpIndex].count;
+
+                    if (playerBase.GetAction().m_action == requiredAction && (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)))
+                    {
+                        actionCounts[popUpIndex]++;
+                        Debug.Log($"{requiredAction} performed {actionCounts[popUpIndex]} times");
+
+                        if (actionCounts[popUpIndex] >= requiredCount)
+                        {
+                            Debug.Log($"{requiredAction} sequence completed");
+                            actionsCompleted = true; // Set the flag to indicate that the required actions are completed
+                        }
+                    }
+                }
                 break;
             case 2:
                 // Custom logic for popup index 2
                 Debug.Log("Custom logic for popup index 2");
-                // Example: Activate yet another specific GameObject
-                // yetAnotherSpecificGameObject.SetActive(true);
+                if (requiredActions.ContainsKey(popUpIndex))
+                {
+                    var requiredAction = requiredActions[popUpIndex].action;
+                    var requiredCount = requiredActions[popUpIndex].count;
+
+                    if (playerBase.GetAction().m_action == requiredAction && (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)))
+                    {
+                        actionCounts[popUpIndex]++;
+                        Debug.Log($"{requiredAction} performed {actionCounts[popUpIndex]} times");
+
+                        if (actionCounts[popUpIndex] >= requiredCount)
+                        {
+                            Debug.Log($"{requiredAction} sequence completed");
+                            actionsCompleted = true; // Set the flag to indicate that the required actions are completed
+                        }
+                    }
+                }
                 break;
             // Add more cases as needed for other popup indices
             default:
