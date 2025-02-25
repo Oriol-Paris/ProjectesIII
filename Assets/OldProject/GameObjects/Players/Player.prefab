@@ -543,6 +543,7 @@ MonoBehaviour:
   shootPl: {fileID: 6045879003536822004}
   playerBase: {fileID: 8584045141074783902}
   actionManager: {fileID: 1251202436317223770}
+  notacction: 0
 --- !u!114 &6045879003536822004
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -557,6 +558,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controlLiniarRender: {fileID: 2554926273211331863}
   controlListMovment: {fileID: 4528686633142332479}
+  timeSecuence: {fileID: 7189739028029077113}
   fx: {fileID: 6904931311285059048}
   bulletPrefab: {fileID: 4841340973275302747, guid: 8c280260248f7e449925f58bc503ee3b, type: 3}
 --- !u!114 &4476756505495577889
@@ -573,6 +575,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controlLiniarRender: {fileID: 2554926273211331863}
   controlListMovment: {fileID: 4528686633142332479}
+  timeSecuence: {fileID: 7189739028029077113}
   t: 0
   maxDistance: 20
   velocity: 1

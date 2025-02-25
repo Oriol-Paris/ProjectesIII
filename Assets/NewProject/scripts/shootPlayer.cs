@@ -6,26 +6,31 @@ public class shootPlayer : MonoBehaviour
 {
     public ControlLiniarRender controlLiniarRender;
     public ControlListMovment controlListMovment;
+    public TimeSecuence timeSecuence;
     public Animator fx;
 
     public GameObject bulletPrefab;
 
     
+    
 
     public void preShoot()
     {
-        if (!Input.GetMouseButton(0))
+        if (!timeSecuence.notacction)
         {
+            if (!Input.GetMouseButton(0))
+            {
 
-           
-            controlLiniarRender.ControlLiniarRenderer();
-            controlLiniarRender.UpdateLineRendererr();
-        }
-        if (Input.GetMouseButtonUp(0))
-        {
 
-            controlListMovment.AddMovement(controlLiniarRender,0.75f, PlayerBase.ActionEnum.SHOOT);
+                controlLiniarRender.ControlLiniarRenderer();
+                controlLiniarRender.UpdateLineRendererr();
+            }
+            if (Input.GetMouseButtonUp(0))
+            {
 
+                controlListMovment.AddMovement(controlLiniarRender, 0.75f, PlayerBase.ActionEnum.SHOOT);
+
+            }
         }
     }
 

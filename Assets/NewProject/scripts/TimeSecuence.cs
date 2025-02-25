@@ -29,6 +29,8 @@ public class TimeSecuence : MonoBehaviour
     [SerializeField] private PlayerActionManager actionManager;
     private PlayerBase.Action selectedAction;
 
+    public bool notacction = false;
+
     void Start()
     {
         totalTime = playerBase.playerData.maxTime;
@@ -129,7 +131,7 @@ public class TimeSecuence : MonoBehaviour
         {
             isExecuting = true;
         Debug.Log("Executing stored actions");
-        
+            notacction = true;
         StartCoroutine(ExecuteActions());
             actualTime = totalTime;
         }
@@ -148,6 +150,7 @@ public class TimeSecuence : MonoBehaviour
 
     private void ResetTurn()
     {
+        notacction = false;
         play = false;
         actions.Clear();
         actionTargets.Clear();

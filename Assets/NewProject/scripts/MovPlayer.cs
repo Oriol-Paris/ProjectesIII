@@ -9,6 +9,7 @@ public class MovPlayer : MonoBehaviour
 
     public ControlLiniarRender controlLiniarRender;
     public ControlListMovment controlListMovment;
+    public TimeSecuence timeSecuence;
 
 
     public float t;
@@ -43,7 +44,13 @@ public class MovPlayer : MonoBehaviour
 
     void Update(){}
 
-    public void PreStartMov() { CanWalk(); }
+    public void PreStartMov() { 
+        if (!timeSecuence.notacction)
+        {
+            CanWalk();
+        }
+      
+    }
 
 
     public void StartMov() { placeSelected = true; }
