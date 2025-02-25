@@ -35,6 +35,7 @@ public class MovPlayer : MonoBehaviour
 
 
 
+
     public void UpdateMovement(int movCount)
     {
 
@@ -79,8 +80,9 @@ public class MovPlayer : MonoBehaviour
     private void CanWalk()
     {
 
+
+
         currentTime = timeSceuence.actualTime;
-           
 
         if (!Input.GetMouseButton(0) )
         {

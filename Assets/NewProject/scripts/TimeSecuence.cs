@@ -91,7 +91,7 @@ public class TimeSecuence : MonoBehaviour
                     break;
                 case PlayerBase.ActionEnum.MOVE:
 
-                    Debug.Log("aaaaa");
+                   
                     while (movPlayer.t < 1f) 
                     {
                       
@@ -112,10 +112,12 @@ public class TimeSecuence : MonoBehaviour
         if (actions.Count > 0)
         {
             isExecuting = true;
-        Debug.Log("Executing stored actions");
+
+    
         
         StartCoroutine(ExecuteActions());
             actualTime = totalTime;
+
         }
         
     }
