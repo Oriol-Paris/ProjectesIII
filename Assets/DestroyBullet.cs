@@ -9,16 +9,17 @@ public class DestroyBullet : MonoBehaviour
     [SerializeField] private float time;
     [SerializeField] private bool fromPlayer;
 
-    private GameObject _camera;
+    private cameraManager _camera;
     [SerializeField] float shootCShakeTime;
     [SerializeField] float shootCShakeRange;
+
     private float bulletSpeed = 3.0f;
 
     void Start()
     {
         timeSecuence = FindFirstObjectByType<TimeSecuence>();
-        _camera = GameObject.FindGameObjectWithTag("MainCamera");
-        StartCoroutine(_camera.GetComponent<cameraManager>().Shake(shootCShakeTime, shootCShakeRange));
+        _camera = FindAnyObjectByType<cameraManager>();
+        StartCoroutine(_camera.Shake(shootCShakeTime, shootCShakeRange));
     }
 
     public void setShootDirection(Vector3 _shootDirection)
@@ -51,24 +52,26 @@ public class DestroyBullet : MonoBehaviour
 
     private void OnTriggerEnter(Collider collision)
     {
-        if (collision.gameObject.CompareTag("Walls"))
+        if (collision != null)
         {
-            Destroy(gameObject);
-        }
+            if (collision.gameObject.CompareTag("Walls"))
+            {
+                Destroy(gameObject);
+            }
 
-        if (fromPlayer)
-        {
-            EnemyBase hit = collision.gameObject.GetComponent<EnemyBase>();
-            hit.Damage(1);
-            Destroy(gameObject);
-        }
+            if (fromPlayer && collision.gameObject.GetComponent<EnemyBase>() != null)
+            {
+                EnemyBase hit = collision.gameObject.GetComponent<EnemyBase>();
+                hit.Damage(1);
+                Destroy(gameObject);
+            }
 
-        else
-        {
-            PlayerBase hit = collision.gameObject.GetComponent<PlayerBase>();
-            hit.Damage(1);
-            Destroy(gameObject);
+            if(!fromPlayer && collision.gameObject.GetComponent<PlayerBase>() != null)
+            {
+                PlayerBase hit = collision.gameObject.GetComponent<PlayerBase>();
+                hit.Damage(1);
+                Destroy(gameObject);
+            }
         }
-
     }
 }

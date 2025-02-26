@@ -6,6 +6,7 @@ using UnityEngine;
 public class PlayerBase : MonoBehaviour
 {
     
+
     public PlayerData playerData; // Reference to the ScriptableObject containing player data
 
     public enum ActionEnum { MOVE, SHOOT, HEAL, MELEE, REST, RECOVERY, SPEED_UP, MANA_POTION, MAX_HP_INCREASE, NOTHING };
@@ -35,6 +36,7 @@ public class PlayerBase : MonoBehaviour
 
     #region VARIABLES
 
+    private cameraManager _camera;
     public PlayerData.BulletStyle activeStyle { get; private set; }
 
     public float health;
@@ -72,6 +74,7 @@ public class PlayerBase : MonoBehaviour
         isInAction = false;
         turnsDone = GetComponent<PlayerActionManager>();
         checkMovement = GetComponent<OG_MovementByMouse>();
+        _camera = FindAnyObjectByType<cameraManager>();
     }
 
     private void LoadPlayerData()
@@ -222,7 +225,10 @@ public class PlayerBase : MonoBehaviour
     { 
         health -= val; 
         playerData.health -= val; 
-        SoundEffectsManager.instance.PlaySoundFXClip(damageClips, transform, 1f); 
+        //SoundEffectsManager.instance.PlaySoundFXClip(damageClips, transform, 1f);
+        StartCoroutine(_camera.Flash(1f, 0.8f, Color.red));
+        StartCoroutine(_camera.Shake(0.3f, 0.8f));
+
 
         // Check for death condition immediately after taking damage
         if (health <= 0 || playerData.health <= 0)

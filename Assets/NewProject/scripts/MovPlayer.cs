@@ -81,8 +81,8 @@ public class MovPlayer : MonoBehaviour
         float duration = controlListMovment.timeConsum[movCount]; // Tiempo deseado para el movimiento
         float fixedDeltaTime = Time.deltaTime / duration;
         
-        Debug.Log(velocity);
-        Debug.Log(controlListMovment.timeConsum[movCount]);
+        //Debug.Log(velocity);
+        //Debug.Log(controlListMovment.timeConsum[movCount]);
 
         t += velocity * fixedDeltaTime;
 

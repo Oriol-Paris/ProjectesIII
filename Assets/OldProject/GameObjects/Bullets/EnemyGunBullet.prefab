@@ -198,3 +198,5 @@ MonoBehaviour:
   shootDirection: {x: 0, y: 0, z: 0}
   time: 0
   fromPlayer: 0
+  shootCShakeTime: 0
+  shootCShakeRange: 0

@@ -11,7 +11,7 @@ public class PlayerActionManager : MonoBehaviour
 {
     #region VARIABLES
 
-
+    
 
     public Vector3 mousePosition;
     public Vector3 positionDesired;
@@ -91,7 +91,8 @@ public class PlayerActionManager : MonoBehaviour
 
         InitializeActions();
         combatManager = FindAnyObjectByType<CombatManager>();
-       
+
+        
     }
 
     private void InitializeActions()

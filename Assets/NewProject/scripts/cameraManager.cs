@@ -14,14 +14,12 @@ public class cameraManager : MonoBehaviour
     void Start()
     {
         originalPosition = transform.position;
-        Debug.LogWarning(originalPosition);
         
         volumeProfile = GameObject.Find("Global Volume").GetComponent<Volume>()?.profile;
         if (!volumeProfile) throw new System.NullReferenceException(nameof(VolumeProfile));
         
         if (!volumeProfile.TryGet(out colorPostProces)) throw new System.NullReferenceException(nameof(colorPostProces));
 
-        //StartCoroutine(Shake(1, 2));
         
     }
 
@@ -40,7 +38,7 @@ public class cameraManager : MonoBehaviour
             x = Random.Range(originalPosition.x - 1.0f * range, originalPosition.x + 1.0f * range);
             z = Random.Range(originalPosition.z - 1.0f * (range / 2), originalPosition.z + 1.0f * (range / 2)) ;
 
-            Debug.Log(originalPosition);
+            //Debug.Log(originalPosition);
             movingPosition.x = x;
             movingPosition.y = transform.position.y;
             movingPosition.z = z;
@@ -67,10 +65,10 @@ public class cameraManager : MonoBehaviour
         elapsed = 0.0f;
         while (elapsed < length)
         {
-            colorPostProces.intensity.Override(intensity-=0.2f);
+            colorPostProces.intensity.Override(1-elapsed/ length);
 
             elapsed += Time.deltaTime;
-            Debug.Log(colorPostProces.intensity);
+           // Debug.Log(colorPostProces.intensity);
             yield return null;
         }
         colorPostProces.intensity.Override(0);
