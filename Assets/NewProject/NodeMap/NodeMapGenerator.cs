@@ -368,7 +368,7 @@ public class NodeMapGenerator : MonoBehaviour
         pressedNode.cleared = true;
         UpdateUI();
         SaveMapToData();
-        // UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
     }
 
     void Update()

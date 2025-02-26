@@ -1138,6 +1138,25 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1677840595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1677840588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 934775c677bf7c341ab3f8a4dac58ae2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  popUps:
+  - {fileID: 961472558}
+  - {fileID: 723070554}
+  - {fileID: 574787145}
+  playerBase: {fileID: 2100986629}
+  timeSecuence: {fileID: 2100986650}
+  dummy: {fileID: 876605064}
 --- !u!4 &1782843974 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6117016437605025760, guid: 86b5e03058826fa47abc3c555286ee76, type: 3}
@@ -1478,6 +1497,22 @@ PrefabInstance:
 
 '
       objectReference: {fileID: 0}
+    - target: {fileID: 2091228725511074500, guid: b0804ace0ed29bf4e916ea1b343a1254, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -200.00006
+      objectReference: {fileID: 0}
+    - target: {fileID: 2091228725511074500, guid: b0804ace0ed29bf4e916ea1b343a1254, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: -605
+      objectReference: {fileID: 0}
+    - target: {fileID: 2091228725511074500, guid: b0804ace0ed29bf4e916ea1b343a1254, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2091228725511074500, guid: b0804ace0ed29bf4e916ea1b343a1254, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -299
+      objectReference: {fileID: 0}
     - target: {fileID: 2653336855223404025, guid: b0804ace0ed29bf4e916ea1b343a1254, type: 3}
       propertyPath: m_text
       value: 'You can  sequence various actions, point and click to two different
@@ -1488,6 +1523,22 @@ PrefabInstance:
     - target: {fileID: 2653336855223404025, guid: b0804ace0ed29bf4e916ea1b343a1254, type: 3}
       propertyPath: m_margin.w
       value: -102.44037
+      objectReference: {fileID: 0}
+    - target: {fileID: 4903170619906391303, guid: b0804ace0ed29bf4e916ea1b343a1254, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -200.00006
+      objectReference: {fileID: 0}
+    - target: {fileID: 4903170619906391303, guid: b0804ace0ed29bf4e916ea1b343a1254, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: -605
+      objectReference: {fileID: 0}
+    - target: {fileID: 4903170619906391303, guid: b0804ace0ed29bf4e916ea1b343a1254, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4903170619906391303, guid: b0804ace0ed29bf4e916ea1b343a1254, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -299
       objectReference: {fileID: 0}
     - target: {fileID: 6495238924379805249, guid: b0804ace0ed29bf4e916ea1b343a1254, type: 3}
       propertyPath: m_Name
@@ -1509,6 +1560,22 @@ PrefabInstance:
     - target: {fileID: 8489643264083088820, guid: b0804ace0ed29bf4e916ea1b343a1254, type: 3}
       propertyPath: m_SortingOrder
       value: 3500
+      objectReference: {fileID: 0}
+    - target: {fileID: 9081078496673893939, guid: b0804ace0ed29bf4e916ea1b343a1254, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -200.00006
+      objectReference: {fileID: 0}
+    - target: {fileID: 9081078496673893939, guid: b0804ace0ed29bf4e916ea1b343a1254, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: -605
+      objectReference: {fileID: 0}
+    - target: {fileID: 9081078496673893939, guid: b0804ace0ed29bf4e916ea1b343a1254, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9081078496673893939, guid: b0804ace0ed29bf4e916ea1b343a1254, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -299
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1609,6 +1676,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1197424400845788420, guid: 18f6f26178d26164cbe949cde73d47a7, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1677840591}
+    - targetCorrespondingSourceObject: {fileID: 1197424400845788420, guid: 18f6f26178d26164cbe949cde73d47a7, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1677840595}
   m_SourcePrefab: {fileID: 100100000, guid: 18f6f26178d26164cbe949cde73d47a7, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
