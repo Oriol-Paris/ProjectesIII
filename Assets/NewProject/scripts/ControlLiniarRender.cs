@@ -25,7 +25,7 @@ public class ControlLiniarRender : MonoBehaviour
     }
 
     public void NextMov(bool isMoov) { 
-        Debug.Log(positionDesired);
+        //Debug.Log(positionDesired);
         if (isMoov)
         {
             playerPosition = positionDesired;

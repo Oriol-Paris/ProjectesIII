@@ -27,8 +27,8 @@ public class ControlListMovment : MonoBehaviour
  
         if (currentTime > timeConsumition)
         {
-            Debug.Log(curvePoints[0]);
-            Debug.Log(curvePoints[1]);
+           // Debug.Log(curvePoints[0]);
+           // Debug.Log(curvePoints[1]);
            
 
             Vector3 point3 = curvePoints.Count > 2 ? curvePoints[2] : Vector3.zero;

@@ -11,6 +11,8 @@ public class PlayerActionManager : MonoBehaviour
 {
     #region VARIABLES
 
+
+
     public Vector3 mousePosition;
     public Vector3 positionDesired;
     public Vector3 playerPosition;
@@ -89,6 +91,7 @@ public class PlayerActionManager : MonoBehaviour
 
         InitializeActions();
         combatManager = FindAnyObjectByType<CombatManager>();
+       
     }
 
     private void InitializeActions()
@@ -148,7 +151,7 @@ public class PlayerActionManager : MonoBehaviour
         //    ShootFinish();
         //}
     }
-
+/*
     private void ShootFinish()
     {
         foreach (var line in visualPlayerAfterShoot)
@@ -164,7 +167,7 @@ public class PlayerActionManager : MonoBehaviour
         //    Destroy(line.gameObject);
         //}
 
-    }
+    }*/
 
     public void UpdateAction(Vector3 newPos, float t)
     {
@@ -272,6 +275,7 @@ public class PlayerActionManager : MonoBehaviour
         {
             ((ShootAction)activeActions[PlayerBase.ActionEnum.SHOOT]).bulletPrefab = style.prefab;
             SoundEffectsManager.instance.PlaySoundFXClip(shootClip, transform, 1f);
+            
             activeActions[PlayerBase.ActionEnum.SHOOT].Execute(player, newPos);
             
         }

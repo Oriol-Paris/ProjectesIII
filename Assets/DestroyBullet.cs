@@ -8,11 +8,17 @@ public class DestroyBullet : MonoBehaviour
     [SerializeField] private Vector3 shootDirection;
     [SerializeField] private float time;
     [SerializeField] private bool fromPlayer;
+
+    private GameObject _camera;
+    [SerializeField] float shootCShakeTime;
+    [SerializeField] float shootCShakeRange;
     private float bulletSpeed = 3.0f;
 
     void Start()
     {
         timeSecuence = FindFirstObjectByType<TimeSecuence>();
+        _camera = GameObject.FindGameObjectWithTag("MainCamera");
+        StartCoroutine(_camera.GetComponent<cameraManager>().Shake(shootCShakeTime, shootCShakeRange));
     }
 
     public void setShootDirection(Vector3 _shootDirection)

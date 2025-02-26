@@ -197,3 +197,4 @@ MonoBehaviour:
   rb: {fileID: 1609921758413641026}
   shootDirection: {x: 0, y: 0, z: 0}
   time: 0
+  fromPlayer: 0
