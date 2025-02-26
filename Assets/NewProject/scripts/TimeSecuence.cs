@@ -34,6 +34,7 @@ public class TimeSecuence : MonoBehaviour
     void Start()
     {
         totalTime = playerBase.playerData.maxTime;
+        Debug.Log("TIME"+totalTime);
         isExecuting = false;
         actualTime = totalTime;
         lastPosition = transform.position;

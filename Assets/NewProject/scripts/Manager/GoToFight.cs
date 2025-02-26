@@ -30,7 +30,7 @@ public class GoToFight : MonoBehaviour
         {
             if (playerData.lastLevel == string.Empty || playerData.lastLevel == "Tutorial")
             {
-                SceneManager.LoadScene("Level1");
+                SceneManager.LoadScene("Node Map");
             }
             else
             {
