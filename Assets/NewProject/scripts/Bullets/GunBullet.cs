@@ -42,7 +42,7 @@ public class GunBullet : BulletPrefab
             EnemyBase enemy = collision.gameObject.GetComponent<EnemyBase>();
             if (enemy != null && enemy.GetHealth() > 0)
             {
-                enemy.Damage(damage);
+                enemy.Damage(damage, collision.gameObject);
                 isHit = true;
                 DestroyBullet();
             }
@@ -52,7 +52,7 @@ public class GunBullet : BulletPrefab
             PlayerBase player = collision.gameObject.GetComponent<PlayerBase>();
             if (player != null)
             {
-                player.Damage(FindAnyObjectByType<CombatManager>().enemyStatMultiplier >= 1.5f ? 2 : 1);
+                player.Damage(FindAnyObjectByType<CombatManager>().enemyStatMultiplier >= 1.5f ? 2 : 1, this.gameObject); //Check if sending correct value (Suposed to be sending Bullet GObject)
                 isHit = true;
                 DestroyBullet();
             }

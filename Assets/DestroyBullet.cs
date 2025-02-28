@@ -62,14 +62,14 @@ public class DestroyBullet : MonoBehaviour
             if (fromPlayer && collision.gameObject.GetComponent<EnemyBase>() != null)
             {
                 EnemyBase hit = collision.gameObject.GetComponent<EnemyBase>();
-                hit.Damage(1);
+                hit.Damage(1, collision.gameObject);
                 Destroy(gameObject);
             }
 
             if(!fromPlayer && collision.gameObject.GetComponent<PlayerBase>() != null)
             {
                 PlayerBase hit = collision.gameObject.GetComponent<PlayerBase>();
-                hit.Damage(1);
+                hit.Damage(1, collision.gameObject);
                 Destroy(gameObject);
             }
         }

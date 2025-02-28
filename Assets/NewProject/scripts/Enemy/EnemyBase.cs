@@ -12,6 +12,9 @@ public class EnemyBase : MonoBehaviour
     [SerializeField] SpriteRenderer spriteRenderer;
     [SerializeField] Collider collider;
     [SerializeField] Rigidbody rb2d;
+
+    [SerializeField] GameObject bloodSplash;
+    
     private bool isMoving;
     private bool isShoooting;
     public bool isAlive;
@@ -25,7 +28,7 @@ public class EnemyBase : MonoBehaviour
         oldRange = range;
         spriteRenderer = GetComponent<SpriteRenderer>();
         collider = GetComponent<Collider>();
-        rb2d = GetComponent<Rigidbody>(); 
+        rb2d = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -46,11 +49,12 @@ public class EnemyBase : MonoBehaviour
 
 
     public int GetHealth() { return health; }
-    public void Damage(int val)
+    public void Damage(int val, GameObject hitObject)
     {
         health -= val;
         health = Mathf.Max(health, 0); // Ensure health doesn't go below 0
         SoundEffectsManager.instance.PlaySoundFXClip(damageClips, transform, 1f);
+        Instantiate(bloodSplash, this.transform.position, hitObject.transform.rotation);
     }
 
     public float GetRange() { return range; }

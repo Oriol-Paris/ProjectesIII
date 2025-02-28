@@ -56,6 +56,7 @@ public class PlayerBase : MonoBehaviour
     public bool victory;
     public bool defeat;
     [SerializeField] AudioClip[] damageClips;
+    [SerializeField] GameObject bloodSplash;
 
     #endregion
 
@@ -160,7 +161,7 @@ public class PlayerBase : MonoBehaviour
 
             if (health > 0 || playerData.health > 0)
             {
-                Damage();
+                Damage(1, collision.gameObject);
             }
             else if(health<=0||playerData.health<=0) 
             {
@@ -221,14 +222,14 @@ public class PlayerBase : MonoBehaviour
 
     }
 
-    public void Damage(int val = 1) 
+    public void Damage(int val, GameObject hitObject) 
     { 
         health -= val; 
         playerData.health -= val; 
         //SoundEffectsManager.instance.PlaySoundFXClip(damageClips, transform, 1f);
         StartCoroutine(_camera.Flash(1f, 0.8f, Color.red));
         StartCoroutine(_camera.Shake(0.3f, 0.8f));
-
+        Instantiate(bloodSplash, this.transform.position, hitObject.transform.rotation);
 
         // Check for death condition immediately after taking damage
         if (health <= 0 || playerData.health <= 0)

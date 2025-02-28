@@ -37,7 +37,7 @@ public class LaserBullet : BulletPrefab
             EnemyBase enemy = collision.gameObject.GetComponent<EnemyBase>();
             if (enemy != null && enemy.GetHealth() > 0)
             {
-                enemy.Damage(damage);
+                enemy.Damage(damage, collision.gameObject);
                 isHit = true;
             }
         }
@@ -46,7 +46,7 @@ public class LaserBullet : BulletPrefab
             PlayerBase player = collision.gameObject.GetComponent<PlayerBase>();
             if (player != null)
             {
-                player.Damage();
+                player.Damage(1, collision.gameObject);
                 isHit = true;
             }
         }
