@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class ExplosionHazard : MonoBehaviour
 {
-    [SerializeField] private float explosionDamage;
+    [SerializeField] private int explosionDamage;
     [SerializeField] private float explosionRadius;
     private List<Object> objectsInRange;
         
@@ -16,7 +16,9 @@ public class ExplosionHazard : MonoBehaviour
     {
         if (collision != null && collision.gameObject.tag == "Bullet")
         {
-
+            Debug.LogWarning("Damaged");
+            AreaScan(explosionRadius);
+            Explode();
         }
     }
 
@@ -44,6 +46,18 @@ public class ExplosionHazard : MonoBehaviour
 
     private void Explode()
     {
-        
+        for (int i = 0; i < objectsInRange.Count; i++) {
+            if(((GameObject)objectsInRange[i]).GetComponent<PlayerBase>() != null)
+            {
+                ((GameObject)objectsInRange[i]).GetComponent<PlayerBase>().Damage(explosionDamage);
+                
+
+            }
+            if (((GameObject)objectsInRange[i]).GetComponent<EnemyBase>() != null)
+            {
+                ((GameObject)objectsInRange[i]).GetComponent<EnemyBase>().Damage(explosionDamage);
+            }
+
+        }
     }
 }
