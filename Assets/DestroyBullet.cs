@@ -13,7 +13,7 @@ public class DestroyBullet : MonoBehaviour
     [SerializeField] float shootCShakeTime;
     [SerializeField] float shootCShakeRange;
 
-    private float bulletSpeed = 3.0f;
+    public float bulletSpeed = 3.0f;
 
     void Start()
     {
@@ -44,7 +44,7 @@ public class DestroyBullet : MonoBehaviour
 
         if (time >= 7f)
         {
-            Debug.Log("aaaa0");
+            
             Destroy(gameObject);
         }
 

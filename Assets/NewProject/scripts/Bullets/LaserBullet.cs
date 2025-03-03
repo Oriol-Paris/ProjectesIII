@@ -5,6 +5,7 @@ public class LaserBullet : BulletPrefab
     
     private Vector3 targetPosition;
     private float lifetime = 5f;
+    [SerializeField] private bool fromPlayer;
 
     void Start()
     {
@@ -15,39 +16,32 @@ public class LaserBullet : BulletPrefab
 
     void Update()
     {
-        if (IsPaused()) return;
-
-        transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
-        lifetime -= Time.deltaTime;
-
-        if (isHit || Vector3.Distance(transform.position, targetPosition) < 0.1f || lifetime <= 0f)
-        {
-            DestroyBullet();
-        }
+      
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Walls"))
+      
+
+        if (collision != null)
         {
-            DestroyBullet();
-        }
-        if (isFromPlayer)
-        {
-            EnemyBase enemy = collision.gameObject.GetComponent<EnemyBase>();
-            if (enemy != null && enemy.GetHealth() > 0)
+            if (collision.gameObject.CompareTag("Walls"))
             {
-                enemy.Damage(damage, collision.gameObject);
-                isHit = true;
+                Destroy(gameObject);
             }
-        }
-        else
-        {
-            PlayerBase player = collision.gameObject.GetComponent<PlayerBase>();
-            if (player != null)
+
+            if (fromPlayer && collision.gameObject.GetComponent<EnemyBase>() != null)
             {
-                player.Damage(1, collision.gameObject);
-                isHit = true;
+                EnemyBase hit = collision.gameObject.GetComponent<EnemyBase>();
+                hit.Damage(damage, collision.gameObject);
+                Destroy(gameObject);
+            }
+
+            if (!fromPlayer && collision.gameObject.GetComponent<PlayerBase>() != null)
+            {
+                PlayerBase hit = collision.gameObject.GetComponent<PlayerBase>();
+                hit.Damage(damage, collision.gameObject);
+                Destroy(gameObject);
             }
         }
     }
