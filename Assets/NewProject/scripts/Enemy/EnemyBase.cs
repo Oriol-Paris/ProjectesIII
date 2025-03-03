@@ -51,10 +51,22 @@ public class EnemyBase : MonoBehaviour
     public int GetHealth() { return health; }
     public void Damage(int val, GameObject hitObject)
     {
+        
+        GetComponent<SpriteRenderer>().color = Color.red;
+        StartCoroutine(whitecolor());
+        Instantiate(bloodSplash, this.transform.position, hitObject.transform.rotation);
+        //SoundEffectsManager.instance.PlaySoundFXClip(damageClips, transform, 1f);
         health -= val;
         health = Mathf.Max(health, 0); // Ensure health doesn't go below 0
-        SoundEffectsManager.instance.PlaySoundFXClip(damageClips, transform, 1f);
-        Instantiate(bloodSplash, this.transform.position, hitObject.transform.rotation);
+        
+       
+        
+    }
+
+    IEnumerator whitecolor()
+    {
+        yield return new WaitForSeconds(0.5f);
+        GetComponent<SpriteRenderer>().color = Color.red;
     }
 
     public float GetRange() { return range; }
