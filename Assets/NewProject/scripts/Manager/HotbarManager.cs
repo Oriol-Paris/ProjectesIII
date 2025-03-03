@@ -6,8 +6,8 @@ using UnityEngine.UI;
 
 public class HotbarManager : MonoBehaviour
 {
-    public PlayerActionManager playerActionManager;
-    public PlayerBase playerData;
+    private PlayerActionManager playerActionManager;
+    private PlayerBase playerData;
     public GameObject hotbarPanel;
     public GameObject actionSlotPrefab;
 
@@ -15,11 +15,6 @@ public class HotbarManager : MonoBehaviour
     private List<PlayerData.ActionData> actionsDisplayed = new List<PlayerData.ActionData>();
 
     void Start()
-    {
-        InitializeHotbar();
-    }
-
-    void InitializeHotbar()
     {
         if (playerData == null)
         {
