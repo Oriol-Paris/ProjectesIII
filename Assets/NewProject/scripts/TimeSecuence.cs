@@ -106,6 +106,7 @@ public class TimeSecuence : MonoBehaviour
                     // StartCoroutine(actionManager.AttackCoroutine(action, targetPosition,bulletStyle));
                     shootPl.UpdateShoot(movCount);
                     yield return new WaitForSeconds(0.75f);
+                    actualTime -= 0.75f;
                     movCount++;
                     break;
                 case PlayerBase.ActionEnum.MOVE:
@@ -122,6 +123,12 @@ public class TimeSecuence : MonoBehaviour
                     break;
                 // Add other cases for different actions if needed
             }
+        }
+     
+        Debug.Log(actualTime);
+        if (actualTime > 0)
+        {
+            yield return new WaitForSeconds(actualTime);
         }
         ResetTurn();
     }

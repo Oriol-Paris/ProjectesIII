@@ -45,7 +45,7 @@ public class EnemyMovement : MonoBehaviour
 
             if (Player.GetIsExecuting() || Player.GetComponent<PlayerBase>().GetInAction())
             {
-                Debug.Log("MEEEP");
+               // Debug.Log("MEEEP");
                 this.GetComponent<Animator>().SetBool("isMoving", true);
                 PlayerPos = Player.transform.position;
                 transform.position = Vector3.MoveTowards(transform.position, PlayerPos, moveTime); //Bad usage of moveTime, using moveTime as distance when it's actually a velocity (check line 34)
