@@ -31,14 +31,11 @@ public class NodeMapGenerator : MonoBehaviour
     [Header("Prefabs and Sprites")]
     public GameObject buttonPrefab;
     public GameObject linePrefab;
-
     public Sprite playableLevelsSprite;
     public Sprite eventLevelsSprite;
     public Sprite shopLevelSprite;
 
     [Header("Map Data")]
-    // Optionally assign an existing NodeMapData (ScriptableObject) via the Inspector,
-    // or place one in a Resources folder named "NodeMapData" so it is automatically loaded.
     public NodeMapData nodeMapData;
 
     [Header("Camera Settings")]
@@ -51,13 +48,11 @@ public class NodeMapGenerator : MonoBehaviour
 
     void Start()
     {
-        // Attempt to load NodeMapData from Resources if not assigned
         if (nodeMapData == null)
         {
             nodeMapData = Resources.Load<NodeMapData>("NodeMapData");
         }
 
-        // If we have existing map data, rebuild the node map; otherwise, generate a new one.
         if (nodeMapData != null && nodeMapData.nodes != null && nodeMapData.nodes.Count > 0)
         {
             RebuildNodesFromData();
@@ -65,14 +60,13 @@ public class NodeMapGenerator : MonoBehaviour
         else
         {
             GenerateNodes();
-            // If we have a NodeMapData object, save the generated map to it.
+
             if (nodeMapData != null)
             {
                 SaveMapToData();
             }
         }
 
-        // These methods recalc the tree connections and layout.
         ConnectNodes();
         ArrangeNodes();
         CenterMap();
@@ -82,7 +76,6 @@ public class NodeMapGenerator : MonoBehaviour
         UpdateUI();
     }
 
-    // Rebuild the nodes list from the existing NodeMapData
     void RebuildNodesFromData()
     {
         nodes.Clear();
@@ -119,7 +112,6 @@ public class NodeMapGenerator : MonoBehaviour
         }
     }
 
-    // Save the generated node map data into the NodeMapData ScriptableObject.
     void SaveMapToData()
     {
         if (nodeMapData != null)
@@ -148,10 +140,10 @@ public class NodeMapGenerator : MonoBehaviour
                 }
                 nodeMapData.nodes.Add(data);
             }
+            nodeMapData.Save();
         }
     }
 
-    // Generate nodes from scratch.
     void GenerateNodes()
     {
         nodes.Clear();
@@ -177,7 +169,6 @@ public class NodeMapGenerator : MonoBehaviour
         nodes.Add(endNode);
     }
 
-    // Create parent-child connections between nodes.
     void ConnectNodes()
     {
         List<List<Node>> layers = new List<List<Node>>();
@@ -229,7 +220,6 @@ public class NodeMapGenerator : MonoBehaviour
         }
     }
 
-    // Arrange node positions in a grid layout.
     void ArrangeNodes()
     {
         float ySpacing = 200f;
@@ -253,7 +243,6 @@ public class NodeMapGenerator : MonoBehaviour
         }
     }
 
-    // Center the camera at the position of the first node.
     void CenterMap()
     {
         if (nodes.Count > 0 && Camera.main != null)
@@ -285,7 +274,9 @@ public class NodeMapGenerator : MonoBehaviour
         }
         else
         {
-            Node deepestCleared = nodes.Where(n => n.cleared).OrderByDescending(n => GetNodeDepth(n)).First();
+            Node deepestCleared = nodes.Where(n => n.cleared)
+                                       .OrderByDescending(n => GetNodeDepth(n))
+                                       .First();
             lastClearedNode = deepestCleared;
             foreach (var node in nodes)
             {
@@ -367,7 +358,19 @@ public class NodeMapGenerator : MonoBehaviour
     {
         pressedNode.cleared = true;
         UpdateUI();
-        SaveMapToData();
+
+        if (pressedNode == nodes.Last())
+        {
+            if (nodeMapData != null)
+            {
+                nodeMapData.ClearNodes();
+            }
+        }
+        else
+        {
+            SaveMapToData();
+        }
+
         UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
     }
 

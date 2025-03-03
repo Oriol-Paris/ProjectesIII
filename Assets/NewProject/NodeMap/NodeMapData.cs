@@ -3,7 +3,7 @@ using UnityEngine;
 
 public enum NodeType { PLAYABLE, EVENT, SHOP }
 
-[CreateAssetMenu(fileName = "NewNodeMapData", menuName = "ScriptableObjects/Map Data")]
+[CreateAssetMenu(fileName = "NewNodeMapData", menuName = "NodeMap/Map Data")]
 public class NodeMapData : ScriptableObject
 {
     [System.Serializable]
@@ -19,4 +19,18 @@ public class NodeMapData : ScriptableObject
     }
 
     public List<NodeData> nodes = new List<NodeData>();
+
+    public void Save()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorUtility.SetDirty(this);
+        UnityEditor.AssetDatabase.SaveAssets();
+#endif
+    }
+
+    public void ClearNodes()
+    {
+        nodes.Clear();
+        Save();
+    }
 }
