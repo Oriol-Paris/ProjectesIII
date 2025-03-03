@@ -49,13 +49,13 @@ public class ExplosionHazard : MonoBehaviour
         for (int i = 0; i < objectsInRange.Count; i++) {
             if(((GameObject)objectsInRange[i]).GetComponent<PlayerBase>() != null)
             {
-                ((GameObject)objectsInRange[i]).GetComponent<PlayerBase>().Damage(explosionDamage);
+                ((GameObject)objectsInRange[i]).GetComponent<PlayerBase>().Damage(explosionDamage, this.gameObject);
                 
 
             }
             if (((GameObject)objectsInRange[i]).GetComponent<EnemyBase>() != null)
             {
-                ((GameObject)objectsInRange[i]).GetComponent<EnemyBase>().Damage(explosionDamage);
+                ((GameObject)objectsInRange[i]).GetComponent<EnemyBase>().Damage(explosionDamage, this.gameObject);
             }
 
         }
