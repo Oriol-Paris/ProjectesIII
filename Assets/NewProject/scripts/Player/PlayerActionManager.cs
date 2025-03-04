@@ -11,6 +11,8 @@ public class PlayerActionManager : MonoBehaviour
 {
     #region VARIABLES
 
+    
+
     public Vector3 mousePosition;
     public Vector3 positionDesired;
     public Vector3 playerPosition;
@@ -23,6 +25,7 @@ public class PlayerActionManager : MonoBehaviour
     [SerializeField] private List<Vector3> curvePoints = new List<Vector3>();
 
     [SerializeField] public List<GameObject> visualPlayerAfterShoot = new List<GameObject>();
+    [SerializeField] public List<LineRenderer> preShootPath = new List<LineRenderer>();
 
     public GameObject prefPreShoot;
 
@@ -61,6 +64,8 @@ public class PlayerActionManager : MonoBehaviour
     private bool hasShotAction = false;
     private bool hasHealed = false;
 
+
+    public shootPlayer shootP;
     #endregion
 
     private void Awake()
@@ -86,6 +91,8 @@ public class PlayerActionManager : MonoBehaviour
 
         InitializeActions();
         combatManager = FindAnyObjectByType<CombatManager>();
+
+        
     }
 
     private void InitializeActions()
@@ -133,15 +140,19 @@ public class PlayerActionManager : MonoBehaviour
         {
             SceneManager.LoadScene("Title Screen");
         }
-        UpdateAction(movePlayer.positionDesired, movePlayer.timeSceuence.actualTime);
-
-        if(Input.GetKeyDown(KeyCode.C))
+        if (SceneManager.GetActiveScene().name != "ShopScene")
         {
-            movePlayer.finish();
-            ShootFinish();
+            UpdateAction(Vector3.zero, movePlayer.timeSceuence.actualTime);
         }
-    }
+            
 
+        //if(Input.GetKeyDown(KeyCode.C))
+        //{
+        //    movePlayer.finish();
+        //    ShootFinish();
+        //}
+    }
+/*
     private void ShootFinish()
     {
         foreach (var line in visualPlayerAfterShoot)
@@ -157,7 +168,7 @@ public class PlayerActionManager : MonoBehaviour
         //    Destroy(line.gameObject);
         //}
 
-    }
+    }*/
 
     public void UpdateAction(Vector3 newPos, float t)
     {
@@ -177,11 +188,11 @@ public class PlayerActionManager : MonoBehaviour
         if (currentAction.m_action == PlayerBase.ActionEnum.SHOOT && (!player.GetComponent<OG_MovementByMouse>().isMoving || isShooting))
         {
 
-            Debug.Log("aaaaaaaaaaaa");
+            //Debug.Log("aaaaaaaaaaaa");
             isShooting = true;
             hasShot = true; // Set the flag to indicate a shot has been fired
             isMoving = false;
-            preShoot();
+            shootP.preShoot();
             //StartCoroutine(AttackCoroutine(PlayerBase.ActionEnum.SHOOT, newPos));
 
 
@@ -222,56 +233,7 @@ public class PlayerActionManager : MonoBehaviour
         
     }
 
-    private void preShoot()
-    {
-        Debug.Log("aaaaa");
-
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out RaycastHit hit))
-        {
-            mousePosition = hit.point;
-        }
-        playerPosition = movePlayer.playerPosition;
-        currentTime = timeSceuence.actualTime;
-
-        if (!Input.GetMouseButton(0) && !isMoving)
-        {
-
-            positionDesired = mousePosition;
-
-            curvePoints.Clear();
-           
-            curvePoints.Add(playerPosition);
-            curvePoints.Add(positionDesired);
-           
-            
-            UpdateLineRendererr();
-        }
-
-        if (Input.GetMouseButtonUp(0) && !isMoving)
-        {
-
-            if (currentTime > costShoot)
-            {
-                GameObject instantiatedObject = Instantiate(prefPreShoot, playerPosition, Quaternion.identity);
-
-                shootpoints.Add(playerPosition);
-                shootpoints.Add(positionDesired);
-                shootLineRenderer.enabled = true;
-                shootLineRenderer.positionCount = shootpoints.Count;
-                shootLineRenderer.SetPositions(shootpoints.ToArray());
-                visualPlayerAfterShoot.Add(instantiatedObject);
-
-
-                currentTime -= costShoot;
-
-                timeSceuence.actualTime = currentTime;
-
-
-            }
-
-        }
-    }
+   
 
     private IEnumerator MoveCoroutine(Vector3 newPos)
     {
@@ -298,8 +260,7 @@ public class PlayerActionManager : MonoBehaviour
         {
             hasMoved = true;
             yield return new WaitForSeconds(1.5f); // Adjust the delay as needed
-            if (dialogueManager != null)
-                dialogueManager.ActionCompleted(PlayerBase.ActionEnum.MOVE);
+           
         }
     }
     
@@ -314,7 +275,8 @@ public class PlayerActionManager : MonoBehaviour
         if (action == PlayerBase.ActionEnum.SHOOT)
         {
             ((ShootAction)activeActions[PlayerBase.ActionEnum.SHOOT]).bulletPrefab = style.prefab;
-            //SoundEffectsManager.instance.PlaySoundFXClip(shootClip, transform, 1f);
+            SoundEffectsManager.instance.PlaySoundFXClip(shootClip, transform, 1f);
+            
             activeActions[PlayerBase.ActionEnum.SHOOT].Execute(player, newPos);
             
         }
@@ -337,8 +299,7 @@ public class PlayerActionManager : MonoBehaviour
         {
             hasShotAction = true;
             yield return new WaitForSeconds(1.0f); // Adjust the delay as needed
-            if (dialogueManager != null)
-                dialogueManager.ActionCompleted(action);
+            
         }
     }
 
@@ -355,8 +316,7 @@ public class PlayerActionManager : MonoBehaviour
         if (!hasHealed)
         {
             hasHealed = true;
-            if (dialogueManager != null)
-                dialogueManager.ActionCompleted(PlayerBase.ActionEnum.HEAL);
+            
         }
     }
 
@@ -366,6 +326,19 @@ public class PlayerActionManager : MonoBehaviour
         turnAdded = false;
         actionPointReduced = false;
         
+    }
+
+    public void WalkingSound()
+    {
+        if (actualWalkSoundDelay < 0)
+        {
+            //SoundEffectsManager.instance.PlaySoundFXClip(walkingClips, transform, 1f);
+            actualWalkSoundDelay = walkSoundDelay;
+        }
+        else
+        {
+            actualWalkSoundDelay -= Time.deltaTime;
+        }
     }
 
     public PlayerBase GetPlayer() { return player; }

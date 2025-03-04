@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class EnemyMovementShooter : MonoBehaviour
 {
@@ -59,6 +60,7 @@ public class EnemyMovementShooter : MonoBehaviour
     // Decides whether to shoot or move based on distance
     private void ExecuteAction()
     {
+        turnAction = TurnActions.SHOOT;
         switch (turnAction)
         {
             case TurnActions.APPROACH:
@@ -72,7 +74,7 @@ public class EnemyMovementShooter : MonoBehaviour
                 break;
 
             case TurnActions.BACK_AWAY:
-                MoveAwayFromPlayer();
+               MoveAwayFromPlayer();
                 this.GetComponent<Animator>().SetBool("isMoving", true);
                 break;
         }
@@ -116,9 +118,8 @@ public class EnemyMovementShooter : MonoBehaviour
             Debug.Log("BANG");
             //SoundEffectsManager.instance.PlaySoundFXClip(shootingClips, transform,1f);
             GameObject bullet = Instantiate(bulletShot, transform.position, Quaternion.identity);
-            GunBullet bulletScript = bullet.GetComponent<GunBullet>();
-            bulletScript.isFromPlayer = false;
-            bulletScript.Shoot((closestPlayerPos - transform.position).normalized); // Set bullet direction
+            bullet.GetComponent<DestroyBullet>().setShootDirection((closestPlayerPos - transform.position).normalized);
+           
 
             // Register the bullet with the closest player's movement script
             //closestPlayer.RegisterBullet(bulletScript);
@@ -167,26 +168,26 @@ public class EnemyMovementShooter : MonoBehaviour
 
         if (distanceToPlayer > range)
         {
-            Debug.Log("MOVING");
+           // Debug.Log("MOVING");
             // Move towards the player if out of range
             turnAction = TurnActions.APPROACH;
         }
         else if (distanceToPlayer < minDistance)
         {
-            Debug.Log("MOVING");
+           // Debug.Log("MOVING");
             // Move away from the player if too close
             turnAction = TurnActions.BACK_AWAY;    
         }
         else if (!hasShot && !isReloading) // Shoot only once per turn
         {
 
-            Debug.Log("PIUM");
+           // Debug.Log("PIUM");
             //In range, shoot
             turnAction = TurnActions.SHOOT;
         }
         else
         {
-            Debug.Log("NOTHING");
+            //Debug.Log("NOTHING");
             turnAction = TurnActions.NOTHING;
         }
     }

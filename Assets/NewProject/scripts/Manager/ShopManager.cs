@@ -140,7 +140,7 @@ public class ShopManager : MonoBehaviour
     {
         if (actionData.actionType != PlayerBase.ActionType.SINGLE_USE)
         {
-            actionData.key = (KeyCode)System.Enum.Parse(typeof(KeyCode), "Alpha" + (player.playerData.availableActions.Count));
+            actionData.key = (KeyCode)System.Enum.Parse(typeof(KeyCode), "Alpha" + (player.playerData.availableActions.Count+1));
             player.playerData.availableActions.Add(actionData);
             statIncreaseCount[actionData] = 0;  // Initialize the stat increase count
         }
@@ -189,15 +189,15 @@ public class ShopManager : MonoBehaviour
                 player.InstantMaxHPIncrease();
                 break;
             case PlayerBase.ActionEnum.MANA_POTION:
-                boughtItem.text = "Player Mana Up";
-                player.InstantManaIncrease(2);
+                boughtItem.text = "Player Time Up";
+                player.InstantManaIncrease();
                 break;
         }
     }
 
     private void InitializeShop()
     {
-        PlayerData.ActionData shotgunShot = new PlayerData.ActionData(PlayerBase.ActionType.ACTIVE, PlayerBase.ActionEnum.SHOOT, KeyCode.None, 1, player.playerData.shotgun);
+        PlayerData.ActionData shotgunShot = new PlayerData.ActionData(PlayerBase.ActionType.ACTIVE, PlayerBase.ActionEnum.SHOOT, KeyCode.None, 2, player.playerData.shotgun);
         PlayerData.ActionData gunShot = new PlayerData.ActionData(PlayerBase.ActionType.ACTIVE, PlayerBase.ActionEnum.SHOOT, KeyCode.None, 1, player.playerData.gun);
         PlayerData.ActionData heal = new PlayerData.ActionData(PlayerBase.ActionType.PASSIVE, PlayerBase.ActionEnum.HEAL, KeyCode.None, 1, player.playerData.healStyle);
         PlayerData.ActionData move = new PlayerData.ActionData(PlayerBase.ActionType.ACTIVE, PlayerBase.ActionEnum.MOVE, KeyCode.None, 1, player.playerData.moveStyle);
@@ -281,7 +281,7 @@ public class ShopManager : MonoBehaviour
         }
         else if (actionData.action == PlayerBase.ActionEnum.MANA_POTION)
         {
-            return "Mana Points Up";
+            return "Time Points Up";
         }
         return actionData.action.ToString();
     }

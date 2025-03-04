@@ -8,7 +8,7 @@ public class TitleScreenManager : MonoBehaviour
     [SerializeField] private Canvas titleScreen;
     public void StartGame()
     {
-        SceneManager.LoadScene("Tutorial");
+        SceneManager.LoadScene("Level1");
     }
     public void BootSettings()
     {

@@ -6,6 +6,7 @@ using UnityEngine;
 public class PlayerBase : MonoBehaviour
 {
     
+
     public PlayerData playerData; // Reference to the ScriptableObject containing player data
 
     public enum ActionEnum { MOVE, SHOOT, HEAL, MELEE, REST, RECOVERY, SPEED_UP, MANA_POTION, MAX_HP_INCREASE, NOTHING };
@@ -35,6 +36,7 @@ public class PlayerBase : MonoBehaviour
 
     #region VARIABLES
 
+    private cameraManager _camera;
     public PlayerData.BulletStyle activeStyle { get; private set; }
 
     public float health;
@@ -54,6 +56,7 @@ public class PlayerBase : MonoBehaviour
     public bool victory;
     public bool defeat;
     [SerializeField] AudioClip[] damageClips;
+    [SerializeField] GameObject bloodSplash;
 
     #endregion
 
@@ -72,6 +75,7 @@ public class PlayerBase : MonoBehaviour
         isInAction = false;
         turnsDone = GetComponent<PlayerActionManager>();
         checkMovement = GetComponent<OG_MovementByMouse>();
+        _camera = FindAnyObjectByType<cameraManager>();
     }
 
     private void LoadPlayerData()
@@ -157,7 +161,7 @@ public class PlayerBase : MonoBehaviour
 
             if (health > 0 || playerData.health > 0)
             {
-                Damage();
+                Damage(1, collision.gameObject);
             }
             else if(health<=0||playerData.health<=0) 
             {
@@ -218,11 +222,14 @@ public class PlayerBase : MonoBehaviour
 
     }
 
-    public void Damage(int val = 1) 
+    public void Damage(int val, GameObject hitObject) 
     { 
         health -= val; 
         playerData.health -= val; 
-        SoundEffectsManager.instance.PlaySoundFXClip(damageClips, transform, 1f); 
+        //SoundEffectsManager.instance.PlaySoundFXClip(damageClips, transform, 1f);
+        StartCoroutine(_camera.Flash(1f, 0.8f, Color.red));
+        StartCoroutine(_camera.Shake(0.3f, 0.8f));
+        Instantiate(bloodSplash, this.transform.position, hitObject.transform.rotation);
 
         // Check for death condition immediately after taking damage
         if (health <= 0 || playerData.health <= 0)
@@ -261,7 +268,7 @@ public class PlayerBase : MonoBehaviour
 
     public void InstantManaIncrease(int amount = 1)
     {
-        playerData.actionPoints += amount;
+        playerData.maxTime += amount;
 
         if(playerData.actionPoints > playerData.maxActionPoints)
             playerData.actionPoints = playerData.maxActionPoints;

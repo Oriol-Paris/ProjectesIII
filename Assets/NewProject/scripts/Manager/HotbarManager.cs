@@ -6,8 +6,8 @@ using UnityEngine.UI;
 
 public class HotbarManager : MonoBehaviour
 {
-    public PlayerActionManager playerActionManager;
-    public PlayerBase playerData;
+    private PlayerActionManager playerActionManager;
+    private PlayerBase playerData;
     public GameObject hotbarPanel;
     public GameObject actionSlotPrefab;
 
@@ -15,11 +15,6 @@ public class HotbarManager : MonoBehaviour
     private List<PlayerData.ActionData> actionsDisplayed = new List<PlayerData.ActionData>();
 
     void Start()
-    {
-        InitializeHotbar();
-    }
-
-    void InitializeHotbar()
     {
         if (playerData == null)
         {
@@ -39,7 +34,7 @@ public class HotbarManager : MonoBehaviour
     {
         if (playerData == null)
         {
-            Debug.LogError("Player is null in HotbarManager.");
+            //Debug.LogError("Player is null in HotbarManager.");
             return;
         }
 
@@ -83,31 +78,33 @@ public class HotbarManager : MonoBehaviour
             }
             else
             {
-                slot.transform.Find("Action Image").GetComponent<Image>().enabled = false;
+                PlayerBase player = FindAnyObjectByType<PlayerBase>();
+
+                if (action.action == player.GetAction().m_action)
+                {
+                    if (action.style.prefab != player.playerData.gun.prefab && action.style.prefab != player.playerData.shotgun.prefab)
+                    {
+                        slot.GetComponent<Image>().color = Color.yellow;
+                    }
+                    else if ((action.style.prefab == player.playerData.gun.prefab && player.GetAction().m_style.prefab == player.playerData.gun.prefab) 
+                        || (action.style.prefab == player.playerData.shotgun.prefab && player.GetAction().m_style.prefab == player.playerData.shotgun.prefab))
+                    {
+                        slot.GetComponent<Image>().color = Color.yellow;
+                    }
+                    else
+                    {
+                        slot.GetComponent<Image>().color = Color.white;
+                    }
+                }
+
                 slot.transform.Find("Texts").transform.Find("Action Name").GetComponent<TextMeshProUGUI>().text = GetActionName(action);
-                slot.transform.Find("Texts").transform.Find("Action Name").position =
-                    new Vector3(slot.transform.Find("Texts").transform.position.x + 70,
-                        slot.transform.Find("Texts").transform.Find("Action Name").position.y,
-                        slot.transform.Find("Texts").transform.Find("Action Name").position.z);
 
                 if (action.actionType == PlayerBase.ActionType.ACTIVE)
                 {
                     slot.transform.Find("Texts").transform.Find("Action Stats").GetComponent<TextMeshProUGUI>().text =
-                        "Range: " + action.style.range + "\nDamage: " + action.style.damage + "\nCost: " + action.cost;
-                    slot.transform.Find("Texts").transform.Find("Action Stats").position =
-                        new Vector3(slot.transform.Find("Texts").transform.position.x + 70,
-                        slot.transform.Find("Texts").transform.Find("Action Stats").position.y,
-                        slot.transform.Find("Texts").transform.Find("Action Stats").position.z);
+                        "Range: " + action.style.range + "\nDamage: " + action.style.damage;
                 }
-                else if (action.actionType == PlayerBase.ActionType.PASSIVE)
-                {
-                    slot.transform.Find("Texts").transform.Find("Action Stats").GetComponent<TextMeshProUGUI>().text = "Cost: " + action.cost;
-                    slot.transform.Find("Texts").transform.Find("Action Stats").position =
-                        new Vector3(slot.transform.Find("Texts").transform.position.x + 70,
-                        slot.transform.Find("Texts").transform.Find("Action Stats").position.y,
-                        slot.transform.Find("Texts").transform.Find("Action Stats").position.z);
-                }
-                else if (action.actionType == PlayerBase.ActionType.SINGLE_USE)
+                else if (action.actionType == PlayerBase.ActionType.SINGLE_USE || action.actionType == PlayerBase.ActionType.PASSIVE)
                 {
                     slot.transform.Find("Texts").transform.Find("Action Stats").gameObject.SetActive(false);
                 }
@@ -116,6 +113,12 @@ public class HotbarManager : MonoBehaviour
                 if (inputText != null)
                 {
                     string inputKey = action.key.ToString();  // Accede a la clave de la acción, que es el input asignado
+
+                    if(inputKey.Contains("Alpha"))
+                    {
+                        inputKey = inputKey[5].ToString();
+                    }
+
                     inputText.text = inputKey;  // Muestra el input asignado a la acción
                 }
             }

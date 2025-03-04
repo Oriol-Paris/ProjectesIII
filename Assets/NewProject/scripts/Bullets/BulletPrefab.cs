@@ -67,7 +67,7 @@ public abstract class BulletPrefab : MonoBehaviour
         {
             movementScript.UnregisterBullet(this);
         }
-        Destroy(gameObject);
+       // Destroy(gameObject);
     }
 
     public Vector3 GetOriginalDirection() { return originalDirection; }

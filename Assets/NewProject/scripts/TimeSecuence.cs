@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 
@@ -12,6 +12,8 @@ public class TimeSecuence : MonoBehaviour
     float rang = 10f;
     public bool isExecuting;
     public Vector3 lastPosition;
+
+    public bool play = false;
 
     public MovPlayer movPlayer;
 
@@ -27,8 +29,12 @@ public class TimeSecuence : MonoBehaviour
     [SerializeField] private PlayerActionManager actionManager;
     private PlayerBase.Action selectedAction;
 
+    public bool notacction = false;
+
     void Start()
     {
+        totalTime = playerBase.playerData.maxTime;
+        Debug.Log("TIME"+totalTime);
         isExecuting = false;
         actualTime = totalTime;
         lastPosition = transform.position;
@@ -53,15 +59,21 @@ public class TimeSecuence : MonoBehaviour
                     Debug.Log("Selected action: " + selectedAction.m_action);
                 }
             }
+            if(actions.Count > 0&&Input.GetKeyDown(KeyCode.C)&&!isExecuting) {
 
+            
+                ResetTurn();
+
+
+            }
             // Check for mouse click to store the selected action
-            if (selectedAction.m_action != PlayerBase.ActionEnum.MOVE && Input.GetMouseButtonDown(0))
+          /*  if (selectedAction.m_action != PlayerBase.ActionEnum.MOVE && Input.GetMouseButtonDown(0))
             {
                 Vector3 targetPosition = GetMouseTargetPosition();
-                AddAction(selectedAction.m_action, targetPosition, selectedAction.m_style); // Modify this line
+                AddAction(selectedAction.m_action); // Modify this line
                 Debug.Log("Stored action: " + selectedAction.m_action + " at position: " + targetPosition);
                 //selectedAction = PlayerBase.Action.nothing; // Reset the selected action
-            }
+            }*/
         }
 
         if (Input.GetKeyDown(KeyCode.LeftControl) && !isExecuting)
@@ -70,39 +82,38 @@ public class TimeSecuence : MonoBehaviour
         }
     }
 
-    public void AddAction(PlayerBase.ActionEnum action, Vector3 targetPosition, PlayerData.BulletStyle bulletStyle) // Modify this line
-    {
-        actions.Add(action);
-        actionTargets.Add(targetPosition);
-        bulletStyles.Add(bulletStyle); // Add this line
-        Debug.Log("HOLA");
-    }
+    public void AddAction(PlayerBase.ActionEnum action) { actions.Add(action);}
 
     IEnumerator ExecuteActions()
     {
         int movCount = 0;
-        int shootCount = 0;
         Debug.Log(actions.Count);
+        play = true;
 
         for (int i = 0; i < actions.Count; i++)
         {
+           
             PlayerBase.ActionEnum action = actions[i];
             Debug.Log(action.ToString());
-            Vector3 targetPosition = actionTargets[i];
-            PlayerData.BulletStyle bulletStyle = bulletStyles[i]; // Add this line
+           // Vector3 targetPosition = actionTargets[i];
+            //PlayerData.BulletStyle bulletStyle = bulletStyles[i]; // Add this line
 
             switch (action)
             {
                 case PlayerBase.ActionEnum.SHOOT:
-                    Debug.Log("Using bullet style: " + bulletStyle.prefab.name); // Add this line
-                    ((ShootAction)actionManager.activeActions[PlayerBase.ActionEnum.SHOOT]).bulletPrefab = bulletStyle.prefab; // Add this line
-                    StartCoroutine(actionManager.AttackCoroutine(action, targetPosition,bulletStyle));
+                    //Debug.Log("Using bullet style: " + bulletStyle.prefab.name); // Add this line
+                    //((ShootAction)actionManager.activeActions[PlayerBase.ActionEnum.SHOOT]).bulletPrefab = bulletStyle.prefab; // Add this line
+                    // StartCoroutine(actionManager.AttackCoroutine(action, targetPosition,bulletStyle));
+                    shootPl.UpdateShoot(movCount);
                     yield return new WaitForSeconds(0.75f);
-                    shootCount++;
+                    movCount++;
                     break;
                 case PlayerBase.ActionEnum.MOVE:
+
+
                     while (movPlayer.t < 1f) // Wait for the movement to finish
                     {
+                      
                         movPlayer.UpdateMovement(movCount);
                         yield return null; // Wait for a frame
                     }
@@ -112,25 +123,20 @@ public class TimeSecuence : MonoBehaviour
                 // Add other cases for different actions if needed
             }
         }
-        actions.Clear();
-        actionTargets.Clear();
-        bulletStyles.Clear(); // Add this line
-        movPlayer.finish();
-        foreach (var line in actionManager.visualPlayerAfterShoot)
-        {
-            Destroy(line.gameObject);
-        }
-        actionManager.visualPlayerAfterShoot.Clear();
-        actionManager.shootpoints.Clear();
-        isExecuting = false;
+        ResetTurn();
     }
 
     void PassTurn()
     {
-        isExecuting = true;
+        if (actions.Count > 0)
+        {
+            isExecuting = true;
         Debug.Log("Executing stored actions");
+            notacction = true;
         StartCoroutine(ExecuteActions());
-        actualTime = totalTime;
+            actualTime = totalTime;
+        }
+        
     }
 
     private Vector3 GetMouseTargetPosition()
@@ -143,6 +149,30 @@ public class TimeSecuence : MonoBehaviour
         return Vector3.zero; // Return Vector3.zero if no hit
     }
 
+    private void ResetTurn()
+    {
+        notacction = false;
+        play = false;
+        actions.Clear();
+        actionTargets.Clear();
+        bulletStyles.Clear(); // Add this line
+        movPlayer.finish();
+        foreach (var line in actionManager.visualPlayerAfterShoot)
+        {
+            Destroy(line.gameObject);
+        }
+        foreach (var line in actionManager.preShootPath)
+        {
+            Destroy(line.gameObject);
+            
+        }
+        actionManager.preShootPath.Clear();
+        actionManager.visualPlayerAfterShoot.Clear();
+        actionManager.shootpoints.Clear();
+        isExecuting = false;
+
+        FindAnyObjectByType<TopBarManager>().ResetTopBar();
+    }
     public bool GetIsExecuting() { return isExecuting; }
 
     private void OnCollisionEnter(Collision collision)

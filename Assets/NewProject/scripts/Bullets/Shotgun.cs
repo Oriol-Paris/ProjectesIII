@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Shotgun : BulletPrefab
 {
+    private float lifetime = 0.5f;
     private Vector3 targetPosition;
     private Vector3 offset;
 
@@ -24,7 +25,12 @@ public class Shotgun : BulletPrefab
 
         transform.position = Vector3.MoveTowards(transform.position, targetPosition, speed * Time.deltaTime);
 
-        if (isHit || Vector3.Distance(transform.position, targetPosition) < 0.1f)
+        if (isHit || Vector3.Distance(transform.position, targetPosition) <= 0.1f)
+        {
+            DestroyBullet();
+        }
+        lifetime -= Time.deltaTime;
+        if (lifetime <= 0f)
         {
             DestroyBullet();
         }
@@ -41,8 +47,9 @@ public class Shotgun : BulletPrefab
             EnemyBase enemy = collision.gameObject.GetComponent<EnemyBase>();
             if (enemy != null && enemy.GetHealth() > 0)
             {
-                enemy.Damage(damage);
+                enemy.Damage(damage, collision.gameObject);
                 isHit = true;
+                DestroyBullet();
             }
         }
         else
@@ -50,8 +57,9 @@ public class Shotgun : BulletPrefab
             PlayerBase player = collision.gameObject.GetComponent<PlayerBase>();
             if (player != null)
             {
-                player.Damage();
+                player.Damage(1, collision.gameObject);
                 isHit = true;
+                DestroyBullet();
             }
         }
     }
