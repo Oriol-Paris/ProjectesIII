@@ -51,6 +51,8 @@ public class PlayerBase : MonoBehaviour
     public Action activeAction { get; private set; }
     public List<Action> availableActions = new List<Action>();
 
+    private float hitFeedBackTime = 0.3f;
+
     private bool isInAction;
     private bool isAlive;
     public bool victory;
@@ -181,6 +183,23 @@ public class PlayerBase : MonoBehaviour
         yield return new WaitForSeconds(1);
     }
 
+    IEnumerator whitecolor()
+    {
+
+        Debug.LogWarning(hitFeedBackTime);
+        Debug.LogWarning(GetComponent<SpriteRenderer>().color);
+        float elapsed = 0;
+        while (elapsed < hitFeedBackTime)
+        {
+            yield return null;
+            GetComponent<SpriteRenderer>().color = new Color(1, GetComponent<SpriteRenderer>().color.b + Time.deltaTime, GetComponent<SpriteRenderer>().color.b + Time.deltaTime);
+
+
+            elapsed += Time.deltaTime;
+        }
+        GetComponent<SpriteRenderer>().color = Color.white;
+    }
+
     #region GETTERS
 
     public float GetRange() { return range; }
@@ -224,8 +243,14 @@ public class PlayerBase : MonoBehaviour
 
     public void Damage(int val, GameObject hitObject) 
     { 
+
+
         health -= val; 
-        playerData.health -= val; 
+        playerData.health -= val;
+       
+        GetComponent<SpriteRenderer>().color = Color.red;
+        StartCoroutine(whitecolor());
+
         //SoundEffectsManager.instance.PlaySoundFXClip(damageClips, transform, 1f);
         StartCoroutine(_camera.Flash(1f, 0.8f, Color.red));
         StartCoroutine(_camera.Shake(0.3f, 0.8f));

@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
+using System.Timers;
+using TMPro;
+using UnityEditor.Rendering;
 using UnityEngine;
 
 public class EnemyBase : MonoBehaviour
@@ -18,10 +21,13 @@ public class EnemyBase : MonoBehaviour
     private bool isMoving;
     private bool isShoooting;
     public bool isAlive;
-    [SerializeField]AudioClip[] damageClips; 
+    [SerializeField]AudioClip[] damageClips;
+    private float hitFeedBackTime = 0.3f;
     // Start is called before the first frame update
     void Start()
     {
+        Debug.Log(Color.white);
+        Debug.Log(Color.red);
         isAlive = true;
         isMoving = true;
         isShoooting = false;
@@ -65,8 +71,19 @@ public class EnemyBase : MonoBehaviour
 
     IEnumerator whitecolor()
     {
-        yield return new WaitForSeconds(0.5f);
-        GetComponent<SpriteRenderer>().color = Color.red;
+
+        Debug.LogWarning(hitFeedBackTime);
+        Debug.LogWarning(GetComponent<SpriteRenderer>().color);
+        float elapsed = 0;
+        while (elapsed < hitFeedBackTime)
+        {
+            yield return null;
+            GetComponent<SpriteRenderer>().color = new Color(1, GetComponent<SpriteRenderer>().color.b + Time.deltaTime, GetComponent<SpriteRenderer>().color.b + Time.deltaTime);
+
+
+            elapsed += Time.deltaTime;
+        }
+        GetComponent<SpriteRenderer>().color = Color.white;
     }
 
     public float GetRange() { return range; }

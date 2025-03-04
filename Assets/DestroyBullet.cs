@@ -44,7 +44,7 @@ public class DestroyBullet : MonoBehaviour
 
         if (time >= 7f)
         {
-            Debug.Log("aaaa0");
+            //Debug.Log("aaaa0");
             Destroy(gameObject);
         }
 
