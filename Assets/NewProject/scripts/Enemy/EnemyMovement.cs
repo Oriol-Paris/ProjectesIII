@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI; // Importante para usar NavMesh
 using UnityEngine.Rendering;
 using UnityEngine.UIElements;
 
@@ -9,13 +10,12 @@ public class EnemyMovement : MonoBehaviour
 {
     #region VARIABLES
 
-    //[SerializeField]private MovementByMouse Player;
-    [SerializeField]private TimeSecuence Player;
+    [SerializeField] private TimeSecuence Player;
     private Vector3 PlayerPos;
-    float moveTime;
-    EnemyBase enemyStats;
+    private EnemyBase enemyStats;
     [SerializeField] private float velocity;
     [SerializeField] private float range;
+    private NavMeshAgent agent; // Referencia al NavMeshAgent
 
     #endregion
 
@@ -25,42 +25,41 @@ public class EnemyMovement : MonoBehaviour
     {
         Player = FindAnyObjectByType<TimeSecuence>();
         enemyStats = GetComponent<EnemyBase>();
-
-        velocity = velocity * FindAnyObjectByType<CombatManager>().enemyStatMultiplier;
-        range = range * FindAnyObjectByType<CombatManager>().enemyStatMultiplier;
+        agent = GetComponent<NavMeshAgent>(); // Obtener el NavMeshAgent
+        agent.speed = velocity * FindAnyObjectByType<CombatManager>().enemyStatMultiplier;
+        range *= FindAnyObjectByType<CombatManager>().enemyStatMultiplier;
+        agent.updateRotation = false;
     }
 
     void Update()
     {
-        moveTime = Time.deltaTime * velocity;
-       
-
+        
         if (enemyStats.isAlive)
         {
-            if(PlayerPos.x < this.GetComponent<Rigidbody>().position.x)
-                this.GetComponent<SpriteRenderer>().flipX = true;
-            else
-                this.GetComponent<SpriteRenderer>().flipX = false;
+            PlayerPos = Player.transform.position;
+            float distanceToPlayer = Vector3.Distance(transform.position, PlayerPos);
 
+            // Voltear sprite dependiendo de la posición del jugador
+            GetComponent<SpriteRenderer>().flipX = PlayerPos.x < transform.position.x;
 
             if (Player.GetIsExecuting() || Player.GetComponent<PlayerBase>().GetInAction())
             {
+                agent.isStopped = false;
                 Debug.Log("MEEEP");
-                this.GetComponent<Animator>().SetBool("isMoving", true);
-                PlayerPos = Player.transform.position;
-                transform.position = Vector3.MoveTowards(transform.position, PlayerPos, moveTime); //Bad usage of moveTime, using moveTime as distance when it's actually a velocity (check line 34)
+                GetComponent<Animator>().SetBool("isMoving", true);
+                agent.SetDestination(PlayerPos); // Usar NavMeshAgent para moverse hacia el jugador
             }
             else
             {
-                this.GetComponent<Animator>().SetBool("isMoving", false);
+                GetComponent<Animator>().SetBool("isMoving", false);
+                agent.isStopped = true;
             }
         }
     }
 
     IEnumerator AttackCoroutine()
     {
-        this.GetComponent<Animator>().SetTrigger("attack");
-
+        GetComponent<Animator>().SetTrigger("attack");
         yield return new WaitForSeconds(1);
     }
 
