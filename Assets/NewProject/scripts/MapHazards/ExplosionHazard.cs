@@ -9,55 +9,51 @@ public class ExplosionHazard : MonoBehaviour
     [SerializeField] private int explosionDamage;
     [SerializeField] private float explosionRadius;
     private List<Object> objectsInRange;
-        
+
+
 
     // Update is called once per frame
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider collision)
     {
-        if (collision != null && collision.gameObject.tag == "Bullet")
+        if (collision.gameObject.tag == "Bullet")
         {
-            Debug.LogWarning("Damaged");
-            AreaScan(explosionRadius);
-            Explode();
+            Explode(explosionRadius);
         }
     }
 
-    private void AreaScan(float radius)
-    {
-        GameObject[] objects;
-        objects = GameObject.FindGameObjectsWithTag("Player");
-        for (int i = 0; i < objects.Length; i++) 
-        {
-            if (IsWithinCircle(objects[i].transform.position, this.transform.position, radius)) 
-            {
-                objectsInRange.Add(objects[i]);
-            }
-        }
-
-    }
     public static bool IsWithinCircle(Vector3 objectPosition, Vector3 centerPosition, float radius)
     {
         float distanceSquared = (objectPosition - centerPosition).sqrMagnitude;
         float radiusSquared = radius * radius;
-
+        
         return distanceSquared <= radiusSquared;
     }
 
 
-    private void Explode()
+    private void Explode(float radius)
     {
-        for (int i = 0; i < objectsInRange.Count; i++) {
-            if(((GameObject)objectsInRange[i]).GetComponent<PlayerBase>() != null)
+        GetComponent<ParticleSystem>().Play();
+        GameObject player;
+        player = GameObject.FindGameObjectWithTag("Player");
+
+        GameObject[] enemies;
+        enemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+        for (int i = 0; i < enemies.Length; i++)
+        {
+            if (IsWithinCircle(enemies[i].transform.position, this.transform.position, radius))
             {
-                ((GameObject)objectsInRange[i]).GetComponent<PlayerBase>().Damage(explosionDamage, this.gameObject);
-                
+                player.GetComponent<EnemyBase>().Damage(1, this.gameObject);
 
             }
-            if (((GameObject)objectsInRange[i]).GetComponent<EnemyBase>() != null)
-            {
-                ((GameObject)objectsInRange[i]).GetComponent<EnemyBase>().Damage(explosionDamage, this.gameObject);
-            }
+        }
+
+        if (IsWithinCircle(player.transform.position, this.transform.position, radius))
+        {
+            player.GetComponent<PlayerBase>().Damage(1, this.gameObject);
 
         }
+
+
     }
 }
