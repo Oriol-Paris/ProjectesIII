@@ -8,16 +8,23 @@ public class ExplosionHazard : MonoBehaviour
 {
     [SerializeField] private int explosionDamage;
     [SerializeField] private float explosionRadius;
-    private List<Object> objectsInRange;
+    [SerializeField] private ParticleSystem explosionEffects;
+
 
 
 
     // Update is called once per frame
     private void OnTriggerEnter(Collider collision)
     {
+        
         if (collision.gameObject.tag == "Bullet")
         {
+            explosionEffects.Play();
             Explode(explosionRadius);
+            Debug.LogWarning("Destroy");
+            GetComponent<SpriteRenderer>().enabled = false;
+            GetComponent<BoxCollider>().enabled = false;
+
         }
     }
 
@@ -32,7 +39,7 @@ public class ExplosionHazard : MonoBehaviour
 
     private void Explode(float radius)
     {
-        GetComponent<ParticleSystem>().Play();
+        
         GameObject player;
         player = GameObject.FindGameObjectWithTag("Player");
 
@@ -43,7 +50,7 @@ public class ExplosionHazard : MonoBehaviour
         {
             if (IsWithinCircle(enemies[i].transform.position, this.transform.position, radius))
             {
-                player.GetComponent<EnemyBase>().Damage(1, this.gameObject);
+                enemies[i].GetComponent<EnemyBase>().Damage(1, this.gameObject);
 
             }
         }
@@ -54,6 +61,6 @@ public class ExplosionHazard : MonoBehaviour
 
         }
 
-
+        
     }
 }

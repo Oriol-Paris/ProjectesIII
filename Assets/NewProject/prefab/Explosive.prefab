@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 6440885155435712520}
   - component: {fileID: 2049251863080510071}
   - component: {fileID: 531636009900561814}
-  - component: {fileID: 5545825863797243358}
-  - component: {fileID: 115296481854376989}
+  - component: {fileID: -7494575573292175062}
+  - component: {fileID: 3089230400664027827}
   m_Layer: 0
   m_Name: Explosive
   m_TagString: Untagged
@@ -55,8 +55,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.18288876, y: 0.17167296, z: 1.1022446}
-  m_Center: {x: -0.0013900459, y: 0.011314279, z: -0.051122308}
+  m_Size: {x: 0.347042, y: 0.17167296, z: 0.78499556}
+  m_Center: {x: -0.057121374, y: 0.011314279, z: 0.055995226}
 --- !u!212 &2049251863080510071
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -126,7 +126,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   explosionDamage: 1
   explosionRadius: 3
---- !u!198 &5545825863797243358
+  explosionEffects: {fileID: -7494575573292175062}
+--- !u!198 &-7494575573292175062
 ParticleSystem:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -143,9 +144,9 @@ ParticleSystem:
   emitterVelocityMode: 1
   looping: 0
   prewarm: 0
-  playOnAwake: 0
+  playOnAwake: 1
   useUnscaledTime: 0
-  autoRandomSeed: 1
+  autoRandomSeed: 0
   startDelay:
     serializedVersion: 2
     minMaxState: 0
@@ -262,7 +263,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1.5
+      scalar: 1.2
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -763,8 +764,8 @@ ParticleSystem:
     boxThickness: {x: 0, y: 0, z: 0}
     radiusThickness: 1
     donutRadius: 0.2
-    m_Position: {x: 4.1723247e-10, y: 0.000000025979144, z: 0.000000012350796}
-    m_Rotation: {x: 4.278721, y: -0.0000018199562, z: -0.0000032192938}
+    m_Position: {x: 2.68221e-10, y: 0.000000026103898, z: 0}
+    m_Rotation: {x: 17.948263, y: -0.0000026196587, z: -0.000003374534}
     m_Scale: {x: 1, y: 1, z: 0.99999505}
     placementMode: 0
     m_MeshMaterialIndex: 0
@@ -844,7 +845,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 0.3020737
+      value: 0.180944
       mode: 0
       spread: 0
       speed:
@@ -1073,7 +1074,7 @@ ParticleSystem:
       countCurve:
         serializedVersion: 2
         minMaxState: 0
-        scalar: 30
+        scalar: 100
         minScalar: 30
         maxCurve:
           serializedVersion: 2
@@ -4907,7 +4908,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
---- !u!199 &115296481854376989
+--- !u!199 &3089230400664027827
 ParticleSystemRenderer:
   serializedVersion: 6
   m_ObjectHideFlags: 0
