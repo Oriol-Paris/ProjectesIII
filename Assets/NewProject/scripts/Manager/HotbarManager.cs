@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class HotbarManager : MonoBehaviour
 {
     private PlayerActionManager playerActionManager;
-    private PlayerBase playerData;
+    public PlayerBase playerData;
     public GameObject hotbarPanel;
     public GameObject actionSlotPrefab;
 

@@ -24,6 +24,18 @@ public class ControlLiniarRender : MonoBehaviour
         
     }
 
+    public void Disable(bool disable)
+    {
+        if(disable)
+        {
+            lineRenderer.enabled = false;
+        }
+        else
+        {
+            lineRenderer.enabled = true;
+        }
+    }
+
     public void NextMov(bool isMoov) { 
         //Debug.Log(positionDesired);
         if (isMoov)
@@ -133,5 +145,7 @@ public class ControlLiniarRender : MonoBehaviour
             Destroy(line.gameObject);
         }
         lineList.Clear();
+        playerPosition = transform.position;
+
     }
 }

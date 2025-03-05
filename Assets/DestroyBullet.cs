@@ -13,7 +13,7 @@ public class DestroyBullet : MonoBehaviour
     [SerializeField] float shootCShakeTime;
     [SerializeField] float shootCShakeRange;
 
-    private float bulletSpeed = 3.0f;
+   public  float bulletSpeed;
 
     void Start()
     {
