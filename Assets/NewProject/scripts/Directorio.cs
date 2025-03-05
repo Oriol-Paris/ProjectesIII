@@ -16,9 +16,10 @@ public class Directorio : MonoBehaviour
 
     public static Vector3 mousePosition()
     {
+        int layerMask = LayerMask.GetMask("floor");
         Vector3 mousePosition;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out RaycastHit hit))
+        if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, layerMask))
         {
             mousePosition = hit.point;
             return mousePosition;
