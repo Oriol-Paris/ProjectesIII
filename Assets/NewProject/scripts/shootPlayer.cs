@@ -18,6 +18,7 @@ public class shootPlayer : MonoBehaviour
     {
         if (!timeSecuence.notacction)
         {
+            controlLiniarRender.Disable(false);
             if (!Input.GetMouseButton(0))
             {
 
@@ -31,6 +32,10 @@ public class shootPlayer : MonoBehaviour
                 controlListMovment.AddMovement(controlLiniarRender, 0.75f, PlayerBase.ActionEnum.SHOOT);
 
             }
+        }
+        else
+        {
+            controlLiniarRender.Disable(true);
         }
     }
 

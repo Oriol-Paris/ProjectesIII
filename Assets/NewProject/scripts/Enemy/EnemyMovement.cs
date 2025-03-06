@@ -39,7 +39,7 @@ public class EnemyMovement : MonoBehaviour
             PlayerPos = Player.transform.position;
             float distanceToPlayer = Vector3.Distance(transform.position, PlayerPos);
 
-            // Voltear sprite dependiendo de la posición del jugador
+            // Voltear sprite dependiendo de la posiciï¿½n del jugador
             GetComponent<SpriteRenderer>().flipX = PlayerPos.x < transform.position.x;
 
             if (Player.GetIsExecuting() || Player.GetComponent<PlayerBase>().GetInAction())

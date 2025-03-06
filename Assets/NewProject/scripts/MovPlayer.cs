@@ -48,6 +48,11 @@ public class MovPlayer : MonoBehaviour
         if (!timeSecuence.notacction)
         {
             CanWalk();
+            controlLiniarRender.Disable(false);
+        }
+        else
+        {
+            controlLiniarRender.Disable(true);
         }
       
     }
