@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI; // Necesario para usar NavMesh
 
@@ -11,7 +12,6 @@ public class EnemyMovementShooter : MonoBehaviour
     [SerializeField] private List<TimeSecuence> players;
     public TimeSecuence closestPlayer;
     private Vector3 closestPlayerPos;
-    private float moveTime;
     public EnemyBase enemyStats;
     [SerializeField] private GameObject bulletShot;
     [SerializeField] private float velocity;
@@ -19,18 +19,19 @@ public class EnemyMovementShooter : MonoBehaviour
     [SerializeField] private float minDistance = 2f;
     [SerializeField] private AudioClip[] shootingClips;
     public Animator fx;
-    private bool onCooldown;
+    private bool onCooldown = false;
     private bool isReloading = false;
     private bool hasShot = false;
-    private bool lastIsMovingState = false;
     float distanceToPlayer;
 
     private NavMeshAgent agent; // Referencia al NavMeshAgent
 
+    [SerializeField] private float actionCooldown = 1f; // Cooldown duration
+
     void Start()
     {
         enemyStats = GetComponent<EnemyBase>();
-        agent = GetComponent<NavMeshAgent>(); // Obtener el agente de navegaci�n
+        agent = GetComponent<NavMeshAgent>(); // Obtener el agente de navegación
         agent.speed = velocity; // Ajustar la velocidad
 
         TimeSecuence[] playersArray = GameObject.FindObjectsByType<TimeSecuence>(FindObjectsSortMode.None);
@@ -50,20 +51,25 @@ public class EnemyMovementShooter : MonoBehaviour
     {
         if (enemyStats.isAlive && closestPlayer != null)
         {
-            if (closestPlayer.isExecuting)
+            if (closestPlayer.isExecuting && !onCooldown)
             {
+                Debug.Log(onCooldown);
                 ExecuteAction();
             }
             else
             {
-                DecideAction();
+                Debug.Log("OnCooldown");
                 agent.isStopped = true;
+                return;
             }
         }
     }
 
     private void ExecuteAction()
     {
+        Debug.Log(onCooldown);
+        if (onCooldown) return; // Evita que el enemigo actúe mientras está en cooldown.
+
         switch (turnAction)
         {
             case TurnActions.APPROACH:
@@ -76,14 +82,17 @@ public class EnemyMovementShooter : MonoBehaviour
                 GetComponent<Animator>().SetBool("isMoving", false);
                 StartCoroutine(AttackCoroutine());
                 agent.isStopped = true;
-
                 break;
 
             case TurnActions.BACK_AWAY:
                 MoveAwayFromPlayer();
                 GetComponent<Animator>().SetBool("isMoving", true);
                 agent.isStopped = true;
+                break;
 
+            case TurnActions.NOTHING:
+                agent.isStopped = true;
+                StartCoroutine(ActionCooldownCoroutine());
                 break;
         }
     }
@@ -108,7 +117,10 @@ public class EnemyMovementShooter : MonoBehaviour
     {
         if (agent != null && closestPlayer != null)
         {
-            agent.SetDestination(closestPlayer.transform.position); // Usar NavMeshAgent para moverse
+            Vector3 directionToPlayer = (closestPlayer.transform.position - transform.position).normalized;
+            Vector3 destination = closestPlayer.transform.position - directionToPlayer * range;
+            agent.SetDestination(destination);
+            StartCoroutine(WaitForMoveCompletion());
         }
     }
 
@@ -116,10 +128,17 @@ public class EnemyMovementShooter : MonoBehaviour
     {
         if (agent != null && closestPlayer != null)
         {
-            Vector3 directionAway = (transform.position - closestPlayerPos).normalized;
-            Vector3 newPosition = transform.position + directionAway * minDistance; // Alejarse
+            Vector3 directionAway = (transform.position - closestPlayer.transform.position).normalized;
+            Vector3 newPosition = transform.position + directionAway * minDistance;
             agent.SetDestination(newPosition);
+            StartCoroutine(WaitForMoveCompletion());
         }
+    }
+
+    private IEnumerator WaitForMoveCompletion()
+    {
+        yield return new WaitUntil(() => !agent.pathPending && agent.remainingDistance <= agent.stoppingDistance);
+        StartCoroutine(ActionCooldownCoroutine());
     }
 
     private void Shoot()
@@ -127,21 +146,14 @@ public class EnemyMovementShooter : MonoBehaviour
         if (!hasShot)
         {
             Debug.Log("BANG");
-            GameObject bullet = Instantiate(bulletShot, transform.position, Quaternion.identity);
-            bullet.GetComponent<DestroyBullet>().setShootDirection((closestPlayerPos - transform.position).normalized);
+            
+                GameObject bullet = Instantiate(bulletShot, transform.position, Quaternion.identity);
+                bullet.GetComponent<DestroyBullet>().setShootDirection((closestPlayerPos - transform.position).normalized);
+                
+            
             hasShot = true;
-            onCooldown = true;
+            //StartCoroutine(ActionCooldownCoroutine()); // Iniciar cooldown después de disparar
         }
-    }
-
-    private IEnumerator Reload()
-    {
-        isReloading = true;
-        yield return new WaitUntil(() => closestPlayer.GetIsExecuting() == false);
-        yield return new WaitUntil(() => closestPlayer.GetIsExecuting() == true);
-        yield return new WaitUntil(() => closestPlayer.GetIsExecuting() == false);
-        isReloading = false;
-        hasShot = false;
     }
 
     private IEnumerator AttackCoroutine()
@@ -156,16 +168,16 @@ public class EnemyMovementShooter : MonoBehaviour
             Shoot();
             fx.ResetTrigger("playFX");
             StartCoroutine(Reload());
-            yield return new WaitUntil(() => closestPlayer.GetIsExecuting() == true);
-            yield return new WaitForSeconds(3);
-            Debug.Log("Wait ended");
-            onCooldown = false;
         }
-        else
-        {
-            
-            DecideAction();
-        }
+    }
+
+    private IEnumerator Reload()
+    {
+        isReloading = true;
+        yield return new WaitForSeconds(1f);
+        isReloading = false;
+        hasShot = false;
+        StartCoroutine(ActionCooldownCoroutine()); // Call ActionCooldownCoroutine here
     }
 
     public void DecideAction()
@@ -181,7 +193,7 @@ public class EnemyMovementShooter : MonoBehaviour
         {
             turnAction = TurnActions.BACK_AWAY;
         }
-        else if (!hasShot && !isReloading)
+        else if (!hasShot && !isReloading && distanceToPlayer==range)
         {
             turnAction = TurnActions.SHOOT;
         }
@@ -189,6 +201,30 @@ public class EnemyMovementShooter : MonoBehaviour
         {
             turnAction = TurnActions.NOTHING;
         }
+    }
+
+    private IEnumerator ActionCooldownCoroutine()
+    {
+        turnAction = TurnActions.NOTHING;
+        onCooldown = true;
+        float countdown = actionCooldown;
+        ExecuteAction();
+
+        while (countdown > 0)
+        {
+            yield return new WaitUntil(() => closestPlayer.isExecuting);
+
+            while (closestPlayer.isExecuting && countdown > 0)
+            {
+                countdown -= Time.deltaTime;
+                Debug.Log("Cooldown countdown: " + countdown);
+                yield return null;
+            }
+        }
+
+        onCooldown = false;
+        Debug.Log("Cooldown ended, deciding next action.");
+        DecideAction();
     }
 
     public void ResetTurnAction()
