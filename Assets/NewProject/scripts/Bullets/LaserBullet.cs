@@ -1,55 +1,68 @@
 using UnityEngine;
+using UnityEngine.UIElements;
 
-public class LaserBullet : BulletPrefab
+public class LaserBullet : MonoBehaviour
 {
-    
-    private Vector3 targetPosition;
-    private float lifetime = 5f;
-    [SerializeField] private bool fromPlayer;
 
-    void Start()
+    [SerializeField] private LineRenderer lineRenderer;
+    [SerializeField] private Transform laserOrigin;
+    [SerializeField] private Vector3 shootDirection;
+    [SerializeField] private LayerMask obstacleLayers;
+    [SerializeField] private LayerMask damageableLayers;
+    [SerializeField] private float maxLaserDistance = 100f;
+    [SerializeField] private int laserDamage;
+
+    private Vector3 laserEndPoint;
+    private void Start()
     {
-        isHit = false;
-        speed = 20f;
-        damage = FindObjectOfType<PlayerBase>().playerData.gun.damage;
+        laserDamage = FindObjectOfType<PlayerBase>().playerData.gun.damage;
     }
-
     void Update()
     {
-      
+        ShootLaser();
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void ShootLaser()
     {
-      
+        RaycastHit hit;
+       
 
-        if (collision != null)
+        // Detectar colisión con un muro o enemigo
+        if (Physics.Raycast(laserOrigin.position, shootDirection, out hit, maxLaserDistance, obstacleLayers | damageableLayers))
         {
-            if (collision.gameObject.CompareTag("Walls"))
-            {
-                Destroy(gameObject);
-            }
+            laserEndPoint = hit.point;  // Detener el láser en el punto de impacto
 
-            if (fromPlayer && collision.gameObject.GetComponent<EnemyBase>() != null)
+            // Si el objeto impactado es dañable, aplicar daño
+            if (((1 << hit.collider.gameObject.layer) & damageableLayers) != 0)
             {
-                EnemyBase hit = collision.gameObject.GetComponent<EnemyBase>();
-                hit.Damage(damage, collision.gameObject);
-                Destroy(gameObject);
-            }
-
-            if (!fromPlayer && collision.gameObject.GetComponent<PlayerBase>() != null)
-            {
-                PlayerBase hit = collision.gameObject.GetComponent<PlayerBase>();
-                hit.Damage(damage, collision.gameObject);
-                Destroy(gameObject);
+                if (hit.collider.TryGetComponent(out EnemyBase enemy))
+                {
+                    enemy.Damage(laserDamage, hit.collider.gameObject);
+                }
+                else if (hit.collider.TryGetComponent(out PlayerBase player))
+                {
+                    player.Damage(laserDamage, hit.collider.gameObject);
+                }
             }
         }
+        else
+        {
+            // Si no choca con nada, el láser llega hasta la distancia máxima
+            laserEndPoint = laserOrigin.position + (shootDirection * maxLaserDistance);
+        }
+
+        // Actualizar LineRenderer para que se vea el láser
+        UpdateLaserVisuals();
     }
 
-    public override void Shoot(Vector3 direction)
+    public void setShootDirection(Vector3 _shootDirection)
     {
-        // Store the original direction and target position
-        originalDirection = direction;
-        targetPosition = transform.position + direction.normalized * 30f; // Laser has a longer range
+        shootDirection = _shootDirection;
+    }
+
+    private void UpdateLaserVisuals()
+    {
+        lineRenderer.SetPosition(0, laserOrigin.position);
+        lineRenderer.SetPosition(1, laserEndPoint);
     }
 }

@@ -202,6 +202,7 @@ MonoBehaviour:
   fromPlayer: 1
   shootCShakeTime: 0.1
   shootCShakeRange: 0.2
+  bulletSpeed: 3
 --- !u!198 &6613436935214394262
 ParticleSystem:
   m_ObjectHideFlags: 0

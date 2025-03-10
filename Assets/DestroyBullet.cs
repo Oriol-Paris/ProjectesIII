@@ -8,6 +8,7 @@ public class DestroyBullet : MonoBehaviour
     [SerializeField] private Vector3 shootDirection;
     [SerializeField] private float time;
     [SerializeField] private bool fromPlayer;
+    [SerializeField] public int damage;
 
     private cameraManager _camera;
     [SerializeField] float shootCShakeTime;
@@ -17,6 +18,7 @@ public class DestroyBullet : MonoBehaviour
 
     void Start()
     {
+        damage = FindObjectOfType<PlayerBase>().playerData.gun.damage;
         timeSecuence = FindFirstObjectByType<TimeSecuence>();
         _camera = FindAnyObjectByType<cameraManager>();
         StartCoroutine(_camera.Shake(shootCShakeTime, shootCShakeRange));
@@ -62,14 +64,14 @@ public class DestroyBullet : MonoBehaviour
             if (fromPlayer && collision.gameObject.GetComponent<EnemyBase>() != null)
             {
                 EnemyBase hit = collision.gameObject.GetComponent<EnemyBase>();
-                hit.Damage(1, collision.gameObject);
+                hit.Damage(damage, collision.gameObject);
                 Destroy(gameObject);
             }
 
             if(!fromPlayer && collision.gameObject.GetComponent<PlayerBase>() != null)
             {
                 PlayerBase hit = collision.gameObject.GetComponent<PlayerBase>();
-                hit.Damage(1, collision.gameObject);
+                hit.Damage(damage, collision.gameObject);
                 Destroy(gameObject);
             }
         }

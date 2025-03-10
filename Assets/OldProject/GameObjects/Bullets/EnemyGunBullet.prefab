@@ -200,3 +200,4 @@ MonoBehaviour:
   fromPlayer: 0
   shootCShakeTime: 0
   shootCShakeRange: 0
+  bulletSpeed: 3

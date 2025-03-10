@@ -202,6 +202,7 @@ MonoBehaviour:
   spriteRenderer: {fileID: 7086546256689271642}
   collider: {fileID: 285907150525029808}
   rb2d: {fileID: 8094846091851707121}
+  bloodSplash: {fileID: 0}
   isAlive: 0
   damageClips:
   - {fileID: 8300000, guid: 94e3b24d75a0cda4980ec5134a8e6da9, type: 3}
