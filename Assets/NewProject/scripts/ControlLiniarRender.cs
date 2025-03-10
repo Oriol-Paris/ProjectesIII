@@ -52,11 +52,36 @@ public class ControlLiniarRender : MonoBehaviour
 
     public void ControlLiniarRenderer()
     {
-        positionDesired = Directorio.mousePosition();
+        RaycastHit hit;
 
+        Vector3 mouseposition = Directorio.mousePosition();
         curvePoints.Clear();
         curvePoints.Add(playerPosition);
-        curvePoints.Add(positionDesired);
+
+        Vector3 direction = (mouseposition - playerPosition).normalized;
+        float distance = Vector3.Distance(playerPosition, mouseposition);
+
+        if (Physics.Raycast(playerPosition, direction, out hit, distance))
+        {
+
+            if (hit.collider.CompareTag("envairoment"))
+            {
+                float margin = 0.2f;
+                 positionDesired = hit.point - (direction * margin);
+                curvePoints.Add(positionDesired);
+            }
+            else
+            {
+                positionDesired = mouseposition;
+                curvePoints.Add(positionDesired);
+            }
+        }
+        else
+        {
+            positionDesired = mouseposition;
+            curvePoints.Add(positionDesired);
+        }
+       
     }
 
     public void InstantiateLineMovment()
@@ -86,15 +111,25 @@ public class ControlLiniarRender : MonoBehaviour
        
         if (curvePoints.Count < 2) return;
 
+        Vector3 startPos = curvePoints[0];
+        Vector3 endPos = curvePoints[curvePoints.Count - 1];
 
-        Vector3 startToMouse = mousePosition - curvePoints[0];
-        Vector3 direction = startToMouse.normalized;
+       
+        Vector3 centerPoint = (startPos + endPos) * 0.5f;
 
+       
+        Vector3 mainDirection = (endPos - startPos).normalized;
 
-        float curveIntensity = Vector3.Distance(curvePoints[0], mousePosition) * 0.5f;
+       
+        Vector3 perpendicular = Vector3.Cross(mainDirection, Vector3.up).normalized;
 
         
-        Vector3 midPoint = curvePoints[0] + direction * curveIntensity;
+        float curveIntensity = Vector3.Distance(startPos, mousePosition) * 0.5f;
+        float lateralOffset = Vector3.Dot(mousePosition - centerPoint, perpendicular);
+
+       
+        Vector3 midPoint = centerPoint + perpendicular * lateralOffset * 0.5f;
+
 
 
         if (curvePoints.Count == 3)
