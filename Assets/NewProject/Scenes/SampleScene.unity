@@ -319,10 +319,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5103112988284754988, guid: 135a33f42603095498418b3997897017, type: 3}
+      propertyPath: m_Constraints
+      value: 116
+      objectReference: {fileID: 0}
     - target: {fileID: 6045879003536822004, guid: 135a33f42603095498418b3997897017, type: 3}
       propertyPath: bulletPrefab
       value: 
-      objectReference: {fileID: 4841340973275302747, guid: 3db35f2e05067784492ec56c6b262789, type: 3}
+      objectReference: {fileID: 1680710797403148065, guid: 9dcd6820efc4c4b488ecff9dbb33f555, type: 3}
     - target: {fileID: 6993864842785556067, guid: 135a33f42603095498418b3997897017, type: 3}
       propertyPath: m_Name
       value: Player
@@ -448,6 +452,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -5676328429409097243, guid: a363a223813dbe94c98929e069052f54, type: 3}
+      propertyPath: bulletShot
+      value: 
+      objectReference: {fileID: 5901384962573073107, guid: 246999a5575533d4cafb94927fb397b7, type: 3}
     - target: {fileID: 285907150525029808, guid: a363a223813dbe94c98929e069052f54, type: 3}
       propertyPath: m_Size.z
       value: 0.7863867

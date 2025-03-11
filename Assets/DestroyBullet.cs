@@ -24,7 +24,7 @@ public class DestroyBullet : MonoBehaviour
         StartCoroutine(_camera.Shake(shootCShakeTime, shootCShakeRange));
     }
 
-    public void setShootDirection(Vector3 _shootDirection)
+    public void setShootDirection(Vector3 _shootDirection,bool itsFromPlayer)
     {
         shootDirection = _shootDirection;
     }
