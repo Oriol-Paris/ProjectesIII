@@ -37,6 +37,8 @@ public class multiShoot : MonoBehaviour
             yield return new WaitForSeconds(shotBetweenShots);
         }
 
+        Destroy(this.gameObject);
+
     }
 
 }

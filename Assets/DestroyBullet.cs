@@ -22,6 +22,7 @@ public class DestroyBullet : MonoBehaviour
         timeSecuence = FindFirstObjectByType<TimeSecuence>();
         _camera = FindAnyObjectByType<cameraManager>();
         StartCoroutine(_camera.Shake(shootCShakeTime, shootCShakeRange));
+        transform.position = new Vector3(transform.position.x,0,transform.position.z);
     }
 
     public void setShootDirection(Vector3 _shootDirection,bool itsFromPlayer)
