@@ -234,6 +234,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 6a3e850acd190164d9bea800f4e24812, type: 3}
   - {fileID: 8300000, guid: fc8dae0e97caff040998967dcf1ff972, type: 3}
   fx: {fileID: 8189897864542917949}
+  actionCooldown: 1
 --- !u!95 &6209296037174827964
 Animator:
   serializedVersion: 7
