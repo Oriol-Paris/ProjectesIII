@@ -189,7 +189,7 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 2547532622408290678, guid: 40da685f188bc2e4bb1c0608ce87ae0a, type: 3}
-      insertIndex: -1
+      insertIndex: 7
       addedObject: {fileID: 192970786}
   m_SourcePrefab: {fileID: 100100000, guid: 40da685f188bc2e4bb1c0608ce87ae0a, type: 3}
 --- !u!1 &192970785 stripped
@@ -7424,7 +7424,7 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 2547532622408290678, guid: a363a223813dbe94c98929e069052f54, type: 3}
-      insertIndex: -1
+      insertIndex: 7
       addedObject: {fileID: 471795613}
   m_SourcePrefab: {fileID: 100100000, guid: a363a223813dbe94c98929e069052f54, type: 3}
 --- !u!1 &471795612 stripped
@@ -8389,6 +8389,7 @@ GameObject:
   - component: {fileID: 2001932631}
   - component: {fileID: 2001932630}
   - component: {fileID: 2001932629}
+  - component: {fileID: 2001932633}
   m_Layer: 0
   m_Name: a
   m_TagString: Untagged
