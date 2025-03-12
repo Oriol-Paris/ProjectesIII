@@ -95,8 +95,9 @@ public class MovPlayer : MonoBehaviour
        
 
         Vector3 newPosition = Directorio.BezierCurve(t, _playerPosition, _controlPoint, _positionDesired);
-       
+        newPosition.y = 0;
         transform.position = newPosition;
+        
 
         tiemp += Time.deltaTime;
     }
