@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class ExplosionHazard : MonoBehaviour
 {
@@ -16,15 +17,10 @@ public class ExplosionHazard : MonoBehaviour
     // Update is called once per frame
     private void OnTriggerEnter(Collider collision)
     {
-        
+
         if (collision.gameObject.tag == "Bullet")
         {
-            explosionEffects.Play();
-            Explode(explosionRadius, false);
-            Debug.LogWarning("Destroy");
-            GetComponent<SpriteRenderer>().enabled = false;
-            GetComponent<BoxCollider>().enabled = false;
-
+            Explode(explosionRadius, false, collision.gameObject);
         }
     }
 
@@ -32,53 +28,63 @@ public class ExplosionHazard : MonoBehaviour
     {
         float distanceSquared = (objectPosition - centerPosition).sqrMagnitude;
         float radiusSquared = radius * radius;
-        
+
         return distanceSquared <= radiusSquared;
     }
 
 
-    private void Explode(float radius, bool spread)
+    private void Explode(float radius, bool spread, GameObject DamageOrigin)
+    {
+        StartCoroutine(DelayAction(explosionSpreadDelay, spread, radius, DamageOrigin));
+    }
+
+    IEnumerator DelayAction(float delay, bool spread, float radius, GameObject DamageOrigin)
     {
         if (spread)
         {
-            StartCoroutine(DelayAction(explosionSpreadDelay));
-        } 
-        GameObject player;
+            yield return new WaitForSeconds(delay);
+        }
+        explosionEffects.Play();
+        GameObject player = null;
         player = GameObject.FindGameObjectWithTag("Player");
 
-        GameObject[] enemies;
+        GameObject[] enemies = null;
         enemies = GameObject.FindGameObjectsWithTag("Enemy");
 
-        GameObject[] explosives;
+        GameObject[] explosives = null;
         explosives = GameObject.FindGameObjectsWithTag("Explosive");
 
-        for (int i = 0; i < enemies.Length; i++)
-        {
-            if (IsWithinCircle(enemies[i].transform.position, this.transform.position, radius))
-            {
-                enemies[i].GetComponent<EnemyBase>().Damage(1, this.gameObject);
+          for (int i = 0; i < enemies.Length; ++i)
+          {
 
-            }
-        }
+              if (IsWithinCircle(enemies[i].transform.position, this.transform.position, radius))
+              {
+                  enemies[i].GetComponent<EnemyBase>().Damage(1, this.gameObject);
+
+              }
+          }
 
         if (IsWithinCircle(player.transform.position, this.transform.position, radius))
         {
             player.GetComponent<PlayerBase>().Damage(1, this.gameObject);
 
         }
-        
-        for (int i = 0; i < explosives.Length; i++)
+
+        for (int i = 0; i < explosives.Length; ++i)
         {
-            if (IsWithinCircle(explosives[i].transform.position, this.transform.position, radius))
+
+
+            if (IsWithinCircle(explosives[i].transform.position, this.transform.position, radius) && explosives[i] != this.gameObject && explosives[i] != DamageOrigin)
             {
 
-                explosives[i].GetComponent<ExplosionHazard>().Explode(explosionRadius, true);
+                explosives[i].GetComponent<ExplosionHazard>().Explode(explosionRadius, true, this.gameObject);
 
             }
+
         }
+        GetComponent<SpriteRenderer>().enabled = false;
+        GetComponent<BoxCollider>().enabled = false;
     }
-    IEnumerator DelayAction(float delayTime)
-    {
-        yield return new WaitForSeconds(delayTime);
-    }
+
+    
 }

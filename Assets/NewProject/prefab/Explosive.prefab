@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 3089230400664027827}
   m_Layer: 0
   m_Name: Explosive
-  m_TagString: Untagged
+  m_TagString: Explosive
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -55,8 +55,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.347042, y: 0.17167296, z: 0.78499556}
-  m_Center: {x: -0.057121374, y: 0.011314279, z: 0.055995226}
+  m_Size: {x: 0.22843786, y: 0.17167298, z: 0.78499556}
+  m_Center: {x: 0.0021808327, y: 0.0113142785, z: 0.055995222}
 --- !u!212 &2049251863080510071
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -127,7 +127,7 @@ MonoBehaviour:
   explosionDamage: 1
   explosionRadius: 3
   explosionEffects: {fileID: -7494575573292175062}
-  explosionSpreadDelay: 0.5
+  explosionSpreadDelay: 0.2
 --- !u!198 &-7494575573292175062
 ParticleSystem:
   m_ObjectHideFlags: 0
