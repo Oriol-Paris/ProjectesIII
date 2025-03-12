@@ -57,6 +57,8 @@ public class TimeSecuence : MonoBehaviour
                 {
                     selectedAction = action;
                     Debug.Log("Selected action: " + selectedAction.m_action);
+
+                    this.GetComponent<ControlLiniarRender>().ChangeLineColor(action);
                 }
             }
             if(actions.Count > 0&&Input.GetKeyDown(KeyCode.C)&&!isExecuting) {

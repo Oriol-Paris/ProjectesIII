@@ -68690,6 +68690,74 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1145941097933022349, guid: 135a33f42603095498418b3997897017, type: 3}
+      propertyPath: m_Parameters.textureMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1145941097933022349, guid: 135a33f42603095498418b3997897017, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 4a10f03634df60c489a85fc47ade7847, type: 2}
+    - target: {fileID: 1145941097933022349, guid: 135a33f42603095498418b3997897017, type: 3}
+      propertyPath: m_Parameters.textureScale.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2554926273211331863, guid: 135a33f42603095498418b3997897017, type: 3}
+      propertyPath: tileScale
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2554926273211331863, guid: 135a33f42603095498418b3997897017, type: 3}
+      propertyPath: lineTexture
+      value: 
+      objectReference: {fileID: 2800000, guid: 7f549d816cad8d449a967d19afaf89d5, type: 3}
+    - target: {fileID: 2554926273211331863, guid: 135a33f42603095498418b3997897017, type: 3}
+      propertyPath: lineMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: 4a10f03634df60c489a85fc47ade7847, type: 2}
+    - target: {fileID: 2554926273211331863, guid: 135a33f42603095498418b3997897017, type: 3}
+      propertyPath: scrollReverse
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2554926273211331863, guid: 135a33f42603095498418b3997897017, type: 3}
+      propertyPath: endOfLineCursor
+      value: 
+      objectReference: {fileID: 1998414478}
+    - target: {fileID: 2554926273211331863, guid: 135a33f42603095498418b3997897017, type: 3}
+      propertyPath: lineColors.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2554926273211331863, guid: 135a33f42603095498418b3997897017, type: 3}
+      propertyPath: lineColors.Array.data[1].m_action
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2554926273211331863, guid: 135a33f42603095498418b3997897017, type: 3}
+      propertyPath: lineColors.Array.data[0].m_color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2554926273211331863, guid: 135a33f42603095498418b3997897017, type: 3}
+      propertyPath: lineColors.Array.data[0].m_color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2554926273211331863, guid: 135a33f42603095498418b3997897017, type: 3}
+      propertyPath: lineColors.Array.data[0].m_color.g
+      value: 0.10980392
+      objectReference: {fileID: 0}
+    - target: {fileID: 2554926273211331863, guid: 135a33f42603095498418b3997897017, type: 3}
+      propertyPath: lineColors.Array.data[1].m_color.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2554926273211331863, guid: 135a33f42603095498418b3997897017, type: 3}
+      propertyPath: lineColors.Array.data[1].m_color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2554926273211331863, guid: 135a33f42603095498418b3997897017, type: 3}
+      propertyPath: lineColors.Array.data[1].m_color.g
+      value: 0.8901961
+      objectReference: {fileID: 0}
+    - target: {fileID: 2554926273211331863, guid: 135a33f42603095498418b3997897017, type: 3}
+      propertyPath: lineColors.Array.data[1].m_color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4476756505495577889, guid: 135a33f42603095498418b3997897017, type: 3}
       propertyPath: timeSecuence
       value: 
@@ -68913,6 +68981,11 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1998414478 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4946164215817653845, guid: 135a33f42603095498418b3997897017, type: 3}
+  m_PrefabInstance: {fileID: 1606952524}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &970291750979261669
 PrefabInstance:
   m_ObjectHideFlags: 0

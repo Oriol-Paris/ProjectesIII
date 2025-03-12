@@ -78,6 +78,8 @@ public class PlayerBase : MonoBehaviour
         turnsDone = GetComponent<PlayerActionManager>();
         checkMovement = GetComponent<OG_MovementByMouse>();
         _camera = FindAnyObjectByType<cameraManager>();
+
+        this.GetComponent<ControlLiniarRender>().ChangeLineColor(activeAction);
     }
 
     private void LoadPlayerData()
