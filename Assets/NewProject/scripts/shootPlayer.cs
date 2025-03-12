@@ -53,7 +53,7 @@ public class shootPlayer : MonoBehaviour
         GameObject bullet = Instantiate(bulletPrefab, _playerPosition, Quaternion.identity);
 
         
-        bullet.GetComponent<multiShoot>().setShootDirection(shootDirection,true);
+        bullet.GetComponent<DestroyBullet>().setShootDirection(shootDirection,true);
 
         
 

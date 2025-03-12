@@ -556,6 +556,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -5676328429409097243, guid: a363a223813dbe94c98929e069052f54, type: 3}
+      propertyPath: bulletShot
+      value: 
+      objectReference: {fileID: 1680710797403148065, guid: 9dcd6820efc4c4b488ecff9dbb33f555, type: 3}
     - target: {fileID: 285907150525029808, guid: a363a223813dbe94c98929e069052f54, type: 3}
       propertyPath: m_Size.z
       value: 0.7863867
