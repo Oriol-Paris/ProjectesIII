@@ -111,7 +111,8 @@ MonoBehaviour:
   velocity: 1.5
   range: 5
   restTime: 1.5
-  hitBox: {fileID: 0}
+  hitBox: {fileID: 1162141195956936038}
+  stopDistance: 1
 --- !u!114 &3400037044067970028
 MonoBehaviour:
   m_ObjectHideFlags: 0
