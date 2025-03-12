@@ -159,25 +159,7 @@ public class EnemyMovementShooter : MonoBehaviour
     }
 
     // Reload coroutine to wait until the next GetIsMoving toggle after shooting
-    private IEnumerator Reload()
-    {
-        //Debug.Log("RELOAD");
-        isReloading = true;
-        yield return new WaitUntil(() => closestPlayer.GetIsExecuting() == false);
-        yield return new WaitUntil(() => closestPlayer.GetIsExecuting() == true);
-        yield return new WaitUntil(() => closestPlayer.GetIsExecuting() == false);
-        yield return new WaitUntil(() => closestPlayer.GetIsExecuting() == false);
-        
-        isReloading = false;
-        hasShot = false; // Reset shooting state for the next turn
-
-        /*
-            Vector3 direction = (closestPlayerPos - transform.position).normalized;
-            GameObject bullet = Instantiate(bulletShot, transform.position + transform.forward * 0.5f, Quaternion.identity);
-            bullet.GetComponent<DestroyBullet>().setShootDirection(direction);
-            hasShot = true;
-        */}
-    }
+    
 
     private IEnumerator AttackCoroutine()
     {
@@ -193,7 +175,7 @@ public class EnemyMovementShooter : MonoBehaviour
             StartCoroutine(Reload());
         }
     }
-
+    
     private IEnumerator Reload()
     {
         isReloading = true;
@@ -205,7 +187,7 @@ public class EnemyMovementShooter : MonoBehaviour
             StartCoroutine(ActionCooldownCoroutine());
         }
     }
-
+    
     public void DecideAction()
     {
         // Solo decide si no tiene acción pendiente

@@ -690,15 +690,19 @@ MonoBehaviour:
   playerPosition: {x: 0, y: 0, z: 0}
   curveResolution: 0
   maxReach: 10
-  tileScale: 1
-  lineMaterial: {fileID: 0}
+  tileScale: 4
+  lineMaterial: {fileID: 2100000, guid: 4a10f03634df60c489a85fc47ade7847, type: 2}
   animateLine: 1
   scrollSpeed: 0.5
-  scrollReverse: 0
+  scrollReverse: 1
   lineRenderer: {fileID: 1145941097933022349}
   lineList: []
-  endOfLineCursor: {fileID: 0}
-  lineColors: []
+  endOfLineCursor: {fileID: 4946164215817653845}
+  lineColors:
+  - m_color: {r: 0, g: 0.10980392, b: 1, a: 1}
+    m_action: 0
+  - m_color: {r: 1, g: 0.8901961, b: 0, a: 1}
+    m_action: 1
   curvePoints: []
 --- !u!114 &4528686633142332479
 MonoBehaviour:

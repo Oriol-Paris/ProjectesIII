@@ -55,6 +55,7 @@ public class CombatManager : MonoBehaviour
             // Habilitar la condici�n de victoria
             winCondition.enabled = true;
             winCondition.GetComponentInChildren<TextMeshProUGUI>().text = "YOU WIN!";
+            Cursor.visible = true;
 
 
             // Realizar el c�lculo de la experiencia
@@ -79,6 +80,7 @@ public class CombatManager : MonoBehaviour
             // Habilitar la condici�n de victoria
             winCondition.enabled = true;
             winCondition.GetComponentInChildren<TextMeshProUGUI>().text = "YOU LOSE";
+            Cursor.visible = true;
             for (int i = 0;i< playerParty.Count;i++)
             {
                 playerParty[i].defeat = true;

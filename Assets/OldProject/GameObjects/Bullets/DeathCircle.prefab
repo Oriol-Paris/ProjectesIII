@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6722198555629147429}
   - component: {fileID: 6171388147638530017}
   m_Layer: 0
-  m_Name: multishot
+  m_Name: DeathCircle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -48,6 +48,6 @@ MonoBehaviour:
   bulletPrefab: {fileID: 0}
   playerPrefab: {fileID: 4841340973275302747, guid: 8c280260248f7e449925f58bc503ee3b, type: 3}
   enemyPrefab: {fileID: 4841340973275302747, guid: a317dacd44aa3d64da68bf5295072605, type: 3}
-  shotBetweenShots: 0.2
+  shotBetweenShots: 0
   coneAngle: 50
-  numbreBullet: 10
+  numbreBullet: 50

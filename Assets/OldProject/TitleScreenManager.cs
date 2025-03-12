@@ -8,7 +8,7 @@ public class TitleScreenManager : MonoBehaviour
     [SerializeField] private Canvas titleScreen;
     public void StartGame()
     {
-        SceneManager.LoadScene("Level1");
+        SceneManager.LoadScene("Node Map");
     }
     public void BootSettings()
     {
