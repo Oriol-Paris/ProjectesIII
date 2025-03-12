@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
@@ -9,8 +10,7 @@ public class ExplosionHazard : MonoBehaviour
     [SerializeField] private int explosionDamage;
     [SerializeField] private float explosionRadius;
     [SerializeField] private ParticleSystem explosionEffects;
-
-
+    [SerializeField] protected float explosionSpreadDelay;
 
 
     // Update is called once per frame
@@ -20,7 +20,7 @@ public class ExplosionHazard : MonoBehaviour
         if (collision.gameObject.tag == "Bullet")
         {
             explosionEffects.Play();
-            Explode(explosionRadius);
+            Explode(explosionRadius, false);
             Debug.LogWarning("Destroy");
             GetComponent<SpriteRenderer>().enabled = false;
             GetComponent<BoxCollider>().enabled = false;
@@ -37,14 +37,20 @@ public class ExplosionHazard : MonoBehaviour
     }
 
 
-    private void Explode(float radius)
+    private void Explode(float radius, bool spread)
     {
-        
+        if (spread)
+        {
+            StartCoroutine(DelayAction(explosionSpreadDelay));
+        } 
         GameObject player;
         player = GameObject.FindGameObjectWithTag("Player");
 
         GameObject[] enemies;
         enemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+        GameObject[] explosives;
+        explosives = GameObject.FindGameObjectsWithTag("Explosive");
 
         for (int i = 0; i < enemies.Length; i++)
         {
@@ -60,7 +66,19 @@ public class ExplosionHazard : MonoBehaviour
             player.GetComponent<PlayerBase>().Damage(1, this.gameObject);
 
         }
-
         
+        for (int i = 0; i < explosives.Length; i++)
+        {
+            if (IsWithinCircle(explosives[i].transform.position, this.transform.position, radius))
+            {
+
+                explosives[i].GetComponent<ExplosionHazard>().Explode(explosionRadius, true);
+
+            }
+        }
+    }
+    IEnumerator DelayAction(float delayTime)
+    {
+        yield return new WaitForSeconds(delayTime);
     }
 }
