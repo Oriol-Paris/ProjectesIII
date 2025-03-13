@@ -24,7 +24,7 @@ public class EnemyMovementShooter : MonoBehaviour
     private bool isPerformingAction = false;
     private float distanceToPlayer;
     private NavMeshAgent agent;
-    [SerializeField] private float actionCooldown = 0.5f;
+    [SerializeField] private float actionCooldown = 0f;
     private float initialMultiplier;
 
     void Start()
@@ -32,7 +32,7 @@ public class EnemyMovementShooter : MonoBehaviour
         enemyStats = GetComponent<EnemyBase>();
         agent = GetComponent<NavMeshAgent>();
         agent.speed = velocity;
-
+        agent.stoppingDistance = range;
         TimeSecuence[] playersArray = GameObject.FindObjectsByType<TimeSecuence>(FindObjectsSortMode.None);
         players.AddRange(playersArray);
 
@@ -54,8 +54,17 @@ public class EnemyMovementShooter : MonoBehaviour
 
         FindClosestPlayer();
 
-        if (enemyStats.isAlive && closestPlayer != null && closestPlayer.isExecuting && !onCooldown && !isPerformingAction)
+        if (enemyStats.isAlive && closestPlayer != null && closestPlayer.isExecuting&&!onCooldown)
         {
+            ExecuteAction();
+        }
+        if(closestPlayer.isExecuting == false)
+        {
+            agent.isStopped = true;
+            
+        } else if(closestPlayer.isExecuting && turnAction == TurnActions.APPROACH || turnAction == TurnActions.BACK_AWAY)
+        {
+            agent.isStopped = false;
             ExecuteAction();
         }
     }
