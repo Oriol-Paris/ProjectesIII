@@ -17,7 +17,9 @@ public class EnemyBase : MonoBehaviour
     [SerializeField] Rigidbody rb2d;
 
     [SerializeField] GameObject bloodSplash;
-    
+
+
+    private UnityEngine.Vector3 originalPosition;
     private bool isMoving;
     private bool isShoooting;
     public bool isAlive;
@@ -35,6 +37,10 @@ public class EnemyBase : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         collider = GetComponent<Collider>();
         rb2d = GetComponent<Rigidbody>();
+        originalPosition = this.transform.position;
+
+        StartCoroutine(Shake(0.2f, 0.3f));
+
     }
 
     // Update is called once per frame
@@ -84,6 +90,38 @@ public class EnemyBase : MonoBehaviour
             elapsed += Time.deltaTime;
         }
         GetComponent<SpriteRenderer>().color = Color.white;
+    }
+
+    public IEnumerator Shake(float timeLenght, float range)
+    {
+        float elapsed = 0.0f;
+        while (elapsed < timeLenght)
+        {
+            UnityEngine.Vector3 movingPosition = UnityEngine.Vector3.zero;
+
+            float x = 0;
+            float z = 0;
+
+            x = Random.Range(originalPosition.x - 1.0f * range, originalPosition.x + 1.0f * range);
+            z = Random.Range(originalPosition.z - 1.0f * (range / 2), originalPosition.z + 1.0f * (range / 2));
+
+            //Debug.Log(originalPosition);
+            movingPosition.x = x;
+            movingPosition.y = transform.position.y;
+            movingPosition.z = z;
+
+            transform.position = movingPosition;
+
+            elapsed += Time.deltaTime;
+
+
+
+            yield return null;
+
+        }
+
+        transform.position = originalPosition;
+
     }
 
     public float GetRange() { return range; }
