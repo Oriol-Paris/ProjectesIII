@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 0de5eead9dadc614f9314f0169a3726c
+guid: ad476bd86c43de4478c3a49d329e2746
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7323847926860770086
-    second: RedSquare_0
+      213: -2459838159890749543
+    second: Artboard 132_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: RedSquare_0
+      name: Artboard 132_0
       rect:
         serializedVersion: 2
-        x: 0
+        x: 15
         y: 0
-        width: 246
-        height: 245
+        width: 259
+        height: 291
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 62b6485d2e883a560800000000000000
-      internalID: 7323847926860770086
+      spriteID: 997e2c2f936ecddd0800000000000000
+      internalID: -2459838159890749543
       vertices: []
       indices: 
       edges: []
@@ -147,8 +147,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      RedSquare_0: 7323847926860770086
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

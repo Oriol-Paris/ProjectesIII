@@ -22,7 +22,7 @@ public class ShopManager : MonoBehaviour
     public Sprite speedUpImage;
     public Sprite restImage;
     public Sprite maxHPImage;
-    public Sprite manaImage;
+    public Sprite laserImage;
 
     public int rerollPrice;
     bool actionExists;
@@ -188,10 +188,6 @@ public class ShopManager : MonoBehaviour
                 boughtItem.text = "Player MaxHP Up";
                 player.InstantMaxHPIncrease();
                 break;
-            case PlayerBase.ActionEnum.MANA_POTION:
-                boughtItem.text = "Player Time Up";
-                player.InstantManaIncrease();
-                break;
         }
     }
 
@@ -199,15 +195,15 @@ public class ShopManager : MonoBehaviour
     {
         PlayerData.ActionData shotgunShot = new PlayerData.ActionData(PlayerBase.ActionType.ACTIVE, PlayerBase.ActionEnum.SHOOT, KeyCode.None, 2, player.playerData.shotgun);
         PlayerData.ActionData gunShot = new PlayerData.ActionData(PlayerBase.ActionType.ACTIVE, PlayerBase.ActionEnum.SHOOT, KeyCode.None, 1, player.playerData.gun);
+        PlayerData.ActionData laser = new PlayerData.ActionData(PlayerBase.ActionType.ACTIVE, PlayerBase.ActionEnum.SHOOT, KeyCode.None, 2, player.playerData.laser);
         PlayerData.ActionData heal = new PlayerData.ActionData(PlayerBase.ActionType.PASSIVE, PlayerBase.ActionEnum.HEAL, KeyCode.None, 1, player.playerData.healStyle);
         PlayerData.ActionData move = new PlayerData.ActionData(PlayerBase.ActionType.ACTIVE, PlayerBase.ActionEnum.MOVE, KeyCode.None, 1, player.playerData.moveStyle);
         PlayerData.ActionData recovery = new PlayerData.ActionData(PlayerBase.ActionType.SINGLE_USE, PlayerBase.ActionEnum.RECOVERY, KeyCode.None, 1, player.playerData.moveStyle);
         PlayerData.ActionData maxHpIncrease = new PlayerData.ActionData(PlayerBase.ActionType.SINGLE_USE, PlayerBase.ActionEnum.MAX_HP_INCREASE, KeyCode.None, 1, player.playerData.moveStyle);
-        PlayerData.ActionData manaPotion = new PlayerData.ActionData(PlayerBase.ActionType.SINGLE_USE, PlayerBase.ActionEnum.MANA_POTION, KeyCode.None, 1, player.playerData.moveStyle);
         //PlayerData.ActionData speedUp = new PlayerData.ActionData(PlayerBase.ActionType.SINGLE_USE, PlayerBase.ActionEnum.SPEED_UP, KeyCode.None, 1, player.playerData.moveStyle);
         actionPool = new List<PlayerData.ActionData>
         {
-            shotgunShot, gunShot, heal, move, recovery, maxHpIncrease, manaPotion
+            shotgunShot, gunShot, heal, move, recovery, maxHpIncrease, laser
         };
 
         activeActions = new List<ActionData>(4);
@@ -258,6 +254,10 @@ public class ShopManager : MonoBehaviour
             {
                 return "Shotgun";
             }
+            else if (actionData.style.prefab == player.playerData.laser.prefab)
+            {
+                return "Laser";
+            }
         }
         else if (actionData.action == PlayerBase.ActionEnum.HEAL)
         {
@@ -279,10 +279,6 @@ public class ShopManager : MonoBehaviour
         {
             return "Max HP Up";
         }
-        else if (actionData.action == PlayerBase.ActionEnum.MANA_POTION)
-        {
-            return "Time Points Up";
-        }
         return actionData.action.ToString();
     }
 
@@ -297,6 +293,10 @@ public class ShopManager : MonoBehaviour
             else if (actionData.style.prefab == player.playerData.shotgun.prefab)
             {
                 return shotgunImage;
+            }
+            else if (actionData.style.prefab == player.playerData.laser.prefab)
+            {
+                return laserImage;
             }
         }
         else if (actionData.action == PlayerBase.ActionEnum.HEAL)
@@ -315,17 +315,9 @@ public class ShopManager : MonoBehaviour
         {
             return speedUpImage;
         }
-        else if (actionData.action == PlayerBase.ActionEnum.REST)
-        {
-            return restImage;
-        }
         else if (actionData.action == PlayerBase.ActionEnum.MAX_HP_INCREASE)
         {
             return maxHPImage;
-        }
-        else if (actionData.action == PlayerBase.ActionEnum.MANA_POTION)
-        {
-            return manaImage;
         }
         return null;
     }
@@ -344,6 +336,8 @@ public class ShopManager : MonoBehaviour
                     return 15 + (Mathf.FloorToInt(Mathf.Pow(action.style.range, 1.25f)));
                 else if (action.action == PlayerBase.ActionEnum.SHOOT && action.style.prefab == player.playerData.shotgun.prefab)
                     return 25 + (Mathf.FloorToInt(Mathf.Pow(action.style.range, 1.25f)));
+                else if (action.action == PlayerBase.ActionEnum.SHOOT && action.style.prefab == player.playerData.laser.prefab)
+                    return 25 + (Mathf.FloorToInt(Mathf.Pow(action.style.range, 1.25f)));
             }
         }
 
@@ -355,12 +349,12 @@ public class ShopManager : MonoBehaviour
             return 15;
         else if (action.action == PlayerBase.ActionEnum.SHOOT && action.style.prefab == player.playerData.shotgun.prefab)
             return 25;
+        else if (action.action == PlayerBase.ActionEnum.SHOOT && action.style.prefab == player.playerData.laser.prefab)
+            return 25;
         else if (action.action == PlayerBase.ActionEnum.RECOVERY)
             return 10 + 10 * player.playerData.timesHealed;
         else if (action.action == PlayerBase.ActionEnum.MAX_HP_INCREASE)
             return 20 + 20 * player.playerData.timesIncreasedMaxHP;
-        else if (action.action == PlayerBase.ActionEnum.MANA_POTION)
-            return 15 + 15 * player.playerData.timesIncreasedMana;
 
         return 100000;
     }
