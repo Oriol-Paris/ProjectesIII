@@ -29,7 +29,7 @@ MonoBehaviour:
   gun:
     prefab: {fileID: 4841340973275302747, guid: 8c280260248f7e449925f58bc503ee3b, type: 3}
     range: 6
-    damage: 1
+    damage: 0
   shotgun:
     prefab: {fileID: 4841340973275302747, guid: 10864d5b051bdc44e928dd42003a1950, type: 3}
     range: 3
