@@ -37,9 +37,9 @@ public class EnemyBase : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         collider = GetComponent<Collider>();
         rb2d = GetComponent<Rigidbody>();
-        originalPosition = this.transform.position;
+        
 
-        StartCoroutine(Shake(0.2f, 0.3f));
+        
 
     }
 
@@ -63,8 +63,9 @@ public class EnemyBase : MonoBehaviour
     public int GetHealth() { return health; }
     public void Damage(int val, GameObject hitObject)
     {
-        
+        originalPosition = this.transform.position;
         GetComponent<SpriteRenderer>().color = Color.red;
+        StartCoroutine(Shake(0.2f, 0.3f));
         StartCoroutine(whitecolor());
         Instantiate(bloodSplash, this.transform.position, hitObject.transform.rotation);
         //SoundEffectsManager.instance.PlaySoundFXClip(damageClips, transform, 1f);
