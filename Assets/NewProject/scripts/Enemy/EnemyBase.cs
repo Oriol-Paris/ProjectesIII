@@ -72,8 +72,8 @@ public class EnemyBase : MonoBehaviour
     IEnumerator whitecolor()
     {
 
-        Debug.LogWarning(hitFeedBackTime);
-        Debug.LogWarning(GetComponent<SpriteRenderer>().color);
+        
+
         float elapsed = 0;
         while (elapsed < hitFeedBackTime)
         {

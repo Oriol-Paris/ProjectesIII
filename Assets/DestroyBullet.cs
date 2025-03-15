@@ -8,21 +8,24 @@ public class DestroyBullet : MonoBehaviour
     [SerializeField] private Vector3 shootDirection;
     [SerializeField] private float time;
     [SerializeField] private bool fromPlayer;
+    [SerializeField] public int damage;
 
     private cameraManager _camera;
     [SerializeField] float shootCShakeTime;
     [SerializeField] float shootCShakeRange;
 
-   public  float bulletSpeed;
+    public float bulletSpeed = 3.0f;
 
     void Start()
     {
+        damage = FindObjectOfType<PlayerBase>().playerData.gun.damage;
         timeSecuence = FindFirstObjectByType<TimeSecuence>();
         _camera = FindAnyObjectByType<cameraManager>();
         StartCoroutine(_camera.Shake(shootCShakeTime, shootCShakeRange));
+        transform.position = new Vector3(transform.position.x,0,transform.position.z);
     }
 
-    public void setShootDirection(Vector3 _shootDirection)
+    public void setShootDirection(Vector3 _shootDirection,bool itsFromPlayer)
     {
         shootDirection = _shootDirection;
     }
@@ -44,7 +47,7 @@ public class DestroyBullet : MonoBehaviour
 
         if (time >= 7f)
         {
-            //Debug.Log("aaaa0");
+            
             Destroy(gameObject);
         }
 
@@ -62,14 +65,14 @@ public class DestroyBullet : MonoBehaviour
             if (fromPlayer && collision.gameObject.GetComponent<EnemyBase>() != null)
             {
                 EnemyBase hit = collision.gameObject.GetComponent<EnemyBase>();
-                hit.Damage(1, collision.gameObject);
+                hit.Damage(damage, collision.gameObject);
                 Destroy(gameObject);
             }
 
             if(!fromPlayer && collision.gameObject.GetComponent<PlayerBase>() != null)
             {
                 PlayerBase hit = collision.gameObject.GetComponent<PlayerBase>();
-                hit.Damage(1, collision.gameObject);
+                hit.Damage(damage, collision.gameObject);
                 Destroy(gameObject);
             }
         }

@@ -157,12 +157,21 @@ public class EnemyMovementShooter : MonoBehaviour
     {
         if (!hasShot)
         {
-            Vector3 direction = (closestPlayerPos - transform.position).normalized;
-            GameObject bullet = Instantiate(bulletShot, transform.position + transform.forward * 0.5f, Quaternion.identity);
-            bullet.GetComponent<DestroyBullet>().setShootDirection(direction);
-            hasShot = true;
+            Debug.Log("BANG");
+            //SoundEffectsManager.instance.PlaySoundFXClip(shootingClips, transform,1f);
+            GameObject bullet = Instantiate(bulletShot, transform.position, Quaternion.identity);
+            bullet.GetComponent<multiShoot>().setShootDirection((closestPlayerPos - transform.position).normalized,false);
+           
+
+            // Register the bullet with the closest player's movement script
+            //closestPlayer.RegisterBullet(bulletScript);
+
+            hasShot = true; // Mark that it has shot this turn
         }
     }
+
+    // Reload coroutine to wait until the next GetIsMoving toggle after shooting
+    
 
     private IEnumerator AttackCoroutine()
     {
@@ -178,14 +187,14 @@ public class EnemyMovementShooter : MonoBehaviour
             StartCoroutine(Reload());
         }
     }
-
+    
     private IEnumerator Reload()
     {
         yield return new WaitForSeconds(1f);
         hasShot = false;
         StartCoroutine(ActionCooldownCoroutine());
     }
-
+    
     public void DecideAction()
     {
         //if (turnAction != TurnActions.NOTHING || onCooldown) return;

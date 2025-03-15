@@ -1,40 +1,29 @@
 using NUnit.Framework;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class ExplosionHazard : MonoBehaviour
 {
     [SerializeField] private int explosionDamage;
     [SerializeField] private float explosionRadius;
-    private List<Object> objectsInRange;
-        
+    [SerializeField] private ParticleSystem explosionEffects;
+    [SerializeField] protected float explosionSpreadDelay;
+
 
     // Update is called once per frame
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider collision)
     {
-        if (collision != null && collision.gameObject.tag == "Bullet")
+
+        if (collision.gameObject.tag == "Bullet")
         {
-            Debug.LogWarning("Damaged");
-            AreaScan(explosionRadius);
-            Explode();
+            Explode(explosionRadius, false, collision.gameObject);
         }
     }
 
-    private void AreaScan(float radius)
-    {
-        GameObject[] objects;
-        objects = GameObject.FindGameObjectsWithTag("Player");
-        for (int i = 0; i < objects.Length; i++) 
-        {
-            if (IsWithinCircle(objects[i].transform.position, this.transform.position, radius)) 
-            {
-                objectsInRange.Add(objects[i]);
-            }
-        }
-
-    }
     public static bool IsWithinCircle(Vector3 objectPosition, Vector3 centerPosition, float radius)
     {
         float distanceSquared = (objectPosition - centerPosition).sqrMagnitude;
@@ -44,20 +33,58 @@ public class ExplosionHazard : MonoBehaviour
     }
 
 
-    private void Explode()
+    private void Explode(float radius, bool spread, GameObject DamageOrigin)
     {
-        for (int i = 0; i < objectsInRange.Count; i++) {
-            if(((GameObject)objectsInRange[i]).GetComponent<PlayerBase>() != null)
-            {
-                ((GameObject)objectsInRange[i]).GetComponent<PlayerBase>().Damage(explosionDamage, this.gameObject);
-                
+        StartCoroutine(DelayAction(explosionSpreadDelay, spread, radius, DamageOrigin));
+    }
 
-            }
-            if (((GameObject)objectsInRange[i]).GetComponent<EnemyBase>() != null)
+    IEnumerator DelayAction(float delay, bool spread, float radius, GameObject DamageOrigin)
+    {
+        if (spread)
+        {
+            yield return new WaitForSeconds(delay);
+        }
+        explosionEffects.Play();
+        GameObject player = null;
+        player = GameObject.FindGameObjectWithTag("Player");
+
+        GameObject[] enemies = null;
+        enemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+        GameObject[] explosives = null;
+        explosives = GameObject.FindGameObjectsWithTag("Explosive");
+
+          for (int i = 0; i < enemies.Length; ++i)
+          {
+
+              if (IsWithinCircle(enemies[i].transform.position, this.transform.position, radius))
+              {
+                  enemies[i].GetComponent<EnemyBase>().Damage(1, this.gameObject);
+
+              }
+          }
+
+        if (IsWithinCircle(player.transform.position, this.transform.position, radius))
+        {
+            player.GetComponent<PlayerBase>().Damage(1, this.gameObject);
+
+        }
+
+        for (int i = 0; i < explosives.Length; ++i)
+        {
+
+
+            if (IsWithinCircle(explosives[i].transform.position, this.transform.position, radius) && explosives[i] != this.gameObject && explosives[i] != DamageOrigin)
             {
-                ((GameObject)objectsInRange[i]).GetComponent<EnemyBase>().Damage(explosionDamage, this.gameObject);
+
+                explosives[i].GetComponent<ExplosionHazard>().Explode(explosionRadius, true, this.gameObject);
+
             }
 
         }
+        GetComponent<SpriteRenderer>().enabled = false;
+        GetComponent<BoxCollider>().enabled = false;
     }
+
+    
 }

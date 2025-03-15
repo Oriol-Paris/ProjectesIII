@@ -35,6 +35,8 @@ public class TopBarManager : MonoBehaviour
         }
 
         UpdateBottomHotbar();
+
+        Cursor.visible = false;
     }
 
     void Update()
@@ -94,6 +96,7 @@ public class TopBarManager : MonoBehaviour
             }
 
             slot.transform.Find("Action Image").GetComponent<Image>().overrideSprite = GetActionImage(action.action);
+            slot.transform.Find("Action Image").GetComponent<Image>().color = GetActionColor(action.action);
 
             actionSlots.Add(slot);
             actionsDisplayed.Add(action);
@@ -133,5 +136,20 @@ public class TopBarManager : MonoBehaviour
             return runImage;
         }
         return null;
+    }
+
+    private Color GetActionColor(PlayerBase.ActionEnum action)
+    {
+        ControlLiniarRender clr = FindAnyObjectByType<ControlLiniarRender>();
+
+        foreach(var lineColor in clr.lineColors)
+        {
+            if (lineColor.m_action == action)
+            {
+                return lineColor.m_color;
+            }
+        }
+
+        return Color.white;
     }
 }

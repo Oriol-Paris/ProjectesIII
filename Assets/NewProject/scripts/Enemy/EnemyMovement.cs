@@ -17,7 +17,7 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] private float range;
     [SerializeField] private float restTime = 1.5f; // Tiempo de descanso tras un ataque
     [SerializeField] private Collider hitBox;
-    private NavMeshAgent agent; // Referencia al NavMeshAgent
+    [SerializeField]private NavMeshAgent agent; // Referencia al NavMeshAgent
     private SpriteRenderer spriteRenderer; // Referencia al SpriteRenderer
     private bool isResting = false; // Indica si el enemigo está en descanso
     [SerializeField] private float stopDistance = 1.0f; // Distance to stop from the player

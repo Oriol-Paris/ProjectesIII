@@ -1,101 +1,249 @@
-
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class ControlLiniarRender : MonoBehaviour
 {
+    [Serializable]
+    public class LineColor
+    {
+        public Color m_color;
+        public PlayerBase.ActionEnum m_action;
+    }
+
     public Vector3 mousePosition;
     public Vector3 positionDesired;
     public Vector3 playerPosition;
 
     [SerializeField] private int curveResolution = 0;
+    [SerializeField] private float maxReach = 10f;
+    [SerializeField] private float tileScale = 1.0f;
+    [SerializeField] private Material lineMaterial;
+
+    [SerializeField] private bool animateLine = true;
+    [SerializeField] private float scrollSpeed = 0.5f;
+    [SerializeField] private bool scrollReverse = false;
+    private float textureOffset = 0f;
 
     public LineRenderer lineRenderer;
     public List<LineRenderer> lineList = new List<LineRenderer>();
+    public GameObject endOfLineCursor;
 
+    [SerializeField] public List<LineColor> lineColors = new List<LineColor>();
+
+    private Color lineColor = Color.white;
 
     [SerializeField] private List<Vector3> curvePoints = new List<Vector3>();
 
     void Start()
     {
-     
         playerPosition = transform.position;
-        
-    }
 
-    public void Disable(bool disable)
-    {
-        if(disable)
+        if (lineRenderer == null)
         {
-            lineRenderer.enabled = false;
+            lineRenderer = gameObject.AddComponent<LineRenderer>();
+        }
+
+        lineRenderer.startWidth = 0.1f;
+        lineRenderer.endWidth = 0.1f;
+
+        SetupLineMaterial();
+
+        lineRenderer.enabled = true;
+
+        lineRenderer.positionCount = 2;
+        lineRenderer.SetPosition(0, transform.position);
+        lineRenderer.SetPosition(1, transform.position + Vector3.forward);
+
+        if (endOfLineCursor == null)
+        {
+            Debug.LogWarning("No end of line cursor assigned. Create one in the inspector.");
         }
         else
         {
-            lineRenderer.enabled = true;
+            UpdateCursorPosition();
         }
     }
 
-    public void NextMov(bool isMoov) { 
-        //Debug.Log(positionDesired);
-        if (isMoov)
+    private void SetupLineMaterial()
+    {
+        if (lineMaterial == null)
+        {
+            Debug.LogWarning("No material assigned to the LineRenderer. Please assign a material with the TiledLineShader.");
+            return;
+        }
+
+        Material materialInstance = new Material(lineMaterial);
+
+        materialInstance.SetColor("_Color", lineColor);
+
+        materialInstance.SetFloat("_TileScale", tileScale);
+
+        lineRenderer.material = materialInstance;
+
+        lineRenderer.textureMode = LineTextureMode.Tile;
+    }
+
+    void Update()
+    {
+        if (animateLine && lineRenderer != null && lineRenderer.material != null)
+        {
+            textureOffset += (scrollReverse ? -scrollSpeed : scrollSpeed) * Time.deltaTime;
+
+            textureOffset = textureOffset % 1.0f;
+
+            lineRenderer.material.SetTextureOffset("_MainTex", new Vector2(textureOffset, 0));
+        }
+    }
+
+    private void UpdateCursorPosition()
+    {
+        if (endOfLineCursor != null && curvePoints.Count > 0)
+        {
+            endOfLineCursor.transform.position = curvePoints[curvePoints.Count - 1];
+        }
+    }
+
+    public void Disable(bool isDisabled)
+    {
+        if (lineRenderer != null)
+        {
+            lineRenderer.enabled = !isDisabled;
+        }
+
+        if (endOfLineCursor != null)
+        {
+            endOfLineCursor.SetActive(!isDisabled);
+        }
+    }
+
+    public void NextMov(bool isMoving)
+    {
+        if (isMoving)
         {
             playerPosition = positionDesired;
-        }
-
-
-        else
-        {
-            playerPosition = playerPosition;
         }
     }
 
     public void ControlLiniarRenderer()
     {
-        positionDesired = Directorio.mousePosition();
+        if (lineRenderer == null) return;
+
+        lineRenderer.enabled = true;
+
+        RaycastHit hit;
+
+        mousePosition = Directorio.mousePosition();
 
         curvePoints.Clear();
         curvePoints.Add(playerPosition);
+
+        Vector3 direction = (mousePosition - playerPosition).normalized;
+        float distance = Vector3.Distance(playerPosition, mousePosition);
+
+        if (distance > maxReach)
+        {
+            positionDesired = playerPosition + direction * maxReach;
+            distance = maxReach;
+        }
+        else
+        {
+            positionDesired = mousePosition;
+        }
+
+        if (Physics.Raycast(playerPosition, direction, out hit, distance))
+        {
+            if (hit.collider.CompareTag("envairoment"))
+            {
+                float margin = 0.2f;
+                positionDesired = hit.point - (direction * margin);
+            }
+        }
+
         curvePoints.Add(positionDesired);
+
+        UpdateLineRendererr();
+
+        UpdateCursorPosition();
     }
 
     public void InstantiateLineMovment()
     {
-       
-        var newLine = Instantiate(lineRenderer);
+        if (lineRenderer == null) return;
+
         lineRenderer.enabled = true;
-        newLine.positionCount = curvePoints.Count;
-        newLine.SetPositions(curvePoints.ToArray());
-        lineList.Add(newLine);
-       
+
+        var newLine = Instantiate(lineRenderer, transform);
+
+        if (curvePoints.Count > 0)
+        {
+            newLine.positionCount = curvePoints.Count;
+            newLine.SetPositions(curvePoints.ToArray());
+            newLine.SetColors(Color.white, Color.white);
+            lineList.Add(newLine);
+
+            if (lineMaterial != null)
+            {
+                Material newMaterial = new Material(lineMaterial);
+                newMaterial.SetColor("_Color", lineColor);
+                newMaterial.SetFloat("_TileScale", tileScale);
+
+                newMaterial.SetTextureOffset("_MainTex", new Vector2(textureOffset, 0));
+
+                newLine.material = newMaterial;
+            }
+        }
     }
 
     public void UpdateLineRendererr()
     {
- 
+        if (lineRenderer == null) return;
+
         lineRenderer.enabled = true;
-        lineRenderer.positionCount = curvePoints.Count;
-        lineRenderer.SetPositions(curvePoints.ToArray());
-      
+
+        if (curvePoints.Count > 0)
+        {
+            lineRenderer.positionCount = curvePoints.Count;
+            lineRenderer.SetPositions(curvePoints.ToArray());
+
+            UpdateCursorPosition();
+        }
+        else
+        {
+            lineRenderer.positionCount = 2;
+            lineRenderer.SetPosition(0, transform.position);
+            lineRenderer.SetPosition(1, transform.position + Vector3.forward);
+
+            if (endOfLineCursor != null)
+            {
+                endOfLineCursor.transform.position = transform.position + Vector3.forward;
+            }
+        }
     }
 
     public void UpdateCurve()
     {
-
         mousePosition = Directorio.mousePosition();
-       
+
         if (curvePoints.Count < 2) return;
 
+        Vector3 startPos = curvePoints[0];
+        Vector3 endPos = curvePoints[curvePoints.Count - 1];
 
-        Vector3 startToMouse = mousePosition - curvePoints[0];
-        Vector3 direction = startToMouse.normalized;
+        Vector3 direction = (endPos - startPos).normalized;
+        float distance = Vector3.Distance(startPos, endPos);
+        if (distance > maxReach)
+        {
+            endPos = startPos + direction * maxReach;
+            curvePoints[curvePoints.Count - 1] = endPos;
+        }
 
+        Vector3 centerPoint = (startPos + endPos) * 0.5f;
+        Vector3 mainDirection = (endPos - startPos).normalized;
+        Vector3 perpendicular = Vector3.Cross(mainDirection, Vector3.up).normalized;
 
-        float curveIntensity = Vector3.Distance(curvePoints[0], mousePosition) * 0.5f;
-
-        
-        Vector3 midPoint = curvePoints[0] + direction * curveIntensity;
-
+        float lateralOffset = Vector3.Dot(mousePosition - centerPoint, perpendicular);
+        Vector3 midPoint = centerPoint + perpendicular * lateralOffset * 0.5f;
 
         if (curvePoints.Count == 3)
         {
@@ -110,10 +258,9 @@ public class ControlLiniarRender : MonoBehaviour
             curvePoints.Insert(1, midPoint);
         }
 
-       
+        UpdateLineRendererr();
     }
 
-  
     public float CalculateCurveLength()
     {
         if (curvePoints.Count < 3) return 0;
@@ -133,19 +280,41 @@ public class ControlLiniarRender : MonoBehaviour
         return length;
     }
 
-
     public List<Vector3> getCurvePoint() { return curvePoints; }
-
 
     public void ResetControlLiniarRenderer()
     {
         curvePoints.Clear();
         foreach (var line in lineList)
         {
-            Destroy(line.gameObject);
+            if (line != null)
+            {
+                Destroy(line.gameObject);
+            }
         }
         lineList.Clear();
         playerPosition = transform.position;
 
+        lineRenderer.positionCount = 2;
+        lineRenderer.SetPosition(0, transform.position);
+        lineRenderer.SetPosition(1, transform.position + Vector3.forward);
+        lineRenderer.enabled = true;
+
+        if (endOfLineCursor != null)
+        {
+            endOfLineCursor.transform.position = transform.position + Vector3.forward;
+        }
+    }
+
+    public void ChangeLineColor(PlayerBase.Action action)
+    {
+        foreach (var color in lineColors)
+        {
+            if (color.m_action == action.m_action)
+            {
+                lineRenderer.material.SetColor("_Color", color.m_color);
+                break;
+            }
+        }
     }
 }

@@ -78,6 +78,8 @@ public class PlayerBase : MonoBehaviour
         turnsDone = GetComponent<PlayerActionManager>();
         checkMovement = GetComponent<OG_MovementByMouse>();
         _camera = FindAnyObjectByType<cameraManager>();
+
+        this.GetComponent<ControlLiniarRender>().ChangeLineColor(activeAction);
     }
 
     private void LoadPlayerData()
@@ -185,9 +187,6 @@ public class PlayerBase : MonoBehaviour
 
     IEnumerator whitecolor()
     {
-
-        Debug.LogWarning(hitFeedBackTime);
-        Debug.LogWarning(GetComponent<SpriteRenderer>().color);
         float elapsed = 0;
         while (elapsed < hitFeedBackTime)
         {
