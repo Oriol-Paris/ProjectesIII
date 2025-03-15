@@ -158,10 +158,9 @@ public class EnemyMovementShooter : MonoBehaviour
         if (!hasShot)
         {
             Debug.Log("BANG");
-            //SoundEffectsManager.instance.PlaySoundFXClip(shootingClips, transform,1f);
             GameObject bullet = Instantiate(bulletShot, transform.position, Quaternion.identity);
             bullet.GetComponent<multiShoot>().setShootDirection((closestPlayerPos - transform.position).normalized,false);
-           
+            SoundEffectsManager.instance.PlaySoundFXClip(shootingClips, transform, 1f);
 
             // Register the bullet with the closest player's movement script
             //closestPlayer.RegisterBullet(bulletScript);
@@ -222,8 +221,9 @@ public class EnemyMovementShooter : MonoBehaviour
         yield return new WaitForSeconds(actionCooldown);
         onCooldown = false;
         isPerformingAction = false;
-        hasShot = false;
+        turnAction = TurnActions.NOTHING;
     }
+
     public void ResetTurnAction()
     {
         turnAction = TurnActions.NOTHING;

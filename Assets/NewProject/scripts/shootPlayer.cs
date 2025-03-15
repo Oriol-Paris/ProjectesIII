@@ -43,6 +43,7 @@ public class shootPlayer : MonoBehaviour
     {
         this.GetComponent<Animator>().SetTrigger("attack");
         fx.SetTrigger("playFX");
+        SoundEffectsManager.instance.PlaySoundFXClip(GetComponent<PlayerActionManager>().shootClip, transform, 1f);
         List<Tuple<Vector3, Vector3, Vector3>> MovList = controlListMovment.MovList;
         var firstItem = MovList[Count];
         Vector3 _playerPosition = firstItem.Item1;
