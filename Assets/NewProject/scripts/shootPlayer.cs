@@ -9,7 +9,7 @@ public class shootPlayer : MonoBehaviour
     public TimeSecuence timeSecuence;
     public Animator fx;
 
-    public List<GameObject> bulletPrefab;
+    public GameObject bulletPrefab;
 
     
     
@@ -30,7 +30,7 @@ public class shootPlayer : MonoBehaviour
             {
 
                 controlListMovment.AddMovement(controlLiniarRender, 0.75f, PlayerBase.ActionEnum.SHOOT);
-
+                bulletPrefab = GetComponent<PlayerBase>().GetAction().m_style.prefab;
             }
         }
         else
@@ -51,9 +51,8 @@ public class shootPlayer : MonoBehaviour
 
         Vector3 shootDirection = (_controlPoint - _playerPosition).normalized;
 
-        GameObject bullet = Instantiate(GetComponent<PlayerBase>().GetAction().m_style.prefab, _playerPosition, Quaternion.identity);
+        GameObject bullet = Instantiate(bulletPrefab, _playerPosition, Quaternion.identity);
 
-        
         if(bullet.GetComponent<DestroyBullet>() != null)
         {
             bullet.GetComponent<DestroyBullet>().setShootDirection(shootDirection, true);
