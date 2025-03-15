@@ -133,7 +133,7 @@ MonoBehaviour:
     m_Bits: 16
   damageableLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   maxLaserDistance: 10
   laserDamage: 1
 --- !u!65 &4933270922853928885

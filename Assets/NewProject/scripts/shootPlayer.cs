@@ -9,7 +9,7 @@ public class shootPlayer : MonoBehaviour
     public TimeSecuence timeSecuence;
     public Animator fx;
 
-    public GameObject bulletPrefab;
+    public List<GameObject> bulletPrefab;
 
     
     
@@ -51,10 +51,21 @@ public class shootPlayer : MonoBehaviour
 
         Vector3 shootDirection = (_controlPoint - _playerPosition).normalized;
 
-        GameObject bullet = Instantiate(bulletPrefab, _playerPosition, Quaternion.identity);
+        GameObject bullet = Instantiate(GetComponent<PlayerBase>().GetAction().m_style.prefab, _playerPosition, Quaternion.identity);
 
         
-        bullet.GetComponent<DestroyBullet>().setShootDirection(shootDirection,true);
+        if(bullet.GetComponent<DestroyBullet>() != null)
+        {
+            bullet.GetComponent<DestroyBullet>().setShootDirection(shootDirection, true);
+            Debug.Log("bullet has gun");
+        } else if(bullet.GetComponent<multiShoot>()!=null)
+        {
+            Debug.Log("Bullet has other gun");
+            bullet.GetComponent<multiShoot>().setShootDirection(shootDirection, true);
+        }else if(bullet.GetComponent<LaserBullet>()!=null)
+        {
+            bullet.GetComponent<LaserBullet>().setShootDirection(shootDirection);
+        }
 
         
 

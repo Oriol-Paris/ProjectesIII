@@ -140,9 +140,9 @@ public class TimeSecuence : MonoBehaviour
         if (actions.Count > 0)
         {
             isExecuting = true;
-        Debug.Log("Executing stored actions");
+             Debug.Log("Executing stored actions");
             notacction = true;
-        StartCoroutine(ExecuteActions());
+            StartCoroutine(ExecuteActions());
             actualTime = totalTime;
         }
         

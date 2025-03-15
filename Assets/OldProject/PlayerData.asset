@@ -18,11 +18,11 @@ MonoBehaviour:
   maxActionPoints: 3
   maxTime: 3
   lastLevel: Level1
-  levelCompleted: 0
+  levelCompleted: 1
   timesHealed: 0
   timesIncreasedMaxHP: 0
   baseRange: 6
-  exp: 238947
+  exp: 238804
   isAlive: 1
   victory: 0
   gun:
@@ -30,7 +30,7 @@ MonoBehaviour:
     range: 6
     damage: 1
   shotgun:
-    prefab: {fileID: 4841340973275302747, guid: 10864d5b051bdc44e928dd42003a1950, type: 3}
+    prefab: {fileID: 1680710797403148065, guid: 9dcd6820efc4c4b488ecff9dbb33f555, type: 3}
     range: 3
     damage: 2
   healStyle:
@@ -62,6 +62,6 @@ MonoBehaviour:
     key: 50
     style:
       prefab: {fileID: 4841340973275302747, guid: 8c280260248f7e449925f58bc503ee3b, type: 3}
-      range: 6
-      damage: 1
+      range: 9
+      damage: 2
     cost: 1
