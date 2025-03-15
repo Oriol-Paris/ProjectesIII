@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Numerics;
 using System.Timers;
 using TMPro;
-using UnityEditor.Rendering;
+
 using UnityEngine;
 
 public class EnemyBase : MonoBehaviour
@@ -47,7 +47,8 @@ public class EnemyBase : MonoBehaviour
             isAlive = false;
             spriteRenderer.color = Color.grey;
             collider.enabled = false;
-            
+            rb2d.useGravity = false;
+            rb2d.detectCollisions = false;
 
         }
 

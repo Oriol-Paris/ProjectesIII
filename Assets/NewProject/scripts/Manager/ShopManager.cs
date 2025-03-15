@@ -3,8 +3,7 @@ using TMPro;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using static PlayerData;
-using UnityEngine.EventSystems;
-using System.Xml;
+using System;
 
 public class ShopManager : MonoBehaviour
 {
@@ -143,6 +142,7 @@ public class ShopManager : MonoBehaviour
             actionData.key = (KeyCode)System.Enum.Parse(typeof(KeyCode), "Alpha" + (player.playerData.availableActions.Count+1));
             player.playerData.availableActions.Add(actionData);
             statIncreaseCount[actionData] = 0;  // Initialize the stat increase count
+            Debug.Log("Item equipped");
         }
     }
 
@@ -213,7 +213,7 @@ public class ShopManager : MonoBehaviour
         // Randomize actions and prices
         for (int i = 0; i < 4; i++) // Assuming there are only four buttons
         {
-            int randomIndex = Random.Range(0, actionPool.Count);
+            int randomIndex = UnityEngine.Random.Range(0, actionPool.Count);
             PlayerData.ActionData actionData = actionPool[randomIndex];
             activeActions.Add(actionData);
 
