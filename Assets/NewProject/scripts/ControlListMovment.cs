@@ -10,7 +10,7 @@ public class ControlListMovment : MonoBehaviour
     public List<Tuple<Vector3, Vector3, Vector3>> MovList = new List<Tuple<Vector3, Vector3, Vector3>>();
     public List<float> timeConsum = new List<float>();
 
-    [SerializeField] private float maxDistance = 20f;
+    [SerializeField] private float maxDistance = 10f;
 
     public float t = 0;
 

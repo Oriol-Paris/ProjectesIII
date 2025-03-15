@@ -21,6 +21,8 @@ public class TopBarManager : MonoBehaviour
 
     public Sprite runImage;
     public Sprite gunImage;
+    public Sprite shotgunImage;
+    public Sprite laserImage;
     public Sprite healImage;
 
     void Start()
@@ -36,7 +38,11 @@ public class TopBarManager : MonoBehaviour
 
         UpdateBottomHotbar();
 
-        Cursor.visible = false;
+#if UNITY_EDITOR
+        Cursor.visible = true;
+#else
+       Cursor.visible = false;
+#endif
     }
 
     void Update()
@@ -47,7 +53,7 @@ public class TopBarManager : MonoBehaviour
     public void AddAction(PlayerBase.ActionEnum action)
     {
         GameObject newAction = Instantiate(topActionPrefab, topPanel.transform);
-        newAction.GetComponent<Image>().overrideSprite = GetActionImage(action);
+        newAction.GetComponent<Image>().overrideSprite = GetActionImage(playerData.activeAction);
     }
 
     void UpdateBottomHotbar()
@@ -80,22 +86,23 @@ public class TopBarManager : MonoBehaviour
 
             if (action.action == player.GetAction().m_action)
             {
-                if (action.style.prefab != player.playerData.gun.prefab && action.style.prefab != player.playerData.shotgun.prefab)
+                if (action.style.prefab != player.playerData.gun.prefab && action.style.prefab != player.playerData.shotgun.prefab && action.style.prefab != player.playerData.laser.prefab)
                 {
                     slot.GetComponent<Image>().color = Color.yellow;
                 }
                 else if ((action.style.prefab == player.playerData.gun.prefab && player.GetAction().m_style.prefab == player.playerData.gun.prefab)
-                    || (action.style.prefab == player.playerData.shotgun.prefab && player.GetAction().m_style.prefab == player.playerData.shotgun.prefab))
+                    || (action.style.prefab == player.playerData.shotgun.prefab && player.GetAction().m_style.prefab == player.playerData.shotgun.prefab)
+                    || (action.style.prefab == player.playerData.laser.prefab && player.GetAction().m_style.prefab == player.playerData.laser.prefab))
                 {
                     slot.GetComponent<Image>().color = Color.yellow;
                 }
                 else
                 {
-                    slot.GetComponent<Image>().color = new Color(0f, 0f, 0f, 0f);
+                    slot.GetComponent<Image>().color = Color.white;
                 }
             }
 
-            slot.transform.Find("Action Image").GetComponent<Image>().overrideSprite = GetActionImage(action.action);
+            slot.transform.Find("Action Image").GetComponent<Image>().overrideSprite = GetActionImage(action);
             slot.transform.Find("Action Image").GetComponent<Image>().color = GetActionColor(action.action);
 
             actionSlots.Add(slot);
@@ -119,23 +126,39 @@ public class TopBarManager : MonoBehaviour
         return new Vector2(slotWidth, slotHeight);
     }
 
-    private Sprite GetActionImage(PlayerBase.ActionEnum action)
+    private Sprite GetActionImage(PlayerBase.Action action)
     {
         PlayerBase player = FindAnyObjectByType<PlayerBase>();
 
-        if (action == PlayerBase.ActionEnum.SHOOT)
+        if (action.m_action == PlayerBase.ActionEnum.SHOOT)
         {
-            return gunImage;
+            if(action.m_style.prefab == player.playerData.gun.prefab)
+            {
+                return gunImage;
+            }
+            else if (action.m_style.prefab == player.playerData.shotgun.prefab)
+            {
+                return shotgunImage;
+            }
+            else if (action.m_style.prefab == player.playerData.laser.prefab)
+            {
+                return laserImage;
+            }
         }
-        else if (action == PlayerBase.ActionEnum.HEAL)
+        else if (action.m_action == PlayerBase.ActionEnum.HEAL)
         {
             return healImage;
         }
-        else if (action == PlayerBase.ActionEnum.MOVE)
+        else if (action.m_action == PlayerBase.ActionEnum.MOVE)
         {
             return runImage;
         }
         return null;
+    }
+
+    private Sprite GetActionImage(PlayerData.ActionData action)
+    {
+        return GetActionImage(new PlayerBase.Action(action.actionType, action.action, action.key, action.cost, action.style));
     }
 
     private Color GetActionColor(PlayerBase.ActionEnum action)

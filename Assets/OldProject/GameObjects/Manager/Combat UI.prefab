@@ -864,6 +864,8 @@ MonoBehaviour:
   bottomActionPrefab: {fileID: 8655032155819557984, guid: 6fc74242154bd1740b2982e70cb9b938, type: 3}
   runImage: {fileID: 21300000, guid: 80a31360147518a4c878052c987d2472, type: 3}
   gunImage: {fileID: 21300000, guid: 04c9e5448c757a54a9482dd91faef38a, type: 3}
+  shotgunImage: {fileID: 21300000, guid: 982cfee97721db245a0c0ea21a8fbddc, type: 3}
+  laserImage: {fileID: 21300000, guid: e80a286d54d378e4fab7e89e4f5b70a5, type: 3}
   healImage: {fileID: 21300000, guid: 800fb34dc71becd4f98a6c0c7bca341b, type: 3}
 --- !u!1 &4900446580998595886
 GameObject:

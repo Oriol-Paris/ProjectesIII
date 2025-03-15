@@ -9,7 +9,7 @@ public class PlayerBase : MonoBehaviour
 
     public PlayerData playerData; // Reference to the ScriptableObject containing player data
 
-    public enum ActionEnum { MOVE, SHOOT, HEAL, MELEE, REST, RECOVERY, SPEED_UP, MANA_POTION, MAX_HP_INCREASE, NOTHING };
+    public enum ActionEnum { MOVE, SHOOT, HEAL, MELEE, RECOVERY, SPEED_UP, MAX_HP_INCREASE, NOTHING };
     public enum ActionType { ACTIVE, PASSIVE, SINGLE_USE };
 
     [System.Serializable]
@@ -122,12 +122,6 @@ public class PlayerBase : MonoBehaviour
 
                         if (action.m_style != null)
                             activeStyle = action.m_style;
-
-                        if (activeAction.m_action == ActionEnum.REST)
-                        {
-                            checkMovement.ExecuteRestAction();
-                            turnsDone.EndTurn(); // End the turn after resting
-                        }
                     }
                 }
             }
@@ -288,18 +282,6 @@ public class PlayerBase : MonoBehaviour
         health += amount;
 
         playerData.timesIncreasedMaxHP++;
-    }
-
-    public void InstantManaIncrease(int amount = 1)
-    {
-        playerData.maxTime += amount;
-
-        if(playerData.actionPoints > playerData.maxActionPoints)
-            playerData.actionPoints = playerData.maxActionPoints;
-
-        actionPoints = playerData.actionPoints;
-
-        playerData.timesIncreasedMana++;
     }
 
     public void SetRange(float newRange) { range = newRange; }

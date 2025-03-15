@@ -125,10 +125,6 @@ public class PlayerActionManager : MonoBehaviour
                     }
                     break;
                 case PlayerBase.ActionType.SINGLE_USE:
-                    if (actionData.action == PlayerBase.ActionEnum.REST)
-                    {
-                        activeActions.Add(actionData.action, new RestAction());
-                    }
                     break;
                     // Add other cases if you have SingleUse or other action types
             }

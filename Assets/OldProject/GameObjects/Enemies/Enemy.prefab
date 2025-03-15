@@ -108,7 +108,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player: {fileID: 0}
-  velocity: 1.5
+  velocity: 4
   range: 5
   restTime: 1.5
   hitBox: {fileID: 1162141195956936038}

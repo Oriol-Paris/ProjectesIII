@@ -157,8 +157,7 @@ MonoBehaviour:
   - Level3
   - Level4
   - Level5
-  eventLevels:
-  - SampleScene
+  eventLevels: []
   shopLevel: ShopScene
   buttonPrefab: {fileID: 8054894118478366324, guid: 3d61aad779734b944bfd6ba92ca74492, type: 3}
   linePrefab: {fileID: 5499991067966864891, guid: ac22e8b23ef67d14f9aba583c1578fde, type: 3}
