@@ -1,4 +1,5 @@
 using JetBrains.Annotations;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -19,19 +20,7 @@ public class PlayerData : ScriptableObject
     public bool isAlive;
     public bool victory;
 
-    [System.Serializable]
-    public class BulletStyle
-    {
-        public GameObject prefab;
-        public int range;
-        public int damage;
-    }
-
-    public BulletStyle gun;
-    public BulletStyle shotgun;
-    public BulletStyle healStyle; // Add this line for healing
-    public BulletStyle moveStyle; // Add this line for moving
-    public BulletStyle laser; // Add this line for laser bullet
+    [NonSerialized] public BulletCollection bulletCollection = new BulletCollection();
 
     public int healAmount = 10; 
     
@@ -54,7 +43,5 @@ public class PlayerData : ScriptableObject
         public KeyCode key;
         public BulletStyle style;
         public int cost;
-
-        
     }
 }

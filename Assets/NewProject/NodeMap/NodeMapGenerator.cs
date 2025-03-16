@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class NodeMapGenerator : MonoBehaviour
@@ -48,19 +49,34 @@ public class NodeMapGenerator : MonoBehaviour
 
     void Start()
     {
+#if UNITY_EDITOR
         if (nodeMapData == null)
         {
             nodeMapData = Resources.Load<NodeMapData>("NodeMapData");
         }
+#else
+        NodeMapData loadedData = NodeMapData.LoadFromDisk();
+        if (loadedData != null && loadedData.nodes != null && loadedData.nodes.Count > 0)
+        {
+            nodeMapData = loadedData;
+        }
+        else if (nodeMapData == null)
+        {
+            nodeMapData = ScriptableObject.CreateInstance<NodeMapData>();
+        }
+#endif
 
-        if (nodeMapData != null && nodeMapData.nodes != null && nodeMapData.nodes.Count > 0)
+        bool shouldRebuild = nodeMapData != null &&
+                            nodeMapData.nodes != null &&
+                            nodeMapData.nodes.Count > 0;
+
+        if (shouldRebuild)
         {
             RebuildNodesFromData();
         }
         else
         {
             GenerateNodes();
-
             if (nodeMapData != null)
             {
                 SaveMapToData();
@@ -78,11 +94,13 @@ public class NodeMapGenerator : MonoBehaviour
 
     void RebuildNodesFromData()
     {
+        if (nodeMapData == null || nodeMapData.nodes == null) return;
+
         nodes.Clear();
-        // Create nodes based on stored data order.
+
         for (int i = 0; i < nodeMapData.nodes.Count; i++)
         {
-            NodeMapData.NodeData data = nodeMapData.nodes[i];
+            NodeData data = nodeMapData.nodes[i];
             Node node = new Node
             {
                 type = data.type,
@@ -93,15 +111,17 @@ public class NodeMapGenerator : MonoBehaviour
             };
             nodes.Add(node);
         }
-        // Restore parent-child relationships.
+
         for (int i = 0; i < nodeMapData.nodes.Count; i++)
         {
-            NodeMapData.NodeData data = nodeMapData.nodes[i];
+            NodeData data = nodeMapData.nodes[i];
             Node node = nodes[i];
+
             if (data.parentIndex >= 0 && data.parentIndex < nodes.Count)
             {
                 node.Parent = nodes[data.parentIndex];
             }
+
             foreach (int childIndex in data.childrenIndices)
             {
                 if (childIndex >= 0 && childIndex < nodes.Count)
@@ -116,11 +136,12 @@ public class NodeMapGenerator : MonoBehaviour
     {
         if (nodeMapData != null)
         {
-            nodeMapData.nodes = new List<NodeMapData.NodeData>();
+            nodeMapData.nodes = new List<NodeData>();
+
             for (int i = 0; i < nodes.Count; i++)
             {
                 Node node = nodes[i];
-                NodeMapData.NodeData data = new NodeMapData.NodeData
+                NodeData data = new NodeData
                 {
                     type = node.type,
                     destination = node.destination,
@@ -130,6 +151,7 @@ public class NodeMapGenerator : MonoBehaviour
                     parentIndex = node.Parent != null ? nodes.IndexOf(node.Parent) : -1,
                     childrenIndices = new List<int>()
                 };
+
                 foreach (Node child in node.Children)
                 {
                     int index = nodes.IndexOf(child);
@@ -138,8 +160,10 @@ public class NodeMapGenerator : MonoBehaviour
                         data.childrenIndices.Add(index);
                     }
                 }
+
                 nodeMapData.nodes.Add(data);
             }
+
             nodeMapData.Save();
         }
     }
@@ -150,19 +174,23 @@ public class NodeMapGenerator : MonoBehaviour
         Node startNode = new Node { type = NodeType.PLAYABLE, destination = playableLevels[0] };
         Node endNode = new Node { type = NodeType.PLAYABLE, destination = playableLevels[playableLevels.Count - 1] };
         List<Node> intermediateNodes = new List<Node>();
+
         for (int i = 1; i < playableLevels.Count - 1; i++)
         {
             intermediateNodes.Add(new Node { type = NodeType.PLAYABLE, destination = playableLevels[i] });
         }
+
         foreach (string evLevel in eventLevels)
         {
             intermediateNodes.Add(new Node { type = NodeType.EVENT, destination = evLevel });
         }
+
         if (!string.IsNullOrEmpty(shopLevel))
         {
             Node shopNode = new Node { type = NodeType.SHOP, destination = shopLevel };
             intermediateNodes.Add(shopNode);
         }
+
         intermediateNodes = intermediateNodes.OrderBy(x => Random.value).ToList();
         nodes.Add(startNode);
         nodes.AddRange(intermediateNodes);
@@ -175,6 +203,7 @@ public class NodeMapGenerator : MonoBehaviour
         layers.Add(new List<Node> { nodes[0] });
         List<Node> intermediateNodes = nodes.Skip(1).Take(nodes.Count - 2).ToList();
         int numIntermediateLevels = Mathf.CeilToInt(intermediateNodes.Count / 3f);
+
         for (int i = 0; i < numIntermediateLevels; i++)
         {
             List<Node> layerNodes = new List<Node>();
@@ -186,11 +215,14 @@ public class NodeMapGenerator : MonoBehaviour
             }
             layers.Add(layerNodes);
         }
+
         layers.Add(new List<Node> { nodes[nodes.Count - 1] });
+
         for (int l = 0; l < layers.Count - 1; l++)
         {
             List<Node> currentLayer = layers[l];
             List<Node> nextLayer = layers[l + 1];
+
             foreach (Node next in nextLayer)
             {
                 Node parent = currentLayer[Random.Range(0, currentLayer.Count)];
@@ -198,6 +230,7 @@ public class NodeMapGenerator : MonoBehaviour
                 if (!parent.Children.Contains(next))
                     parent.Children.Add(next);
             }
+
             foreach (Node current in currentLayer)
             {
                 if (current.Children.Count == 0 && nextLayer.Count > 0)
@@ -206,6 +239,7 @@ public class NodeMapGenerator : MonoBehaviour
                     current.Children.Add(child);
                     child.Parent = current;
                 }
+
                 int extraConnections = Random.Range(0, 2);
                 for (int c = 0; c < extraConnections; c++)
                 {
@@ -225,6 +259,7 @@ public class NodeMapGenerator : MonoBehaviour
         float ySpacing = 200f;
         float xSpacing = 300f;
         Dictionary<int, List<Node>> depthLevels = new Dictionary<int, List<Node>>();
+
         foreach (var node in nodes)
         {
             int depth = GetNodeDepth(node);
@@ -232,6 +267,7 @@ public class NodeMapGenerator : MonoBehaviour
                 depthLevels[depth] = new List<Node>();
             depthLevels[depth].Add(node);
         }
+
         foreach (var level in depthLevels)
         {
             int count = level.Value.Count;
@@ -275,8 +311,8 @@ public class NodeMapGenerator : MonoBehaviour
         else
         {
             Node deepestCleared = nodes.Where(n => n.cleared)
-                                       .OrderByDescending(n => GetNodeDepth(n))
-                                       .First();
+                                     .OrderByDescending(n => GetNodeDepth(n))
+                                     .First();
             lastClearedNode = deepestCleared;
             foreach (var node in nodes)
             {
@@ -297,6 +333,7 @@ public class NodeMapGenerator : MonoBehaviour
             buttonObj.GetComponent<RectTransform>().anchoredPosition = node.Position;
             Button btn = buttonObj.GetComponent<Button>();
             Image img = buttonObj.GetComponent<Image>();
+
             switch (node.type)
             {
                 case NodeType.PLAYABLE:
@@ -309,6 +346,7 @@ public class NodeMapGenerator : MonoBehaviour
                     img.sprite = shopLevelSprite;
                     break;
             }
+
             string destination = node.destination;
             btn.onClick.AddListener(() => LoadScene(node, destination));
             nodeButtons[node] = btn;
@@ -327,11 +365,13 @@ public class NodeMapGenerator : MonoBehaviour
                 Vector3 direction = (child.Position - node.Position).normalized;
                 Vector3 startPos = new Vector3(node.Position.x, node.Position.y, transform.position.z) + direction * offset;
                 Vector3 endPos = new Vector3(child.Position.x, child.Position.y, transform.position.z) - direction * offset;
+
                 line.positionCount = 2;
                 line.SetPosition(0, startPos);
                 line.SetPosition(1, endPos);
                 line.startWidth = 5f;
                 line.endWidth = 5f;
+
                 connections.Add(new Connection { parent = node, child = child, lineRenderer = line });
             }
         }
@@ -371,7 +411,7 @@ public class NodeMapGenerator : MonoBehaviour
             SaveMapToData();
         }
 
-        UnityEngine.SceneManagement.SceneManager.LoadScene(sceneName);
+        //SceneManager.LoadScene(sceneName);
     }
 
     void Update()

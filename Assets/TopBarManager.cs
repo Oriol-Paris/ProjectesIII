@@ -86,13 +86,7 @@ public class TopBarManager : MonoBehaviour
 
             if (action.action == player.GetAction().m_action)
             {
-                if (action.style.prefab != player.playerData.gun.prefab && action.style.prefab != player.playerData.shotgun.prefab && action.style.prefab != player.playerData.laser.prefab)
-                {
-                    slot.GetComponent<Image>().color = Color.yellow;
-                }
-                else if ((action.style.prefab == player.playerData.gun.prefab && player.GetAction().m_style.prefab == player.playerData.gun.prefab)
-                    || (action.style.prefab == player.playerData.shotgun.prefab && player.GetAction().m_style.prefab == player.playerData.shotgun.prefab)
-                    || (action.style.prefab == player.playerData.laser.prefab && player.GetAction().m_style.prefab == player.playerData.laser.prefab))
+                if (BulletCollection.CompareBullets(action.style, player.GetAction().m_style))
                 {
                     slot.GetComponent<Image>().color = Color.yellow;
                 }
@@ -132,15 +126,15 @@ public class TopBarManager : MonoBehaviour
 
         if (action.m_action == PlayerBase.ActionEnum.SHOOT)
         {
-            if(action.m_style.prefab == player.playerData.gun.prefab)
+            if(action.m_style.bulletType == BulletType.GUN)
             {
                 return gunImage;
             }
-            else if (action.m_style.prefab == player.playerData.shotgun.prefab)
+            else if (action.m_style.bulletType == BulletType.SHOTGUN)
             {
                 return shotgunImage;
             }
-            else if (action.m_style.prefab == player.playerData.laser.prefab)
+            else if (action.m_style.bulletType == BulletType.LASER)
             {
                 return laserImage;
             }

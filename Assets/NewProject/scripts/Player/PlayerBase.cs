@@ -5,8 +5,6 @@ using UnityEngine;
 [System.Serializable]
 public class PlayerBase : MonoBehaviour
 {
-    
-
     public PlayerData playerData; // Reference to the ScriptableObject containing player data
 
     public enum ActionEnum { MOVE, SHOOT, HEAL, MELEE, RECOVERY, SPEED_UP, MAX_HP_INCREASE, NOTHING };
@@ -15,7 +13,7 @@ public class PlayerBase : MonoBehaviour
     [System.Serializable]
     public struct Action
     {
-        public Action(ActionType type, ActionEnum action, KeyCode key, int cost, PlayerData.BulletStyle style = null)
+        public Action(ActionType type, ActionEnum action, KeyCode key, int cost, BulletStyle style = null)
         {
             m_action = action;
             m_key = key;
@@ -27,7 +25,7 @@ public class PlayerBase : MonoBehaviour
 
         public ActionEnum m_action { get; private set; }
         public KeyCode m_key { get; private set; }
-        public PlayerData.BulletStyle m_style { get; private set; }
+        public BulletStyle m_style { get; private set; }
 
         public int m_cost { get; private set; }
 
@@ -37,7 +35,7 @@ public class PlayerBase : MonoBehaviour
     #region VARIABLES
 
     private cameraManager _camera;
-    public PlayerData.BulletStyle activeStyle { get; private set; }
+    public BulletStyle activeStyle { get; private set; }
 
     public float health;
     public float maxHealth;

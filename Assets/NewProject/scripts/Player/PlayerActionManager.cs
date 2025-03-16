@@ -260,7 +260,7 @@ public class PlayerActionManager : MonoBehaviour
         }
     }
     
-    public IEnumerator AttackCoroutine(PlayerBase.ActionEnum action, Vector3 newPos, PlayerData.BulletStyle style)
+    public IEnumerator AttackCoroutine(PlayerBase.ActionEnum action, Vector3 newPos, BulletStyle style)
     {
         shootLineRenderer.enabled = false;
         this.GetComponent<Animator>().SetTrigger("attack");

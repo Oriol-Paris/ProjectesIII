@@ -25,7 +25,7 @@ public class TimeSecuence : MonoBehaviour
 
     public List<PlayerBase.ActionEnum> actions = new List<PlayerBase.ActionEnum>();
     private List<Vector3> actionTargets = new List<Vector3>();
-    private List<PlayerData.BulletStyle> bulletStyles = new List<PlayerData.BulletStyle>(); // Add this line
+    private List<BulletStyle> bulletStyles = new List<BulletStyle>(); // Add this line
 
     [SerializeField] private PlayerBase playerBase;
     [SerializeField] private PlayerActionManager actionManager;

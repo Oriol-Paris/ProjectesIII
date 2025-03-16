@@ -18,7 +18,7 @@ public class DestroyBullet : MonoBehaviour
 
     void Start()
     {
-        damage = FindObjectOfType<PlayerBase>().playerData.gun.damage;
+        damage = FindAnyObjectByType<PlayerBase>().playerData.bulletCollection.GetBullet(BulletType.GUN).damage;
         timeSecuence = FindFirstObjectByType<TimeSecuence>();
         _camera = FindAnyObjectByType<cameraManager>();
         StartCoroutine(_camera.Shake(shootCShakeTime, shootCShakeRange));

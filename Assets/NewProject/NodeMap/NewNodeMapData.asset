@@ -21,10 +21,10 @@ MonoBehaviour:
     cleared: 0
     enabled: 0
   - type: 0
-    destination: Level3
-    position: {x: 0, y: 0}
-    parentIndex: -1
-    childrenIndices: 
+    destination: Level2
+    position: {x: -300, y: 200}
+    parentIndex: 0
+    childrenIndices: 04000000
     cleared: 0
     enabled: 0
   - type: 2
@@ -36,17 +36,24 @@ MonoBehaviour:
     enabled: 0
   - type: 0
     destination: Level4
-    position: {x: 0, y: 0}
-    parentIndex: -1
-    childrenIndices: 
+    position: {x: 0, y: 200}
+    parentIndex: 0
+    childrenIndices: 04000000
+    cleared: 1
+    enabled: 0
+  - type: 2
+    destination: ShopScene
+    position: {x: 300, y: 200}
+    parentIndex: 0
+    childrenIndices: 04000000
     cleared: 0
     enabled: 0
   - type: 0
-    destination: Level2
-    position: {x: 0, y: 0}
-    parentIndex: -1
-    childrenIndices: 
-    cleared: 0
+    destination: Level3
+    position: {x: 0, y: 400}
+    parentIndex: 1
+    childrenIndices: 05000000
+    cleared: 1
     enabled: 0
   - type: 0
     destination: Level5
@@ -54,4 +61,4 @@ MonoBehaviour:
     parentIndex: -1
     childrenIndices: 
     cleared: 0
-    enabled: 0
+    enabled: 1

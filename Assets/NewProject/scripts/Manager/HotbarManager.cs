@@ -82,12 +82,11 @@ public class HotbarManager : MonoBehaviour
 
                 if (action.action == player.GetAction().m_action)
                 {
-                    if (action.style.prefab != player.playerData.gun.prefab && action.style.prefab != player.playerData.shotgun.prefab)
+                    if (action.style.bulletType != BulletType.GUN && action.style.bulletType != BulletType.SHOTGUN)
                     {
                         slot.GetComponent<Image>().color = Color.yellow;
                     }
-                    else if ((action.style.prefab == player.playerData.gun.prefab && player.GetAction().m_style.prefab == player.playerData.gun.prefab) 
-                        || (action.style.prefab == player.playerData.shotgun.prefab && player.GetAction().m_style.prefab == player.playerData.shotgun.prefab))
+                    else if (BulletCollection.CompareBullets(action.style, player.GetAction().m_style))
                     {
                         slot.GetComponent<Image>().color = Color.yellow;
                     }
@@ -140,11 +139,11 @@ public class HotbarManager : MonoBehaviour
     {
         if (actionData.action == PlayerBase.ActionEnum.SHOOT)
         {
-            if (actionData.style.prefab == FindAnyObjectByType<PlayerBase>().playerData.gun.prefab)
+            if (actionData.style.bulletType == BulletType.GUN)
             {
                 return "Gun";
             }
-            else if (actionData.style.prefab == FindAnyObjectByType<PlayerBase>().playerData.shotgun.prefab)
+            else if (actionData.style.bulletType == BulletType.SHOTGUN)
             {
                 return "Shotgun";
             }

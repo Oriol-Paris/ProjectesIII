@@ -193,13 +193,13 @@ public class ShopManager : MonoBehaviour
 
     private void InitializeShop()
     {
-        PlayerData.ActionData shotgunShot = new PlayerData.ActionData(PlayerBase.ActionType.ACTIVE, PlayerBase.ActionEnum.SHOOT, KeyCode.None, 2, player.playerData.shotgun);
-        PlayerData.ActionData gunShot = new PlayerData.ActionData(PlayerBase.ActionType.ACTIVE, PlayerBase.ActionEnum.SHOOT, KeyCode.None, 1, player.playerData.gun);
-        PlayerData.ActionData laser = new PlayerData.ActionData(PlayerBase.ActionType.ACTIVE, PlayerBase.ActionEnum.SHOOT, KeyCode.None, 2, player.playerData.laser);
-        PlayerData.ActionData heal = new PlayerData.ActionData(PlayerBase.ActionType.PASSIVE, PlayerBase.ActionEnum.HEAL, KeyCode.None, 1, player.playerData.healStyle);
-        PlayerData.ActionData move = new PlayerData.ActionData(PlayerBase.ActionType.ACTIVE, PlayerBase.ActionEnum.MOVE, KeyCode.None, 1, player.playerData.moveStyle);
-        PlayerData.ActionData recovery = new PlayerData.ActionData(PlayerBase.ActionType.SINGLE_USE, PlayerBase.ActionEnum.RECOVERY, KeyCode.None, 1, player.playerData.moveStyle);
-        PlayerData.ActionData maxHpIncrease = new PlayerData.ActionData(PlayerBase.ActionType.SINGLE_USE, PlayerBase.ActionEnum.MAX_HP_INCREASE, KeyCode.None, 1, player.playerData.moveStyle);
+        PlayerData.ActionData shotgunShot = new PlayerData.ActionData(PlayerBase.ActionType.ACTIVE, PlayerBase.ActionEnum.SHOOT, KeyCode.None, 2, player.playerData.bulletCollection.GetBullet(BulletType.SHOTGUN));
+        PlayerData.ActionData gunShot = new PlayerData.ActionData(PlayerBase.ActionType.ACTIVE, PlayerBase.ActionEnum.SHOOT, KeyCode.None, 1, player.playerData.bulletCollection.GetBullet(BulletType.GUN));
+        PlayerData.ActionData laser = new PlayerData.ActionData(PlayerBase.ActionType.ACTIVE, PlayerBase.ActionEnum.SHOOT, KeyCode.None, 2, player.playerData.bulletCollection.GetBullet(BulletType.LASER));
+        PlayerData.ActionData heal = new PlayerData.ActionData(PlayerBase.ActionType.PASSIVE, PlayerBase.ActionEnum.HEAL, KeyCode.None, 1, null);
+        PlayerData.ActionData move = new PlayerData.ActionData(PlayerBase.ActionType.ACTIVE, PlayerBase.ActionEnum.MOVE, KeyCode.None, 1, null);
+        PlayerData.ActionData recovery = new PlayerData.ActionData(PlayerBase.ActionType.SINGLE_USE, PlayerBase.ActionEnum.RECOVERY, KeyCode.None, 1, null);
+        PlayerData.ActionData maxHpIncrease = new PlayerData.ActionData(PlayerBase.ActionType.SINGLE_USE, PlayerBase.ActionEnum.MAX_HP_INCREASE, KeyCode.None, 1, null);
         //PlayerData.ActionData speedUp = new PlayerData.ActionData(PlayerBase.ActionType.SINGLE_USE, PlayerBase.ActionEnum.SPEED_UP, KeyCode.None, 1, player.playerData.moveStyle);
         actionPool = new List<PlayerData.ActionData>
         {
@@ -246,15 +246,15 @@ public class ShopManager : MonoBehaviour
     {
         if (actionData.action == PlayerBase.ActionEnum.SHOOT)
         {
-            if (actionData.style.prefab == player.playerData.gun.prefab)
+            if (actionData.style.bulletType == BulletType.GUN)
             {
                 return "Gun";
             }
-            else if (actionData.style.prefab == player.playerData.shotgun.prefab)
+            else if (actionData.style.bulletType == BulletType.SHOTGUN)
             {
                 return "Shotgun";
             }
-            else if (actionData.style.prefab == player.playerData.laser.prefab)
+            else if (actionData.style.bulletType == BulletType.LASER)
             {
                 return "Laser";
             }
@@ -286,15 +286,15 @@ public class ShopManager : MonoBehaviour
     {
         if (actionData.action == PlayerBase.ActionEnum.SHOOT)
         {
-            if (actionData.style.prefab == player.playerData.gun.prefab)
+            if (actionData.style.bulletType == BulletType.GUN)
             {
                 return gunImage;
             }
-            else if (actionData.style.prefab == player.playerData.shotgun.prefab)
+            else if (actionData.style.bulletType == BulletType.SHOTGUN)
             {
                 return shotgunImage;
             }
-            else if (actionData.style.prefab == player.playerData.laser.prefab)
+            else if (actionData.style.bulletType == BulletType.LASER)
             {
                 return laserImage;
             }
@@ -332,11 +332,11 @@ public class ShopManager : MonoBehaviour
                     return 10 + (Mathf.FloorToInt(Mathf.Pow(action.style.range, 1.25f)));
                 else if (action.action == PlayerBase.ActionEnum.HEAL)
                     return 10 + (Mathf.FloorToInt(Mathf.Pow(player.playerData.healAmount, 1.25f)));
-                else if (action.action == PlayerBase.ActionEnum.SHOOT && action.style.prefab == player.playerData.gun.prefab)
+                else if (action.action == PlayerBase.ActionEnum.SHOOT && action.style.bulletType == BulletType.GUN)
                     return 15 + (Mathf.FloorToInt(Mathf.Pow(action.style.range, 1.25f)));
-                else if (action.action == PlayerBase.ActionEnum.SHOOT && action.style.prefab == player.playerData.shotgun.prefab)
+                else if (action.action == PlayerBase.ActionEnum.SHOOT && action.style.bulletType == BulletType.SHOTGUN)
                     return 25 + (Mathf.FloorToInt(Mathf.Pow(action.style.range, 1.25f)));
-                else if (action.action == PlayerBase.ActionEnum.SHOOT && action.style.prefab == player.playerData.laser.prefab)
+                else if (action.action == PlayerBase.ActionEnum.SHOOT && action.style.bulletType == BulletType.LASER)
                     return 25 + (Mathf.FloorToInt(Mathf.Pow(action.style.range, 1.25f)));
             }
         }
@@ -345,11 +345,11 @@ public class ShopManager : MonoBehaviour
             return 10;
         else if (action.action == PlayerBase.ActionEnum.HEAL)
             return 10;
-        else if (action.action == PlayerBase.ActionEnum.SHOOT && action.style.prefab == player.playerData.gun.prefab)
+        else if (action.action == PlayerBase.ActionEnum.SHOOT && action.style.bulletType == BulletType.GUN)
             return 15;
-        else if (action.action == PlayerBase.ActionEnum.SHOOT && action.style.prefab == player.playerData.shotgun.prefab)
+        else if (action.action == PlayerBase.ActionEnum.SHOOT && action.style.bulletType == BulletType.SHOTGUN)
             return 25;
-        else if (action.action == PlayerBase.ActionEnum.SHOOT && action.style.prefab == player.playerData.laser.prefab)
+        else if (action.action == PlayerBase.ActionEnum.SHOOT && action.style.bulletType == BulletType.LASER)
             return 25;
         else if (action.action == PlayerBase.ActionEnum.RECOVERY)
             return 10 + 10 * player.playerData.timesHealed;
