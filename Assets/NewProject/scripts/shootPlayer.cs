@@ -8,11 +8,12 @@ public class shootPlayer : MonoBehaviour
     public ControlListMovment controlListMovment;
     public TimeSecuence timeSecuence;
     public Animator fx;
+    private int internalIterator = 0;
+    public List<GameObject> bulletPrefab;
 
-    public GameObject bulletPrefab;
+    GameObject bullet;
 
-    
-    
+
 
     public void preShoot()
     {
@@ -30,7 +31,8 @@ public class shootPlayer : MonoBehaviour
             {
 
                 controlListMovment.AddMovement(controlLiniarRender, 0.75f, PlayerBase.ActionEnum.SHOOT);
-                bulletPrefab = GetComponent<PlayerBase>().GetAction().m_style.prefab;
+                bulletPrefab.Add(GetComponent<PlayerBase>().GetAction().m_style.prefab);
+                
             }
         }
         else
@@ -50,10 +52,13 @@ public class shootPlayer : MonoBehaviour
         Vector3 _controlPoint = firstItem.Item2;
 
         Vector3 shootDirection = (_controlPoint - _playerPosition).normalized;
+        
+        if (bulletPrefab[internalIterator] != null) { 
 
-        GameObject bullet = Instantiate(bulletPrefab, _playerPosition, Quaternion.identity);
-
-        if(bullet.GetComponent<DestroyBullet>() != null)
+            bullet = Instantiate(bulletPrefab[internalIterator], _playerPosition, Quaternion.identity);
+            internalIterator++;
+        }
+        if (bullet.GetComponent<DestroyBullet>() != null)
         {
             bullet.GetComponent<DestroyBullet>().setShootDirection(shootDirection, true);
             Debug.Log("bullet has gun");
@@ -69,5 +74,7 @@ public class shootPlayer : MonoBehaviour
         
 
     }
+
+    public void SetInternalIterator(int amount) { internalIterator = amount; }
 
 }

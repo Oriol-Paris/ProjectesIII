@@ -178,6 +178,8 @@ public class TimeSecuence : MonoBehaviour
         actionManager.preShootPath.Clear();
         actionManager.visualPlayerAfterShoot.Clear();
         actionManager.shootpoints.Clear();
+        GetComponent<shootPlayer>().bulletPrefab.Clear();
+        GetComponent<shootPlayer>().SetInternalIterator(0);
         isExecuting = false;
 
         FindAnyObjectByType<TopBarManager>().ResetTopBar();
