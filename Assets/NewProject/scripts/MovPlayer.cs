@@ -81,13 +81,11 @@ public class MovPlayer : MonoBehaviour
 
       
         this.GetComponent<PlayerActionManager>().WalkingSound();
-        // float a = Directorio.ApproximateBezierLength(_playerPosition, _controlPoint,_positionDesired,1);
-        // Debug.Log(a);
+       
         float duration = controlListMovment.timeConsum[movCount]; // Tiempo deseado para el movimiento
         float fixedDeltaTime = Time.deltaTime / duration;
         
-        //Debug.Log(velocity);
-        //Debug.Log(controlListMovment.timeConsum[movCount]);
+       
 
         t += velocity * fixedDeltaTime;
 
