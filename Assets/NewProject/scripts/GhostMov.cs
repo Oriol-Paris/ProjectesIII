@@ -15,6 +15,8 @@ public class GhostMov : MonoBehaviour
     [SerializeField] private float velocity = 1f;
     [SerializeField] private float tiemp = 0f;
 
+    
+
 
 
     public float t;
@@ -40,8 +42,8 @@ public class GhostMov : MonoBehaviour
             switch (action)
             {
                 case PlayerBase.ActionEnum.SHOOT:
-                    
-                   
+
+                    this.GetComponent<Animator>().SetTrigger("attack");
                     yield return new WaitForSeconds(0.75f);
                     movCount++;
 
