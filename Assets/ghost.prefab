@@ -345,22 +345,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7985519555228967366}
-  - component: {fileID: 1251202436317223770}
-  - component: {fileID: 8584045141074783902}
   - component: {fileID: 73541132482798089}
   - component: {fileID: 3499610218160799801}
-  - component: {fileID: 498754982940256858}
-  - component: {fileID: 1251141132472822132}
-  - component: {fileID: 7324284292620221592}
-  - component: {fileID: 5103112988284754988}
-  - component: {fileID: 7189739028029077113}
-  - component: {fileID: 6045879003536822004}
-  - component: {fileID: 4476756505495577889}
-  - component: {fileID: 2554926273211331863}
-  - component: {fileID: 4528686633142332479}
-  - component: {fileID: 4026666568815950345}
+  - component: {fileID: 5236960388339608502}
   m_Layer: 0
-  m_Name: Player
+  m_Name: ghost
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -384,75 +373,6 @@ Transform:
   - {fileID: 7330715069190877286}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1251202436317223770
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6993864842785556067}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1f263461156138f44afbe9f44d9f2293, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mousePosition: {x: 0, y: 0, z: 0}
-  positionDesired: {x: 0, y: 0, z: 0}
-  playerPosition: {x: 0, y: 0, z: 0}
-  lineRenderer: {fileID: 1145941097933022349}
-  shootLineRenderer: {fileID: 0}
-  shootpoints: []
-  curvePoints: []
-  visualPlayerAfterShoot: []
-  preShootPath: []
-  prefPreShoot: {fileID: 8692861098284185572, guid: 1846c6badfef9834b9070ae3d6268d06, type: 3}
-  timeSceuence: {fileID: 7189739028029077113}
-  player: {fileID: 8584045141074783902}
-  dialogueManager: {fileID: 0}
-  fx: {fileID: 6904931311285059048}
-  isMoving: 0
-  isShooting: 0
-  isHealing: 0
-  turnAdded: 0
-  turnsDone: 0
-  costShoot: 0.4
-  walkSoundDelay: 0.1
-  movePlayer: {fileID: 4476756505495577889}
-  shootClip:
-  - {fileID: 8300000, guid: 6a3e850acd190164d9bea800f4e24812, type: 3}
-  walkingClips:
-  - {fileID: 8300000, guid: 800348d9004d7344fbfe34d05735214e, type: 3}
-  - {fileID: 8300000, guid: 3c86f529a7726ba449d33a82786f52eb, type: 3}
-  - {fileID: 8300000, guid: 4776d3af08497d34585054155750bd88, type: 3}
-  shootP: {fileID: 6045879003536822004}
---- !u!114 &8584045141074783902
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6993864842785556067}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa45039ced6d3494a9722175dca2c5f5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerData: {fileID: 11400000, guid: 30cde2f3bd3a0de47a315ed687870d98, type: 2}
-  health: 10
-  maxHealth: 0
-  actionPoints: 3
-  maxActionPoints: 0
-  range: 3
-  exp: 0
-  turnsDone: {fileID: 1251202436317223770}
-  availableActions: []
-  victory: 0
-  defeat: 0
-  damageClips:
-  - {fileID: 8300000, guid: 94e3b24d75a0cda4980ec5134a8e6da9, type: 3}
-  - {fileID: 8300000, guid: fc8dae0e97caff040998967dcf1ff972, type: 3}
-  - {fileID: 8300000, guid: f76dafa51ef36cc42a86cc9a6ecbabdc, type: 3}
-  bloodSplash: {fileID: 7700263313313388815, guid: 34d4d40cf4e3e3045972def69b9f3dc4, type: 3}
 --- !u!95 &73541132482798089
 Animator:
   serializedVersion: 7
@@ -520,7 +440,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 10
   m_Sprite: {fileID: -6360279559682097336, guid: 910f662863ea39141adea76064dcfc26, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.4745098}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -530,27 +450,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &498754982940256858
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6993864842785556067}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 65f5a2370e62d6a4db4eec9c8fac8380, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mousePositionWorld: {x: 0, y: 0, z: 0}
-  playerPosition: {x: 0, y: 0, z: 0}
-  positionDesired: {x: 0, y: 0, z: 0}
-  lineRenderer1: {fileID: 1145941097933022349}
-  lineRenderer2: {fileID: 0}
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 0
---- !u!114 &1251141132472822132
+--- !u!114 &5236960388339608502
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -559,195 +459,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 6993864842785556067}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 599239f003c2c9a4a938e6fcae556c2a, type: 3}
+  m_Script: {fileID: 11500000, guid: 30fa5eaa994bad349882f60fa34bb188, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!65 &7324284292620221592
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6993864842785556067}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 0.2}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!54 &5103112988284754988
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6993864842785556067}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 112
-  m_CollisionDetection: 0
---- !u!114 &7189739028029077113
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6993864842785556067}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3751eac9fad097647ad777670baae6d5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  actualTime: 0
-  totalTime: 3
-  isExecuting: 0
-  canInvokeGhost: 1
-  lastPosition: {x: 0, y: 0, z: 0}
-  play: 0
-  movPlayer: {fileID: 4476756505495577889}
-  player: {fileID: 6993864842785556067}
-  shootPl: {fileID: 6045879003536822004}
-  controlListMovment: {fileID: 4528686633142332479}
-  actions: 
-  playerBase: {fileID: 8584045141074783902}
-  actionManager: {fileID: 1251202436317223770}
-  notacction: 0
---- !u!114 &6045879003536822004
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6993864842785556067}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 44fc981e223626b4eb847658d7a1598f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  controlLiniarRender: {fileID: 2554926273211331863}
-  controlListMovment: {fileID: 4528686633142332479}
-  timeSecuence: {fileID: 7189739028029077113}
-  fx: {fileID: 6904931311285059048}
-  bulletPrefab: {fileID: 4841340973275302747, guid: 8c280260248f7e449925f58bc503ee3b, type: 3}
---- !u!114 &4476756505495577889
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6993864842785556067}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2d0373a7b444224398a68a9bfe18b68, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  controlLiniarRender: {fileID: 2554926273211331863}
-  controlListMovment: {fileID: 4528686633142332479}
-  timeSecuence: {fileID: 7189739028029077113}
-  t: 0
+  _timeConsum: []
   maxDistance: 20
   velocity: 1
   tiemp: 0
-  timeSceuence: {fileID: 7189739028029077113}
-  placeSelected: 0
-  isMoving: 0
-  isDragging: 0
---- !u!114 &2554926273211331863
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6993864842785556067}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6a36704461b4e24ebb49a430a568517, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mousePosition: {x: 0, y: 0, z: 0}
-  positionDesired: {x: 0, y: 0, z: 0}
-  playerPosition: {x: 0, y: 0, z: 0}
-  curveResolution: 0
-  maxReach: 10
-  tileScale: 4
-  lineMaterial: {fileID: 2100000, guid: 4a10f03634df60c489a85fc47ade7847, type: 2}
-  animateLine: 1
-  scrollSpeed: 0.5
-  scrollReverse: 1
-  lineRenderer: {fileID: 1145941097933022349}
-  lineList: []
-  endOfLineCursor: {fileID: 4946164215817653845}
-  lineColors:
-  - m_color: {r: 0, g: 0.10980392, b: 1, a: 1}
-    m_action: 0
-  - m_color: {r: 1, g: 0.8901961, b: 0, a: 1}
-    m_action: 1
-  curvePoints: []
---- !u!114 &4528686633142332479
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6993864842785556067}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b29106fb42b4d6c4fb61201146a119db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timeSceuence: {fileID: 7189739028029077113}
-  timeConsum: []
-  ghostsPlayers: []
-  maxDistance: 20
   t: 0
-  ghostPlayer: {fileID: 6993864842785556067, guid: 785ff20f51df2be40b3fbda2c31b3afc, type: 3}
---- !u!114 &4026666568815950345
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6993864842785556067}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: befa5a8330344994286e20c10a68831e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mousePosition: {x: 0, y: 0, z: 0}
-  positionDesired: {x: 0, y: 0, z: 0}
-  playerPosition: {x: 0, y: 0, z: 0}
-  placeSelected: 0
-  isMoving: 0
-  isDragging: 0
-  isResting: 0
-  t: 0
-  velocity: 0
-  lineRenderer: {fileID: 0}
-  curveResolution: 20
-  playerBase: {fileID: 0}
-  movementTimeLimit: 5
-  timer: 0

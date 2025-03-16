@@ -112,6 +112,7 @@ MonoBehaviour:
   range: 5
   restTime: 1.5
   hitBox: {fileID: 1162141195956936038}
+  agent: {fileID: 0}
   stopDistance: 1
 --- !u!114 &3400037044067970028
 MonoBehaviour:
