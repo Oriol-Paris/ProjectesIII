@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 [System.Serializable]
 public class PlayerBase : MonoBehaviour
@@ -60,9 +61,46 @@ public class PlayerBase : MonoBehaviour
 
     #endregion
 
+    private void Awake()
+    {
+        // Load saved data before Start() is called
+        PlayerData loadedData = PlayerData.LoadFromDisk();
+        if (loadedData != null)
+        {
+            // Copy the loaded data to our scriptable object
+            playerData.health = loadedData.health;
+            playerData.maxHealth = loadedData.maxHealth;
+            playerData.actionPoints = loadedData.actionPoints;
+            playerData.maxActionPoints = loadedData.maxActionPoints;
+            playerData.maxTime = loadedData.maxTime;
+            playerData.lastLevel = loadedData.lastLevel;
+            playerData.levelCompleted = loadedData.levelCompleted;
+            playerData.timesHealed = loadedData.timesHealed;
+            playerData.timesIncreasedMaxHP = loadedData.timesIncreasedMaxHP;
+            playerData.moveRange = loadedData.moveRange;
+            playerData.exp = loadedData.exp;
+            playerData.isAlive = loadedData.isAlive;
+            playerData.victory = loadedData.victory;
+            playerData.healAmount = loadedData.healAmount;
+
+            // Clear and copy actions
+            playerData.availableActions.Clear();
+            foreach (var action in loadedData.availableActions)
+            {
+                playerData.availableActions.Add(action);
+            }
+        }
+        else
+        {
+            // If no saved data exists, this might be the first time playing
+            playerData.SaveOriginalPlayerIfNotExists();
+        }
+    }
+
     void Start()
     {
-        if(playerData.health<=0){
+        if (playerData.health <= 0)
+        {
             playerData.health = playerData.maxHealth;
         }
         LoadPlayerData();
@@ -71,11 +109,18 @@ public class PlayerBase : MonoBehaviour
         {
             activeAction = availableActions[0];
         }
-        
+
         isInAction = false;
         turnsDone = GetComponent<PlayerActionManager>();
         checkMovement = GetComponent<OG_MovementByMouse>();
         _camera = FindAnyObjectByType<cameraManager>();
+
+        // Only save level start state if this is a new level
+        if (playerData.lastLevel != SceneManager.GetActiveScene().name)
+        {
+            playerData.lastLevel = SceneManager.GetActiveScene().name;
+            playerData.SavePlayerAtLevelStart();
+        }
 
         this.GetComponent<ControlLiniarRender>().ChangeLineColor(activeAction);
     }
@@ -91,12 +136,19 @@ public class PlayerBase : MonoBehaviour
         isAlive = playerData.isAlive;
         victory = playerData.victory;
 
+        // Clear existing actions before loading
+        availableActions.Clear();
+
         // Load available actions from playerData and populate availableActions list
         foreach (var actionData in playerData.availableActions)
         {
-            if(activeStyle == null && actionData.action == ActionEnum.SHOOT)
+            if (actionData.action == ActionEnum.SHOOT)
             {
-                actionData.style = FindAnyObjectByType<BulletCollection>().GetBullet(actionData.bulletType);
+                // Only get the bullet style if it hasn't been set yet
+                if (actionData.style == null)
+                {
+                    actionData.style = FindAnyObjectByType<BulletCollection>().GetBullet(actionData.bulletType);
+                }
             }
 
             availableActions.Add(new Action(
@@ -108,8 +160,9 @@ public class PlayerBase : MonoBehaviour
             ));
         }
 
-        range = playerData.baseRange;  // Set initial range from playerData
+        range = playerData.moveRange;
     }
+
 
     void Update()
     {
@@ -129,7 +182,7 @@ public class PlayerBase : MonoBehaviour
                 }
             }
 
-            range = activeAction.m_style != null ? activeAction.m_style.range : playerData.baseRange;
+            range = activeAction.m_style != null ? activeAction.m_style.range : playerData.moveRange;
 
             if (activeAction.m_action == ActionEnum.HEAL)
             {
@@ -196,6 +249,48 @@ public class PlayerBase : MonoBehaviour
         GetComponent<SpriteRenderer>().color = Color.white;
     }
 
+    public void SaveCurrentState()
+    {
+        playerData.Save();
+    }
+
+    public void ResetToLevelStart()
+    {
+        playerData.ResetToLevelStart();
+        LoadPlayerData();
+    }
+
+    public void ResetToOriginal()
+    {
+        playerData.ResetToOriginal();
+        LoadPlayerData();
+    }
+
+    private void OnApplicationQuit()
+    {
+        SaveCurrentState();
+    }
+
+    private void OnDestroy()
+    {
+        SaveCurrentState();
+    }
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        SaveCurrentState();
+    }
+
+
     #region GETTERS
 
     public float GetRange() { return range; }
@@ -222,6 +317,8 @@ public class PlayerBase : MonoBehaviour
         playerData.health = Mathf.Min(playerData.health, maxHealth);
 
         activeAction = Action.nothing;
+
+        SaveCurrentState();
     }
 
     public void Rest()
@@ -235,12 +332,12 @@ public class PlayerBase : MonoBehaviour
         activeAction = Action.nothing;
         turnsDone.ResetFlags(); // End the turn after resting
 
+        SaveCurrentState();
+
     }
 
     public void Damage(int val, GameObject hitObject) 
-    { 
-
-
+    {
         health -= val; 
         playerData.health -= val;
        
@@ -261,6 +358,8 @@ public class PlayerBase : MonoBehaviour
                 StartCoroutine(DeathCoroutine());
             }
         }
+
+        SaveCurrentState();
     }
 
     public void InstantHeal(int amount = 1)
@@ -275,6 +374,8 @@ public class PlayerBase : MonoBehaviour
         health = playerData.health;
 
         playerData.timesHealed++;
+
+        SaveCurrentState();
     }
 
     public void InstantMaxHPIncrease(int amount = 1)
@@ -285,6 +386,8 @@ public class PlayerBase : MonoBehaviour
         health += amount;
 
         playerData.timesIncreasedMaxHP++;
+
+        SaveCurrentState();
     }
 
     public void SetRange(float newRange) { range = newRange; }

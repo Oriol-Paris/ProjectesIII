@@ -411,7 +411,7 @@ public class NodeMapGenerator : MonoBehaviour
             SaveMapToData();
         }
 
-        //SceneManager.LoadScene(sceneName);
+        SceneManager.LoadScene(sceneName);
     }
 
     void Update()

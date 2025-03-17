@@ -60,7 +60,6 @@ public class EnemyMovement : MonoBehaviour
                     Attack();
                 }
                 agent.isStopped = false;
-                Debug.Log("MEEEP");
                 GetComponent<Animator>().SetBool("isMoving", true);
 
                 // Calculate the destination with an offset
