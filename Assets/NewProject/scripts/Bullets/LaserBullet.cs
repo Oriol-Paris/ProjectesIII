@@ -15,7 +15,7 @@ public class LaserBullet : MonoBehaviour
     private Vector3 laserEndPoint;
     private void Start()
     {
-        laserDamage = FindAnyObjectByType<BulletCollection>().GetBullet(BulletType.GUN).damage;
+        //laserDamage = FindAnyObjectByType<BulletCollection>().GetBullet(BulletType.GUN).damage;
     }
     void Update()
     {
@@ -38,10 +38,12 @@ public class LaserBullet : MonoBehaviour
                 if (hit.collider.TryGetComponent(out EnemyBase enemy))
                 {
                     enemy.Damage(laserDamage, hit.collider.gameObject);
+                    Destroy(gameObject);
                 }
                 else if (hit.collider.TryGetComponent(out PlayerBase player))
                 {
                     player.Damage(laserDamage, hit.collider.gameObject);
+                    Destroy(gameObject);
                 }
             }
         }
