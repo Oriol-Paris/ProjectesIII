@@ -159,7 +159,17 @@ public class EnemyMovementShooter : MonoBehaviour
         {
             Debug.Log("BANG");
             GameObject bullet = Instantiate(bulletShot, transform.position, Quaternion.identity);
-            bullet.GetComponent<multiShoot>().setShootDirection((closestPlayerPos - transform.position).normalized,false);
+            if(bullet.GetComponent<multiShoot>() != null)
+            {
+                bullet.GetComponent<multiShoot>().setShootDirection((closestPlayerPos - transform.position).normalized, false);
+            } else if (bullet.GetComponent<tripleShoot>() != null)
+            {
+                bullet.GetComponent<tripleShoot>().setShootDirection((closestPlayerPos-transform.position).normalized, true);
+            } else if(bullet.GetComponent<DestroyBullet>()!= null)
+            {
+                bullet.GetComponent<DestroyBullet>().setShootDirection((closestPlayerPos-transform.position).normalized, true);
+            }
+            
             SoundEffectsManager.instance.PlaySoundFXClip(shootingClips, transform, 1f);
 
             // Register the bullet with the closest player's movement script
