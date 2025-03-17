@@ -6,7 +6,7 @@ public class PlayerAnims : MonoBehaviour
     {
         Animator animator = this.GetComponent<Animator>();
 
-        animator.SetBool("isMoving", this.GetComponent<OG_MovementByMouse>().GetIsMoving() && this.GetComponent<PlayerActionManager>().isMoving);
+        animator.SetBool("isMoving", this.GetComponent<TimeSecuence>().isExecuting && this.GetComponent<PlayerActionManager>().isMoving);
         animator.SetBool("isDead", !this.GetComponent<PlayerBase>().GetIsAlive());
     }
 }

@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 
@@ -11,6 +11,7 @@ public class TimeSecuence : MonoBehaviour
     public float totalTime = 3;
     float rang = 10f;
     public bool isExecuting;
+    public bool canInvokeGhost  =true;
     public Vector3 lastPosition;
 
     public bool play = false;
@@ -20,10 +21,11 @@ public class TimeSecuence : MonoBehaviour
     public GameObject player;
 
     public shootPlayer shootPl;
+    public ControlListMovment controlListMovment;
 
-    private List<PlayerBase.ActionEnum> actions = new List<PlayerBase.ActionEnum>();
+    public List<PlayerBase.ActionEnum> actions = new List<PlayerBase.ActionEnum>();
     private List<Vector3> actionTargets = new List<Vector3>();
-    private List<PlayerData.BulletStyle> bulletStyles = new List<PlayerData.BulletStyle>(); // Add this line
+    private List<BulletStyle> bulletStyles = new List<BulletStyle>(); // Add this line
 
     [SerializeField] private PlayerBase playerBase;
     [SerializeField] private PlayerActionManager actionManager;
@@ -88,6 +90,7 @@ public class TimeSecuence : MonoBehaviour
 
     IEnumerator ExecuteActions()
     {
+        canInvokeGhost = false;
         int movCount = 0;
         Debug.Log(actions.Count);
         play = true;
@@ -140,13 +143,16 @@ public class TimeSecuence : MonoBehaviour
         if (actions.Count > 0)
         {
             isExecuting = true;
-        Debug.Log("Executing stored actions");
+             Debug.Log("Executing stored actions");
             notacction = true;
+            controlListMovment.DestroyAllGhostrs();
         StartCoroutine(ExecuteActions());
             actualTime = totalTime;
         }
         
     }
+
+
 
     private Vector3 GetMouseTargetPosition()
     {
@@ -162,10 +168,12 @@ public class TimeSecuence : MonoBehaviour
     {
         notacction = false;
         play = false;
+        canInvokeGhost = true;
         actions.Clear();
         actionTargets.Clear();
         bulletStyles.Clear(); // Add this line
         movPlayer.finish();
+        controlListMovment.DestroyAllGhostrs();
         foreach (var line in actionManager.visualPlayerAfterShoot)
         {
             Destroy(line.gameObject);

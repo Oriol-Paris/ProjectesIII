@@ -9,7 +9,7 @@ public class cameraManager : MonoBehaviour
     UnityEngine.Rendering.Universal.Vignette colorPostProces;
     Vector3 originalPosition;
     Vector3 movingPosition;
-    float elapsed;
+   
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -27,7 +27,7 @@ public class cameraManager : MonoBehaviour
 
     public IEnumerator Shake(float timeLenght, float range)
     {
-        elapsed = 0.0f;
+        float elapsed = 0.0f;
         while (elapsed < timeLenght)
         {
             movingPosition= Vector3.zero;
@@ -59,6 +59,8 @@ public class cameraManager : MonoBehaviour
 
     public IEnumerator Flash(float intensity, float length, Color color)
     {
+        float elapsed = 0.0f;
+
         Debug.Log("Color set");
         colorPostProces.color.Override(color);
         colorPostProces.intensity.Override(intensity);

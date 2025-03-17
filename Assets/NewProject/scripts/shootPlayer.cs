@@ -30,7 +30,7 @@ public class shootPlayer : MonoBehaviour
             {
 
                 controlListMovment.AddMovement(controlLiniarRender, 0.75f, PlayerBase.ActionEnum.SHOOT);
-
+                bulletPrefab = GetComponent<PlayerBase>().GetAction().m_style.prefab;
             }
         }
         else
@@ -43,6 +43,7 @@ public class shootPlayer : MonoBehaviour
     {
         this.GetComponent<Animator>().SetTrigger("attack");
         fx.SetTrigger("playFX");
+        SoundEffectsManager.instance.PlaySoundFXClip(GetComponent<PlayerActionManager>().shootClip, transform, 1f);
         List<Tuple<Vector3, Vector3, Vector3>> MovList = controlListMovment.MovList;
         var firstItem = MovList[Count];
         Vector3 _playerPosition = firstItem.Item1;
@@ -52,8 +53,18 @@ public class shootPlayer : MonoBehaviour
 
         GameObject bullet = Instantiate(bulletPrefab, _playerPosition, Quaternion.identity);
 
-        
-        bullet.GetComponent<DestroyBullet>().setShootDirection(shootDirection,true);
+        if(bullet.GetComponent<DestroyBullet>() != null)
+        {
+            bullet.GetComponent<DestroyBullet>().setShootDirection(shootDirection, true);
+            Debug.Log("bullet has gun");
+        } else if(bullet.GetComponent<multiShoot>()!=null)
+        {
+            Debug.Log("Bullet has other gun");
+            bullet.GetComponent<multiShoot>().setShootDirection(shootDirection, true);
+        }else if(bullet.GetComponent<LaserBullet>()!=null)
+        {
+            bullet.GetComponent<LaserBullet>().setShootDirection(shootDirection);
+        }
 
         
 

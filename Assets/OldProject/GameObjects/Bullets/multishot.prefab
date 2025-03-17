@@ -48,6 +48,10 @@ MonoBehaviour:
   bulletPrefab: {fileID: 0}
   playerPrefab: {fileID: 4841340973275302747, guid: 8c280260248f7e449925f58bc503ee3b, type: 3}
   enemyPrefab: {fileID: 4841340973275302747, guid: a317dacd44aa3d64da68bf5295072605, type: 3}
+  shootingClips:
+  - {fileID: 8300000, guid: 94e3b24d75a0cda4980ec5134a8e6da9, type: 3}
+  - {fileID: 8300000, guid: fc8dae0e97caff040998967dcf1ff972, type: 3}
+  - {fileID: 8300000, guid: f76dafa51ef36cc42a86cc9a6ecbabdc, type: 3}
   shotBetweenShots: 0.2
   coneAngle: 50
   numbreBullet: 10

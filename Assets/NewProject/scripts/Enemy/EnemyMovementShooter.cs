@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,12 +20,11 @@ public class EnemyMovementShooter : MonoBehaviour
     [SerializeField] private AudioClip[] shootingClips;
     public Animator fx;
     private bool onCooldown = false;
-    private bool isReloading = false;
-    private bool hasShot = false;
     private bool isPerformingAction = false;
+    private bool hasShot = false;
     private float distanceToPlayer;
     private NavMeshAgent agent;
-    [SerializeField] private float actionCooldown = 0.5f;
+    [SerializeField] private float actionCooldown = 0f;
     private float initialMultiplier;
 
     void Start()
@@ -32,11 +32,10 @@ public class EnemyMovementShooter : MonoBehaviour
         enemyStats = GetComponent<EnemyBase>();
         agent = GetComponent<NavMeshAgent>();
         agent.speed = velocity;
+        agent.stoppingDistance = range;
+        players.AddRange(FindObjectsOfType<TimeSecuence>());
 
-        TimeSecuence[] playersArray = GameObject.FindObjectsByType<TimeSecuence>(FindObjectsSortMode.None);
-        players.AddRange(playersArray);
-
-        CombatManager combatManager = FindAnyObjectByType<CombatManager>();
+        CombatManager combatManager = FindObjectOfType<CombatManager>();
         initialMultiplier = combatManager.enemyStatMultiplier;
         UpdateStats(initialMultiplier);
 
@@ -45,7 +44,8 @@ public class EnemyMovementShooter : MonoBehaviour
 
     void Update()
     {
-        CombatManager combatManager = FindAnyObjectByType<CombatManager>();
+        Debug.Log("Agent: " +   agent.isStopped);
+        CombatManager combatManager = FindObjectOfType<CombatManager>();
         if (combatManager.enemyStatMultiplier != initialMultiplier)
         {
             initialMultiplier = combatManager.enemyStatMultiplier;
@@ -54,8 +54,19 @@ public class EnemyMovementShooter : MonoBehaviour
 
         FindClosestPlayer();
 
-        if (enemyStats.isAlive && closestPlayer != null && closestPlayer.isExecuting && !onCooldown && !isPerformingAction)
+        if (!enemyStats.isAlive || closestPlayer == null)
+            return;
+
+        if (!closestPlayer.isExecuting)
         {
+            agent.isStopped = true;
+            return;
+        }
+
+        // Only execute actions when allowed and not in cooldown
+        if (!onCooldown && !isPerformingAction)
+        {
+            DecideAction();
             ExecuteAction();
         }
     }
@@ -70,23 +81,24 @@ public class EnemyMovementShooter : MonoBehaviour
     private void ExecuteAction()
     {
         if (onCooldown || isPerformingAction) return;
-
-        isPerformingAction = true; // Evita que cambie de acción hasta terminar
-        DecideAction(); // Solo decide una vez por turno
+        isPerformingAction = true; // Prevents multiple actions in one turn
 
         switch (turnAction)
         {
             case TurnActions.APPROACH:
+                agent.isStopped = false;
                 MoveTowardsPlayer();
                 GetComponent<Animator>().SetBool("isMoving", true);
                 break;
 
             case TurnActions.SHOOT:
+                agent.isStopped = true;
                 GetComponent<Animator>().SetBool("isMoving", false);
                 StartCoroutine(AttackCoroutine());
                 break;
 
             case TurnActions.BACK_AWAY:
+                agent.isStopped = false;
                 MoveAwayFromPlayer();
                 GetComponent<Animator>().SetBool("isMoving", true);
                 break;
@@ -119,7 +131,7 @@ public class EnemyMovementShooter : MonoBehaviour
         {
             Vector3 directionToPlayer = (closestPlayer.transform.position - transform.position).normalized;
             Vector3 destination = closestPlayer.transform.position - directionToPlayer * range;
-            agent.SetDestination(destination);
+            agent.SetDestination(closestPlayer.transform.position);
             StartCoroutine(WaitForMoveCompletion());
         }
     }
@@ -129,7 +141,7 @@ public class EnemyMovementShooter : MonoBehaviour
         if (agent != null && closestPlayer != null)
         {
             Vector3 directionAway = (transform.position - closestPlayer.transform.position).normalized;
-            Vector3 newPosition = transform.position + directionAway * minDistance;
+            Vector3 newPosition = transform.position + directionAway * minDistance * 2f;
             agent.SetDestination(newPosition);
             StartCoroutine(WaitForMoveCompletion());
         }
@@ -146,10 +158,9 @@ public class EnemyMovementShooter : MonoBehaviour
         if (!hasShot)
         {
             Debug.Log("BANG");
-            //SoundEffectsManager.instance.PlaySoundFXClip(shootingClips, transform,1f);
             GameObject bullet = Instantiate(bulletShot, transform.position, Quaternion.identity);
             bullet.GetComponent<multiShoot>().setShootDirection((closestPlayerPos - transform.position).normalized,false);
-           
+            SoundEffectsManager.instance.PlaySoundFXClip(shootingClips, transform, 1f);
 
             // Register the bullet with the closest player's movement script
             //closestPlayer.RegisterBullet(bulletScript);
@@ -164,11 +175,12 @@ public class EnemyMovementShooter : MonoBehaviour
     private IEnumerator AttackCoroutine()
     {
         fx.SetTrigger("playFX");
-        GetComponent<Animator>().SetTrigger("attack");
-        yield return new WaitForSeconds(0.3f);
+       
 
         if (enemyStats.isAlive && closestPlayer.isExecuting)
         {
+            GetComponent<Animator>().SetTrigger("attack");
+            yield return new WaitForSeconds(0.3f);
             closestPlayerPos = closestPlayer.transform.position;
             Shoot();
             fx.ResetTrigger("playFX");
@@ -178,20 +190,14 @@ public class EnemyMovementShooter : MonoBehaviour
     
     private IEnumerator Reload()
     {
-        isReloading = true;
         yield return new WaitForSeconds(1f);
-        if (enemyStats.isAlive)
-        {
-            isReloading = false;
-            hasShot = false;
-            StartCoroutine(ActionCooldownCoroutine());
-        }
+        hasShot = false;
+        StartCoroutine(ActionCooldownCoroutine());
     }
     
     public void DecideAction()
     {
-        // Solo decide si no tiene acción pendiente
-        if (turnAction != TurnActions.NOTHING) return;
+        //if (turnAction != TurnActions.NOTHING || onCooldown) return;
 
         distanceToPlayer = Vector3.Distance(transform.position, closestPlayerPos);
 
@@ -203,14 +209,11 @@ public class EnemyMovementShooter : MonoBehaviour
         {
             turnAction = TurnActions.BACK_AWAY;
         }
-        else if (!hasShot && !isReloading && distanceToPlayer <= range)
+        else if (!hasShot && distanceToPlayer <= range)
         {
             turnAction = TurnActions.SHOOT;
         }
-        else
-        {
-            turnAction = TurnActions.NOTHING;
-        }
+        
     }
 
     private IEnumerator ActionCooldownCoroutine()
@@ -218,9 +221,10 @@ public class EnemyMovementShooter : MonoBehaviour
         onCooldown = true;
         yield return new WaitForSeconds(actionCooldown);
         onCooldown = false;
-        isPerformingAction = false; // Ahora puede hacer una nueva acción
-        turnAction = TurnActions.NOTHING; // Resetea la acción para el siguiente turno
+        isPerformingAction = false;
+        turnAction = TurnActions.NOTHING;
     }
+
     public void ResetTurnAction()
     {
         turnAction = TurnActions.NOTHING;

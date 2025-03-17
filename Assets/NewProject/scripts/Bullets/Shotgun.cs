@@ -12,7 +12,7 @@ public class Shotgun : BulletPrefab
         speed = 10f;
         for (int i = 0; i < playerData.availableActions.Count; i++)
         {
-            if (playerData.availableActions[i].style.prefab == playerData.shotgun.prefab)
+            if (playerData.availableActions[i].style.bulletType == BulletType.SHOTGUN)
             {
                 damage = playerData.availableActions[i].style.damage; break;
             }

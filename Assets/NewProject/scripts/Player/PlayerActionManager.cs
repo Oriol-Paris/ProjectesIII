@@ -57,7 +57,7 @@ public class PlayerActionManager : MonoBehaviour
     private bool hasShot = false; // Flag to track if a shot has been fired
     private bool actionPointReduced;
     private Animator animationToExecute;
-    [SerializeField] AudioClip[] shootClip;
+    [SerializeField] public AudioClip[] shootClip;
     [SerializeField] AudioClip[] walkingClips;
 
     private bool hasMoved = false;
@@ -260,7 +260,7 @@ public class PlayerActionManager : MonoBehaviour
         }
     }
     
-    public IEnumerator AttackCoroutine(PlayerBase.ActionEnum action, Vector3 newPos, PlayerData.BulletStyle style)
+    public IEnumerator AttackCoroutine(PlayerBase.ActionEnum action, Vector3 newPos, BulletStyle style)
     {
         shootLineRenderer.enabled = false;
         this.GetComponent<Animator>().SetTrigger("attack");
@@ -326,9 +326,10 @@ public class PlayerActionManager : MonoBehaviour
 
     public void WalkingSound()
     {
+        Debug.Log("PLAYING WALK");
         if (actualWalkSoundDelay < 0)
         {
-            //SoundEffectsManager.instance.PlaySoundFXClip(walkingClips, transform, 1f);
+            SoundEffectsManager.instance.PlaySoundFXClip(walkingClips, transform, 1f);
             actualWalkSoundDelay = walkSoundDelay;
         }
         else
