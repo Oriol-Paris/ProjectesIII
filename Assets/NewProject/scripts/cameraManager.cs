@@ -10,7 +10,7 @@ public class cameraManager : MonoBehaviour
     Vector3 originalPosition;
     Vector3 movingPosition;
    
-
+   
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -26,6 +26,7 @@ public class cameraManager : MonoBehaviour
         StartCoroutine(FadeInVignette(0.3f, 0.5f, Color.red));
         
     }
+
     public IEnumerator Shake(float timeLenght, float range)
     {
         float elapsed = 0.0f;
