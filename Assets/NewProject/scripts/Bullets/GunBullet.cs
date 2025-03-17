@@ -12,7 +12,7 @@ public class GunBullet : BulletPrefab
         {
             for (int i = 0; i < playerData.availableActions.Count; i++)
             {
-                if (playerData.availableActions[i].style.prefab == playerData.bulletCollection.GetBullet(BulletType.GUN).prefab)
+                if (playerData.availableActions[i].style.bulletType == BulletType.GUN)
                 {
                     damage = playerData.availableActions[i].style.damage; break;
                 }

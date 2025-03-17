@@ -62,7 +62,7 @@ public class HotbarManager : MonoBehaviour
                 slot.transform.Find("Action Image").GetComponent<Image>().overrideSprite = FindAnyObjectByType<ShopManager>().GetActionImage(action);
                 slot.transform.Find("Action Image").GetComponent<Image>().preserveAspect = true;
 
-                if (action.actionType == PlayerBase.ActionType.ACTIVE)
+                if (action.action == PlayerBase.ActionEnum.SHOOT)
                 {
                     slot.transform.Find("Texts").transform.Find("Action Stats").GetComponent<TextMeshProUGUI>().text =
                         "Range: " + action.style.range + "\nDamage: " + action.style.damage + "\nCost: " + action.cost;

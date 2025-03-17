@@ -15,7 +15,7 @@ public class LaserBullet : MonoBehaviour
     private Vector3 laserEndPoint;
     private void Start()
     {
-        laserDamage = FindAnyObjectByType<PlayerBase>().playerData.bulletCollection.GetBullet(BulletType.GUN).damage;
+        laserDamage = FindAnyObjectByType<BulletCollection>().GetBullet(BulletType.GUN).damage;
     }
     void Update()
     {

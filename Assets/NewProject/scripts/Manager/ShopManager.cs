@@ -84,9 +84,9 @@ public class ShopManager : MonoBehaviour
                 {
                     if (actionData.action == PlayerBase.ActionEnum.SHOOT)
                     {
-                        if (actionData.style.prefab == playerAction.style.prefab)
+                        if (actionData.style.bulletType == playerAction.style.bulletType)
                         {
-                            Debug.Log("MISMOESTILO");
+                            Debug.Log("MISMO ESTILO");
                             actionExists = true;
                             repeatAction = playerAction;
                         }
@@ -140,7 +140,7 @@ public class ShopManager : MonoBehaviour
     {
         if (actionData.actionType != PlayerBase.ActionType.SINGLE_USE)
         {
-            actionData.key = (KeyCode)System.Enum.Parse(typeof(KeyCode), "Alpha" + (player.playerData.availableActions.Count+1));
+            actionData.key = (KeyCode)System.Enum.Parse(typeof(KeyCode), "Alpha" + (player.playerData.availableActions.Count + 1));
             player.playerData.availableActions.Add(actionData);
             statIncreaseCount[actionData] = 0;  // Initialize the stat increase count
         }
@@ -193,9 +193,9 @@ public class ShopManager : MonoBehaviour
 
     private void InitializeShop()
     {
-        PlayerData.ActionData shotgunShot = new PlayerData.ActionData(PlayerBase.ActionType.ACTIVE, PlayerBase.ActionEnum.SHOOT, KeyCode.None, 2, player.playerData.bulletCollection.GetBullet(BulletType.SHOTGUN));
-        PlayerData.ActionData gunShot = new PlayerData.ActionData(PlayerBase.ActionType.ACTIVE, PlayerBase.ActionEnum.SHOOT, KeyCode.None, 1, player.playerData.bulletCollection.GetBullet(BulletType.GUN));
-        PlayerData.ActionData laser = new PlayerData.ActionData(PlayerBase.ActionType.ACTIVE, PlayerBase.ActionEnum.SHOOT, KeyCode.None, 2, player.playerData.bulletCollection.GetBullet(BulletType.LASER));
+        PlayerData.ActionData shotgunShot = new PlayerData.ActionData(PlayerBase.ActionType.ACTIVE, PlayerBase.ActionEnum.SHOOT, KeyCode.None, 2, FindAnyObjectByType<BulletCollection>().GetBullet(BulletType.SHOTGUN), BulletType.SHOTGUN);
+        PlayerData.ActionData gunShot = new PlayerData.ActionData(PlayerBase.ActionType.ACTIVE, PlayerBase.ActionEnum.SHOOT, KeyCode.None, 1, FindAnyObjectByType<BulletCollection>().GetBullet(BulletType.GUN), BulletType.GUN);
+        PlayerData.ActionData laser = new PlayerData.ActionData(PlayerBase.ActionType.ACTIVE, PlayerBase.ActionEnum.SHOOT, KeyCode.None, 2, FindAnyObjectByType<BulletCollection>().GetBullet(BulletType.LASER), BulletType.LASER);
         PlayerData.ActionData heal = new PlayerData.ActionData(PlayerBase.ActionType.PASSIVE, PlayerBase.ActionEnum.HEAL, KeyCode.None, 1, null);
         PlayerData.ActionData move = new PlayerData.ActionData(PlayerBase.ActionType.ACTIVE, PlayerBase.ActionEnum.MOVE, KeyCode.None, 1, null);
         PlayerData.ActionData recovery = new PlayerData.ActionData(PlayerBase.ActionType.SINGLE_USE, PlayerBase.ActionEnum.RECOVERY, KeyCode.None, 1, null);
@@ -242,7 +242,7 @@ public class ShopManager : MonoBehaviour
         }
     }
 
-    public string GetActionDisplayName(PlayerData.ActionData actionData)
+    public string GetActionDisplayName(ActionData actionData)
     {
         if (actionData.action == PlayerBase.ActionEnum.SHOOT)
         {
@@ -326,7 +326,7 @@ public class ShopManager : MonoBehaviour
     {
         foreach (ActionData playerAction in FindAnyObjectByType<PlayerBase>().playerData.availableActions)
         {
-            if (action.action == playerAction.action && action.style.prefab == playerAction.style.prefab)
+            if (action.action == playerAction.action && BulletCollection.CompareBullets(action.style, playerAction.style))
             {
                 if (action.action == PlayerBase.ActionEnum.MOVE)
                     return 10 + (Mathf.FloorToInt(Mathf.Pow(action.style.range, 1.25f)));

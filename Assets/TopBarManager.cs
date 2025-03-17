@@ -13,11 +13,10 @@ public class TopBarManager : MonoBehaviour
     public GameObject topActionPrefab;
     public GameObject bottomActionPrefab;
 
-    private PlayerActionManager playerActionManager;
     private PlayerBase playerData;
 
     private List<GameObject> actionSlots = new List<GameObject>();
-    private List<ActionData> actionsDisplayed = new List<ActionData>();
+    private List<PlayerBase.Action> actionsDisplayed = new List<PlayerBase.Action>();
 
     public Sprite runImage;
     public Sprite gunImage;
@@ -28,7 +27,6 @@ public class TopBarManager : MonoBehaviour
     void Start()
     {
         playerData = FindAnyObjectByType<PlayerBase>();
-        playerActionManager = playerData.GetComponent<PlayerActionManager>();
 
         if (playerData == null)
         {
@@ -41,13 +39,16 @@ public class TopBarManager : MonoBehaviour
 #if UNITY_EDITOR
         Cursor.visible = true;
 #else
-       Cursor.visible = false;
+        Cursor.visible = false;
 #endif
     }
 
     void Update()
     {
-        UpdateBottomHotbar();
+        if (HaveActionsChanged())
+        {
+            UpdateBottomHotbar();
+        }
     }
 
     public void AddAction(PlayerBase.ActionEnum action)
@@ -64,18 +65,21 @@ public class TopBarManager : MonoBehaviour
             return;
         }
 
-        var availableActions = playerData.playerData.availableActions;
+        var availableActions = playerData.availableActions;
         int actionCount = availableActions.Count;
         Vector2 slotSize = CalculateSlotSize(actionCount);
 
+        // Clean up old slots
         foreach (var slot in actionSlots)
         {
-            Destroy(slot);
+            if (slot != null)
+                Destroy(slot);
         }
 
         actionSlots.Clear();
         actionsDisplayed.Clear();
 
+        // Create new slots
         foreach (var action in availableActions)
         {
             GameObject slot = Instantiate(bottomActionPrefab, bottomPanel.transform);
@@ -84,9 +88,9 @@ public class TopBarManager : MonoBehaviour
 
             PlayerBase player = FindAnyObjectByType<PlayerBase>();
 
-            if (action.action == player.GetAction().m_action)
+            if (action.m_action == player.GetAction().m_action)
             {
-                if (BulletCollection.CompareBullets(action.style, player.GetAction().m_style))
+                if (BulletCollection.CompareBullets(action.m_style, player.GetAction().m_style))
                 {
                     slot.GetComponent<Image>().color = Color.yellow;
                 }
@@ -97,7 +101,7 @@ public class TopBarManager : MonoBehaviour
             }
 
             slot.transform.Find("Action Image").GetComponent<Image>().overrideSprite = GetActionImage(action);
-            slot.transform.Find("Action Image").GetComponent<Image>().color = GetActionColor(action.action);
+            slot.transform.Find("Action Image").GetComponent<Image>().color = GetActionColor(action.m_action);
 
             actionSlots.Add(slot);
             actionsDisplayed.Add(action);
@@ -118,6 +122,63 @@ public class TopBarManager : MonoBehaviour
         float slotWidth = hotbarWidth / actionCount;
         float slotHeight = bottomPanel.GetComponent<RectTransform>().rect.height;
         return new Vector2(slotWidth, slotHeight);
+    }
+
+    private bool HaveActionsChanged()
+    {
+        if (playerData == null || playerData.playerData == null)
+            return false;
+
+        var availableActions = playerData.playerData.availableActions;
+
+        // Check if count has changed
+        if (availableActions.Count != actionsDisplayed.Count)
+            return true;
+
+        // Check if any action has changed
+        for (int i = 0; i < availableActions.Count; i++)
+        {
+            if (i >= actionsDisplayed.Count) return true;
+
+            var current = availableActions[i];
+            var displayed = actionsDisplayed[i];
+
+            if (current.action != displayed.m_action ||
+                current.GetType() != displayed.GetType() ||
+                current.cost != displayed.m_cost ||
+                !BulletCollection.CompareBullets(current.style, displayed.m_style))
+            {
+                return true;
+            }
+        }
+
+        // Check if selected action has changed
+        PlayerBase player = FindAnyObjectByType<PlayerBase>();
+        if (player != null)
+        {
+            foreach (var slot in actionSlots)
+            {
+                if (slot == null) continue;
+
+                Image slotImage = slot.GetComponent<Image>();
+                bool shouldBeHighlighted = false;
+
+                for (int i = 0; i < availableActions.Count; i++)
+                {
+                    if (availableActions[i].action == player.GetAction().m_action &&
+                        BulletCollection.CompareBullets(availableActions[i].style, player.GetAction().m_style))
+                    {
+                        shouldBeHighlighted = (i == actionSlots.IndexOf(slot));
+                        break;
+                    }
+                }
+
+                if ((slotImage.color == Color.yellow) != shouldBeHighlighted)
+                    return true;
+            }
+        }
+
+        return false;
     }
 
     private Sprite GetActionImage(PlayerBase.Action action)
@@ -152,7 +213,30 @@ public class TopBarManager : MonoBehaviour
 
     private Sprite GetActionImage(PlayerData.ActionData action)
     {
-        return GetActionImage(new PlayerBase.Action(action.actionType, action.action, action.key, action.cost, action.style));
+        if (action.action == PlayerBase.ActionEnum.SHOOT)
+        {
+            if (action.style.bulletType == BulletType.GUN)
+            {
+                return gunImage;
+            }
+            else if (action.style.bulletType == BulletType.SHOTGUN)
+            {
+                return shotgunImage;
+            }
+            else if (action.style.bulletType == BulletType.LASER)
+            {
+                return laserImage;
+            }
+        }
+        else if (action.action == PlayerBase.ActionEnum.HEAL)
+        {
+            return healImage;
+        }
+        else if (action.action == PlayerBase.ActionEnum.MOVE)
+        {
+            return runImage;
+        }
+        return null;
     }
 
     private Color GetActionColor(PlayerBase.ActionEnum action)

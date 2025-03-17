@@ -20,8 +20,6 @@ public class PlayerData : ScriptableObject
     public bool isAlive;
     public bool victory;
 
-    [NonSerialized] public BulletCollection bulletCollection = new BulletCollection();
-
     public int healAmount = 10; 
     
     public List<ActionData> availableActions = new List<ActionData>();
@@ -29,13 +27,14 @@ public class PlayerData : ScriptableObject
     [System.Serializable]
     public class ActionData
     {
-        public ActionData(PlayerBase.ActionType _actionType, PlayerBase.ActionEnum _action, KeyCode _key, int _cost, BulletStyle _style = null)
+        public ActionData(PlayerBase.ActionType _actionType, PlayerBase.ActionEnum _action, KeyCode _key, int _cost, BulletStyle _style = null, BulletType _bulletType = BulletType.GUN)
         {
             actionType = _actionType;
             action = _action;
             key = _key;
             style = _style;
             cost = _cost;
+            bulletType = _bulletType;
         }
         public PlayerBase.ActionType actionType;
         public PlayerBase.ActionEnum action;
@@ -43,5 +42,6 @@ public class PlayerData : ScriptableObject
         public KeyCode key;
         public BulletStyle style;
         public int cost;
+        public BulletType bulletType;
     }
 }

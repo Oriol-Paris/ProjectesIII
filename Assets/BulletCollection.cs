@@ -6,23 +6,38 @@ public class BulletCollection : MonoBehaviour
 {
     [SerializeField] private BulletType prefabOrderReference;
     [SerializeField] public List<GameObject> prefabs = new List<GameObject>();
-    [NonSerialized] public int numOfBulletTypes;
+    [SerializeField] public int numOfBulletTypes;
 
     [NonSerialized] public List<BulletStyle> bulletCollection = new List<BulletStyle>();
 
-    public BulletCollection()
+    private void Awake()
     {
-        numOfBulletTypes = prefabs.Count;
+        InitializeBulletCollection();
+    }
 
-        for (int i = 0; i < numOfBulletTypes; i++)
+    private void InitializeBulletCollection()
+    {
+        bulletCollection.Clear();
+
+        int typesToCreate = Mathf.Min(numOfBulletTypes, prefabs.Count);
+
+        for (int i = 0; i < typesToCreate; i++)
         {
-            bulletCollection.Add(new BulletStyle((BulletType)i, prefabs[i]));
+            if (prefabs[i] != null)
+            {
+                bulletCollection.Add(new BulletStyle((BulletType)i, prefabs[i]));
+            }
         }
     }
 
-
     public BulletStyle GetBullet(BulletType type)
     {
+        // Initialize if not already done
+        if (bulletCollection.Count == 0)
+        {
+            InitializeBulletCollection();
+        }
+
         foreach (BulletStyle style in bulletCollection)
         {
             if (style.bulletType == type)
@@ -34,14 +49,23 @@ public class BulletCollection : MonoBehaviour
 
     public static bool CompareBullets(BulletStyle a, BulletStyle b)
     {
-        if (a.bulletType == b.bulletType)
+        // If both are null, they're considered equal
+        if (a == null && b == null)
             return true;
 
-        return false;
+        // If only one is null, they're different
+        if (a == null || b == null)
+            return false;
+
+        // Now we can safely compare bulletTypes
+        return a.bulletType == b.bulletType;
     }
 
     public static bool CompareBulletsWithType(BulletType type, BulletStyle a, BulletStyle b)
     {
+        if (a == null || b == null)
+            return false;
+
         if (a.bulletType == b.bulletType && a.bulletType == type)
             return true;
         return false;

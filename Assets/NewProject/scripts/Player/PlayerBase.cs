@@ -94,6 +94,11 @@ public class PlayerBase : MonoBehaviour
         // Load available actions from playerData and populate availableActions list
         foreach (var actionData in playerData.availableActions)
         {
+            if(activeStyle == null && actionData.action == ActionEnum.SHOOT)
+            {
+                actionData.style = FindAnyObjectByType<BulletCollection>().GetBullet(actionData.bulletType);
+            }
+
             availableActions.Add(new Action(
                 actionData.actionType,
                 actionData.action,
