@@ -3,8 +3,7 @@ using TMPro;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using static PlayerData;
-using UnityEngine.EventSystems;
-using System.Xml;
+using System;
 
 public class ShopManager : MonoBehaviour
 {
@@ -143,6 +142,7 @@ public class ShopManager : MonoBehaviour
             actionData.key = (KeyCode)System.Enum.Parse(typeof(KeyCode), "Alpha" + (player.playerData.availableActions.Count + 1));
             player.playerData.availableActions.Add(actionData);
             statIncreaseCount[actionData] = 0;  // Initialize the stat increase count
+            Debug.Log("Item equipped");
         }
     }
 

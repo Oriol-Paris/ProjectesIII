@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4747154246722693345}
   - component: {fileID: 3685031352787386541}
   - component: {fileID: 6904931311285059048}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: FX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -183,7 +183,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4336953727275008324}
   - component: {fileID: 1145941097933022349}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Trajectory
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -322,7 +322,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7330715069190877286}
   - component: {fileID: 7352692858684511296}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Cursor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -422,7 +422,7 @@ GameObject:
   - component: {fileID: 2554926273211331863}
   - component: {fileID: 4528686633142332479}
   - component: {fileID: 4026666568815950345}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -672,7 +672,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 116
   m_CollisionDetection: 0
 --- !u!114 &7189739028029077113
 MonoBehaviour:
@@ -716,7 +716,10 @@ MonoBehaviour:
   controlListMovment: {fileID: 4528686633142332479}
   timeSecuence: {fileID: 7189739028029077113}
   fx: {fileID: 6904931311285059048}
-  bulletPrefab: {fileID: 4841340973275302747, guid: 8c280260248f7e449925f58bc503ee3b, type: 3}
+  bulletPrefab:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &4476756505495577889
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -12,7 +12,7 @@ public class ControlListMovment : MonoBehaviour
     public List<float> timeConsum = new List<float>();
     public List<GameObject> ghostsPlayers = new List<GameObject>();
 
-    [SerializeField] private float maxDistance = 20f;
+    [SerializeField] private float maxDistance = 10f;
 
     public float t = 0;
 

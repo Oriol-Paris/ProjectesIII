@@ -12,10 +12,12 @@ public class MeleeEnemyDamage : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!hasDealtDamage && other.gameObject.CompareTag("Player"))
-        {
-            other.GetComponent<PlayerBase>().Damage(damage, other.gameObject);
-            hasDealtDamage = true; // Set the flag to true after dealing damage
+        if(this.GetComponentInParent<EnemyBase>().isAlive) {
+            if (!hasDealtDamage && other.gameObject.CompareTag("Player"))
+            {
+                other.GetComponent<PlayerBase>().Damage(damage, other.gameObject);
+                hasDealtDamage = true; // Set the flag to true after dealing damage
+            }
         }
     }
 }

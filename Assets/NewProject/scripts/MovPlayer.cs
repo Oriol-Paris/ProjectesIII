@@ -14,7 +14,7 @@ public class MovPlayer : MonoBehaviour
 
     public float t;
     [SerializeField] private float maxDistance = 20f; 
-    [SerializeField] private float velocity = 1f;
+    [SerializeField] private float velocity = 0.5f;
     [SerializeField] private float tiemp = 0f;
    
    
@@ -38,7 +38,7 @@ public class MovPlayer : MonoBehaviour
 
 
     void Start(){
-        velocity = 1f;
+        
         t = 0;
     }
 

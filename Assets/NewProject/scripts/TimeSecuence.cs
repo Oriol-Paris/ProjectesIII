@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 
@@ -143,7 +143,7 @@ public class TimeSecuence : MonoBehaviour
         if (actions.Count > 0)
         {
             isExecuting = true;
-        Debug.Log("Executing stored actions");
+             Debug.Log("Executing stored actions");
             notacction = true;
             controlListMovment.DestroyAllGhostrs();
         StartCoroutine(ExecuteActions());

@@ -20,7 +20,7 @@ MonoBehaviour:
   maxActionPoints: 3
   maxTime: 3
   lastLevel: Level1
-  levelCompleted: 0
+  levelCompleted: 1
   timesHealed: 0
   timesIncreasedMaxHP: 0
   moveRange: 0

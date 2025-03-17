@@ -46,7 +46,8 @@ public class EnemyBase : MonoBehaviour
             isAlive = false;
             spriteRenderer.color = Color.grey;
             collider.enabled = false;
-            
+            rb2d.useGravity = false;
+            rb2d.detectCollisions = false;
 
         }
 
@@ -60,7 +61,7 @@ public class EnemyBase : MonoBehaviour
         GetComponent<SpriteRenderer>().color = Color.red;
         StartCoroutine(whitecolor());
         Instantiate(bloodSplash, this.transform.position, hitObject.transform.rotation);
-        //SoundEffectsManager.instance.PlaySoundFXClip(damageClips, transform, 1f);
+        SoundEffectsManager.instance.PlaySoundFXClip(damageClips, transform, 1f);
         health -= val;
         health = Mathf.Max(health, 0); // Ensure health doesn't go below 0
         
