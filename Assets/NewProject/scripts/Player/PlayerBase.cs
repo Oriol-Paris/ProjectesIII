@@ -36,6 +36,8 @@ public class PlayerBase : MonoBehaviour
     #region VARIABLES
 
     private cameraManager _camera;
+    private float cameraPostProcesLength = 0.5f;
+    private float cameraPostProcesIntensity = 0.3f;
     public BulletStyle activeStyle { get; private set; }
 
     public float health;
@@ -125,6 +127,9 @@ public class PlayerBase : MonoBehaviour
         this.GetComponent<ControlLiniarRender>().ChangeLineColor(activeAction);
     }
 
+
+
+
     private void LoadPlayerData()
     {
         // Load health, range, and other properties from the ScriptableObject
@@ -204,6 +209,20 @@ public class PlayerBase : MonoBehaviour
                 StartCoroutine(DeathCoroutine());
             }
         }
+        //Debug.LogWarning((float)_camera.colorPostProces.intensity);
+
+        //if (health <= 2 && (float)_camera.colorPostProces.intensity < cameraPostProcesIntensity / 2)
+        //{
+        //    Debug.LogWarning("FadeIN");
+        //    StartCoroutine(_camera.FadeInVignette(cameraPostProcesIntensity, cameraPostProcesLength, Color.red));
+        //}
+
+        
+        //if (health > 2 && (float)_camera.colorPostProces.intensity > cameraPostProcesIntensity / 2)
+        //{
+        //    Debug.LogWarning("FadeOUT");
+        //    StartCoroutine(_camera.Flash(cameraPostProcesIntensity, cameraPostProcesLength, Color.red));
+        //}
     }
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -317,8 +336,6 @@ public class PlayerBase : MonoBehaviour
         playerData.health = Mathf.Min(playerData.health, maxHealth);
 
         activeAction = Action.nothing;
-
-        SaveCurrentState();
     }
 
     public void Rest()
@@ -358,6 +375,11 @@ public class PlayerBase : MonoBehaviour
                 StartCoroutine(DeathCoroutine());
             }
         }
+        if (health <= 2/* && (float)_camera.colorPostProces.intensity <= cameraPostProcesIntensity / 2*/)
+        {
+            Debug.LogWarning("In damage");
+            StartCoroutine(_camera.FadeInVignette(cameraPostProcesIntensity, cameraPostProcesLength, Color.red));
+        }
 
         SaveCurrentState();
     }
@@ -374,8 +396,6 @@ public class PlayerBase : MonoBehaviour
         health = playerData.health;
 
         playerData.timesHealed++;
-
-        SaveCurrentState();
     }
 
     public void InstantMaxHPIncrease(int amount = 1)
