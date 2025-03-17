@@ -6,24 +6,23 @@ using UnityEngine.Rendering;
 public class cameraManager : MonoBehaviour
 {
     VolumeProfile volumeProfile;
-    UnityEngine.Rendering.Universal.Vignette colorPostProces;
+    public UnityEngine.Rendering.Universal.Vignette colorPostProces;
     Vector3 originalPosition;
     Vector3 movingPosition;
    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        
         originalPosition = transform.position;
         
         volumeProfile = GameObject.Find("Global Volume").GetComponent<Volume>()?.profile;
         if (!volumeProfile) throw new System.NullReferenceException(nameof(VolumeProfile));
         
         if (!volumeProfile.TryGet(out colorPostProces)) throw new System.NullReferenceException(nameof(colorPostProces));
-
+        
         
     }
-
-
 
     public IEnumerator Shake(float timeLenght, float range)
     {
@@ -38,7 +37,7 @@ public class cameraManager : MonoBehaviour
             x = Random.Range(originalPosition.x - 1.0f * range, originalPosition.x + 1.0f * range);
             z = Random.Range(originalPosition.z - 1.0f * (range / 2), originalPosition.z + 1.0f * (range / 2)) ;
 
-            //Debug.Log(originalPosition);
+
             movingPosition.x = x;
             movingPosition.y = transform.position.y;
             movingPosition.z = z;
@@ -64,16 +63,37 @@ public class cameraManager : MonoBehaviour
         Debug.Log("Color set");
         colorPostProces.color.Override(color);
         colorPostProces.intensity.Override(intensity);
-        elapsed = 0.0f;
+
         while (elapsed < length)
         {
-            colorPostProces.intensity.Override(1-elapsed/ length);
+            colorPostProces.intensity.Override(intensity - (elapsed / length) * intensity);
 
             elapsed += Time.deltaTime;
-           // Debug.Log(colorPostProces.intensity);
+        
             yield return null;
         }
         colorPostProces.intensity.Override(0);
         yield return null;
+    }
+    public IEnumerator FadeInVignette(float intensity, float length, Color color)
+    {
+        Debug.Log("Color set");
+        colorPostProces.color.Override(color);
+        
+        float elapsed = 0.0f;
+        while (elapsed < length)
+        {
+            colorPostProces.intensity.Override((elapsed/length)*intensity);
+
+            elapsed += Time.deltaTime;
+
+            yield return null;
+        }
+
+        yield return null;
+    }
+    public void RemoveVignette()
+    {
+        colorPostProces.intensity.Override(0);
     }
 }

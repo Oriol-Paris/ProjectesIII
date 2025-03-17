@@ -12,7 +12,13 @@ public class ExplosionHazard : MonoBehaviour
     [SerializeField] private float explosionRadius;
     [SerializeField] private ParticleSystem explosionEffects;
     [SerializeField] protected float explosionSpreadDelay;
+    private cameraManager camera;
 
+
+    private void Start()
+    {
+        camera = FindAnyObjectByType<cameraManager>();
+    }
 
     // Update is called once per frame
     private void OnTriggerEnter(Collider collision)
@@ -45,6 +51,7 @@ public class ExplosionHazard : MonoBehaviour
             yield return new WaitForSeconds(delay);
         }
         explosionEffects.Play();
+        StartCoroutine(camera.Shake(0.1f, 0.8f));
         GameObject player = null;
         player = GameObject.FindGameObjectWithTag("Player");
 
