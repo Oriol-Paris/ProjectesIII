@@ -72,6 +72,8 @@ public class CombatManager : MonoBehaviour
                 playerParty[i].playerData.exp = playerParty[i].exp;
             }
 
+            playerParty[0].SaveCurrentState();
+
             // Marcar que ya se calcul� la experiencia
             hasCalculatedExp = true;
         }
@@ -85,7 +87,9 @@ public class CombatManager : MonoBehaviour
             {
                 playerParty[i].defeat = true;
             }
-            
+
+            playerParty[0].ResetToLevelStart();
+
         }
     }
     public Canvas GetWinCondition() {  return winCondition; }
