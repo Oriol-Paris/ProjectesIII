@@ -40,7 +40,7 @@ public class PlayerBase : MonoBehaviour
     private float cameraPostProcesIntensity = 0.3f;
     public BulletStyle activeStyle { get; private set; }
 
-    public float health;
+    public float health = 5;
     public float maxHealth;
     public float actionPoints;
     public float maxActionPoints;

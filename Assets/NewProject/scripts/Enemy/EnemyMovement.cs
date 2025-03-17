@@ -69,8 +69,10 @@ public class EnemyMovement : MonoBehaviour
             }
             else
             {
+              
                 GetComponent<Animator>().SetBool("isMoving", false);
                 agent.isStopped = true;
+                agent.velocity = Vector3.zero;
                 hitBox.GetComponent<MeleeEnemyDamage>().hasDealtDamage = false;
             }
         }
@@ -82,14 +84,16 @@ public class EnemyMovement : MonoBehaviour
         Debug.Log("Attacking");
         GetComponent<Animator>().SetTrigger("attack");
 
-        yield return new WaitForSeconds(0.5f); // Tiempo de animación del ataque
+        yield return new WaitForSeconds(0.5f);
+      // Tiempo de animación del ataque
         hitBox.enabled = true;
 
-        yield return new WaitForSeconds(1f); // Duración del ataque
+        yield return new WaitForSeconds(1f);
+       // Duración del ataque
         hitBox.enabled = false;
 
         yield return new WaitForSeconds(restTime); // Tiempo de descanso después del ataque
-
+      
         isResting = false; // El enemigo puede volver a moverse y atacar
     }
 
