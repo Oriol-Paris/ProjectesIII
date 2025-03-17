@@ -32,7 +32,7 @@ public class EnemyMovementShooter : MonoBehaviour
         enemyStats = GetComponent<EnemyBase>();
         agent = GetComponent<NavMeshAgent>();
         agent.speed = velocity;
-        agent.stoppingDistance = range;
+        //agent.stoppingDistance = range;
         players.AddRange(FindObjectsOfType<TimeSecuence>());
 
         CombatManager combatManager = FindObjectOfType<CombatManager>();
@@ -44,7 +44,6 @@ public class EnemyMovementShooter : MonoBehaviour
 
     void Update()
     {
-        Debug.Log("Agent: " +   agent.isStopped);
         CombatManager combatManager = FindObjectOfType<CombatManager>();
         if (combatManager.enemyStatMultiplier != initialMultiplier)
         {
@@ -62,6 +61,10 @@ public class EnemyMovementShooter : MonoBehaviour
             agent.isStopped = true;
             return;
         }
+        else if (agent.isStopped)
+        {
+            agent.isStopped = false; // Resume movement if it was previously stopped
+        }
 
         // Only execute actions when allowed and not in cooldown
         if (!onCooldown && !isPerformingAction)
@@ -71,24 +74,15 @@ public class EnemyMovementShooter : MonoBehaviour
         }
     }
 
-    private void UpdateStats(float multiplier)
-    {
-        velocity *= multiplier;
-        range *= multiplier;
-        agent.speed = velocity;
-    }
-
     private void ExecuteAction()
     {
         if (onCooldown || isPerformingAction) return;
-        isPerformingAction = true; // Prevents multiple actions in one turn
+        isPerformingAction = true;
 
         switch (turnAction)
         {
             case TurnActions.APPROACH:
-                agent.isStopped = false;
                 MoveTowardsPlayer();
-                GetComponent<Animator>().SetBool("isMoving", true);
                 break;
 
             case TurnActions.SHOOT:
@@ -98,9 +92,7 @@ public class EnemyMovementShooter : MonoBehaviour
                 break;
 
             case TurnActions.BACK_AWAY:
-                agent.isStopped = false;
                 MoveAwayFromPlayer();
-                GetComponent<Animator>().SetBool("isMoving", true);
                 break;
 
             case TurnActions.NOTHING:
@@ -108,6 +100,83 @@ public class EnemyMovementShooter : MonoBehaviour
                 break;
         }
     }
+
+    private void MoveTowardsPlayer()
+    {
+        if (agent != null && closestPlayer != null)
+        {
+            agent.isStopped = false;
+            Vector3 directionToPlayer = (closestPlayer.transform.position - transform.position).normalized;
+            Vector3 destination = closestPlayer.transform.position - directionToPlayer * range;
+
+            agent.SetDestination(destination);
+
+            // Check if the enemy can reach the player
+            StartCoroutine(CheckIfPathIsStuck());
+        }
+    }
+
+    private void MoveAwayFromPlayer()
+    {
+        if (agent != null && closestPlayer != null)
+        {
+            agent.isStopped = false;
+            Vector3 directionAway = (transform.position - closestPlayer.transform.position).normalized;
+            Vector3 newPosition = transform.position + directionAway * minDistance * 2f;
+
+            agent.SetDestination(newPosition);
+
+            // Ensure movement is not stuck
+            StartCoroutine(CheckIfPathIsStuck());
+            StartCoroutine(WaitForMoveCompletion());
+        }
+    }
+
+    // If enemy is stuck, retry the action
+    private IEnumerator CheckIfPathIsStuck()
+    {
+        float stuckTimer = .5f; // Time to consider as stuck
+        float elapsed = 0f;
+        Vector3 lastPosition = transform.position;
+
+        while (elapsed < stuckTimer)
+        {
+            yield return new WaitForSeconds(0.5f);
+            elapsed += 0.5f;
+
+            // If the enemy hasn't moved significantly, it's stuck
+            if (Vector3.Distance(transform.position, lastPosition) < 0.1f)
+            {
+                // Recalculate a new path
+                DecideAction();
+                ExecuteAction();
+                yield break;
+            }
+
+            lastPosition = transform.position;
+        }
+
+        // If it couldn't move at all, stop trying to move
+        agent.isStopped = true;
+        StartCoroutine(ActionCooldownCoroutine());
+    }
+
+
+    private IEnumerator WaitForMoveCompletion()
+    {
+        yield return new WaitUntil(() => !agent.pathPending && agent.remainingDistance <= agent.stoppingDistance);
+        StartCoroutine(ActionCooldownCoroutine());
+    }
+
+
+    private void UpdateStats(float multiplier)
+    {
+        velocity *= multiplier;
+        range *= multiplier;
+        agent.speed = velocity;
+    }
+
+
 
     private void FindClosestPlayer()
     {
@@ -125,67 +194,43 @@ public class EnemyMovementShooter : MonoBehaviour
         }
     }
 
-    private void MoveTowardsPlayer()
-    {
-        if (agent != null && closestPlayer != null)
-        {
-            Vector3 directionToPlayer = (closestPlayer.transform.position - transform.position).normalized;
-            Vector3 destination = closestPlayer.transform.position - directionToPlayer * range;
-            agent.SetDestination(closestPlayer.transform.position);
-            StartCoroutine(WaitForMoveCompletion());
-        }
-    }
-
-    private void MoveAwayFromPlayer()
-    {
-        if (agent != null && closestPlayer != null)
-        {
-            Vector3 directionAway = (transform.position - closestPlayer.transform.position).normalized;
-            Vector3 newPosition = transform.position + directionAway * minDistance * 2f;
-            agent.SetDestination(newPosition);
-            StartCoroutine(WaitForMoveCompletion());
-        }
-    }
-
-    private IEnumerator WaitForMoveCompletion()
-    {
-        yield return new WaitUntil(() => !agent.pathPending && agent.remainingDistance <= agent.stoppingDistance);
-        StartCoroutine(ActionCooldownCoroutine());
-    }
-
     private void Shoot()
     {
         if (!hasShot)
         {
             Debug.Log("BANG");
             GameObject bullet = Instantiate(bulletShot, transform.position, Quaternion.identity);
-            if(bullet.GetComponent<multiShoot>() != null)
+            if (bullet.GetComponent<multiShoot>() != null)
             {
                 bullet.GetComponent<multiShoot>().setShootDirection((closestPlayerPos - transform.position).normalized, false);
-            } else if (bullet.GetComponent<tripleShoot>() != null)
-            {
-                bullet.GetComponent<tripleShoot>().setShootDirection((closestPlayerPos-transform.position).normalized, true);
-            } else if(bullet.GetComponent<DestroyBullet>()!= null)
-            {
-                bullet.GetComponent<DestroyBullet>().setShootDirection((closestPlayerPos-transform.position).normalized, true);
             }
-            
-            SoundEffectsManager.instance.PlaySoundFXClip(shootingClips, transform, 1f);
+            else if (bullet.GetComponent<tripleShoot>() != null)
+            {
+                bullet.GetComponent<tripleShoot>().setShootDirection((closestPlayerPos - transform.position).normalized, true);
+            }
+            else if (bullet.GetComponent<DestroyBullet>() != null)
+            {
+                bullet.GetComponent<DestroyBullet>().setShootDirection((closestPlayerPos - transform.position).normalized, true);
+            }
+
+            hasShot = true; // Mark that it has shot this turn
+
+            //SoundEffectsManager.instance.PlaySoundFXClip(shootingClips, transform, 1f);
 
             // Register the bullet with the closest player's movement script
             //closestPlayer.RegisterBullet(bulletScript);
 
-            hasShot = true; // Mark that it has shot this turn
+
         }
     }
 
     // Reload coroutine to wait until the next GetIsMoving toggle after shooting
-    
+
 
     private IEnumerator AttackCoroutine()
     {
         fx.SetTrigger("playFX");
-       
+
 
         if (enemyStats.isAlive && closestPlayer.isExecuting)
         {
@@ -197,17 +242,22 @@ public class EnemyMovementShooter : MonoBehaviour
             StartCoroutine(Reload());
         }
     }
-    
+
     private IEnumerator Reload()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitUntil(() => !closestPlayer.isExecuting);
+        yield return new WaitUntil(() => closestPlayer.isExecuting == true);
         hasShot = false;
         StartCoroutine(ActionCooldownCoroutine());
     }
-    
+
     public void DecideAction()
     {
-        //if (turnAction != TurnActions.NOTHING || onCooldown) return;
+        if (closestPlayer.actualTime < 1f)
+        {
+            turnAction = TurnActions.NOTHING;
+            
+        }
 
         distanceToPlayer = Vector3.Distance(transform.position, closestPlayerPos);
 
@@ -223,8 +273,8 @@ public class EnemyMovementShooter : MonoBehaviour
         {
             turnAction = TurnActions.SHOOT;
         }
-        
     }
+
 
     private IEnumerator ActionCooldownCoroutine()
     {
@@ -232,7 +282,7 @@ public class EnemyMovementShooter : MonoBehaviour
         yield return new WaitForSeconds(actionCooldown);
         onCooldown = false;
         isPerformingAction = false;
-        turnAction = TurnActions.NOTHING;
+        DecideAction();
     }
 
     public void ResetTurnAction()
