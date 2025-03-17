@@ -6,51 +6,26 @@ using UnityEngine.Rendering;
 public class cameraManager : MonoBehaviour
 {
     VolumeProfile volumeProfile;
-    UnityEngine.Rendering.Universal.Vignette colorPostProces;
+    public UnityEngine.Rendering.Universal.Vignette colorPostProces;
     Vector3 originalPosition;
     Vector3 movingPosition;
-    public bool isFlickering;
+   
+
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        isFlickering = false;
+        
         originalPosition = transform.position;
         
         volumeProfile = GameObject.Find("Global Volume").GetComponent<Volume>()?.profile;
         if (!volumeProfile) throw new System.NullReferenceException(nameof(VolumeProfile));
         
         if (!volumeProfile.TryGet(out colorPostProces)) throw new System.NullReferenceException(nameof(colorPostProces));
-
+        StartCoroutine(FadeInVignette(0.3f, 0.5f, Color.red));
         
     }
-
-    private void Update()
-    {
-        if (Input.GetKeyUp(KeyCode.I))
-        {
-            StartCoroutine(FadeInVignette(0.5f,1f,Color.red));
-
-        }
-
-        if (Input.GetKeyUp(KeyCode.O))
-        {
-            StartCoroutine(Flash(0.5f, 1f, Color.red));
-        }
-            /*if (isFlickering)
-            {
-                while (isFlickering)
-                {
-                    Flicker(1,1,Color.red);
-                }
-                colorPostProces.intensity.Override(0);
-            }*/
-        }
-
-
-
-
     public IEnumerator Shake(float timeLenght, float range)
     {
         float elapsed = 0.0f;
@@ -64,7 +39,7 @@ public class cameraManager : MonoBehaviour
             x = Random.Range(originalPosition.x - 1.0f * range, originalPosition.x + 1.0f * range);
             z = Random.Range(originalPosition.z - 1.0f * (range / 2), originalPosition.z + 1.0f * (range / 2)) ;
 
-            //Debug.Log(originalPosition);
+
             movingPosition.x = x;
             movingPosition.y = transform.position.y;
             movingPosition.z = z;
@@ -94,7 +69,7 @@ public class cameraManager : MonoBehaviour
             colorPostProces.intensity.Override(intensity - (elapsed / length) * intensity);
 
             elapsed += Time.deltaTime;
-           // Debug.Log(colorPostProces.intensity);
+        
             yield return null;
         }
         colorPostProces.intensity.Override(0);
@@ -111,10 +86,10 @@ public class cameraManager : MonoBehaviour
             colorPostProces.intensity.Override((elapsed/length)*intensity);
 
             elapsed += Time.deltaTime;
-            // Debug.Log(colorPostProces.intensity);
+
             yield return null;
         }
-        //colorPostProces.intensity.Override(intensity);
+
         yield return null;
     }
     public void RemoveVignette()

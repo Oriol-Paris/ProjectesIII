@@ -37,6 +37,8 @@ public class PlayerBase : MonoBehaviour
     #region VARIABLES
 
     private cameraManager _camera;
+    private float cameraPostProcesLength = 0.5f;
+    private float cameraPostProcesIntensity = 0.3f;
     public PlayerData.BulletStyle activeStyle { get; private set; }
 
     public float health;
@@ -225,6 +227,12 @@ public class PlayerBase : MonoBehaviour
         playerData.health = Mathf.Min(playerData.health, maxHealth);
 
         activeAction = Action.nothing;
+        /*
+        if (health > 2 && (float)_camera.colorPostProces.intensity >= cameraPostProcesIntensity / 2)
+        {
+            
+            StartCoroutine(_camera.Flash(cameraPostProcesIntensity, cameraPostProcesLength, Color.red));
+        }*/
     }
 
     public void Rest()
@@ -264,6 +272,11 @@ public class PlayerBase : MonoBehaviour
                 StartCoroutine(DeathCoroutine());
             }
         }
+        if (health <= 2/* && (float)_camera.colorPostProces.intensity <= cameraPostProcesIntensity / 2*/)
+        {
+            Debug.LogWarning("In damage");
+            StartCoroutine(_camera.FadeInVignette(cameraPostProcesIntensity, cameraPostProcesLength, Color.red));
+        }
     }
 
     public void InstantHeal(int amount = 1)
@@ -278,6 +291,11 @@ public class PlayerBase : MonoBehaviour
         health = playerData.health;
 
         playerData.timesHealed++;
+        /*
+        if (health > 2 && (float)_camera.colorPostProces.intensity >= cameraPostProcesIntensity / 2)
+        {
+            StartCoroutine(_camera.Flash(cameraPostProcesIntensity, cameraPostProcesLength, Color.red));
+        }*/
     }
 
     public void InstantMaxHPIncrease(int amount = 1)
