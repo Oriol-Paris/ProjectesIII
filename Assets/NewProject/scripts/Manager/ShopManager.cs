@@ -212,7 +212,7 @@ public class ShopManager : MonoBehaviour
         // Randomize actions and prices
         for (int i = 0; i < 4; i++) // Assuming there are only four buttons
         {
-            int randomIndex = Random.Range(0, actionPool.Count);
+            int randomIndex = UnityEngine.Random.Range(0, actionPool.Count);
             ActionData actionData = actionPool[randomIndex];
             activeActions.Add(actionData);
 
