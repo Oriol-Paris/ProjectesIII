@@ -20,7 +20,7 @@ public class cameraManager : MonoBehaviour
         if (!volumeProfile) throw new System.NullReferenceException(nameof(VolumeProfile));
         
         if (!volumeProfile.TryGet(out colorPostProces)) throw new System.NullReferenceException(nameof(colorPostProces));
-        StartCoroutine(FadeInVignette(0.3f, 0.5f, Color.red));
+        
         
     }
 
@@ -63,7 +63,7 @@ public class cameraManager : MonoBehaviour
         Debug.Log("Color set");
         colorPostProces.color.Override(color);
         colorPostProces.intensity.Override(intensity);
-        float elapsed = 0.0f;
+
         while (elapsed < length)
         {
             colorPostProces.intensity.Override(intensity - (elapsed / length) * intensity);
