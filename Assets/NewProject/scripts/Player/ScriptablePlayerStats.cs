@@ -15,7 +15,7 @@ public class PlayerData : ScriptableObject
     public bool levelCompleted;
     public int timesHealed;
     public int timesIncreasedMaxHP;
-    public int baseRange;
+    public int moveRange;
     public int exp;
     public bool isAlive;
     public bool victory;

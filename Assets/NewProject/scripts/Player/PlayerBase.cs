@@ -108,7 +108,7 @@ public class PlayerBase : MonoBehaviour
             ));
         }
 
-        range = playerData.baseRange;  // Set initial range from playerData
+        range = playerData.moveRange;  // Set initial range from playerData
     }
 
     void Update()
@@ -129,7 +129,7 @@ public class PlayerBase : MonoBehaviour
                 }
             }
 
-            range = activeAction.m_style != null ? activeAction.m_style.range : playerData.baseRange;
+            range = activeAction.m_style != null ? activeAction.m_style.range : playerData.moveRange;
 
             if (activeAction.m_action == ActionEnum.HEAL)
             {
