@@ -6,6 +6,7 @@ public class ChangeScene : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI expValue;
     [SerializeField] CombatManager expObtained;
+
     public void GoToShop()
     {
         FindAnyObjectByType<PlayerBase>().playerData.lastLevel = SceneManager.GetActiveScene().name;

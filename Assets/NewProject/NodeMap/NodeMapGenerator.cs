@@ -283,7 +283,7 @@ public class NodeMapGenerator : MonoBehaviour
     {
         if (nodes.Count > 0 && Camera.main != null)
         {
-            Vector3 pos = new Vector3(nodes[0].Position.x, nodes[0].Position.y, Camera.main.transform.position.z);
+            Vector3 pos = new Vector3(nodes[0].Position.x, nodes[0].Position.y + 150, Camera.main.transform.position.z);
             Camera.main.transform.position = pos;
         }
     }
@@ -310,9 +310,7 @@ public class NodeMapGenerator : MonoBehaviour
         }
         else
         {
-            Node deepestCleared = nodes.Where(n => n.cleared)
-                                     .OrderByDescending(n => GetNodeDepth(n))
-                                     .First();
+            Node deepestCleared = nodes.Where(n => n.cleared).OrderByDescending(n => GetNodeDepth(n)).First();
             lastClearedNode = deepestCleared;
             foreach (var node in nodes)
             {
@@ -385,19 +383,47 @@ public class NodeMapGenerator : MonoBehaviour
             Node node = kvp.Key;
             Button btn = kvp.Value;
             btn.interactable = node.enabled;
+
+            var image = btn.GetComponent<Image>();
+            if (node.cleared)
+            {
+                image.color = Color.grey;
+            }
+            else if (node.destination == nodeMapData.lastEnteredLevel)
+            {
+                image.color = Color.white;
+            }
+            else if (node.enabled)
+            {
+                image.color = Color.white;
+            }
+            else
+            {
+                image.color = new Color(0.75f, 0.75f, 0.75f, 0.8f);
+            }
         }
+
         foreach (var connection in connections)
         {
-            Color lineColor = (connection.parent.cleared && connection.child.enabled) ? Color.white : Color.grey;
+            Color lineColor = (connection.parent.cleared && !connection.child.cleared && connection.child.enabled) ? Color.white : Color.grey;
+
             connection.lineRenderer.startColor = lineColor;
             connection.lineRenderer.endColor = lineColor;
         }
     }
 
+    public void SetLevelEntered(Node node)
+    {
+        if (nodeMapData != null)
+        {
+            nodeMapData.lastEnteredLevel = node.destination;
+            SaveMapToData();
+        }
+    }
+
     void LoadScene(Node pressedNode, string sceneName)
     {
-        pressedNode.cleared = true;
-        UpdateUI();
+        SetLevelEntered(pressedNode);
 
         if (pressedNode == nodes.Last())
         {
@@ -419,7 +445,7 @@ public class NodeMapGenerator : MonoBehaviour
         if (lastClearedNode != null && Camera.main != null)
         {
             Vector3 currentPos = Camera.main.transform.position;
-            Vector3 targetPos = new Vector3(lastClearedNode.Position.x, lastClearedNode.Position.y, currentPos.z);
+            Vector3 targetPos = new Vector3(lastClearedNode.Position.x, lastClearedNode.Position.y + 150, currentPos.z);
             Camera.main.transform.position = Vector3.Lerp(currentPos, targetPos, Time.deltaTime * cameraSpeed);
         }
     }

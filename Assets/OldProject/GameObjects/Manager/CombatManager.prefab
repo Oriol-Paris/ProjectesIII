@@ -49,8 +49,10 @@ MonoBehaviour:
   enemyParty: []
   allEnemiesDead: 0
   allPlayersDead: 0
+  enemyStatMultiplier: 1
   numberOfTurns: 15
   winCondition: {fileID: 0}
+  nodeMapData: {fileID: 11400000, guid: 6ef68e3488c0059429efc21e0680add7, type: 2}
 --- !u!114 &4887429392197456182
 MonoBehaviour:
   m_ObjectHideFlags: 0

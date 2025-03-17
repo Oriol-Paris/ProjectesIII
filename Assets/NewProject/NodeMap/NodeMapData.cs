@@ -15,18 +15,21 @@ public class NodeData
     public List<int> childrenIndices = new List<int>();
     public bool cleared;
     public bool enabled;
+    public bool isCurrentLevel;
 }
 
 [Serializable]
 public class NodeMapDataWrapper
 {
     public List<NodeData> nodes;
+    public string lastEnteredLevel;
 }
 
 [CreateAssetMenu(fileName = "NewNodeMapData", menuName = "NodeMap/Map Data")]
 public class NodeMapData : ScriptableObject
 {
     public List<NodeData> nodes = new List<NodeData>();
+    public string lastEnteredLevel;
 
     public void Save()
     {
@@ -42,7 +45,11 @@ public class NodeMapData : ScriptableObject
     {
         try
         {
-            NodeMapDataWrapper wrapper = new NodeMapDataWrapper { nodes = this.nodes };
+            NodeMapDataWrapper wrapper = new NodeMapDataWrapper
+            {
+                nodes = this.nodes,
+                lastEnteredLevel = this.lastEnteredLevel
+            };
             string json = JsonUtility.ToJson(wrapper, true);
             string path = Application.persistentDataPath + "/NodeMapData.json";
             File.WriteAllText(path, json);
@@ -66,9 +73,13 @@ public class NodeMapData : ScriptableObject
                 NodeMapData data = CreateInstance<NodeMapData>();
                 data.nodes = new List<NodeData>();
 
-                if (wrapper != null && wrapper.nodes != null)
+                if (wrapper != null)
                 {
-                    data.nodes = wrapper.nodes;
+                    if (wrapper.nodes != null)
+                    {
+                        data.nodes = wrapper.nodes;
+                    }
+                    data.lastEnteredLevel = wrapper.lastEnteredLevel;
                 }
 
                 return data;
@@ -86,5 +97,29 @@ public class NodeMapData : ScriptableObject
     {
         nodes.Clear();
         Save();
+    }
+
+    public void SetLevelCleared(string levelName)
+    {
+        var node = nodes.Find(n => n.destination == levelName);
+        if (node != null)
+        {
+            node.cleared = true;
+
+            foreach (int childIndex in node.childrenIndices)
+            {
+                if (childIndex >= 0 && childIndex < nodes.Count)
+                {
+                    nodes[childIndex].enabled = true;
+                }
+            }
+            Save();
+        }
+    }
+
+    public bool IsLevelCleared(string levelName)
+    {
+        var node = nodes.Find(n => n.destination == levelName);
+        return node != null && node.cleared;
     }
 }

@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CombatManager : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class CombatManager : MonoBehaviour
     [SerializeField] public float enemyStatMultiplier = 1;
     [SerializeField] private int numberOfTurns;
     [SerializeField] Canvas winCondition;
+
+    [SerializeField] NodeMapData nodeMapData;
 
     private bool hasCalculatedExp = false;  // Bandera para controlar que la suma de experiencia solo se haga una vez
 
@@ -72,6 +75,7 @@ public class CombatManager : MonoBehaviour
                 playerParty[i].playerData.exp = playerParty[i].exp;
             }
 
+            nodeMapData.SetLevelCleared(SceneManager.GetActiveScene().name);
             playerParty[0].SaveCurrentState();
 
             // Marcar que ya se calcul� la experiencia
