@@ -716,7 +716,7 @@ MonoBehaviour:
   controlListMovment: {fileID: 4528686633142332479}
   timeSecuence: {fileID: 7189739028029077113}
   fx: {fileID: 6904931311285059048}
-  bulletPrefab: {fileID: 0}
+  bulletPrefab: {fileID: 4841340973275302747, guid: 8c280260248f7e449925f58bc503ee3b, type: 3}
 --- !u!114 &4476756505495577889
 MonoBehaviour:
   m_ObjectHideFlags: 0
