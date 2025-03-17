@@ -786,7 +786,7 @@ MonoBehaviour:
   timeSceuence: {fileID: 7189739028029077113}
   timeConsum: []
   ghostsPlayers: []
-  maxDistance: 20
+  maxDistance: 10
   t: 0
   ghostPlayer: {fileID: 6993864842785556067, guid: 785ff20f51df2be40b3fbda2c31b3afc, type: 3}
 --- !u!114 &4026666568815950345

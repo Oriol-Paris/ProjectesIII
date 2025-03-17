@@ -53,6 +53,8 @@ public class LaserBullet : MonoBehaviour
 
         // Actualizar LineRenderer para que se vea el láser
         UpdateLaserVisuals();
+
+        Destroy(gameObject, 0.75f);
     }
 
     public void setShootDirection(Vector3 _shootDirection)
