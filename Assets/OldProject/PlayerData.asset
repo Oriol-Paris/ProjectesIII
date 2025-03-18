@@ -28,6 +28,7 @@ MonoBehaviour:
   isAlive: 1
   victory: 0
   healAmount: 1
+  bulletLevels: []
   availableActions:
   - actionType: 0
     action: 0
