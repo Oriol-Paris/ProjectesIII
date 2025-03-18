@@ -11,8 +11,6 @@ public class PlayerActionManager : MonoBehaviour
 {
     #region VARIABLES
 
-    
-
     public Vector3 mousePosition;
     public Vector3 positionDesired;
     public Vector3 playerPosition;
@@ -91,8 +89,6 @@ public class PlayerActionManager : MonoBehaviour
 
         InitializeActions();
         combatManager = FindAnyObjectByType<CombatManager>();
-
-        
     }
 
     private void InitializeActions()
@@ -132,11 +128,6 @@ public class PlayerActionManager : MonoBehaviour
     }
     private void Update()
     {
-        //Cambiar por un menu de pausa a la larga
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            SceneManager.LoadScene("Title Screen");
-        }
         if (SceneManager.GetActiveScene().name != "ShopScene")
         {
             UpdateAction(Vector3.zero, movePlayer.timeSceuence.actualTime);
