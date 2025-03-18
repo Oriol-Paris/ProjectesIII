@@ -4,6 +4,7 @@ using static PlayerData;
 using TMPro;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
+using System.Collections;
 
 
 public class TopBarManager : MonoBehaviour
@@ -83,19 +84,12 @@ public class TopBarManager : MonoBehaviour
                 animator.SetBool("Upgrade", true);
 
                 // Optionally reset the animation after a short delay
-                StartCoroutine(ResetActionAnimation(animator));
+                StartCoroutine(ResetUpgradeAnimation());
             }
         }
     }
 
-    private IEnumerator ResetActionAnimation(Animator animator)
-    {
-        yield return new WaitForSeconds(0.2f);
-        if (animator != null)
-        {
-            animator.SetBool("Upgrade", false);
-        }
-    }
+    
 
     public void AddAction(PlayerBase.ActionEnum action)
     {
