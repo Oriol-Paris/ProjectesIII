@@ -6,10 +6,14 @@ using UnityEngine;
 
 public class TutorialManager : MonoBehaviour
 {
+    public PlayerActionManager actionManager;
     public GameObject[] popUps;
     public PlayerBase playerBase; // Reference to the PlayerBase component
     public TimeSecuence timeSecuence; // Reference to the TimeSecuence component
     public GameObject dummy;
+
+    public GameObject dummy1;
+
     private int popUpIndex = 0;
     private bool actionsCompleted = false; // Flag to indicate when the required actions are completed
     private bool isInsideTrigger = false; // Flag to indicate if the player is inside the trigger
@@ -19,7 +23,9 @@ public class TutorialManager : MonoBehaviour
     {
         { 0, (PlayerBase.ActionEnum.MOVE, 1) }, // Requires 1 MOVE action
         { 1, (PlayerBase.ActionEnum.MOVE, 2) }, // Requires 2 MOVE actions
-        { 2, (PlayerBase.ActionEnum.SHOOT, 1) } // Requires 1 SHOOT action
+        { 2, (PlayerBase.ActionEnum.SHOOT, 1) }, // Requires 1 SHOOT action
+        { 3, (PlayerBase.ActionEnum.MOVE, 1) }, // Requires 1 MOVE action
+        { 4, (PlayerBase.ActionEnum.SHOOT, 1) } // Requires 1 SHOOT action
         // Add more entries as needed
     };
 
@@ -51,6 +57,25 @@ public class TutorialManager : MonoBehaviour
         {
             rigidbody.useGravity = false;
         }
+
+        // Make the dummy1 invisible at the start
+        var collider1 = dummy1.GetComponent<BoxCollider>();
+        if (collider1 != null)
+        {
+            collider1.enabled = false;
+        }
+
+        var spriteRenderer1 = dummy1.GetComponent<SpriteRenderer>();
+        if (spriteRenderer1 != null)
+        {
+            spriteRenderer1.enabled = false;
+        }
+
+        var rigidbody1 = dummy1.GetComponent<Rigidbody>();
+        if (rigidbody1 != null)
+        {
+            rigidbody1.useGravity = false;
+        }
         // Display the first popup
         DisplayCurrentPopup();
     }
@@ -63,7 +88,7 @@ public class TutorialManager : MonoBehaviour
         {
             Debug.Log("Actions completed");
             actionsCompleted = false; // Reset the flag
-            if (popUpIndex < 2)
+            if (popUpIndex < 3)
             {
                 popUpIndex++;
                 Debug.Log("FROM HERE");
@@ -87,6 +112,7 @@ public class TutorialManager : MonoBehaviour
 
     private void DisplayCurrentPopup()
     {
+       
         // Disable all popups
         foreach (var popUp in popUps)
         {
@@ -96,6 +122,7 @@ public class TutorialManager : MonoBehaviour
         // Enable the current popup
         if (popUpIndex < popUps.Length)
         {
+            actionManager.enabled = false;
             popUps[popUpIndex].SetActive(true);
             Debug.Log("Displaying popUpIndex: " + popUpIndex);
             ExecuteCustomLogicForPopup(popUpIndex); // Execute custom logic for the current popup
@@ -103,10 +130,11 @@ public class TutorialManager : MonoBehaviour
         
     }
 
-    private void DisableCurrentPopup()
+    public void DisableCurrentPopup()
     {
         if (popUpIndex < popUps.Length)
         {
+            actionManager.enabled = true;
             popUps[popUpIndex].SetActive(false);
             Debug.Log("Disabling popUpIndex: " + popUpIndex);
         }
@@ -178,6 +206,46 @@ public class TutorialManager : MonoBehaviour
                 if (rigidbody != null)
                 {
                     rigidbody.useGravity = true;
+                }
+                if (requiredActions.ContainsKey(popUpIndex))
+                {
+                    var requiredAction = requiredActions[popUpIndex].action;
+                    var requiredCount = requiredActions[popUpIndex].count;
+
+                    if (playerBase.GetAction().m_action == requiredAction && (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)))
+                    {
+                        actionCounts[popUpIndex]++;
+                        Debug.Log($"{requiredAction} performed {actionCounts[popUpIndex]} times");
+
+                        if (actionCounts[popUpIndex] >= requiredCount)
+                        {
+                            Debug.Log($"{requiredAction} sequence completed");
+                            actionsCompleted = true; // Set the flag to indicate that the required actions are completed
+                        }
+                    }
+                }
+                break;
+
+            case 3:
+                // Custom logic for popup index 2
+                Debug.Log("Custom logic for popup index 2");
+                dummy1.SetActive(true);
+                var collider1 = dummy1.GetComponent<BoxCollider>();
+                if (collider1 != null)
+                {
+                    collider1.enabled = true;
+                }
+
+                var spriteRenderer1 = dummy1.GetComponent<SpriteRenderer>();
+                if (spriteRenderer1 != null)
+                {
+                    spriteRenderer1.enabled = true;
+                }
+
+                var rigidbody1 = dummy1.GetComponent<Rigidbody>();
+                if (rigidbody1 != null)
+                {
+                    rigidbody1.useGravity = true;
                 }
                 if (requiredActions.ContainsKey(popUpIndex))
                 {

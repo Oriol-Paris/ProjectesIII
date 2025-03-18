@@ -6,8 +6,9 @@ using System.Collections.Generic;
 public class Dialogue : MonoBehaviour
 {
     public TextMeshProUGUI textComponent;
-    public string[] dialogueLines;
+    public string dialogueLines;
     public float textSpeed;
+    public TutorialManager tutorialManager; // Add this line
 
     private int index;
 
@@ -21,14 +22,15 @@ public class Dialogue : MonoBehaviour
     {
         if (Input.GetMouseButtonUp(0))
         {
-            if (textComponent.text == dialogueLines[index])
+            if (textComponent.text == dialogueLines)
             {
-                NextLine();
+                tutorialManager.DisableCurrentPopup(); // Add this line
+
             }
             else
             {
                 StopAllCoroutines();
-                textComponent.text = dialogueLines[index];
+                textComponent.text = dialogueLines;
             }
         }
     }
@@ -41,7 +43,7 @@ public class Dialogue : MonoBehaviour
 
     IEnumerator TypeLine()
     {
-        foreach (char c in dialogueLines[index].ToCharArray())
+        foreach (char c in dialogueLines.ToCharArray())
         {
             textComponent.text += c;
             yield return new WaitForSeconds(textSpeed);
@@ -59,6 +61,7 @@ public class Dialogue : MonoBehaviour
         else
         {
             gameObject.SetActive(false);
+            tutorialManager.DisableCurrentPopup(); // Add this line
         }
     }
 }

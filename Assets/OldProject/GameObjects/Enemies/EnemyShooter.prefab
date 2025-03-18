@@ -227,7 +227,7 @@ MonoBehaviour:
   enemyStats: {fileID: 7931825162647696330}
   bulletShot: {fileID: 4841340973275302747, guid: a317dacd44aa3d64da68bf5295072605, type: 3}
   velocity: 2
-  range: 5
+  range: 10
   minDistance: 2
   shootingClips:
   - {fileID: 8300000, guid: 3fdff599a87b80a4dbdcbe89e60062ce, type: 3}
