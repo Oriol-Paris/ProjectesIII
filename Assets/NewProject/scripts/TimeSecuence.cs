@@ -83,7 +83,7 @@ public class TimeSecuence : MonoBehaviour
               }*/
         }
 
-        if (Input.GetKeyDown(KeyCode.E) && !isExecuting)
+        if ((Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Space)) && !isExecuting)
         {
             PassTurn();
         }
