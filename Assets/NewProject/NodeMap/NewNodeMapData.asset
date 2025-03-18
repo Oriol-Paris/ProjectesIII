@@ -48,7 +48,7 @@ MonoBehaviour:
   - type: 0
     destination: Level4
     position: {x: 0, y: 400}
-    parentIndex: 3
+    parentIndex: 1
     childrenIndices: 05000000
     cleared: 0
     enabled: 0
