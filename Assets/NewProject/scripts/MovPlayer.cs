@@ -72,7 +72,7 @@ public class MovPlayer : MonoBehaviour
     public void UpdateMovement(int movCount)
     {
 
-     
+        this.GetComponent<Animator>().SetBool("isMoving", true);
         List<Tuple<Vector3, Vector3, Vector3>> MovList = controlListMovment.MovList;
             var firstItem = MovList[movCount];
             Vector3 _playerPosition = firstItem.Item1;
