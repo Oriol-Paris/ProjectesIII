@@ -10,10 +10,10 @@ public class ghostBullet : MonoBehaviour
 
     void Start()
     {
-        
+
     }
 
-    public void takedirection(Vector3 _direction,float _time)
+    public void takedirection(Vector3 _direction, float _time)
     {
         direction = _direction;
         time = _time;
@@ -28,6 +28,14 @@ public class ghostBullet : MonoBehaviour
         if (time >= 7f)
         {
             Debug.Log("destoy");
+            Destroy(gameObject);
+        }
+    }
+
+    private void OnTriggerEnter(Collider collision)
+    {
+        if (collision.gameObject.CompareTag("envairoment"))
+        {
             Destroy(gameObject);
         }
     }

@@ -14,27 +14,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalPlayer: {fileID: 0}
   playerAtStartOfLevel: {fileID: 0}
-  health: 4
+  health: 1
   maxHealth: 5
   actionPoints: -21
   maxActionPoints: 3
   maxTime: 3
-  lastLevel: ShopScene
-  levelCompleted: 0
-  timesHealed: 2
+  lastLevel: Level4
+  levelCompleted: 1
+  timesHealed: 0
   timesIncreasedMaxHP: 0
   moveRange: 0
-  exp: 238959
+  exp: 238935
   isAlive: 1
   victory: 0
   healAmount: 1
   bulletLevels:
   - bulletType: 0
-    level: 6
+    level: 1
   - bulletType: 1
     level: 1
   - bulletType: 2
-    level: 13
+    level: 1
   availableActions:
   - actionType: 0
     action: 0
@@ -48,3 +48,15 @@ MonoBehaviour:
     style: {fileID: 0}
     cost: 1
     bulletType: 0
+  - actionType: 0
+    action: 1
+    key: 51
+    style: {fileID: 0}
+    cost: 2
+    bulletType: 2
+  - actionType: 0
+    action: 1
+    key: 52
+    style: {fileID: 0}
+    cost: 2
+    bulletType: 1
