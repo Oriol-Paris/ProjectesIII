@@ -139,6 +139,11 @@ public class TopBarManager : MonoBehaviour
         }
     }
 
+    public void EraseLastAction()
+    {
+        Destroy(topPanel.transform.GetChild(topPanel.transform.childCount - 1).gameObject);
+    }
+
     Vector2 CalculateSlotSize(int actionCount)
     {
         float hotbarWidth = bottomPanel.GetComponent<RectTransform>().rect.width;

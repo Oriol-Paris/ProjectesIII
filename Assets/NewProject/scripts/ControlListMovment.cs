@@ -83,6 +83,14 @@ public class ControlListMovment : MonoBehaviour
         ghostsPlayers.Clear();
     }
 
+    public void DestroyLastGhost()
+    {
+        if (ghostsPlayers.Count > 0)
+        {
+            Destroy(ghostsPlayers[ghostsPlayers.Count - 1]);
+            ghostsPlayers.RemoveAt(ghostsPlayers.Count - 1);
+        }
+    }
 
 
     public float CalculateStaminaConsumption(float distance)

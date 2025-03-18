@@ -132,6 +132,7 @@ public class PlayerActionManager : MonoBehaviour
     }
     private void Update()
     {
+        //Cambiar por un menu de pausa a la larga
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             SceneManager.LoadScene("Title Screen");

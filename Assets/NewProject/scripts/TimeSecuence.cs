@@ -63,24 +63,27 @@ public class TimeSecuence : MonoBehaviour
                     this.GetComponent<ControlLiniarRender>().ChangeLineColor(action);
                 }
             }
-            if(actions.Count > 0&&Input.GetKeyDown(KeyCode.C)&&!isExecuting) {
-
-            
-                ResetTurn();
-
-
-            }
-            // Check for mouse click to store the selected action
-          /*  if (selectedAction.m_action != PlayerBase.ActionEnum.MOVE && Input.GetMouseButtonDown(0))
+            if(actions.Count > 0&&Input.GetKeyDown(KeyCode.R)&&!isExecuting) 
             {
-                Vector3 targetPosition = GetMouseTargetPosition();
-                AddAction(selectedAction.m_action); // Modify this line
-                Debug.Log("Stored action: " + selectedAction.m_action + " at position: " + targetPosition);
-                //selectedAction = PlayerBase.Action.nothing; // Reset the selected action
-            }*/
+                ResetTurn();
+            }
+            if (actions.Count > 0 && Input.GetKeyDown(KeyCode.Mouse1) && !isExecuting)
+            {
+                RemoveLastAction();
+            }
+
+
+            // Check for mouse click to store the selected action
+            /*  if (selectedAction.m_action != PlayerBase.ActionEnum.MOVE && Input.GetMouseButtonDown(0))
+              {
+                  Vector3 targetPosition = GetMouseTargetPosition();
+                  AddAction(selectedAction.m_action); // Modify this line
+                  Debug.Log("Stored action: " + selectedAction.m_action + " at position: " + targetPosition);
+                  //selectedAction = PlayerBase.Action.nothing; // Reset the selected action
+              }*/
         }
 
-        if (Input.GetKeyDown(KeyCode.LeftControl) && !isExecuting)
+        if (Input.GetKeyDown(KeyCode.E) && !isExecuting)
         {
             PassTurn();
         }
@@ -192,6 +195,41 @@ public class TimeSecuence : MonoBehaviour
 
         FindAnyObjectByType<TopBarManager>().ResetTopBar();
     }
+
+    public void RemoveLastAction()
+    {
+        if (actions.Count > 0)
+        {
+            actions.RemoveAt(actions.Count - 1);
+        }
+        if (actionTargets.Count > 0)
+        {
+            actionTargets.RemoveAt(actionTargets.Count - 1);
+        }
+        if (bulletStyles.Count > 0)
+        {
+            bulletStyles.RemoveAt(bulletStyles.Count - 1);
+        }
+
+        controlListMovment.DestroyLastGhost();
+
+        if(actionManager.visualPlayerAfterShoot.Count > 0)
+        {
+            Destroy(actionManager.visualPlayerAfterShoot[actionManager.visualPlayerAfterShoot.Count - 1].gameObject);
+            actionManager.visualPlayerAfterShoot.RemoveAt(actionManager.visualPlayerAfterShoot.Count - 1);
+        }
+        if (actionManager.preShootPath.Count > 0)
+        {
+            Destroy(actionManager.preShootPath[actionManager.preShootPath.Count - 1].gameObject);
+            actionManager.preShootPath.RemoveAt(actionManager.preShootPath.Count - 1);
+        }
+
+        GetComponent<shootPlayer>().bulletPrefab.Clear();
+        GetComponent<shootPlayer>().SetInternalIterator(0);
+
+        FindAnyObjectByType<TopBarManager>().EraseLastAction();
+    }
+
     public bool GetIsExecuting() { return isExecuting; }
 
     private void OnCollisionEnter(Collision collision)
