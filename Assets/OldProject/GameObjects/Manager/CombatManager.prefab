@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3646632880744387548}
   - component: {fileID: 4815321763802748431}
   - component: {fileID: 4887429392197456182}
+  - component: {fileID: 710727539823109254}
   m_Layer: 0
   m_Name: CombatManager
   m_TagString: Untagged
@@ -66,3 +67,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementScript: {fileID: 0}
+--- !u!114 &710727539823109254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6415970302341681951}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae13f0a3f39455a42a628efccd8b7d65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bullets: []
+  instatiateBullets: []
+  ghostbullet: {fileID: 4841340973275302747, guid: 67b94f091dbf97347b80ffd95ab5ff40, type: 3}
