@@ -152,7 +152,7 @@ public class TutorialManager : MonoBehaviour
                     var requiredAction = requiredActions[popUpIndex].action;
                     var requiredCount = requiredActions[popUpIndex].count;
 
-                    if (playerBase.GetAction().m_action == requiredAction && (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)))
+                    if (playerBase.GetAction().m_action == requiredAction && (Input.GetKey(KeyCode.E) || Input.GetKey(KeyCode.Space)))
                     {
                         actionCounts[popUpIndex]++;
                         Debug.Log($"{requiredAction} performed {actionCounts[popUpIndex]} times");
@@ -173,7 +173,7 @@ public class TutorialManager : MonoBehaviour
                     var requiredAction = requiredActions[popUpIndex].action;
                     var requiredCount = requiredActions[popUpIndex].count;
 
-                    if (playerBase.GetAction().m_action == requiredAction && (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)))
+                    if (playerBase.GetAction().m_action == requiredAction && (Input.GetKey(KeyCode.E) || Input.GetKey(KeyCode.Space)))
                     {
                         actionCounts[popUpIndex]++;
                         Debug.Log($"{requiredAction} performed {actionCounts[popUpIndex]} times");
@@ -207,22 +207,11 @@ public class TutorialManager : MonoBehaviour
                 {
                     rigidbody.useGravity = true;
                 }
-                if (requiredActions.ContainsKey(popUpIndex))
+                var enemyBase = dummy.GetComponent<EnemyBase>();
+                if (enemyBase != null && !enemyBase.isAlive)
                 {
-                    var requiredAction = requiredActions[popUpIndex].action;
-                    var requiredCount = requiredActions[popUpIndex].count;
-
-                    if (playerBase.GetAction().m_action == requiredAction && (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)))
-                    {
-                        actionCounts[popUpIndex]++;
-                        Debug.Log($"{requiredAction} performed {actionCounts[popUpIndex]} times");
-
-                        if (actionCounts[popUpIndex] >= requiredCount)
-                        {
-                            Debug.Log($"{requiredAction} sequence completed");
-                            actionsCompleted = true; // Set the flag to indicate that the required actions are completed
-                        }
-                    }
+                    Debug.Log("Dummy1 is dead");
+                    actionsCompleted = true; // Set the flag to indicate that the required actions are completed
                 }
                 break;
 
@@ -247,22 +236,11 @@ public class TutorialManager : MonoBehaviour
                 {
                     rigidbody1.useGravity = true;
                 }
-                if (requiredActions.ContainsKey(popUpIndex))
+                var enemyBase1 = dummy1.GetComponent<EnemyBase>();
+                if (enemyBase1 != null && !enemyBase1.isAlive)
                 {
-                    var requiredAction = requiredActions[popUpIndex].action;
-                    var requiredCount = requiredActions[popUpIndex].count;
-
-                    if (playerBase.GetAction().m_action == requiredAction && (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)))
-                    {
-                        actionCounts[popUpIndex]++;
-                        Debug.Log($"{requiredAction} performed {actionCounts[popUpIndex]} times");
-
-                        if (actionCounts[popUpIndex] >= requiredCount)
-                        {
-                            Debug.Log($"{requiredAction} sequence completed");
-                            actionsCompleted = true; // Set the flag to indicate that the required actions are completed
-                        }
-                    }
+                    Debug.Log("Dummy1 is dead");
+                    actionsCompleted = true; // Set the flag to indicate that the required actions are completed
                 }
                 break;
             // Add more cases as needed for other popup indices

@@ -67,10 +67,10 @@ public class TimeSecuence : MonoBehaviour
             {
                 ResetTurn();
             }
-            if (actions.Count > 0 && Input.GetKeyDown(KeyCode.Mouse1) && !isExecuting)
-            {
-                RemoveLastAction();
-            }
+            //if (actions.Count > 0 && Input.GetKeyDown(KeyCode.Mouse1) && !isExecuting)
+            //{
+            //    RemoveLastAction();
+            //}
 
 
             // Check for mouse click to store the selected action

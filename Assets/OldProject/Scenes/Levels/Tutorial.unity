@@ -69053,8 +69053,8 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 120763224782647842, guid: b0804ace0ed29bf4e916ea1b343a1254, type: 3}
       propertyPath: dialogueLines
-      value: 'Press 1 to select move action, the click where to go. Press CTRL to
-        execute your action. '
+      value: 'Press 1 to select move action, then click where to go. Press E or SPACE
+        to execute your action. '
       objectReference: {fileID: 0}
     - target: {fileID: 120763224782647842, guid: b0804ace0ed29bf4e916ea1b343a1254, type: 3}
       propertyPath: tutorialManager
@@ -69220,7 +69220,7 @@ PrefabInstance:
     - target: {fileID: 7020125211916091721, guid: b0804ace0ed29bf4e916ea1b343a1254, type: 3}
       propertyPath: dialogueLines
       value: You can  sequence various actions, point and click to two different
-        positions to move twice. Press CTRL to execute your sequence.
+        positions to move twice. Press SPACE or E to execute your sequence.
       objectReference: {fileID: 0}
     - target: {fileID: 7020125211916091721, guid: b0804ace0ed29bf4e916ea1b343a1254, type: 3}
       propertyPath: tutorialManager
