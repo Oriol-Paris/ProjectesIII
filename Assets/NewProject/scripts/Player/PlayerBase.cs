@@ -45,7 +45,7 @@ public class PlayerBase : MonoBehaviour
     public float actionPoints;
     public float maxActionPoints;
     public float range;
-    public int exp = 0;
+    public float exp = 0;
     private OG_MovementByMouse checkMovement;
     public PlayerActionManager turnsDone;
 

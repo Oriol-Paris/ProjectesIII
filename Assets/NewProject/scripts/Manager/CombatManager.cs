@@ -17,8 +17,6 @@ public class CombatManager : MonoBehaviour
 
     private bool hasCalculatedExp = false;  // Bandera para controlar que la suma de experiencia solo se haga una vez
 
-    private const int MAX_TURNS_EXP = 50; // Límite máximo de experiencia por turnos
-
     void Start()
     {
         // Obtener todos los objetos de tipo PlayerBase en la escena
@@ -64,15 +62,19 @@ public class CombatManager : MonoBehaviour
                 playerParty[i].victory = true;
                 if (playerParty[i].GetIsAlive())
                 {
-                    playerParty[i].exp++;  // Experiencia base
-                    int turnsUsed = Mathf.Clamp(playerParty[i].turnsDone.turnsDone, 0, numberOfTurns);
-                    int turnsExpDifference = numberOfTurns - turnsUsed;
-                    turnsExpDifference = Mathf.Min(turnsExpDifference, MAX_TURNS_EXP);
+                    // 1. Experiencia base de 25
+                    playerParty[i].exp += 25;
 
-                    playerParty[i].exp += turnsExpDifference; // Ajuste por turnos
+                    // 2. Sumar la vida del jugador
+                    playerParty[i].exp += playerParty[i].health;
+
+                    // 3. Agregar 1 de experiencia extra por cada 20 de experiencia
+                    int bonusExp = (int)playerParty[i].exp/20;
+                    playerParty[i].exp += bonusExp;
+                    Debug.Log($"Player {i} EXP: {bonusExp}");
                 }
-                playerParty[i].playerData.exp = playerParty[i].exp;
-                Debug.Log($"Player {i} EXP: {playerParty[i].exp}");
+                playerParty[i].playerData.exp = (int)playerParty[i].exp;
+                
             }
 
             nodeMapData.SetLevelCleared(SceneManager.GetActiveScene().name);
