@@ -98,13 +98,20 @@ public class TopBarManager : MonoBehaviour
 
             if (action.m_action == player.GetAction().m_action)
             {
-                if (BulletCollection.CompareBullets(action.m_style, player.GetAction().m_style))
+                if(action.m_action == PlayerBase.ActionEnum.SHOOT)
                 {
-                    slot.GetComponent<Image>().color = Color.yellow;
+                    if (action.m_style.bulletType == player.GetAction().m_style.bulletType)
+                    {
+                        slot.GetComponent<Image>().color = Color.yellow;
+                    }
+                    else
+                    {
+                        slot.GetComponent<Image>().color = Color.white;
+                    }
                 }
                 else
                 {
-                    slot.GetComponent<Image>().color = Color.white;
+                    slot.GetComponent<Image>().color = Color.yellow;
                 }
             }
 
