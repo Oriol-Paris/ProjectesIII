@@ -176,7 +176,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Play
+  m_text: Continue
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2595,7 +2595,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1747569850}
         m_TargetAssemblyTypeName: TitleScreenManager, Assembly-CSharp
-        m_MethodName: StartGame
+        m_MethodName: Continue
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3561,6 +3561,8 @@ MonoBehaviour:
   settings: {fileID: 1842174671}
   titleScreen: {fileID: 1747569848}
   creditsScreen: {fileID: 1474425243}
+  continueButton: {fileID: 1241712935}
+  playerData: {fileID: 11400000, guid: 30cde2f3bd3a0de47a315ed687870d98, type: 2}
 --- !u!1001 &1755954043
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4380,7 +4382,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1747569850}
         m_TargetAssemblyTypeName: TitleScreenManager, Assembly-CSharp
-        m_MethodName: StartGame
+        m_MethodName: NewGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

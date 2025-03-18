@@ -24,6 +24,7 @@ public class NodeMapDataWrapper
     public List<NodeData> nodes;
     public string lastEnteredLevel;
     public int enemyStatMultiplier;
+    public bool hasPlayedTutorial;
 }
 
 [CreateAssetMenu(fileName = "NewNodeMapData", menuName = "NodeMap/Map Data")]
@@ -32,6 +33,7 @@ public class NodeMapData : ScriptableObject
     public List<NodeData> nodes = new List<NodeData>();
     public string lastEnteredLevel;
     public int enemyStatMultiplier = 1;
+    public bool hasPlayedTutorial = false;
 
     public void Save()
     {
@@ -50,7 +52,9 @@ public class NodeMapData : ScriptableObject
             NodeMapDataWrapper wrapper = new NodeMapDataWrapper
             {
                 nodes = this.nodes,
-                lastEnteredLevel = this.lastEnteredLevel
+                lastEnteredLevel = this.lastEnteredLevel,
+                enemyStatMultiplier = this.enemyStatMultiplier,
+                hasPlayedTutorial = this.hasPlayedTutorial
             };
             string json = JsonUtility.ToJson(wrapper, true);
             string path = Application.persistentDataPath + "/NodeMapData.json";
@@ -82,6 +86,8 @@ public class NodeMapData : ScriptableObject
                         data.nodes = wrapper.nodes;
                     }
                     data.lastEnteredLevel = wrapper.lastEnteredLevel;
+                    data.enemyStatMultiplier = wrapper.enemyStatMultiplier;
+                    data.hasPlayedTutorial = wrapper.hasPlayedTutorial;
                 }
 
                 return data;
