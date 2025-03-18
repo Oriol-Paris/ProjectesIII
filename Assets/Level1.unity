@@ -69171,10 +69171,6 @@ PrefabInstance:
       propertyPath: winCondition
       value: 
       objectReference: {fileID: 101388484}
-    - target: {fileID: 4887429392197456182, guid: 4e7827872e7dec14293f42c46d1d1dd1, type: 3}
-      propertyPath: movementScript
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 6415970302341681951, guid: 4e7827872e7dec14293f42c46d1d1dd1, type: 3}
       propertyPath: m_Name
       value: CombatManager

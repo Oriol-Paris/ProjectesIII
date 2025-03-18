@@ -5,8 +5,8 @@ public class DestroyBullet : MonoBehaviour
 {
     [SerializeField] private TimeSecuence timeSecuence;
     [SerializeField] private Rigidbody rb;
-    [SerializeField] private Vector3 shootDirection;
-    [SerializeField] private float time;
+    [SerializeField] public Vector3 shootDirection;
+    [SerializeField] public float time;
     [SerializeField] private bool fromPlayer;
     [SerializeField] public int damage;
 
