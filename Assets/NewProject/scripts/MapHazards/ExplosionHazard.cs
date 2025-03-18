@@ -10,7 +10,7 @@ using UnityEngine.Rendering;
 public class ExplosionHazard : MonoBehaviour
 {
     [SerializeField] private int explosionDamage;
-    [SerializeField] private float explosionRadius;
+    [SerializeField] public float explosionRadius;
     [SerializeField] private ParticleSystem explosionEffects;
     [SerializeField] protected float explosionSpreadDelay;
     private cameraManager camera;
@@ -19,6 +19,8 @@ public class ExplosionHazard : MonoBehaviour
     private void Start()
     {
         camera = FindAnyObjectByType<cameraManager>();
+
+
     }
 
     // Update is called once per frame
@@ -93,29 +95,8 @@ public class ExplosionHazard : MonoBehaviour
         GetComponent<SpriteRenderer>().enabled = false;
         GetComponent<BoxCollider>().enabled = false;
         
-       /* void DrawCircle()
-        {
-            float theta_scale = 0.1f;  // Circle resolution
-
-            LineRenderer lineRenderer = gameObject.AddComponent<LineRenderer>();
-            lineRenderer.material = new Material(Shader.Find("Particles/Additive"));
-            lineRenderer.SetColors(c1, c2);
-            lineRenderer.SetWidth(0.2F, 0.2F);
-            lineRenderer.SetVertexCount(size);
-
-            int i = 0;
-            for (float theta = 0; theta < 2 * PI; theta += theta_scale)
-            {
-                
-                x = r * Mathf.Cos(theta);
-                y = r * Mathf.Sin(theta);
-
-                Vector3 pos = new Vector3(x, y, 0);
-                lineRenderer.SetPosition(i, pos);
-                i += 1;
-            }
-        }*/
+      
     }
 
-    
+   
 }
