@@ -23,6 +23,7 @@ public class NodeMapDataWrapper
 {
     public List<NodeData> nodes;
     public string lastEnteredLevel;
+    public int enemyStatMultiplier;
 }
 
 [CreateAssetMenu(fileName = "NewNodeMapData", menuName = "NodeMap/Map Data")]
@@ -30,6 +31,7 @@ public class NodeMapData : ScriptableObject
 {
     public List<NodeData> nodes = new List<NodeData>();
     public string lastEnteredLevel;
+    public int enemyStatMultiplier = 1;
 
     public void Save()
     {
@@ -113,6 +115,10 @@ public class NodeMapData : ScriptableObject
                     nodes[childIndex].enabled = true;
                 }
             }
+
+            if (levelName == "Level5")
+                enemyStatMultiplier += 1;
+
             Save();
         }
     }
