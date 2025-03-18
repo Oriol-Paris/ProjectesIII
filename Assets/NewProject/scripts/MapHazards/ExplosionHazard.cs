@@ -94,7 +94,8 @@ public class ExplosionHazard : MonoBehaviour
         }
         GetComponent<SpriteRenderer>().enabled = false;
         GetComponent<BoxCollider>().enabled = false;
-        
+        GetComponentInChildren<LineRenderer>().enabled = false;
+        GetComponentInChildren<RadiusPrint>().enabled = false;
       
     }
 
