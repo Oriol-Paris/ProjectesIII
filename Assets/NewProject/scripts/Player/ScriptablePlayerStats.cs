@@ -403,7 +403,7 @@ public class PlayerData : ScriptableObject
         }
         else
         {
-            Debug.LogWarning("Level start data not found!");
+            
             LoadPlayerAtLevelStart();
             if (playerAtStartOfLevel != null)
             {

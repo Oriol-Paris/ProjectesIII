@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using static PlayerData;
 
 public class HotbarManager : MonoBehaviour
 {
@@ -10,9 +12,13 @@ public class HotbarManager : MonoBehaviour
     public PlayerBase playerData;
     public GameObject hotbarPanel;
     public GameObject actionSlotPrefab;
-
+    private GameObject slot;
     private List<GameObject> actionSlots = new List<GameObject>();
     private List<PlayerData.ActionData> actionsDisplayed = new List<PlayerData.ActionData>();
+
+    public Animator hotbarAnimator; // Reference to the Animator
+
+    private List<PlayerData.ActionData> previousActions = new List<PlayerData.ActionData>(); // Tracks the previous state of actions
 
     void Start()
     {
@@ -27,14 +33,38 @@ public class HotbarManager : MonoBehaviour
 
     void Update()
     {
-        UpdateHotbar();
+        if (HasActionsChanged())
+        {
+            UpdateHotbar();
+        }
+    }
+
+    bool HasActionsChanged()
+    {
+        var currentActions = playerData.playerData.availableActions;
+
+        // Check if the number of actions has changed
+        if (currentActions.Count != previousActions.Count)
+        {
+            return true;
+        }
+
+        // Check if any action in the list has changed
+        for (int i = 0; i < currentActions.Count; i++)
+        {
+            if (currentActions[i] != previousActions[i])
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     void UpdateHotbar()
     {
         if (playerData == null)
         {
-            //Debug.LogError("Player is null in HotbarManager.");
             return;
         }
 
@@ -52,7 +82,7 @@ public class HotbarManager : MonoBehaviour
 
         foreach (var action in availableActions)
         {
-            GameObject slot = Instantiate(actionSlotPrefab, hotbarPanel.transform);
+            slot = Instantiate(actionSlotPrefab, hotbarPanel.transform);
             RectTransform slotRectTransform = slot.GetComponent<RectTransform>();
             slotRectTransform.sizeDelta = slotSize;
 
@@ -65,8 +95,8 @@ public class HotbarManager : MonoBehaviour
                 if (action.action == PlayerBase.ActionEnum.SHOOT)
                 {
                     slot.transform.Find("Texts").transform.Find("Action Stats").GetComponent<TextMeshProUGUI>().text =
-                        "Range: " + FindAnyObjectByType<BulletCollection>().GetBullet(action.bulletType).range + 
-                        "\nDamage: " + FindAnyObjectByType<BulletCollection>().GetBullet(action.bulletType).damage + 
+                        "Range: " + FindAnyObjectByType<BulletCollection>().GetBullet(action.bulletType).range +
+                        "\nDamage: " + FindAnyObjectByType<BulletCollection>().GetBullet(action.bulletType).damage +
                         "\nCost: " + action.cost;
                 }
                 else if (action.actionType == PlayerBase.ActionType.PASSIVE)
@@ -103,7 +133,7 @@ public class HotbarManager : MonoBehaviour
                 if (action.actionType == PlayerBase.ActionType.ACTIVE)
                 {
                     slot.transform.Find("Texts").transform.Find("Action Stats").GetComponent<TextMeshProUGUI>().text =
-                        "Range: " + FindAnyObjectByType<BulletCollection>().GetBullet(action.bulletType).range + 
+                        "Range: " + FindAnyObjectByType<BulletCollection>().GetBullet(action.bulletType).range +
                         "\nDamage: " + FindAnyObjectByType<BulletCollection>().GetBullet(action.bulletType).damage;
                 }
                 else if (action.actionType == PlayerBase.ActionType.SINGLE_USE || action.actionType == PlayerBase.ActionType.PASSIVE)
@@ -114,20 +144,23 @@ public class HotbarManager : MonoBehaviour
                 TextMeshProUGUI inputText = slot.transform.Find("Texts").transform.Find("Action Input").GetComponent<TextMeshProUGUI>();
                 if (inputText != null)
                 {
-                    string inputKey = action.key.ToString();  // Accede a la clave de la acción, que es el input asignado
+                    string inputKey = action.key.ToString();
 
-                    if(inputKey.Contains("Alpha"))
+                    if (inputKey.Contains("Alpha"))
                     {
                         inputKey = inputKey[5].ToString();
                     }
 
-                    inputText.text = inputKey;  // Muestra el input asignado a la acción
+                    inputText.text = inputKey;
                 }
             }
 
             actionSlots.Add(slot);
             actionsDisplayed.Add(action);
         }
+
+        // Update the previous actions list
+        previousActions = new List<PlayerData.ActionData>(availableActions);
     }
 
     Vector2 CalculateSlotSize(int actionCount)
@@ -160,5 +193,35 @@ public class HotbarManager : MonoBehaviour
             return "Move";
         }
         return actionData.action.ToString();
+    }
+
+    public void TriggerUpgradeAnimation(PlayerData.ActionData actionData)
+    {
+        int index = actionsDisplayed.FindIndex(action => action == actionData);
+        if (index != -1 && index < actionSlots.Count)
+        {
+            Animator animator = actionSlots[index].GetComponent<Animator>();
+            if (animator != null)
+            {
+                animator.SetBool("Upgrade", true);
+
+                // Optionally reset the boolean after the animation is done
+                StartCoroutine(ResetUpgradeAnimation());
+            }
+        }
+    }
+
+    private IEnumerator ResetUpgradeAnimation()
+    {
+        yield return new WaitForSeconds(.2f);
+
+        for (int i = 0; i < actionSlots.Count; i++)
+        {
+            Animator animator = actionSlots[i].GetComponent<Animator>();
+            if (animator != null)
+            {
+                animator.SetBool("Upgrade", false);
+            }
+        }
     }
 }

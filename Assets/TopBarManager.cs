@@ -4,7 +4,7 @@ using static PlayerData;
 using TMPro;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
-using Mono.Cecil.Cil;
+
 
 public class TopBarManager : MonoBehaviour
 {
@@ -54,6 +54,47 @@ public class TopBarManager : MonoBehaviour
         {
             UpdateBottomHotbar();
         }
+
+        // Check for key presses to trigger animations
+        CheckForActionKeyPress();
+    }
+
+    private void CheckForActionKeyPress()
+    {
+        for (int i = 0; i < actionSlots.Count; i++)
+        {
+            // Convert the index to the corresponding key (1-9)
+            KeyCode key = KeyCode.Alpha1 + i;
+
+            if (Input.GetKeyDown(key))
+            {
+                TriggerActionAnimation(i);
+            }
+        }
+    }
+
+    private void TriggerActionAnimation(int index)
+    {
+        if (index >= 0 && index < actionSlots.Count)
+        {
+            Animator animator = actionSlots[index].GetComponent<Animator>();
+            if (animator != null)
+            {
+                animator.SetBool("Upgrade", true);
+
+                // Optionally reset the animation after a short delay
+                StartCoroutine(ResetActionAnimation(animator));
+            }
+        }
+    }
+
+    private IEnumerator ResetActionAnimation(Animator animator)
+    {
+        yield return new WaitForSeconds(0.2f);
+        if (animator != null)
+        {
+            animator.SetBool("Upgrade", false);
+        }
     }
 
     public void AddAction(PlayerBase.ActionEnum action)
@@ -75,34 +116,38 @@ public class TopBarManager : MonoBehaviour
         int actionCount = availableActions.Count;
         Vector2 slotSize = CalculateSlotSize(actionCount);
 
-        // Clean up old slots
-        foreach (var slot in actionSlots)
+        // Update existing slots or create new ones if necessary
+        for (int i = 0; i < actionCount; i++)
         {
-            if (slot != null)
-                Destroy(slot);
-        }
-
-        actionSlots.Clear();
-        actionsDisplayed.Clear();
-
-        // Create new slots
-        int currentKeyIndex = 1;
-        foreach (var action in availableActions)
-        {
-            GameObject slot = Instantiate(bottomActionPrefab, bottomPanel.transform);
+            GameObject slot;
+            if (i < actionSlots.Count)
+            {
+                // Reuse existing slot
+                slot = actionSlots[i];
+            }
+            else
+            {
+                // Create new slot
+                slot = Instantiate(bottomActionPrefab, bottomPanel.transform);
+                actionSlots.Add(slot);
+            }
 
             RectTransform slotRectTransform = slot.GetComponent<RectTransform>();
             slotRectTransform.sizeDelta = slotSize;
 
+            var action = availableActions[i];
             PlayerBase player = FindAnyObjectByType<PlayerBase>();
 
+            // Highlight the selected action
             if (action.m_action == player.GetAction().m_action)
             {
-                if(action.m_action == PlayerBase.ActionEnum.SHOOT)
+                
+                if (action.m_action == PlayerBase.ActionEnum.SHOOT)
                 {
                     if (action.m_style.bulletType == player.GetAction().m_style.bulletType)
                     {
                         slot.GetComponent<Image>().color = Color.yellow;
+                        
                     }
                     else
                     {
@@ -112,9 +157,16 @@ public class TopBarManager : MonoBehaviour
                 else
                 {
                     slot.GetComponent<Image>().color = Color.yellow;
+                    
+
                 }
             }
+            else
+            {
+                slot.GetComponent<Image>().color = Color.white;
+            }
 
+            // Update slot visuals
             slot.transform.Find("Action Image").GetComponent<Image>().overrideSprite = GetActionImage(action);
             slot.transform.Find("Action Image").GetComponent<Image>().color = GetActionColor(action.m_action);
 
@@ -122,13 +174,19 @@ public class TopBarManager : MonoBehaviour
             TextMeshProUGUI actionKeyIndexText = slot.GetComponentInChildren<TextMeshProUGUI>();
             if (actionKeyIndexText != null)
             {
-                actionKeyIndexText.text = currentKeyIndex.ToString();
+                actionKeyIndexText.text = (i + 1).ToString();
             }
-            currentKeyIndex++;
-
-            actionSlots.Add(slot);
-            actionsDisplayed.Add(action);
         }
+
+        // Remove extra slots if action count has decreased
+        for (int i = actionSlots.Count - 1; i >= actionCount; i--)
+        {
+            Destroy(actionSlots[i]);
+            actionSlots.RemoveAt(i);
+        }
+
+        // Update the displayed actions list
+        actionsDisplayed = new List<PlayerBase.Action>(availableActions);
     }
 
     public void ResetTopBar()
@@ -278,5 +336,35 @@ public class TopBarManager : MonoBehaviour
         }
 
         return Color.white;
+    }
+
+     public void TriggerUpgradeAnimation(PlayerBase.Action actionData)
+    {
+        int index = actionsDisplayed.FindIndex(action => action.m_style == actionData.m_style);
+        if (index != -1 && index < actionSlots.Count)
+        {
+            Animator animator = actionSlots[index].GetComponent<Animator>();
+            if (animator != null)
+            {
+                animator.SetBool("Upgrade", true);
+
+                // Optionally reset the boolean after the animation is done
+                StartCoroutine(ResetUpgradeAnimation());
+            }
+        }
+    }
+
+    private IEnumerator ResetUpgradeAnimation()
+    {
+        yield return new WaitForSeconds(.2f);
+
+        for (int i = 0; i < actionSlots.Count; i++)
+        {
+            Animator animator = actionSlots[i].GetComponent<Animator>();
+            if (animator != null)
+            {
+                animator.SetBool("Upgrade", false);
+            }
+        }
     }
 }

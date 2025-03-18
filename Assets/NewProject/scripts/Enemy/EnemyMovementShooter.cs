@@ -112,7 +112,8 @@ public class EnemyMovementShooter : MonoBehaviour
             agent.SetDestination(destination);
 
             // Check if the enemy can reach the player
-            StartCoroutine(CheckIfPathIsStuck());
+            //StartCoroutine(CheckIfPathIsStuck());
+            StartCoroutine(Reload());
         }
     }
 
@@ -127,7 +128,7 @@ public class EnemyMovementShooter : MonoBehaviour
             agent.SetDestination(newPosition);
 
             // Ensure movement is not stuck
-            StartCoroutine(CheckIfPathIsStuck());
+            //StartCoroutine(CheckIfPathIsStuck());
             StartCoroutine(WaitForMoveCompletion());
         }
     }
@@ -165,7 +166,7 @@ public class EnemyMovementShooter : MonoBehaviour
     private IEnumerator WaitForMoveCompletion()
     {
         yield return new WaitUntil(() => !agent.pathPending && agent.remainingDistance <= agent.stoppingDistance);
-        StartCoroutine(ActionCooldownCoroutine());
+        
     }
 
 

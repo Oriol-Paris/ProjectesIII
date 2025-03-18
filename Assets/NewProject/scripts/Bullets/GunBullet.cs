@@ -33,7 +33,7 @@ public class GunBullet : BulletPrefab
     
     private void OnTriggerEnter(Collider collision)
     {
-        if (collision.gameObject.CompareTag("Walls"))
+        if (collision.gameObject.CompareTag("envairoment"))
         {
             DestroyBullet();
         }
@@ -67,6 +67,6 @@ public class GunBullet : BulletPrefab
 
     private void DestroyBullet()
     {
-      //  Destroy(gameObject);
+        //Destroy(gameObject);
     }
 }

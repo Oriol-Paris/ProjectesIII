@@ -377,7 +377,7 @@ public class PlayerBase : MonoBehaviour
         }
         if (health <= 2/* && (float)_camera.colorPostProces.intensity <= cameraPostProcesIntensity / 2*/)
         {
-            Debug.LogWarning("In damage");
+
             StartCoroutine(_camera.FadeInVignette(cameraPostProcesIntensity, cameraPostProcesLength, Color.red));
         }
 

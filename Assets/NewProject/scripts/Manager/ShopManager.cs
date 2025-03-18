@@ -22,6 +22,7 @@ public class ShopManager : MonoBehaviour
     public Sprite restImage;
     public Sprite maxHPImage;
     public Sprite laserImage;
+    [SerializeField] private HotbarManager hotbarManager;
 
     public int rerollPrice;
     bool actionExists;
@@ -30,6 +31,7 @@ public class ShopManager : MonoBehaviour
     private List<int> pricePool;
     private List<GameObject> buttons;
 
+    
     private Dictionary<PlayerData.ActionData, int> statIncreaseCount;
 
     public void Start()
@@ -42,7 +44,7 @@ public class ShopManager : MonoBehaviour
 
     public void Update()
     {
-        currentXP.text = "Current EXP: " + player.playerData.exp + "";
+        currentXP.text = "EXP: " + player.playerData.exp;
     }
 
     public void Reroll()
@@ -85,7 +87,6 @@ public class ShopManager : MonoBehaviour
                     {
                         if (actionData.style.bulletType == playerAction.style.bulletType)
                         {
-                            Debug.Log("MISMO ESTILO");
                             actionExists = true;
                             repeatAction = playerAction;
                         }
@@ -107,6 +108,10 @@ public class ShopManager : MonoBehaviour
                         player.playerData.exp -= pricePool[index];
                         boughtItem.enabled = true;
                         IncreaseStat(player.playerData.availableActions[i]);
+                        
+                        // Trigger animation for the upgraded action slot
+                        hotbarManager.TriggerUpgradeAnimation(repeatAction);
+
                         UpdatePrices();
                         return;
                     }
@@ -126,6 +131,9 @@ public class ShopManager : MonoBehaviour
 
                 boughtItem.enabled = true;
                 boughtItem.text = "Just bought: " + itemName;
+
+                // Trigger animation for the new action slot
+                hotbarManager.TriggerUpgradeAnimation(actionData);
             }
 
             // Update prices after the item has been bought
@@ -186,6 +194,10 @@ public class ShopManager : MonoBehaviour
                 boughtItem.text = "Player MaxHP Up";
                 player.InstantMaxHPIncrease();
                 break;
+        }
+        if (hotbarManager != null)
+        {
+            hotbarManager.TriggerUpgradeAnimation(actionData);
         }
     }
 
