@@ -5,9 +5,39 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/NewProject/Scenes/SampleScene.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
+  - enabled: 1
+    path: Assets/OldProject/Scenes/Title Screen.unity
+    guid: c2121f84b8034fd479bddeca00d11eb0
+  - enabled: 1
+    path: Assets/NewProject/NodeMap/Node Map.unity
+    guid: eb4281e5324047f47bb826b9f49dae93
+  - enabled: 0
+    path: Assets/NewProject/Scenes/TUTORIAL.unity
+    guid: cff39110ae88c154e8e2da84beb69806
+  - enabled: 1
+    path: Assets/OldProject/Scenes/Levels/Tutorial.unity
+    guid: f1b898b8d57963a4bbeeb85406677d5e
+  - enabled: 1
+    path: Assets/OldProject/Scenes/ShopScene.unity
+    guid: 7199331da1ea89b478cb1e8b2e13be49
+  - enabled: 1
+    path: Assets/OldProject/Scenes/Levels/Level1.unity
+    guid: d4a8686da2723084fb7164ec47e434aa
+  - enabled: 1
+    path: Assets/OldProject/Scenes/Levels/Level2.unity
+    guid: b6d27c545589ba14a944322df94a0571
+  - enabled: 1
+    path: Assets/OldProject/Scenes/Levels/Level3.unity
+    guid: 4d3716e7678f959449049e95775572b4
+  - enabled: 1
+    path: Assets/OldProject/Scenes/Levels/Level4.unity
+    guid: 9f8b7c244255b4b4daa3133a24a791c9
+  - enabled: 1
+    path: Assets/OldProject/Scenes/Levels/Level5.unity
+    guid: 29e20541f4b509c42a4c79b87debb59f
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0
