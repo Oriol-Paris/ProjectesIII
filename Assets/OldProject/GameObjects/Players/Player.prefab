@@ -177,7 +177,7 @@ MonoBehaviour:
   prefabOrderReference: 0
   prefabs:
   - {fileID: 4841340973275302747, guid: 8c280260248f7e449925f58bc503ee3b, type: 3}
-  - {fileID: 4841340973275302747, guid: 10864d5b051bdc44e928dd42003a1950, type: 3}
+  - {fileID: 1680710797403148065, guid: 9dcd6820efc4c4b488ecff9dbb33f555, type: 3}
   - {fileID: 4841340973275302747, guid: 3db35f2e05067784492ec56c6b262789, type: 3}
   numOfBulletTypes: 3
   playerData: {fileID: 11400000, guid: 30cde2f3bd3a0de47a315ed687870d98, type: 2}
