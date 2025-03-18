@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -9,7 +10,7 @@ using UnityEngine.Rendering;
 public class ExplosionHazard : MonoBehaviour
 {
     [SerializeField] private int explosionDamage;
-    [SerializeField] private float explosionRadius;
+    [SerializeField] public float explosionRadius;
     [SerializeField] private ParticleSystem explosionEffects;
     [SerializeField] protected float explosionSpreadDelay;
     private cameraManager camera;
@@ -18,6 +19,8 @@ public class ExplosionHazard : MonoBehaviour
     private void Start()
     {
         camera = FindAnyObjectByType<cameraManager>();
+
+
     }
 
     // Update is called once per frame
@@ -91,7 +94,9 @@ public class ExplosionHazard : MonoBehaviour
         }
         GetComponent<SpriteRenderer>().enabled = false;
         GetComponent<BoxCollider>().enabled = false;
+        
+      
     }
 
-    
+   
 }
