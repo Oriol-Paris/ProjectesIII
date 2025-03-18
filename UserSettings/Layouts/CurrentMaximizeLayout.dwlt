@@ -24,7 +24,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 13646
+  controlID: 21648
   draggingID: 0
 --- !u!114 &2
 MonoBehaviour:
@@ -150,7 +150,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 13647
+  controlID: 21649
   draggingID: 0
 --- !u!114 &4
 MonoBehaviour:
@@ -176,7 +176,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 50}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 13648
+  controlID: 21650
   draggingID: 0
 --- !u!114 &5
 MonoBehaviour:
@@ -197,8 +197,8 @@ MonoBehaviour:
     y: 0
     width: 305.6
     height: 560.8
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 201, y: 226}
+  m_MaxSize: {x: 4001, y: 4026}
   m_ActualView: {fileID: 6}
   m_Panes:
   - {fileID: 6}
@@ -243,9 +243,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 0019bfff
-      m_LastClickedID: -4253440
-      m_ExpandedIDs: 2819bfff5619bfff401cbfffb61ebfff2022bfff8c24bfff6a27bfff66a8e3fff6faf8ffc8fbf8ff0efcf8ff7cfef8fff400f9ff06ebfbfffcedfbff1af8fbff86fafbff20fbfbffcefefbffa2b0feff4eb5feff2ac1ffff3ad1ffffccd2ffffb2d8ffff86daffff1cddffffccdeffff46dfffff28e1ffffeae2fffffce2ffff34e3ffff10f4ffffa4f4ffffd2f9ffffce160100222c0100262c0100282c0100
+      m_SelectedIDs: 
+      m_LastClickedID: 0
+      m_ExpandedIDs: 26fc10ff582712ffcc32b2ffb237b2ff2819bfff5619bfff401cbfffb61ebfff2022bfff8c24bfff6a27bfff66a8e3fff6faf8ffc8fbf8ff0efcf8ff7cfef8fff400f9ff06ebfbfffcedfbff1af8fbff86fafbff20fbfbffcefefbffa2b0feff4eb5feff2ac1ffff3ad1ffffccd2ffffb2d8ffff86daffff1cddffffccdeffff46dfffff28e1ffffeae2fffffce2ffff34e3ffff10f4ffffa4f4ffffd2f9ffffce160100222c0100262c0100282c0100
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -921,9 +921,9 @@ MonoBehaviour:
   m_AudioPlay: 0
   m_DebugDrawModesUseInteractiveLightBakingData: 0
   m_Position:
-    m_Target: {x: -3.822529, y: -9.913689, z: 10.479395}
+    m_Target: {x: 0.5699997, y: -0.7169838, z: 1.4745064}
     speed: 2
-    m_Value: {x: -3.822529, y: -9.913689, z: 10.479395}
+    m_Value: {x: 0.5699997, y: -0.7169838, z: 1.4745064}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -969,13 +969,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: -0.3096302, y: -0.034511425, z: 0.011239655, w: -0.9501934}
+    m_Target: {x: -0.40062413, y: 0.009616056, z: -0.004210942, w: -0.91621417}
     speed: 2
-    m_Value: {x: -0.30962157, y: -0.034510467, z: 0.011239343, w: -0.950167}
+    m_Value: {x: -0.40061247, y: 0.009615777, z: -0.0042108195, w: -0.9161875}
   m_Size:
-    m_Target: 14.86095
+    m_Target: 7.514062
     speed: 2
-    m_Value: 14.86095
+    m_Value: 7.514062
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -1740,9 +1740,9 @@ MonoBehaviour:
   m_Pos:
     serializedVersion: 2
     x: 0
-    y: 748
-    width: 1456
-    height: 238
+    y: 640
+    width: 1078.2
+    height: 226
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
@@ -1765,7 +1765,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/NewProject/NodeMap
+    - Assets/OldProject/Scenes/Levels
     m_Globs: []
     m_ProductIds: 
     m_AnyWithAssetOrigin: 0
@@ -1775,16 +1775,16 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/NewProject/NodeMap
+  - Assets/OldProject/Scenes/Levels
   m_LastFoldersGridSize: -1
-  m_LastProjectPath: C:\Users\Oriol\source\Unity\ProjectesIII
+  m_LastProjectPath: C:\Users\janpl\Documents\Github\ProjectesIII
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 38}
-    m_SelectedIDs: 68e70000
-    m_LastClickedID: 59240
-    m_ExpandedIDs: 0000000074d2000076d2000078d2000000ca9a3b
+    scrollPos: {x: 0, y: 98}
+    m_SelectedIDs: 4a0f0100
+    m_LastClickedID: 69450
+    m_ExpandedIDs: 0000000074d2000076d2000078d200006ae60000400f010000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1839,8 +1839,8 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 
-    m_LastClickedInstanceID: 0
+    m_SelectedInstanceIDs: 94b70000
+    m_LastClickedInstanceID: 46996
     m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c6230000fe640000725f00005ac3000066b90000a8b90000aaba0000a435010000000000
     m_RenameOverlay:
@@ -1908,7 +1908,7 @@ MonoBehaviour:
     m_ContainerData: []
     m_OverlaysVisible: 1
   m_SearchFilter:
-    m_NameFilter: tutorial
+    m_NameFilter: level
     m_ClassNames: []
     m_AssetLabels: []
     m_AssetBundleNames: []
@@ -1918,25 +1918,25 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets
+    - Assets/NewProject/NodeMap
     m_Globs: []
     m_ProductIds: 
     m_AnyWithAssetOrigin: 0
-    m_OriginalText: tutorial
+    m_OriginalText: level
     m_ImportLogFlags: 0
     m_FilterByTypeIntersection: 0
   m_ViewMode: 1
   m_StartGridSize: 67
   m_LastFolders:
-  - Assets
+  - Assets/NewProject/NodeMap
   m_LastFoldersGridSize: 67
   m_LastProjectPath: C:\Users\janpl\Documents\Github\ProjectesIII
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 50}
-    m_SelectedIDs: 74d20000
-    m_LastClickedID: 53876
+    m_SelectedIDs: 5ee60000
+    m_LastClickedID: 58974
     m_ExpandedIDs: 0000000074d2000076d2000078d2000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -1992,8 +1992,8 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 0019bfff
-    m_LastClickedInstanceID: -4253440
+    m_SelectedInstanceIDs: 
+    m_LastClickedInstanceID: 0
     m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: 1eb70000d4b80000aaba000070b90000f4b600000ac4000082cb000052d900007ab00000d0d70000e021010000000000
     m_RenameOverlay:
@@ -2098,7 +2098,7 @@ MonoBehaviour:
     m_OverlaysVisible: 1
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: 76782
+  m_LastSelectedObjectID: 96090
 --- !u!114 &17
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -2118,8 +2118,8 @@ MonoBehaviour:
     y: 0
     width: 456.80005
     height: 812.8
-  m_MinSize: {x: 276, y: 76}
-  m_MaxSize: {x: 4001, y: 4026}
+  m_MinSize: {x: 275, y: 50}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 18}
   m_Panes:
   - {fileID: 18}
