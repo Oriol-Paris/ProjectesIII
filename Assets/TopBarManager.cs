@@ -15,7 +15,6 @@ public class TopBarManager : MonoBehaviour
     public GameObject bottomActionPrefab;
     public TextMeshProUGUI actionKeyIndex;
     private PlayerBase playerData;
-    private int keyIndex = 1;
     private List<GameObject> actionSlots = new List<GameObject>();
     private List<PlayerBase.Action> actionsDisplayed = new List<PlayerBase.Action>();
 
@@ -61,9 +60,6 @@ public class TopBarManager : MonoBehaviour
     {
         GameObject newAction = Instantiate(topActionPrefab, topPanel.transform);
         newAction.GetComponent<Image>().overrideSprite = GetActionImage(playerData.activeAction);
-       
-            
-        
     }
     
 
@@ -203,8 +199,6 @@ public class TopBarManager : MonoBehaviour
 
     private Sprite GetActionImage(PlayerBase.Action action)
     {
-        PlayerBase player = FindAnyObjectByType<PlayerBase>();
-
         if (action.m_action == PlayerBase.ActionEnum.SHOOT)
         {
             if(action.m_style.bulletType == BulletType.GUN)

@@ -163,7 +163,7 @@ public class ShopManager : MonoBehaviour
         {
             case PlayerBase.ActionEnum.SHOOT:
                 boughtItem.text = "Increased bullet damage and range";
-                actionData.style.LevelUpBullet();
+                player.playerData.LevelUpBullet(actionData.bulletType);
                 break;
             case PlayerBase.ActionEnum.HEAL:
                 boughtItem.text = "Increased healing amount";

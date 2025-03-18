@@ -4,22 +4,23 @@ using UnityEngine;
 
 public enum BulletType { GUN, SHOTGUN, LASER };
 
+[Serializable]
 public class BulletStyle : MonoBehaviour
 {
-    [NonSerialized] public GameObject prefab;
-    [NonSerialized] public BulletType bulletType;
-    [NonSerialized] public int level = 0;
-    [NonSerialized] public float range = 0;
-    [NonSerialized] public float rangePerLevel = 0;
-    [NonSerialized] public int damage = 0;
-    [NonSerialized] public int damagePerLevel = 0;
+    public GameObject prefab;
+    public BulletType bulletType;
+    public int level = 0;
+    public float range = 0;
+    public float rangePerLevel = 0;
+    public int damage = 0;
+    public int damagePerLevel = 0;
 
-    public BulletStyle(BulletType type, GameObject loadedPrefab)
+    public void Initiazlize(BulletType type, GameObject loadedPrefab)
     {
         prefab = loadedPrefab;
         bulletType = type;
 
-        switch(type)
+        switch (type)
         {
             case BulletType.GUN:
                 rangePerLevel += 1;
@@ -36,9 +37,10 @@ public class BulletStyle : MonoBehaviour
         }
     }
 
-    public void LevelUpBullet(int numOfLevels = 1)
+
+    public void LevelUpBullet(int currentLevel, int numOfLevels = 1)
     {
-        if(level == 0)
+        if(currentLevel == 0)
         {
             switch (bulletType)
             {
@@ -58,9 +60,8 @@ public class BulletStyle : MonoBehaviour
         }
         else
         {
-            range += rangePerLevel * numOfLevels;
-            damage += damagePerLevel * numOfLevels;
-            level += numOfLevels;
+            range = rangePerLevel * (currentLevel + numOfLevels);
+            damage = damagePerLevel * (currentLevel + numOfLevels);
         }
     }
 }
