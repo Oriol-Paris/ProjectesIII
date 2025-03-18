@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class EnemyBase : MonoBehaviour
 {
-    [SerializeField] private int health;
+    [SerializeField] private float health;
     [SerializeField] private float range;
     [SerializeField] private float oldRange;//Esto para clase shooter
     [SerializeField] private float shootingRange;//Esto para cuando hagamos clase shooter
@@ -36,8 +36,8 @@ public class EnemyBase : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         collider = GetComponent<Collider>();
         rb2d = GetComponent<Rigidbody>();
-        
 
+        health *= FindAnyObjectByType<CombatManager>().enemyStatMultiplier;
         
 
     }
@@ -60,7 +60,7 @@ public class EnemyBase : MonoBehaviour
     }
 
 
-    public int GetHealth() { return health; }
+    public float GetHealth() { return health; }
     public void Damage(int val, GameObject hitObject)
     {
         originalPosition = this.transform.position;

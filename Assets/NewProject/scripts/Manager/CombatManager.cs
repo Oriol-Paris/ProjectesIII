@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -18,7 +17,8 @@ public class CombatManager : MonoBehaviour
 
     private bool hasCalculatedExp = false;  // Bandera para controlar que la suma de experiencia solo se haga una vez
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    private const int MAX_TURNS_EXP = 50; // Límite máximo de experiencia por turnos
+
     void Start()
     {
         // Obtener todos los objetos de tipo PlayerBase en la escena
@@ -36,7 +36,6 @@ public class CombatManager : MonoBehaviour
         allEnemiesDead = true;
     }
 
-    // Update is called once per frame
     void Update()
     {
         allEnemiesDead = true;
@@ -46,55 +45,57 @@ public class CombatManager : MonoBehaviour
             if (enemyParty[i].isAlive)
                 allEnemiesDead = false;
         }
-        for(int i = 0; i< playerParty.Count; i++)
+        for (int i = 0; i < playerParty.Count; i++)
         {
             if (playerParty[i].GetIsAlive())
                 allPlayersDead = false;
         }
 
-        // Si todos los enemigos est�n muertos y a�n no hemos calculado la experiencia
         if (allEnemiesDead && !hasCalculatedExp)
         {
-            // Habilitar la condici�n de victoria
+            // Habilitar la condición de victoria
             winCondition.enabled = true;
             winCondition.GetComponentInChildren<TextMeshProUGUI>().text = "YOU WIN!";
             Cursor.visible = true;
 
-
-            // Realizar el c�lculo de la experiencia
+            // Calcular experiencia
             for (int i = 0; i < playerParty.Count; i++)
             {
                 playerParty[i].victory = true;
                 if (playerParty[i].GetIsAlive())
                 {
-                    playerParty[i].exp++;  // Sumar una experiencia b�sica
-                    int turnsExpDifference = numberOfTurns - playerParty[i].turnsDone.turnsDone;
-                    turnsExpDifference = Mathf.Max(0, turnsExpDifference);
-                    playerParty[i].exp += turnsExpDifference; // Ajustar por los turnos
+                    playerParty[i].exp++;  // Experiencia base
+                    int turnsUsed = Mathf.Clamp(playerParty[i].turnsDone.turnsDone, 0, numberOfTurns);
+                    int turnsExpDifference = numberOfTurns - turnsUsed;
+                    turnsExpDifference = Mathf.Min(turnsExpDifference, MAX_TURNS_EXP);
+
+                    playerParty[i].exp += turnsExpDifference; // Ajuste por turnos
                 }
                 playerParty[i].playerData.exp = playerParty[i].exp;
+                Debug.Log($"Player {i} EXP: {playerParty[i].exp}");
             }
 
             nodeMapData.SetLevelCleared(SceneManager.GetActiveScene().name);
             playerParty[0].SaveCurrentState();
 
-            // Marcar que ya se calcul� la experiencia
             hasCalculatedExp = true;
         }
+
         if (allPlayersDead)
         {
-            // Habilitar la condici�n de victoria
+            // Mostrar mensaje de derrota
             winCondition.enabled = true;
             winCondition.GetComponentInChildren<TextMeshProUGUI>().text = "YOU LOSE";
             Cursor.visible = true;
-            for (int i = 0;i< playerParty.Count;i++)
+
+            for (int i = 0; i < playerParty.Count; i++)
             {
                 playerParty[i].defeat = true;
             }
 
             playerParty[0].ResetToLevelStart();
-
         }
     }
-    public Canvas GetWinCondition() {  return winCondition; }
+
+    public Canvas GetWinCondition() { return winCondition; }
 }

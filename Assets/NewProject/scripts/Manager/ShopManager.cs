@@ -195,9 +195,13 @@ public class ShopManager : MonoBehaviour
                 player.InstantMaxHPIncrease();
                 break;
         }
+
+        // Trigger the hotbar update
         if (hotbarManager != null)
         {
+            
             hotbarManager.TriggerUpgradeAnimation(actionData);
+            hotbarManager.UpdateHotbar();
         }
     }
 

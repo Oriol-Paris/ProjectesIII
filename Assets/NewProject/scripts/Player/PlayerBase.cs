@@ -355,6 +355,7 @@ public class PlayerBase : MonoBehaviour
 
     public void Damage(int val, GameObject hitObject) 
     {
+        Debug.Log("AUCH");
         health -= val; 
         playerData.health -= val;
        
