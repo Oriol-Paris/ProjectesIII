@@ -143,16 +143,12 @@ public class TimeSecuence : MonoBehaviour
 
     void PassTurn()
     {
-        if (actions.Count > 0)
-        {
-            isExecuting = true;
-             Debug.Log("Executing stored actions");
-            notacction = true;
-            controlListMovment.DestroyAllGhostrs();
+        isExecuting = true;
+        Debug.Log("Executing stored actions");
+        notacction = true;
+        controlListMovment.DestroyAllGhostrs();
         StartCoroutine(ExecuteActions());
-            actualTime = totalTime;
-        }
-        
+        actualTime = totalTime;
     }
 
 
