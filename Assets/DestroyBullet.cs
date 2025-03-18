@@ -57,7 +57,7 @@ public class DestroyBullet : MonoBehaviour
     {
         if (collision != null)
         {
-            if (collision.gameObject.CompareTag("Walls"))
+            if (collision.gameObject.CompareTag("envairoment"))
             {
                 Destroy(gameObject);
             }
