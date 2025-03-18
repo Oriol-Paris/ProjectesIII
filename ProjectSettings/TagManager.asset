@@ -52,5 +52,8 @@ TagManager:
   - name: hazards
     uniqueID: 4157573601
     locked: 0
+  - name: OnBoarding
+    uniqueID: 3526868761
+    locked: 0
   m_RenderingLayers:
   - Default
