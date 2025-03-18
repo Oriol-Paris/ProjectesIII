@@ -19,12 +19,12 @@ MonoBehaviour:
   actionPoints: -21
   maxActionPoints: 3
   maxTime: 3
-  lastLevel: Level5
+  lastLevel: ShopScene
   levelCompleted: 0
   timesHealed: 2
   timesIncreasedMaxHP: 0
   moveRange: 0
-  exp: 238975
+  exp: 238959
   isAlive: 1
   victory: 0
   healAmount: 1
@@ -48,9 +48,3 @@ MonoBehaviour:
     style: {fileID: 0}
     cost: 1
     bulletType: 0
-  - actionType: 0
-    action: 1
-    key: 51
-    style: {fileID: 0}
-    cost: 2
-    bulletType: 2
