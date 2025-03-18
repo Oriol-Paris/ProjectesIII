@@ -10,13 +10,11 @@ GameObject:
   m_Component:
   - component: {fileID: 4611151845898006163}
   - component: {fileID: 8691793027047177071}
-  - component: {fileID: 3584146164476778208}
-  - component: {fileID: 5237114156361899095}
-  - component: {fileID: 1609921758413641026}
-  - component: {fileID: 41578014823126762}
-  - component: {fileID: -1676723806143739372}
+  - component: {fileID: 2990912560374432514}
+  - component: {fileID: 2572626133480285931}
+  - component: {fileID: 3734615239118393944}
   m_Layer: 0
-  m_Name: EnemyGunBullet
+  m_Name: ghostBullet
   m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -81,8 +79,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 5
-  m_Sprite: {fileID: 8839072523237006621, guid: cf100fcbefcbdd44ea1a32a74f99e6e5, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: -583364301812350179, guid: a47422a1438d5cf40a985a493520ba09, type: 3}
+  m_Color: {r: 0.9502573, g: 0.8632076, b: 1, a: 0.4627451}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -92,26 +90,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3584146164476778208
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4841340973275302747}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 22e3876fa198c1943a8b884c9bc0802d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerData: {fileID: 0}
-  isHit: 0
-  range: 10
-  speed: 5
-  damage: 1
-  isFromPlayer: 0
-  velocity: {x: 1, y: 1, z: 1}
---- !u!95 &5237114156361899095
+--- !u!95 &2990912560374432514
 Animator:
   serializedVersion: 7
   m_ObjectHideFlags: 0
@@ -121,7 +100,7 @@ Animator:
   m_GameObject: {fileID: 4841340973275302747}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 700a201f6f453b94893b890917dc34be, type: 2}
+  m_Controller: {fileID: 9100000, guid: 75941586b403daa42a81f09a796799c9, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -133,7 +112,7 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!54 &1609921758413641026
+--- !u!54 &2572626133480285931
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -158,30 +137,9 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 116
+  m_Constraints: 112
   m_CollisionDetection: 0
---- !u!65 &41578014823126762
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4841340973275302747}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.6965556, y: 0.1998179, z: 0.2}
-  m_Center: {x: -0.004876852, y: 0.0070192814, z: 0}
---- !u!114 &-1676723806143739372
+--- !u!114 &3734615239118393944
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -190,15 +148,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4841340973275302747}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 427c9481d5c5dd84d87937bff331feb3, type: 3}
+  m_Script: {fileID: 11500000, guid: 707a8d1aefb39014b8279bcf0e0b8960, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeSecuence: {fileID: 0}
-  rb: {fileID: 1609921758413641026}
-  shootDirection: {x: 0, y: 0, z: 0}
-  time: 0
-  fromPlayer: 0
-  damage: 0
-  shootCShakeTime: 0
-  shootCShakeRange: 0
-  bulletSpeed: 4
+  rb: {fileID: 2572626133480285931}

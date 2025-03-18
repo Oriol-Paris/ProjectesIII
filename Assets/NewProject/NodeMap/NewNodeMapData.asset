@@ -30,7 +30,7 @@ MonoBehaviour:
     enabled: 1
     isCurrentLevel: 0
   - type: 0
-    destination: Level2
+    destination: Level3
     position: {x: 0, y: 200}
     parentIndex: 0
     childrenIndices: 04000000
@@ -38,7 +38,7 @@ MonoBehaviour:
     enabled: 1
     isCurrentLevel: 0
   - type: 0
-    destination: Level3
+    destination: Level2
     position: {x: 300, y: 200}
     parentIndex: 0
     childrenIndices: 04000000
@@ -50,8 +50,8 @@ MonoBehaviour:
     position: {x: 0, y: 400}
     parentIndex: 1
     childrenIndices: 05000000
-    cleared: 0
-    enabled: 1
+    cleared: 1
+    enabled: 0
     isCurrentLevel: 0
   - type: 0
     destination: Level5
@@ -59,6 +59,6 @@ MonoBehaviour:
     parentIndex: 4
     childrenIndices: 
     cleared: 0
-    enabled: 0
+    enabled: 1
     isCurrentLevel: 0
   lastEnteredLevel: ShopScene

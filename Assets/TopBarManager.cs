@@ -4,8 +4,7 @@ using static PlayerData;
 using TMPro;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
-using Mono.Cecil.Cil;
-using System.Collections;
+
 
 public class TopBarManager : MonoBehaviour
 {

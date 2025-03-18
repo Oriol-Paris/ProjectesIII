@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - Walls
   - envairoment
+  - Explosive
   layers:
   - Default
   - TransparentFX
@@ -47,6 +48,9 @@ TagManager:
     locked: 0
   - name: particles
     uniqueID: 2017633559
+    locked: 0
+  - name: hazards
+    uniqueID: 4157573601
     locked: 0
   m_RenderingLayers:
   - Default

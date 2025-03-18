@@ -169,6 +169,7 @@ public class TimeSecuence : MonoBehaviour
 
     private void ResetTurn()
     {
+       
         notacction = false;
         play = false;
         canInvokeGhost = true;
@@ -176,7 +177,7 @@ public class TimeSecuence : MonoBehaviour
         actionTargets.Clear();
         bulletStyles.Clear(); // Add this line
         movPlayer.finish();
-        controlListMovment.DestroyAllGhostrs();
+       
         foreach (var line in actionManager.visualPlayerAfterShoot)
         {
             Destroy(line.gameObject);
@@ -194,6 +195,7 @@ public class TimeSecuence : MonoBehaviour
         isExecuting = false;
 
         FindAnyObjectByType<TopBarManager>().ResetTopBar();
+        controlListMovment.DestroyAllGhostrs();
     }
 
     public void RemoveLastAction()
