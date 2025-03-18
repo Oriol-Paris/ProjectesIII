@@ -2,6 +2,7 @@ using JetBrains.Annotations;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "PlayerData", menuName = "ScriptableObjects/PlayerData")]
@@ -29,7 +30,22 @@ public class PlayerData : ScriptableObject
 
     public int healAmount = 10;
 
+    // We'll use a list of serializable bullet levels instead of a dictionary.
+    public List<SerializableBulletLevel> bulletLevels = new List<SerializableBulletLevel>();
     public List<ActionData> availableActions = new List<ActionData>();
+
+    [Serializable]
+    public class SerializableBulletLevel
+    {
+        public BulletType bulletType;
+        public int level;
+
+        public SerializableBulletLevel(BulletType type, int level)
+        {
+            this.bulletType = type;
+            this.level = level;
+        }
+    }
 
     [Serializable]
     public class ActionData
@@ -80,6 +96,8 @@ public class PlayerData : ScriptableObject
             public BulletType bulletType;
         }
 
+        // Use a list of serializable bullet levels for saving
+        public List<SerializableBulletLevel> bulletLevels = new List<SerializableBulletLevel>();
         public List<SerializableActionData> availableActions = new List<SerializableActionData>();
     }
 
@@ -113,6 +131,8 @@ public class PlayerData : ScriptableObject
                 isAlive = this.isAlive,
                 victory = this.victory,
                 healAmount = this.healAmount,
+                // Convert bullet levels from availableActions
+                bulletLevels = GetBulletLevels(),
                 availableActions = new List<PlayerDataWrapper.SerializableActionData>()
             };
 
@@ -152,7 +172,6 @@ public class PlayerData : ScriptableObject
 
                 PlayerData data = CreateInstance<PlayerData>();
 
-                // Copy basic data from wrapper to the new instance
                 data.health = wrapper.health;
                 data.maxHealth = wrapper.maxHealth;
                 data.actionPoints = wrapper.actionPoints;
@@ -168,7 +187,7 @@ public class PlayerData : ScriptableObject
                 data.victory = wrapper.victory;
                 data.healAmount = wrapper.healAmount;
 
-                // Convert serialized actions back to ActionData
+                data.bulletLevels = wrapper.bulletLevels;
                 data.availableActions = new List<ActionData>();
                 foreach (var serializedAction in wrapper.availableActions)
                 {
@@ -187,6 +206,12 @@ public class PlayerData : ScriptableObject
                     if (action.action == PlayerBase.ActionEnum.SHOOT)
                     {
                         action.style = FindAnyObjectByType<BulletCollection>().GetBullet(action.bulletType);
+                        // Find bullet level for this bullet type from the list
+                        var bulletLevel = data.bulletLevels.FirstOrDefault(b => b.bulletType == action.bulletType);
+                        if (bulletLevel != null)
+                        {
+                            action.style.LevelUpBullet(bulletLevel.level);
+                        }
                     }
                 }
 
@@ -251,6 +276,7 @@ public class PlayerData : ScriptableObject
             isAlive = this.isAlive,
             victory = this.victory,
             healAmount = this.healAmount,
+            bulletLevels = GetBulletLevels(),
             availableActions = new List<PlayerDataWrapper.SerializableActionData>()
         };
 
@@ -293,7 +319,6 @@ public class PlayerData : ScriptableObject
 
                 PlayerData data = CreateInstance<PlayerData>();
 
-                // Copy basic data from wrapper to the new instance
                 data.health = wrapper.health;
                 data.maxHealth = wrapper.maxHealth;
                 data.actionPoints = wrapper.actionPoints;
@@ -309,7 +334,7 @@ public class PlayerData : ScriptableObject
                 data.victory = wrapper.victory;
                 data.healAmount = wrapper.healAmount;
 
-                // Convert serialized actions back to ActionData
+                data.bulletLevels = wrapper.bulletLevels;
                 data.availableActions = new List<ActionData>();
                 foreach (var serializedAction in wrapper.availableActions)
                 {
@@ -328,6 +353,11 @@ public class PlayerData : ScriptableObject
                     if (action.action == PlayerBase.ActionEnum.SHOOT)
                     {
                         action.style = FindAnyObjectByType<BulletCollection>().GetBullet(action.bulletType);
+                        var bulletLevel = data.bulletLevels.FirstOrDefault(b => b.bulletType == action.bulletType);
+                        if (bulletLevel != null)
+                        {
+                            action.style.LevelUpBullet(bulletLevel.level);
+                        }
                     }
                 }
 
@@ -342,7 +372,6 @@ public class PlayerData : ScriptableObject
         return null;
     }
 
-    // Use this method at the start of your game
     public void InitializeAllData()
     {
         SaveOriginalPlayerIfNotExists();
@@ -350,7 +379,6 @@ public class PlayerData : ScriptableObject
         LoadPlayerAtLevelStart();
     }
 
-    // Method to reset to original state
     public void ResetToOriginal()
     {
         if (originalPlayer != null)
@@ -368,7 +396,19 @@ public class PlayerData : ScriptableObject
         }
     }
 
-    // Method to reset to level start
+    public List<SerializableBulletLevel> GetBulletLevels()
+    {
+        List<SerializableBulletLevel> levels = new List<SerializableBulletLevel>();
+        foreach (var action in availableActions)
+        {
+            if (action.action == PlayerBase.ActionEnum.SHOOT && action.style != null)
+            {
+                levels.Add(new SerializableBulletLevel(action.bulletType, action.style.level));
+            }
+        }
+        return levels;
+    }
+
     public void ResetToLevelStart()
     {
         if (playerAtStartOfLevel != null)
