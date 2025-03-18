@@ -8,7 +8,9 @@ public class BulletCollection : MonoBehaviour
     [SerializeField] public List<GameObject> prefabs = new List<GameObject>();
     [SerializeField] public int numOfBulletTypes;
 
-    [NonSerialized] public List<BulletStyle> bulletCollection = new List<BulletStyle>();
+    [SerializeField] public PlayerData playerData;
+
+    [SerializeField] public List<BulletStyle> bulletCollection = new List<BulletStyle>();
 
     private void Awake()
     {
@@ -25,14 +27,17 @@ public class BulletCollection : MonoBehaviour
         {
             if (prefabs[i] != null)
             {
-                bulletCollection.Add(new BulletStyle((BulletType)i, prefabs[i]));
+                BulletStyle bullet = new BulletStyle();
+                bullet.Initiazlize((BulletType)i, prefabs[i]);
+
+                bulletCollection.Add(bullet);
+                playerData.LevelUpBullet(bullet.bulletType, 0);
             }
         }
     }
 
     public BulletStyle GetBullet(BulletType type)
     {
-        // Initialize if not already done
         if (bulletCollection.Count == 0)
         {
             InitializeBulletCollection();
@@ -49,15 +54,12 @@ public class BulletCollection : MonoBehaviour
 
     public static bool CompareBullets(BulletStyle a, BulletStyle b)
     {
-        // If both are null, they're considered equal
         if (a == null && b == null)
             return true;
 
-        // If only one is null, they're different
         if (a == null || b == null)
             return false;
 
-        // Now we can safely compare bulletTypes
         return a.bulletType == b.bulletType;
     }
 

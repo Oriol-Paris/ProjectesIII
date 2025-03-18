@@ -65,7 +65,9 @@ public class HotbarManager : MonoBehaviour
                 if (action.action == PlayerBase.ActionEnum.SHOOT)
                 {
                     slot.transform.Find("Texts").transform.Find("Action Stats").GetComponent<TextMeshProUGUI>().text =
-                        "Range: " + action.style.range + "\nDamage: " + action.style.damage + "\nCost: " + action.cost;
+                        "Range: " + FindAnyObjectByType<BulletCollection>().GetBullet(action.bulletType).range + 
+                        "\nDamage: " + FindAnyObjectByType<BulletCollection>().GetBullet(action.bulletType).damage + 
+                        "\nCost: " + action.cost;
                 }
                 else if (action.actionType == PlayerBase.ActionType.PASSIVE)
                 {
@@ -101,7 +103,8 @@ public class HotbarManager : MonoBehaviour
                 if (action.actionType == PlayerBase.ActionType.ACTIVE)
                 {
                     slot.transform.Find("Texts").transform.Find("Action Stats").GetComponent<TextMeshProUGUI>().text =
-                        "Range: " + action.style.range + "\nDamage: " + action.style.damage;
+                        "Range: " + FindAnyObjectByType<BulletCollection>().GetBullet(action.bulletType).range + 
+                        "\nDamage: " + FindAnyObjectByType<BulletCollection>().GetBullet(action.bulletType).damage;
                 }
                 else if (action.actionType == PlayerBase.ActionType.SINGLE_USE || action.actionType == PlayerBase.ActionType.PASSIVE)
                 {

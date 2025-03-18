@@ -15,7 +15,6 @@ public class TopBarManager : MonoBehaviour
     public GameObject bottomActionPrefab;
     public TextMeshProUGUI actionKeyIndex;
     private PlayerBase playerData;
-    private int keyIndex = 1;
     private List<GameObject> actionSlots = new List<GameObject>();
     private List<PlayerBase.Action> actionsDisplayed = new List<PlayerBase.Action>();
 
@@ -61,9 +60,6 @@ public class TopBarManager : MonoBehaviour
     {
         GameObject newAction = Instantiate(topActionPrefab, topPanel.transform);
         newAction.GetComponent<Image>().overrideSprite = GetActionImage(playerData.activeAction);
-       
-            
-        
     }
     
 
@@ -102,13 +98,20 @@ public class TopBarManager : MonoBehaviour
 
             if (action.m_action == player.GetAction().m_action)
             {
-                if (BulletCollection.CompareBullets(action.m_style, player.GetAction().m_style))
+                if(action.m_action == PlayerBase.ActionEnum.SHOOT)
                 {
-                    slot.GetComponent<Image>().color = Color.yellow;
+                    if (action.m_style.bulletType == player.GetAction().m_style.bulletType)
+                    {
+                        slot.GetComponent<Image>().color = Color.yellow;
+                    }
+                    else
+                    {
+                        slot.GetComponent<Image>().color = Color.white;
+                    }
                 }
                 else
                 {
-                    slot.GetComponent<Image>().color = Color.white;
+                    slot.GetComponent<Image>().color = Color.yellow;
                 }
             }
 
@@ -203,8 +206,6 @@ public class TopBarManager : MonoBehaviour
 
     private Sprite GetActionImage(PlayerBase.Action action)
     {
-        PlayerBase player = FindAnyObjectByType<PlayerBase>();
-
         if (action.m_action == PlayerBase.ActionEnum.SHOOT)
         {
             if(action.m_style.bulletType == BulletType.GUN)

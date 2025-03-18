@@ -30,7 +30,6 @@ public class PlayerData : ScriptableObject
 
     public int healAmount = 10;
 
-    // We'll use a list of serializable bullet levels instead of a dictionary.
     public List<SerializableBulletLevel> bulletLevels = new List<SerializableBulletLevel>();
     public List<ActionData> availableActions = new List<ActionData>();
 
@@ -132,7 +131,7 @@ public class PlayerData : ScriptableObject
                 victory = this.victory,
                 healAmount = this.healAmount,
                 // Convert bullet levels from availableActions
-                bulletLevels = GetBulletLevels(),
+                bulletLevels = this.bulletLevels,
                 availableActions = new List<PlayerDataWrapper.SerializableActionData>()
             };
 
@@ -276,7 +275,7 @@ public class PlayerData : ScriptableObject
             isAlive = this.isAlive,
             victory = this.victory,
             healAmount = this.healAmount,
-            bulletLevels = GetBulletLevels(),
+            bulletLevels = this.bulletLevels,
             availableActions = new List<PlayerDataWrapper.SerializableActionData>()
         };
 
@@ -396,19 +395,6 @@ public class PlayerData : ScriptableObject
         }
     }
 
-    public List<SerializableBulletLevel> GetBulletLevels()
-    {
-        List<SerializableBulletLevel> levels = new List<SerializableBulletLevel>();
-        foreach (var action in availableActions)
-        {
-            if (action.action == PlayerBase.ActionEnum.SHOOT && action.style != null)
-            {
-                levels.Add(new SerializableBulletLevel(action.bulletType, action.style.level));
-            }
-        }
-        return levels;
-    }
-
     public void ResetToLevelStart()
     {
         if (playerAtStartOfLevel != null)
@@ -455,5 +441,20 @@ public class PlayerData : ScriptableObject
                 action.bulletType
             ));
         }
+    }
+
+    public void LevelUpBullet(BulletType type, int amountOfLevels = 1)
+    {
+        foreach(var bullet in bulletLevels)
+        {
+            if (bullet.bulletType == type)
+            {
+                FindAnyObjectByType<BulletCollection>().GetBullet(bullet.bulletType).LevelUpBullet(bullet.level);
+                bullet.level += amountOfLevels;
+                return;
+            }
+        }
+
+        Save();
     }
 }
