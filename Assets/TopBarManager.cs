@@ -4,6 +4,7 @@ using static PlayerData;
 using TMPro;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
+using Mono.Cecil.Cil;
 
 public class TopBarManager : MonoBehaviour
 {
@@ -12,9 +13,9 @@ public class TopBarManager : MonoBehaviour
 
     public GameObject topActionPrefab;
     public GameObject bottomActionPrefab;
-
+    public TextMeshProUGUI actionKeyIndex;
     private PlayerBase playerData;
-
+    private int keyIndex = 1;
     private List<GameObject> actionSlots = new List<GameObject>();
     private List<PlayerBase.Action> actionsDisplayed = new List<PlayerBase.Action>();
 
@@ -26,6 +27,11 @@ public class TopBarManager : MonoBehaviour
 
     void Start()
     {
+        actionKeyIndex = bottomActionPrefab.GetComponentInChildren<TextMeshProUGUI>();
+        if(actionKeyIndex != null)
+        {
+            Debug.Log("Found and assigned");
+        }
         playerData = FindAnyObjectByType<PlayerBase>();
 
         if (playerData == null)
@@ -55,7 +61,11 @@ public class TopBarManager : MonoBehaviour
     {
         GameObject newAction = Instantiate(topActionPrefab, topPanel.transform);
         newAction.GetComponent<Image>().overrideSprite = GetActionImage(playerData.activeAction);
+       
+            
+        
     }
+    
 
     void UpdateBottomHotbar()
     {
@@ -80,9 +90,11 @@ public class TopBarManager : MonoBehaviour
         actionsDisplayed.Clear();
 
         // Create new slots
+        int currentKeyIndex = 1;
         foreach (var action in availableActions)
         {
             GameObject slot = Instantiate(bottomActionPrefab, bottomPanel.transform);
+
             RectTransform slotRectTransform = slot.GetComponent<RectTransform>();
             slotRectTransform.sizeDelta = slotSize;
 
@@ -102,6 +114,14 @@ public class TopBarManager : MonoBehaviour
 
             slot.transform.Find("Action Image").GetComponent<Image>().overrideSprite = GetActionImage(action);
             slot.transform.Find("Action Image").GetComponent<Image>().color = GetActionColor(action.m_action);
+
+            // Set the action key index
+            TextMeshProUGUI actionKeyIndexText = slot.GetComponentInChildren<TextMeshProUGUI>();
+            if (actionKeyIndexText != null)
+            {
+                actionKeyIndexText.text = currentKeyIndex.ToString();
+            }
+            currentKeyIndex++;
 
             actionSlots.Add(slot);
             actionsDisplayed.Add(action);

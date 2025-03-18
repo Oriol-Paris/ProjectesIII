@@ -19,15 +19,16 @@ MonoBehaviour:
   actionPoints: -21
   maxActionPoints: 3
   maxTime: 3
-  lastLevel: Level2
+  lastLevel: Level1
   levelCompleted: 1
   timesHealed: 0
   timesIncreasedMaxHP: 0
   moveRange: 0
-  exp: 238935
+  exp: 238919
   isAlive: 1
   victory: 0
   healAmount: 1
+  bulletLevels: []
   availableActions:
   - actionType: 0
     action: 0
