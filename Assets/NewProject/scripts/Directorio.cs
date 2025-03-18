@@ -5,18 +5,18 @@ public static class Directorio
     // Method to get mouse position in world space with better debugging
     public static Vector3 mousePosition()
     {
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
-
-        if (groundPlane.Raycast(ray, out float distance))
         {
-            Vector3 hitPoint = ray.GetPoint(distance);
-            // Debug.Log($"Mouse hit ground at: {hitPoint}, distance: {distance}");
-            return hitPoint;
-        }
+            int layerMask = LayerMask.GetMask("floor");
+            Vector3 mousePosition;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, layerMask))
+            {
+                mousePosition = hit.point;
+                return mousePosition;
+            }
+            else return Vector3.zero;
 
-        Debug.LogWarning("Mouse ray didn't hit ground plane!");
-        return Vector3.zero;
+        }
     }
 
     // Alternative implementation using Physics.Raycast
