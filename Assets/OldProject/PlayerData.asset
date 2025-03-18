@@ -24,17 +24,17 @@ MonoBehaviour:
   timesHealed: 0
   timesIncreasedMaxHP: 0
   moveRange: 0
-  exp: 238903
+  exp: 238939
   isAlive: 1
   victory: 0
   healAmount: 1
   bulletLevels:
   - bulletType: 0
-    level: 82
+    level: 6
   - bulletType: 1
-    level: 49
+    level: 1
   - bulletType: 2
-    level: 45
+    level: 13
   availableActions:
   - actionType: 0
     action: 0

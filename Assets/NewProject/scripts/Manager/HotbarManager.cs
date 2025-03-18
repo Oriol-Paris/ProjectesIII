@@ -61,7 +61,7 @@ public class HotbarManager : MonoBehaviour
         return false;
     }
 
-    void UpdateHotbar()
+    public void UpdateHotbar()
     {
         if (playerData == null)
         {
