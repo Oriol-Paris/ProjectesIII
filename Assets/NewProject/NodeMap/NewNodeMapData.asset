@@ -27,7 +27,7 @@ MonoBehaviour:
     parentIndex: 0
     childrenIndices: 04000000
     cleared: 0
-    enabled: 0
+    enabled: 1
     isCurrentLevel: 0
   - type: 0
     destination: Level2
@@ -35,7 +35,7 @@ MonoBehaviour:
     parentIndex: 0
     childrenIndices: 04000000
     cleared: 1
-    enabled: 0
+    enabled: 1
     isCurrentLevel: 0
   - type: 0
     destination: Level3
@@ -43,7 +43,7 @@ MonoBehaviour:
     parentIndex: 0
     childrenIndices: 04000000
     cleared: 0
-    enabled: 0
+    enabled: 1
     isCurrentLevel: 0
   - type: 2
     destination: ShopScene
