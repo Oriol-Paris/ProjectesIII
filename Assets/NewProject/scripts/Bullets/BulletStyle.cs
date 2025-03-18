@@ -40,28 +40,7 @@ public class BulletStyle : MonoBehaviour
 
     public void LevelUpBullet(int currentLevel, int numOfLevels = 1)
     {
-        if(currentLevel == 0)
-        {
-            switch (bulletType)
-            {
-                case BulletType.GUN:
-                    range = 5;
-                    damage = 0;
-                    break;
-                case BulletType.SHOTGUN:
-                    range = 3;
-                    damage = 1;
-                    break;
-                case BulletType.LASER:
-                    range = -1;
-                    damage = 1;
-                    break;
-            }
-        }
-        else
-        {
-            range = rangePerLevel * (currentLevel + numOfLevels);
-            damage = damagePerLevel * (currentLevel + numOfLevels);
-        }
+        range = rangePerLevel * (currentLevel + numOfLevels);
+        damage = damagePerLevel * (currentLevel + numOfLevels);
     }
 }

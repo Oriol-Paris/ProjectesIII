@@ -83,6 +83,8 @@ public class NodeMapGenerator : MonoBehaviour
             }
         }
 
+        Cursor.visible = true;
+
         ConnectNodes();
         ArrangeNodes();
         CenterMap();
