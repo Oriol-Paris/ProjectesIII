@@ -27,14 +27,14 @@ public class PauseMenu : MonoBehaviour
         if(pauseMenu.activeInHierarchy)
         {
             Cursor.visible = false;
-            playerActionManager.enabled = true;
+            Time.timeScale = 1.0f;
             pauseMenu.SetActive(false);
             combatUI.SetActive(true);
         }
         else
         {
             Cursor.visible = true;
-            playerActionManager.enabled = false;
+            Time.timeScale = 0.0f;
             pauseMenu.SetActive(true);
             combatUI.SetActive(false);
         }
