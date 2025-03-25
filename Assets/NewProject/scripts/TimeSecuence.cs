@@ -163,9 +163,9 @@ public class TimeSecuence : MonoBehaviour
         return Vector3.zero; // Return Vector3.zero if no hit
     }
 
-    private void ResetTurn()
+    public void ResetTurn()
     {
-       
+        Debug.Log("aaaaa");
         notacction = false;
         play = false;
         canInvokeGhost = true;

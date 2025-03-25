@@ -12,6 +12,7 @@ public class CombatManager : MonoBehaviour
     [SerializeField] public float enemyStatMultiplier = 1;
     [SerializeField] private int numberOfTurns;
     [SerializeField] Canvas winCondition;
+    [SerializeField] TimeSecuence Time;
 
     [SerializeField] NodeMapData nodeMapData;
 
@@ -54,6 +55,7 @@ public class CombatManager : MonoBehaviour
             // Habilitar la condición de victoria
             winCondition.enabled = true;
             winCondition.GetComponentInChildren<TextMeshProUGUI>().text = "YOU WIN!";
+            Time.ResetTurn();
             Cursor.visible = true;
 
             // Calcular experiencia
@@ -88,6 +90,7 @@ public class CombatManager : MonoBehaviour
             // Mostrar mensaje de derrota
             winCondition.enabled = true;
             winCondition.GetComponentInChildren<TextMeshProUGUI>().text = "YOU LOSE";
+            Time.ResetTurn();
             Cursor.visible = true;
 
             for (int i = 0; i < playerParty.Count; i++)

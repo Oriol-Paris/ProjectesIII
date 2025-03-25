@@ -197,7 +197,7 @@ public class PlayerBase : MonoBehaviour
         else
         {
             activeAction = Action.nothing;
-            Debug.Log("Doing nothing");
+            //Debug.Log("Doing nothing");
         }
 
         // Check for death condition
