@@ -743,7 +743,7 @@ MonoBehaviour:
   timeSecuence: {fileID: 7189739028029077113}
   t: 0
   maxDistance: 20
-  velocity: 1
+  velocity: 2
   tiemp: 0
   timeSceuence: {fileID: 7189739028029077113}
   placeSelected: 0
@@ -765,7 +765,7 @@ MonoBehaviour:
   positionDesired: {x: 0, y: 0, z: 0}
   playerPosition: {x: 0, y: 0, z: 0}
   curveResolution: 0
-  maxReach: 10
+  maxReach: 5
   tileScale: 4
   lineMaterial: {fileID: 2100000, guid: 4a10f03634df60c489a85fc47ade7847, type: 2}
   animateLine: 1
@@ -795,7 +795,7 @@ MonoBehaviour:
   timeSceuence: {fileID: 7189739028029077113}
   timeConsum: []
   ghostsPlayers: []
-  maxDistance: 10
+  maxDistance: 5
   t: 0
   ghostPlayer: {fileID: 6993864842785556067, guid: 785ff20f51df2be40b3fbda2c31b3afc, type: 3}
 --- !u!114 &4026666568815950345
