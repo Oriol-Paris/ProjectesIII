@@ -1,0 +1,742 @@
+fileFormatVersion: 2
+guid: 9c385427eb35abd43981f2487d505c20
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -5629351806993494549
+    second: Big_rock_3_albedo_0
+  - first:
+      213: -8740547718633531032
+    second: Big_rock_3_albedo_1
+  - first:
+      213: -7142395410694427132
+    second: Big_rock_3_albedo_2
+  - first:
+      213: 7961961243244311919
+    second: Big_rock_3_albedo_3
+  - first:
+      213: 4256293981252564839
+    second: Big_rock_3_albedo_4
+  - first:
+      213: -2946487619241170798
+    second: Big_rock_3_albedo_5
+  - first:
+      213: -560920026208609324
+    second: Big_rock_3_albedo_6
+  - first:
+      213: -5550309985596695097
+    second: Big_rock_3_albedo_7
+  - first:
+      213: -2231952942688041878
+    second: Big_rock_3_albedo_8
+  - first:
+      213: -5934708514292115041
+    second: Big_rock_3_albedo_9
+  - first:
+      213: 4616055894520931031
+    second: Big_rock_3_albedo_10
+  - first:
+      213: -3373785100566689811
+    second: Big_rock_3_albedo_11
+  - first:
+      213: -5411698054372157291
+    second: Big_rock_3_albedo_12
+  - first:
+      213: 4677468997993346550
+    second: Big_rock_3_albedo_13
+  - first:
+      213: -915196899920101026
+    second: Big_rock_3_albedo_14
+  - first:
+      213: 6981491174156534302
+    second: Big_rock_3_albedo_15
+  - first:
+      213: -8106915778413791577
+    second: Big_rock_3_albedo_16
+  - first:
+      213: 4612245395457832677
+    second: Big_rock_3_albedo_17
+  - first:
+      213: 6230297889614807606
+    second: Big_rock_3_albedo_18
+  - first:
+      213: 4999671105940390774
+    second: Big_rock_3_albedo_19
+  - first:
+      213: -6719780970265750673
+    second: Big_rock_3_albedo_20
+  - first:
+      213: -7775919909347011458
+    second: Big_rock_3_albedo_21
+  - first:
+      213: 1503710093567288563
+    second: Big_rock_3_albedo_22
+  - first:
+      213: -8506202150579242312
+    second: Big_rock_3_albedo_23
+  - first:
+      213: -8191402279691736453
+    second: Big_rock_3_albedo_24
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Big_rock_3_albedo_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1375
+        width: 376
+        height: 656
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bed037c6b5680e1b0800000000000000
+      internalID: -5629351806993494549
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Big_rock_3_albedo_1
+      rect:
+        serializedVersion: 2
+        x: 317
+        y: 1588
+        width: 245
+        height: 439
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8695f78c82653b680800000000000000
+      internalID: -8740547718633531032
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Big_rock_3_albedo_2
+      rect:
+        serializedVersion: 2
+        x: 430
+        y: 1635
+        width: 332
+        height: 413
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 40ead2c473d11ec90800000000000000
+      internalID: -7142395410694427132
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Big_rock_3_albedo_3
+      rect:
+        serializedVersion: 2
+        x: 558
+        y: 635
+        width: 1299
+        height: 1413
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f65310301919e7e60800000000000000
+      internalID: 7961961243244311919
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Big_rock_3_albedo_4
+      rect:
+        serializedVersion: 2
+        x: 1679
+        y: 1580
+        width: 283
+        height: 432
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 767313c33d4611b30800000000000000
+      internalID: 4256293981252564839
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Big_rock_3_albedo_5
+      rect:
+        serializedVersion: 2
+        x: 1957
+        y: 1945
+        width: 39
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2982b081f19fb17d0800000000000000
+      internalID: -2946487619241170798
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Big_rock_3_albedo_6
+      rect:
+        serializedVersion: 2
+        x: 1957
+        y: 1580
+        width: 70
+        height: 370
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4dbde6245363738f0800000000000000
+      internalID: -560920026208609324
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Big_rock_3_albedo_7
+      rect:
+        serializedVersion: 2
+        x: 372
+        y: 1512
+        width: 36
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7cd9433997659f2b0800000000000000
+      internalID: -5550309985596695097
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Big_rock_3_albedo_8
+      rect:
+        serializedVersion: 2
+        x: 413
+        y: 826
+        width: 149
+        height: 766
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a6401bfbf928601e0800000000000000
+      internalID: -2231952942688041878
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Big_rock_3_albedo_9
+      rect:
+        serializedVersion: 2
+        x: 1853
+        y: 1441
+        width: 126
+        height: 138
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f99d128bc0ea3ada0800000000000000
+      internalID: -5934708514292115041
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Big_rock_3_albedo_10
+      rect:
+        serializedVersion: 2
+        x: 1974
+        y: 1461
+        width: 38
+        height: 118
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7d2a44011668f0040800000000000000
+      internalID: 4616055894520931031
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Big_rock_3_albedo_11
+      rect:
+        serializedVersion: 2
+        x: 2015
+        y: 1536
+        width: 33
+        height: 248
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: de7873c7358ed21d0800000000000000
+      internalID: -3373785100566689811
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Big_rock_3_albedo_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 826
+        width: 418
+        height: 553
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 598997dba49c5e4b0800000000000000
+      internalID: -5411698054372157291
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Big_rock_3_albedo_13
+      rect:
+        serializedVersion: 2
+        x: 371
+        y: 1376
+        width: 46
+        height: 140
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6f5bb497545b9e040800000000000000
+      internalID: 4677468997993346550
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Big_rock_3_albedo_14
+      rect:
+        serializedVersion: 2
+        x: 1853
+        y: 1227
+        width: 131
+        height: 218
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e5149b8b4419c43f0800000000000000
+      internalID: -915196899920101026
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Big_rock_3_albedo_15
+      rect:
+        serializedVersion: 2
+        x: 1979
+        y: 1226
+        width: 52
+        height: 227
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e12002ebb3d33e060800000000000000
+      internalID: 6981491174156534302
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Big_rock_3_albedo_16
+      rect:
+        serializedVersion: 2
+        x: 1831
+        y: 635
+        width: 186
+        height: 587
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7a6f2a34d037e7f80800000000000000
+      internalID: -8106915778413791577
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Big_rock_3_albedo_17
+      rect:
+        serializedVersion: 2
+        x: 1981
+        y: 841
+        width: 55
+        height: 210
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5e6f13d10ccf10040800000000000000
+      internalID: 4612245395457832677
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Big_rock_3_albedo_18
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 1481
+        height: 830
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6324b5bcbe6767650800000000000000
+      internalID: 6230297889614807606
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Big_rock_3_albedo_19
+      rect:
+        serializedVersion: 2
+        x: 1367
+        y: 332
+        width: 499
+        height: 306
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6738c57a166626540800000000000000
+      internalID: 4999671105940390774
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Big_rock_3_albedo_20
+      rect:
+        serializedVersion: 2
+        x: 1861
+        y: 417
+        width: 109
+        height: 215
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f6351ea7fca8eb2a0800000000000000
+      internalID: -6719780970265750673
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Big_rock_3_albedo_21
+      rect:
+        serializedVersion: 2
+        x: 1965
+        y: 417
+        width: 55
+        height: 211
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e74db718a02661490800000000000000
+      internalID: -7775919909347011458
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Big_rock_3_albedo_22
+      rect:
+        serializedVersion: 2
+        x: 1476
+        y: 0
+        width: 208
+        height: 395
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3f46f34fc504ed410800000000000000
+      internalID: 1503710093567288563
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Big_rock_3_albedo_23
+      rect:
+        serializedVersion: 2
+        x: 1679
+        y: 0
+        width: 191
+        height: 336
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8ba7f0b3636e3f980800000000000000
+      internalID: -8506202150579242312
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Big_rock_3_albedo_24
+      rect:
+        serializedVersion: 2
+        x: 1866
+        y: 0
+        width: 160
+        height: 409
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b7a26aac60b425e80800000000000000
+      internalID: -8191402279691736453
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable: {}
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
