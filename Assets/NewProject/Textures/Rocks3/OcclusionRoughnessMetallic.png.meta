@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      OcclusionRoughnessMetallic_0: -3862733597428788794
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

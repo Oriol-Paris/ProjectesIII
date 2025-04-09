@@ -409,7 +409,19 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      small_rock_albedo_0: 4273007612730596704
+      small_rock_albedo_1: -3981397233170030503
+      small_rock_albedo_10: -5234763175452631732
+      small_rock_albedo_11: 8242095787591424054
+      small_rock_albedo_2: 1289864562913692093
+      small_rock_albedo_3: 576610777458512254
+      small_rock_albedo_4: -2215830738253747976
+      small_rock_albedo_5: -7623584675859566548
+      small_rock_albedo_6: 5840218711899364317
+      small_rock_albedo_7: -7502625116830579601
+      small_rock_albedo_8: -1607190075106930267
+      small_rock_albedo_9: 1948624473962241715
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

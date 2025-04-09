@@ -159,7 +159,9 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Small_rock_2_albedo_0: -1509658004709243489
+      Small_rock_2_albedo_1: 6941390177062935405
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

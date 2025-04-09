@@ -359,7 +359,17 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Midle_rock_2_albedo_0: 203230431710281521
+      Midle_rock_2_albedo_1: 2980218601651732776
+      Midle_rock_2_albedo_2: 3159592044839483257
+      Midle_rock_2_albedo_3: 7935103635892014206
+      Midle_rock_2_albedo_4: 3279391482350610874
+      Midle_rock_2_albedo_5: -3448578127573595457
+      Midle_rock_2_albedo_6: -8189731519135731317
+      Midle_rock_2_albedo_7: 6299048051381023364
+      Midle_rock_2_albedo_8: 2462821507158192863
+      Midle_rock_2_albedo_9: 8034588707908369225
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

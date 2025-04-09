@@ -734,7 +734,32 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Big_rock_3_albedo_0: -5629351806993494549
+      Big_rock_3_albedo_1: -8740547718633531032
+      Big_rock_3_albedo_10: 4616055894520931031
+      Big_rock_3_albedo_11: -3373785100566689811
+      Big_rock_3_albedo_12: -5411698054372157291
+      Big_rock_3_albedo_13: 4677468997993346550
+      Big_rock_3_albedo_14: -915196899920101026
+      Big_rock_3_albedo_15: 6981491174156534302
+      Big_rock_3_albedo_16: -8106915778413791577
+      Big_rock_3_albedo_17: 4612245395457832677
+      Big_rock_3_albedo_18: 6230297889614807606
+      Big_rock_3_albedo_19: 4999671105940390774
+      Big_rock_3_albedo_2: -7142395410694427132
+      Big_rock_3_albedo_20: -6719780970265750673
+      Big_rock_3_albedo_21: -7775919909347011458
+      Big_rock_3_albedo_22: 1503710093567288563
+      Big_rock_3_albedo_23: -8506202150579242312
+      Big_rock_3_albedo_24: -8191402279691736453
+      Big_rock_3_albedo_3: 7961961243244311919
+      Big_rock_3_albedo_4: 4256293981252564839
+      Big_rock_3_albedo_5: -2946487619241170798
+      Big_rock_3_albedo_6: -560920026208609324
+      Big_rock_3_albedo_7: -5550309985596695097
+      Big_rock_3_albedo_8: -2231952942688041878
+      Big_rock_3_albedo_9: -5934708514292115041
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Big_rock_2_albedo_0: 8887457921977851405
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
