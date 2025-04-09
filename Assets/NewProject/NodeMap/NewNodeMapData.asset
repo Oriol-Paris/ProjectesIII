@@ -12,7 +12,55 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcc9f97db0794854a9aebb25fae8d7f7, type: 3}
   m_Name: NewNodeMapData
   m_EditorClassIdentifier: 
-  nodes: []
+  nodes:
+  - type: 0
+    destination: Level1
+    position: {x: 0, y: 0}
+    parentIndex: -1
+    childrenIndices: 
+    cleared: 0
+    enabled: 0
+    isCurrentLevel: 0
+  - type: 0
+    destination: Level4
+    position: {x: 0, y: 0}
+    parentIndex: -1
+    childrenIndices: 
+    cleared: 0
+    enabled: 0
+    isCurrentLevel: 0
+  - type: 0
+    destination: Level2
+    position: {x: 0, y: 0}
+    parentIndex: -1
+    childrenIndices: 
+    cleared: 0
+    enabled: 0
+    isCurrentLevel: 0
+  - type: 2
+    destination: ShopScene
+    position: {x: 0, y: 0}
+    parentIndex: -1
+    childrenIndices: 
+    cleared: 0
+    enabled: 0
+    isCurrentLevel: 0
+  - type: 0
+    destination: Level3
+    position: {x: 0, y: 0}
+    parentIndex: -1
+    childrenIndices: 
+    cleared: 0
+    enabled: 0
+    isCurrentLevel: 0
+  - type: 0
+    destination: Level5
+    position: {x: 0, y: 0}
+    parentIndex: -1
+    childrenIndices: 
+    cleared: 0
+    enabled: 0
+    isCurrentLevel: 0
   lastEnteredLevel: 
   enemyStatMultiplier: 1
   hasPlayedTutorial: 0
