@@ -19,8 +19,7 @@ public class ActionIndicator : MonoBehaviour
     void Update()
     {
         if(enemyMovementShooter.enemyStats.isAlive) {
-            if (!enemyMovementShooter.closestPlayer.isExecuting)
-            {
+            
                 currentActionIndicator.enabled = true;
                 switch (enemyMovementShooter.turnAction)
                 {
@@ -43,7 +42,7 @@ public class ActionIndicator : MonoBehaviour
                         break;
 
 
-                }
+                
             }
            
         } else { currentActionIndicator.enabled = false; }

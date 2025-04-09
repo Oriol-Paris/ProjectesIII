@@ -9,14 +9,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fb30dde6f8cbe3341a51d2e8e0301e35, type: 3}
+  m_Script: {fileID: 11500000, guid: fe6b8f5bf0e5ea24fa2c8558c5c006ce, type: 3}
   m_Name: ScriptablePlayerBase
   m_EditorClassIdentifier: 
-  health: 10
+  originalPlayer: {fileID: 0}
+  playerAtStartOfLevel: {fileID: 0}
+  health: 0
+  maxHealth: 0
+  actionPoints: 0
+  maxActionPoints: 0
+  maxTime: 0
+  lastLevel: 
+  levelCompleted: 0
+  timesHealed: 0
+  timesIncreasedMaxHP: 0
+  moveRange: 0
+  exp: 0
+  isAlive: 0
+  victory: 0
+  healAmount: 10
   availableActions: []
-  gun:
-    prefab: {fileID: 0}
-    range: 0
-  shotgun:
-    prefab: {fileID: 0}
-    range: 0

@@ -7,6 +7,8 @@ TagManager:
   - Bullet
   - Enemy
   - Walls
+  - envairoment
+  - Explosive
   layers:
   - Default
   - TransparentFX
@@ -14,9 +16,9 @@ TagManager:
   - PostProcessing
   - Water
   - UI
-  - 
-  - 
-  - 
+  - Enemy
+  - floor
+  - Player
   - 
   - 
   - 
@@ -43,6 +45,15 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: particles
+    uniqueID: 2017633559
+    locked: 0
+  - name: hazards
+    uniqueID: 4157573601
+    locked: 0
+  - name: OnBoarding
+    uniqueID: 3526868761
     locked: 0
   m_RenderingLayers:
   - Default

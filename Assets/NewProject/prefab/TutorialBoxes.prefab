@@ -91,7 +91,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textComponent: {fileID: 2653336855223404025}
-  dialogueLines: []
+  dialogueLines: Press 2 to select shoot action, point and click where to shoot!
   textSpeed: 0.05
 --- !u!1 &772618445721033508
 GameObject:
@@ -158,7 +158,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Press 2 to select shoot action, point and click where to shoot!
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -570,7 +570,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Press 1 to select move action, the click where to go
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -974,7 +974,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textComponent: {fileID: 7353185549590669976}
-  dialogueLines: []
+  dialogueLines: 
   textSpeed: 0.05
 --- !u!1 &8338706699980911590
 GameObject:
@@ -1061,13 +1061,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8338706699980911590}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2c447cfec1ed3af41a6bb6c2530ca8b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   textComponent: {fileID: 1810524478172021702}
-  dialogueLines: []
+  dialogueLines: Press 1 to select move action, the click where to go
   textSpeed: 0.05
 --- !u!1 &8683314825193024062
 GameObject:

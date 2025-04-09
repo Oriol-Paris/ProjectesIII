@@ -1,194 +1,289 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
+using UnityEngine.AI;
 
 public class EnemyMovementShooter : MonoBehaviour
 {
     public enum TurnActions { APPROACH, SHOOT, BACK_AWAY, NOTHING };
-    public TurnActions turnAction;
+    public TurnActions turnAction = TurnActions.NOTHING;
 
-    [SerializeField] private List<TimeSecuence> players; // Array of player references
+    [SerializeField] private List<TimeSecuence> players = new List<TimeSecuence>();
     public TimeSecuence closestPlayer;
     private Vector3 closestPlayerPos;
-    private float moveTime;
     public EnemyBase enemyStats;
-    [SerializeField] private GameObject bulletShot; // Bullet prefab to shoot
-    [SerializeField] private float velocity; // Movement speed
-    [SerializeField] private float range; // Shooting range
-    [SerializeField] private float minDistance = 2f; // Minimum distance before moving back
+    [SerializeField] private GameObject bulletShot;
+    [SerializeField] private float velocity;
+    [SerializeField] private float range;
+    [SerializeField] private float minDistance = 2f;
     [SerializeField] private AudioClip[] shootingClips;
     public Animator fx;
-    private bool haveChosenAnAction;
-    private bool isReloading = false; // To control the "reload" wait after shooting
-    private bool hasShot = false; // To ensure only one shot per turn
-    private bool lastIsMovingState = false; // Track the last state of GetIsMoving to detect state change
-    float distanceToPlayer;
+    private bool onCooldown = false;
+    private bool isPerformingAction = false;
+    private bool hasShot = false;
+    private float distanceToPlayer;
+    private NavMeshAgent agent;
+    [SerializeField] private float actionCooldown = 0f;
+    private float initialMultiplier;
+
     void Start()
     {
         enemyStats = GetComponent<EnemyBase>();
+        agent = GetComponent<NavMeshAgent>();
+        agent.speed = velocity;
+        //agent.stoppingDistance = range;
+        players.AddRange(FindObjectsOfType<TimeSecuence>());
 
-        // Get all OG_MovementByMouse objects in the scene and add them to the players list
-        TimeSecuence[] playersArray = GameObject.FindObjectsByType<TimeSecuence>(FindObjectsSortMode.None);
-        foreach (TimeSecuence player in playersArray)
-        {
-            players.Add(player);
-        }
+        CombatManager combatManager = FindObjectOfType<CombatManager>();
+        initialMultiplier = combatManager.enemyStatMultiplier;
+        UpdateStats(initialMultiplier);
 
-        velocity = velocity * FindAnyObjectByType<CombatManager>().enemyStatMultiplier;
-        range = range * FindAnyObjectByType<CombatManager>().enemyStatMultiplier;
-
-        DecideAction();
+        agent.updateRotation = false;
     }
 
     void Update()
     {
-        moveTime = Time.deltaTime * velocity;
-
-        if (enemyStats.isAlive && closestPlayer != null)
+        CombatManager combatManager = FindObjectOfType<CombatManager>();
+        if (combatManager.enemyStatMultiplier != initialMultiplier)
         {
-            if (closestPlayer.isExecuting)
-            {
-                ExecuteAction();
-            } else
-            {
-                DecideAction();
-            }
+            initialMultiplier = combatManager.enemyStatMultiplier;
+            UpdateStats(initialMultiplier);
+        }
+
+        FindClosestPlayer();
+
+        if (!enemyStats.isAlive || closestPlayer == null)
+            return;
+
+        if (!closestPlayer.isExecuting)
+        {
+            agent.isStopped = true;
+            return;
+        }
+        else if (agent.isStopped)
+        {
+            agent.isStopped = false; // Resume movement if it was previously stopped
+        }
+
+        // Only execute actions when allowed and not in cooldown
+        if (!onCooldown && !isPerformingAction)
+        {
+            DecideAction();
+            ExecuteAction();
         }
     }
 
-    // Decides whether to shoot or move based on distance
     private void ExecuteAction()
     {
+        if (onCooldown || isPerformingAction) return;
+        isPerformingAction = true;
+
         switch (turnAction)
         {
             case TurnActions.APPROACH:
                 MoveTowardsPlayer();
-                this.GetComponent<Animator>().SetBool("isMoving", true);
                 break;
 
             case TurnActions.SHOOT:
-                this.GetComponent<Animator>().SetBool("isMoving", false);
+                agent.isStopped = true;
+                GetComponent<Animator>().SetBool("isMoving", false);
                 StartCoroutine(AttackCoroutine());
                 break;
 
             case TurnActions.BACK_AWAY:
                 MoveAwayFromPlayer();
-                this.GetComponent<Animator>().SetBool("isMoving", true);
+                break;
+
+            case TurnActions.NOTHING:
+                StartCoroutine(ActionCooldownCoroutine());
                 break;
         }
     }
 
-    // Finds the closest player in the players array
+    private void MoveTowardsPlayer()
+    {
+        if (agent != null && closestPlayer != null)
+        {
+            agent.isStopped = false;
+            Vector3 directionToPlayer = (closestPlayer.transform.position - transform.position).normalized;
+            Vector3 destination = closestPlayer.transform.position - directionToPlayer * range;
+
+            agent.SetDestination(destination);
+
+            // Check if the enemy can reach the player
+            //StartCoroutine(CheckIfPathIsStuck());
+            StartCoroutine(Reload());
+        }
+    }
+
+    private void MoveAwayFromPlayer()
+    {
+        if (agent != null && closestPlayer != null)
+        {
+            agent.isStopped = false;
+            Vector3 directionAway = (transform.position - closestPlayer.transform.position).normalized;
+            Vector3 newPosition = transform.position + directionAway * minDistance * 2f;
+
+            agent.SetDestination(newPosition);
+
+            // Ensure movement is not stuck
+            //StartCoroutine(CheckIfPathIsStuck());
+            StartCoroutine(WaitForMoveCompletion());
+        }
+    }
+
+    // If enemy is stuck, retry the action
+    private IEnumerator CheckIfPathIsStuck()
+    {
+        float stuckTimer = .5f; // Time to consider as stuck
+        float elapsed = 0f;
+        Vector3 lastPosition = transform.position;
+
+        while (elapsed < stuckTimer)
+        {
+            yield return new WaitForSeconds(0.5f);
+            elapsed += 0.5f;
+
+            // If the enemy hasn't moved significantly, it's stuck
+            if (Vector3.Distance(transform.position, lastPosition) < 0.1f)
+            {
+                // Recalculate a new path
+                DecideAction();
+                ExecuteAction();
+                yield break;
+            }
+
+            lastPosition = transform.position;
+        }
+
+        // If it couldn't move at all, stop trying to move
+        agent.isStopped = true;
+        StartCoroutine(ActionCooldownCoroutine());
+    }
+
+
+    private IEnumerator WaitForMoveCompletion()
+    {
+        yield return new WaitUntil(() => !agent.pathPending && agent.remainingDistance <= agent.stoppingDistance);
+        
+    }
+
+
+    private void UpdateStats(float multiplier)
+    {
+        velocity *= multiplier;
+        range *= multiplier;
+        agent.speed = velocity;
+    }
+
+
+
     private void FindClosestPlayer()
     {
-        float closestDistance = 100;
+        float closestDistanceSqr = float.MaxValue;
 
         foreach (var player in players)
         {
-            float distance = Vector3.Distance(transform.position, player.transform.position);
-            if (distance < closestDistance)
+            float sqrDistance = (transform.position - player.transform.position).sqrMagnitude;
+            if (sqrDistance < closestDistanceSqr)
             {
-                closestDistance = distance;
+                closestDistanceSqr = sqrDistance;
                 closestPlayer = player;
                 closestPlayerPos = player.transform.position;
             }
         }
     }
 
-    // Moves towards the closest player
-    private void MoveTowardsPlayer()
-    {
-        transform.position = Vector3.MoveTowards(transform.position, closestPlayerPos, moveTime);
-    }
-
-    // Moves away from the closest player
-    private void MoveAwayFromPlayer()
-    {
-        Vector3 directionAway = (transform.position - closestPlayerPos).normalized;
-        transform.position = Vector3.MoveTowards(transform.position, transform.position + directionAway, moveTime);
-    }
-
-    // Shoots a bullet towards the closest player
     private void Shoot()
     {
-        if(!hasShot)
+        if (!hasShot)
         {
             Debug.Log("BANG");
-            //SoundEffectsManager.instance.PlaySoundFXClip(shootingClips, transform,1f);
             GameObject bullet = Instantiate(bulletShot, transform.position, Quaternion.identity);
-            bullet.GetComponent<DestroyBullet>().setShootDirection((closestPlayerPos - transform.position).normalized);
-           
+            if (bullet.GetComponent<multiShoot>() != null)
+            {
+                bullet.GetComponent<multiShoot>().setShootDirection((closestPlayerPos - transform.position).normalized, false);
+            }
+            else if (bullet.GetComponent<tripleShoot>() != null)
+            {
+                bullet.GetComponent<tripleShoot>().setShootDirection((closestPlayerPos - transform.position).normalized, true);
+            }
+            else if (bullet.GetComponent<DestroyBullet>() != null)
+            {
+                bullet.GetComponent<DestroyBullet>().setShootDirection((closestPlayerPos - transform.position).normalized, true);
+            }
+
+            hasShot = true; // Mark that it has shot this turn
+
+            //SoundEffectsManager.instance.PlaySoundFXClip(shootingClips, transform, 1f);
 
             // Register the bullet with the closest player's movement script
             //closestPlayer.RegisterBullet(bulletScript);
 
-            hasShot = true; // Mark that it has shot this turn
+
         }
     }
 
     // Reload coroutine to wait until the next GetIsMoving toggle after shooting
-    private IEnumerator Reload()
-    {
-        //Debug.Log("RELOAD");
-        isReloading = true;
-        yield return new WaitUntil(() => closestPlayer.GetIsExecuting() == false);
-        yield return new WaitUntil(() => closestPlayer.GetIsExecuting() == true);
-        yield return new WaitUntil(() => closestPlayer.GetIsExecuting() == false);
-        yield return new WaitUntil(() => closestPlayer.GetIsExecuting() == false);
-        
-        isReloading = false;
-        hasShot = false; // Reset shooting state for the next turn
-    }
+
 
     private IEnumerator AttackCoroutine()
     {
         fx.SetTrigger("playFX");
-        this.GetComponent<Animator>().SetTrigger("attack");
-        yield return new WaitForSeconds(0.3f);
-        if(closestPlayer.isExecuting) { 
-        closestPlayerPos = closestPlayer.transform.position;
 
-            Shoot();
 
-            fx.ResetTrigger("playFX");
-    
-            StartCoroutine(Reload());
-        } else
+        if (enemyStats.isAlive && closestPlayer.isExecuting)
         {
-            DecideAction();
+            GetComponent<Animator>().SetTrigger("attack");
+            yield return new WaitForSeconds(0.3f);
+            closestPlayerPos = closestPlayer.transform.position;
+            Shoot();
+            fx.ResetTrigger("playFX");
+            StartCoroutine(Reload());
         }
+    }
+
+    private IEnumerator Reload()
+    {
+        yield return new WaitUntil(() => !closestPlayer.isExecuting);
+        yield return new WaitUntil(() => closestPlayer.isExecuting == true);
+        hasShot = false;
+        StartCoroutine(ActionCooldownCoroutine());
     }
 
     public void DecideAction()
     {
-        FindClosestPlayer();
+        if (closestPlayer.actualTime < 1f)
+        {
+            turnAction = TurnActions.NOTHING;
+            
+        }
+
         distanceToPlayer = Vector3.Distance(transform.position, closestPlayerPos);
 
         if (distanceToPlayer > range)
         {
-           // Debug.Log("MOVING");
-            // Move towards the player if out of range
             turnAction = TurnActions.APPROACH;
         }
         else if (distanceToPlayer < minDistance)
         {
-           // Debug.Log("MOVING");
-            // Move away from the player if too close
-            turnAction = TurnActions.BACK_AWAY;    
+            turnAction = TurnActions.BACK_AWAY;
         }
-        else if (!hasShot && !isReloading) // Shoot only once per turn
+        else if (!hasShot && distanceToPlayer <= range)
         {
-
-           // Debug.Log("PIUM");
-            //In range, shoot
             turnAction = TurnActions.SHOOT;
         }
-        else
-        {
-            //Debug.Log("NOTHING");
-            turnAction = TurnActions.NOTHING;
-        }
+    }
+
+
+    private IEnumerator ActionCooldownCoroutine()
+    {
+        onCooldown = true;
+        yield return new WaitForSeconds(actionCooldown);
+        onCooldown = false;
+        isPerformingAction = false;
+        DecideAction();
     }
 
     public void ResetTurnAction()

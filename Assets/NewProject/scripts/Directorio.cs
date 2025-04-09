@@ -1,50 +1,46 @@
 using UnityEngine;
 
-public class Directorio : MonoBehaviour
+public static class Directorio
 {
-    public static void Apuntar(GameObject instantiatedObject, Vector3 lastPosition, Vector3 Target)
-    {
-
-        Vector3 direction = Target - lastPosition;
-
-
-        Quaternion rotation = Quaternion.LookRotation(Vector3.forward, direction);
-
-
-        instantiatedObject.transform.rotation = rotation;
-    }
-
+    // Method to get mouse position in world space with better debugging
     public static Vector3 mousePosition()
     {
-        Vector3 mousePosition;
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out RaycastHit hit))
         {
-            mousePosition = hit.point;
-            return mousePosition;
+            int layerMask = LayerMask.GetMask("floor");
+            Vector3 mousePosition;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, layerMask))
+            {
+                mousePosition = hit.point;
+                return mousePosition;
+            }
+            else return Vector3.zero;
+
         }
-        else return Vector3.zero;
-
-      
-
     }
 
-    public static float ApproximateBezierLength(Vector3 p0, Vector3 p1, Vector3 p2, int segments)
+    // Alternative implementation using Physics.Raycast
+    public static Vector3 mousePositionRaycast()
     {
-        float length = 0f;
-        Vector3 previousPoint = p0;
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
 
-        for (int i = 1; i <= segments; i++)
+        if (Physics.Raycast(ray, out hit))
         {
-            float t = i / (float)segments;
-            Vector3 point = Directorio.BezierCurve(t, p0, p1, p2);
-            length += Vector3.Distance(previousPoint, point);
-            previousPoint = point;
+            return hit.point;
         }
 
-        return length;
+        // Fallback to a plane at y=0
+        Plane groundPlane = new Plane(Vector3.up, Vector3.zero);
+        if (groundPlane.Raycast(ray, out float distance))
+        {
+            return ray.GetPoint(distance);
+        }
+
+        return Vector3.zero;
     }
 
+    // Bezier curve calculation
     public static Vector3 BezierCurve(float t, Vector3 p0, Vector3 p1, Vector3 p2)
     {
         float u = 1 - t;
@@ -54,6 +50,7 @@ public class Directorio : MonoBehaviour
         Vector3 p = uu * p0;
         p += 2 * u * t * p1;
         p += tt * p2;
+
         return p;
     }
 }

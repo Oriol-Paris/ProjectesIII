@@ -30,7 +30,7 @@ public class MeleeAction : ActiveAction
                 if (enemy != null)
                 {
                     // Deal damage to the enemy
-                    enemy.Damage((int)damage);
+                    enemy.Damage((int)damage, player.gameObject);
                     player.GetComponent<OG_MovementByMouse>().SetPositionDesired(player.transform.position); 
                     // Apply knockback to the enemy
                     Vector3 knockbackDirection = (enemy.transform.position - player.transform.position).normalized;

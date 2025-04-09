@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 
@@ -11,6 +11,7 @@ public class TimeSecuence : MonoBehaviour
     public float totalTime = 3;
     float rang = 10f;
     public bool isExecuting;
+    public bool canInvokeGhost  =true;
     public Vector3 lastPosition;
 
     public bool play = false;
@@ -20,18 +21,22 @@ public class TimeSecuence : MonoBehaviour
     public GameObject player;
 
     public shootPlayer shootPl;
+    public ControlListMovment controlListMovment;
 
-    private List<PlayerBase.ActionEnum> actions = new List<PlayerBase.ActionEnum>();
+    public List<PlayerBase.ActionEnum> actions = new List<PlayerBase.ActionEnum>();
     private List<Vector3> actionTargets = new List<Vector3>();
-    private List<PlayerData.BulletStyle> bulletStyles = new List<PlayerData.BulletStyle>(); // Add this line
+    private List<BulletStyle> bulletStyles = new List<BulletStyle>(); // Add this line
 
     [SerializeField] private PlayerBase playerBase;
     [SerializeField] private PlayerActionManager actionManager;
     private PlayerBase.Action selectedAction;
 
+    public bool notacction = false;
+
     void Start()
     {
         totalTime = playerBase.playerData.maxTime;
+        Debug.Log("TIME"+totalTime);
         isExecuting = false;
         actualTime = totalTime;
         lastPosition = transform.position;
@@ -54,26 +59,31 @@ public class TimeSecuence : MonoBehaviour
                 {
                     selectedAction = action;
                     Debug.Log("Selected action: " + selectedAction.m_action);
+
+                    this.GetComponent<ControlLiniarRender>().ChangeLineColor(action);
                 }
             }
-            if(actions.Count > 0&&Input.GetKeyDown(KeyCode.C)&&!isExecuting) {
-
-            
-                ResetTurn();
-
-
-            }
-            // Check for mouse click to store the selected action
-          /*  if (selectedAction.m_action != PlayerBase.ActionEnum.MOVE && Input.GetMouseButtonDown(0))
+            if(actions.Count > 0&&Input.GetKeyDown(KeyCode.R)&&!isExecuting) 
             {
-                Vector3 targetPosition = GetMouseTargetPosition();
-                AddAction(selectedAction.m_action); // Modify this line
-                Debug.Log("Stored action: " + selectedAction.m_action + " at position: " + targetPosition);
-                //selectedAction = PlayerBase.Action.nothing; // Reset the selected action
-            }*/
+                ResetTurn();
+            }
+            //if (actions.Count > 0 && Input.GetKeyDown(KeyCode.Mouse1) && !isExecuting)
+            //{
+            //    RemoveLastAction();
+            //}
+
+
+            // Check for mouse click to store the selected action
+            /*  if (selectedAction.m_action != PlayerBase.ActionEnum.MOVE && Input.GetMouseButtonDown(0))
+              {
+                  Vector3 targetPosition = GetMouseTargetPosition();
+                  AddAction(selectedAction.m_action); // Modify this line
+                  Debug.Log("Stored action: " + selectedAction.m_action + " at position: " + targetPosition);
+                  //selectedAction = PlayerBase.Action.nothing; // Reset the selected action
+              }*/
         }
 
-        if (Input.GetKeyDown(KeyCode.LeftControl) && !isExecuting)
+        if ((Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Space)) && !isExecuting)
         {
             PassTurn();
         }
@@ -83,6 +93,7 @@ public class TimeSecuence : MonoBehaviour
 
     IEnumerator ExecuteActions()
     {
+        canInvokeGhost = false;
         int movCount = 0;
         Debug.Log(actions.Count);
         play = true;
@@ -103,6 +114,7 @@ public class TimeSecuence : MonoBehaviour
                     // StartCoroutine(actionManager.AttackCoroutine(action, targetPosition,bulletStyle));
                     shootPl.UpdateShoot(movCount);
                     yield return new WaitForSeconds(0.75f);
+                    actualTime -= 0.75f;
                     movCount++;
                     break;
                 case PlayerBase.ActionEnum.MOVE:
@@ -120,21 +132,26 @@ public class TimeSecuence : MonoBehaviour
                 // Add other cases for different actions if needed
             }
         }
+     
+        Debug.Log(actualTime);
+        if (actualTime > 0)
+        {
+            yield return new WaitForSeconds(actualTime);
+        }
         ResetTurn();
     }
 
     void PassTurn()
     {
-        if (actions.Count > 0)
-        {
-            isExecuting = true;
+        isExecuting = true;
         Debug.Log("Executing stored actions");
-        
+        notacction = true;
+        controlListMovment.DestroyAllGhostrs();
         StartCoroutine(ExecuteActions());
-            actualTime = totalTime;
-        }
-        
+        actualTime = totalTime;
     }
+
+
 
     private Vector3 GetMouseTargetPosition()
     {
@@ -148,11 +165,15 @@ public class TimeSecuence : MonoBehaviour
 
     private void ResetTurn()
     {
+       
+        notacction = false;
         play = false;
+        canInvokeGhost = true;
         actions.Clear();
         actionTargets.Clear();
         bulletStyles.Clear(); // Add this line
         movPlayer.finish();
+       
         foreach (var line in actionManager.visualPlayerAfterShoot)
         {
             Destroy(line.gameObject);
@@ -165,10 +186,48 @@ public class TimeSecuence : MonoBehaviour
         actionManager.preShootPath.Clear();
         actionManager.visualPlayerAfterShoot.Clear();
         actionManager.shootpoints.Clear();
+        GetComponent<shootPlayer>().bulletPrefab.Clear();
+        GetComponent<shootPlayer>().SetInternalIterator(0);
         isExecuting = false;
 
         FindAnyObjectByType<TopBarManager>().ResetTopBar();
+        controlListMovment.DestroyAllGhostrs();
     }
+
+    public void RemoveLastAction()
+    {
+        if (actions.Count > 0)
+        {
+            actions.RemoveAt(actions.Count - 1);
+        }
+        if (actionTargets.Count > 0)
+        {
+            actionTargets.RemoveAt(actionTargets.Count - 1);
+        }
+        if (bulletStyles.Count > 0)
+        {
+            bulletStyles.RemoveAt(bulletStyles.Count - 1);
+        }
+
+        controlListMovment.DestroyLastGhost();
+
+        if(actionManager.visualPlayerAfterShoot.Count > 0)
+        {
+            Destroy(actionManager.visualPlayerAfterShoot[actionManager.visualPlayerAfterShoot.Count - 1].gameObject);
+            actionManager.visualPlayerAfterShoot.RemoveAt(actionManager.visualPlayerAfterShoot.Count - 1);
+        }
+        if (actionManager.preShootPath.Count > 0)
+        {
+            Destroy(actionManager.preShootPath[actionManager.preShootPath.Count - 1].gameObject);
+            actionManager.preShootPath.RemoveAt(actionManager.preShootPath.Count - 1);
+        }
+
+        GetComponent<shootPlayer>().bulletPrefab.Clear();
+        GetComponent<shootPlayer>().SetInternalIterator(0);
+
+        FindAnyObjectByType<TopBarManager>().EraseLastAction();
+    }
+
     public bool GetIsExecuting() { return isExecuting; }
 
     private void OnCollisionEnter(Collision collision)

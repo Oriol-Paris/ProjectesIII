@@ -12,7 +12,7 @@ public class Shotgun : BulletPrefab
         speed = 10f;
         for (int i = 0; i < playerData.availableActions.Count; i++)
         {
-            if (playerData.availableActions[i].style.prefab == playerData.shotgun.prefab)
+            if (playerData.availableActions[i].style.bulletType == BulletType.SHOTGUN)
             {
                 damage = playerData.availableActions[i].style.damage; break;
             }
@@ -47,7 +47,7 @@ public class Shotgun : BulletPrefab
             EnemyBase enemy = collision.gameObject.GetComponent<EnemyBase>();
             if (enemy != null && enemy.GetHealth() > 0)
             {
-                enemy.Damage(damage);
+                enemy.Damage(damage, collision.gameObject);
                 isHit = true;
                 DestroyBullet();
             }
@@ -57,7 +57,7 @@ public class Shotgun : BulletPrefab
             PlayerBase player = collision.gameObject.GetComponent<PlayerBase>();
             if (player != null)
             {
-                player.Damage();
+                player.Damage(1, collision.gameObject);
                 isHit = true;
                 DestroyBullet();
             }

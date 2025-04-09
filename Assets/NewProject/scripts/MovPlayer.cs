@@ -9,11 +9,12 @@ public class MovPlayer : MonoBehaviour
 
     public ControlLiniarRender controlLiniarRender;
     public ControlListMovment controlListMovment;
+    public TimeSecuence timeSecuence;
 
 
     public float t;
     [SerializeField] private float maxDistance = 20f; 
-    [SerializeField] private float velocity = 1f;
+    [SerializeField] private float velocity = 0.5f;
     [SerializeField] private float tiemp = 0f;
    
    
@@ -37,13 +38,24 @@ public class MovPlayer : MonoBehaviour
 
 
     void Start(){
-        velocity = 1f;
+        
         t = 0;
     }
 
     void Update(){}
 
-    public void PreStartMov() { CanWalk(); }
+    public void PreStartMov() { 
+        if (!timeSecuence.notacction)
+        {
+            CanWalk();
+            controlLiniarRender.Disable(false);
+        }
+        else
+        {
+            controlLiniarRender.Disable(true);
+        }
+      
+    }
 
 
     public void StartMov() { placeSelected = true; }
@@ -60,7 +72,7 @@ public class MovPlayer : MonoBehaviour
     public void UpdateMovement(int movCount)
     {
 
-     
+        this.GetComponent<Animator>().SetBool("isMoving", true);
         List<Tuple<Vector3, Vector3, Vector3>> MovList = controlListMovment.MovList;
             var firstItem = MovList[movCount];
             Vector3 _playerPosition = firstItem.Item1;
@@ -69,13 +81,11 @@ public class MovPlayer : MonoBehaviour
 
       
         this.GetComponent<PlayerActionManager>().WalkingSound();
-        // float a = Directorio.ApproximateBezierLength(_playerPosition, _controlPoint,_positionDesired,1);
-        // Debug.Log(a);
+       
         float duration = controlListMovment.timeConsum[movCount]; // Tiempo deseado para el movimiento
         float fixedDeltaTime = Time.deltaTime / duration;
         
-        Debug.Log(velocity);
-        Debug.Log(controlListMovment.timeConsum[movCount]);
+       
 
         t += velocity * fixedDeltaTime;
 
@@ -83,8 +93,9 @@ public class MovPlayer : MonoBehaviour
        
 
         Vector3 newPosition = Directorio.BezierCurve(t, _playerPosition, _controlPoint, _positionDesired);
-       
+        newPosition.y = 0;
         transform.position = newPosition;
+        
 
         tiemp += Time.deltaTime;
     }

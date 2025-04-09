@@ -55,7 +55,7 @@ public class PlayerActionManager : MonoBehaviour
     private bool hasShot = false; // Flag to track if a shot has been fired
     private bool actionPointReduced;
     private Animator animationToExecute;
-    [SerializeField] AudioClip[] shootClip;
+    [SerializeField] public AudioClip[] shootClip;
     [SerializeField] AudioClip[] walkingClips;
 
     private bool hasMoved = false;
@@ -121,10 +121,6 @@ public class PlayerActionManager : MonoBehaviour
                     }
                     break;
                 case PlayerBase.ActionType.SINGLE_USE:
-                    if (actionData.action == PlayerBase.ActionEnum.REST)
-                    {
-                        activeActions.Add(actionData.action, new RestAction());
-                    }
                     break;
                     // Add other cases if you have SingleUse or other action types
             }
@@ -132,10 +128,6 @@ public class PlayerActionManager : MonoBehaviour
     }
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            SceneManager.LoadScene("Title Screen");
-        }
         if (SceneManager.GetActiveScene().name != "ShopScene")
         {
             UpdateAction(Vector3.zero, movePlayer.timeSceuence.actualTime);
@@ -148,7 +140,7 @@ public class PlayerActionManager : MonoBehaviour
         //    ShootFinish();
         //}
     }
-
+/*
     private void ShootFinish()
     {
         foreach (var line in visualPlayerAfterShoot)
@@ -164,7 +156,7 @@ public class PlayerActionManager : MonoBehaviour
         //    Destroy(line.gameObject);
         //}
 
-    }
+    }*/
 
     public void UpdateAction(Vector3 newPos, float t)
     {
@@ -260,7 +252,7 @@ public class PlayerActionManager : MonoBehaviour
         }
     }
     
-    public IEnumerator AttackCoroutine(PlayerBase.ActionEnum action, Vector3 newPos, PlayerData.BulletStyle style)
+    public IEnumerator AttackCoroutine(PlayerBase.ActionEnum action, Vector3 newPos, BulletStyle style)
     {
         shootLineRenderer.enabled = false;
         this.GetComponent<Animator>().SetTrigger("attack");
@@ -272,6 +264,7 @@ public class PlayerActionManager : MonoBehaviour
         {
             ((ShootAction)activeActions[PlayerBase.ActionEnum.SHOOT]).bulletPrefab = style.prefab;
             SoundEffectsManager.instance.PlaySoundFXClip(shootClip, transform, 1f);
+            
             activeActions[PlayerBase.ActionEnum.SHOOT].Execute(player, newPos);
             
         }
@@ -325,9 +318,10 @@ public class PlayerActionManager : MonoBehaviour
 
     public void WalkingSound()
     {
+        Debug.Log("PLAYING WALK");
         if (actualWalkSoundDelay < 0)
         {
-            //SoundEffectsManager.instance.PlaySoundFXClip(walkingClips, transform, 1f);
+            SoundEffectsManager.instance.PlaySoundFXClip(walkingClips, transform, 1f);
             actualWalkSoundDelay = walkSoundDelay;
         }
         else

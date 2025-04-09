@@ -8,7 +8,6 @@ public class UIBarManager : MonoBehaviour
     [SerializeField] private Image healthBar;
     [SerializeField] private Image actionPointBar;
     [SerializeField] private Image actionPointAnimBar;
-    [SerializeField] private Image timeBar;
     private PlayerData player;
     private TimeSecuence time;
     private float lerpSpeed;
@@ -30,8 +29,6 @@ public class UIBarManager : MonoBehaviour
         healthBar.color = Color.Lerp(Color.red, Color.green, (player.health / player.maxHealth));
 
         actionPointBar.fillAmount = Mathf.Lerp(actionPointBar.fillAmount, time.actualTime / (time.totalTime * 4.0f), lerpSpeed);
-
-        timeBar.fillAmount = Mathf.Clamp01(1.0f - FindAnyObjectByType<MovPlayer>().t);
     }
 
     public void NotEnoughStaminaAnim()
