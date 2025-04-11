@@ -113,8 +113,12 @@ public class TimeSecuence : MonoBehaviour
                     //((ShootAction)actionManager.activeActions[PlayerBase.ActionEnum.SHOOT]).bulletPrefab = bulletStyle.prefab; // Add this line
                     // StartCoroutine(actionManager.AttackCoroutine(action, targetPosition,bulletStyle));
                     shootPl.UpdateShoot(movCount);
-                    yield return new WaitForSeconds(0.75f);
-                    actualTime -= 0.75f;
+                    yield return new WaitForSeconds(0.1f);
+                    if (i + 1 < actions.Count && actions[i+1] == PlayerBase.ActionEnum.SHOOT)
+                    {
+                        yield return new WaitForSeconds(0.6f);
+                    }
+                  
                     movCount++;
                     break;
                 case PlayerBase.ActionEnum.MOVE:
@@ -136,7 +140,7 @@ public class TimeSecuence : MonoBehaviour
         //Debug.Log(actualTime);
         //if (actualTime > 0)
         //{
-        //    yield return new WaitForSeconds(actualTime);
+            yield return new WaitForSeconds(0.3f);
         //}
         ResetTurn();
     }
