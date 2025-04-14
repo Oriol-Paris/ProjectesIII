@@ -19,8 +19,8 @@ MonoBehaviour:
   actionPoints: -21
   maxActionPoints: 3
   maxTime: 3
-  lastLevel: SampleScene
-  levelCompleted: 1
+  lastLevel: Level1
+  levelCompleted: 0
   timesHealed: 0
   timesIncreasedMaxHP: 0
   moveRange: 0
