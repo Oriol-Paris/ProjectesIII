@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      dungeon_remastered_sample5_0: 8352639112722342122
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
