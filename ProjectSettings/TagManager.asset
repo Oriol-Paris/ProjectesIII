@@ -9,6 +9,7 @@ TagManager:
   - Walls
   - envairoment
   - Explosive
+  - wapon
   layers:
   - Default
   - TransparentFX
