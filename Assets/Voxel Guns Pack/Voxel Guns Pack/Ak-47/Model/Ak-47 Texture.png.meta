@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Ak-47 Texture_0: 5361109211271113158
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

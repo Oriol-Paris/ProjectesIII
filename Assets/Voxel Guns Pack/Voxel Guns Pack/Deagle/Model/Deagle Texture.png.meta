@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Deagle Texture_0: 9191529403460929659
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
