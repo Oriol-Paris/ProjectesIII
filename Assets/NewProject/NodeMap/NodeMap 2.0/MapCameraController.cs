@@ -30,7 +30,14 @@ public class MapCameraController : MonoBehaviour
         {
             if(tile.levelName == PlayerPrefs.GetString("LastLevelCleared"))
             {
-                transform.position = new Vector3(tile.transform.position.x, transform.position.y, tile.transform.position.z - 15.0f);
+                if(tile.levelName == "Level6")
+                {
+                    transform.position = new Vector3(tile.transform.position.x, transform.position.y, -20.0f);
+                }
+                else
+                {
+                    transform.position = new Vector3(tile.transform.position.x, transform.position.y, tile.transform.position.z - 20.0f);
+                }
             }
         }
     }
@@ -81,9 +88,11 @@ public class MapCameraController : MonoBehaviour
     void ClampPosition()
     {
         Vector3 clamped = transform.position;
+
         clamped.x = Mathf.Clamp(clamped.x, minX, maxX);
         clamped.y = Mathf.Clamp(clamped.y, minY, maxY);
         clamped.z = Mathf.Clamp(clamped.z, minZ, maxZ);
+
         transform.position = clamped;
     }
 }

@@ -1,55 +1,36 @@
-using System.Collections;
-using TMPro;
+using System.Collections.Generic;
+using UnityEditor.Rendering;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class UIBarManager : MonoBehaviour
 {
-    [SerializeField] private Image healthBar;
-    [SerializeField] private Image actionPointBar;
-    [SerializeField] private Image actionPointAnimBar;
+    [SerializeField] private GameObject healthBarPrefab;
+    private List<GameObject> healthBarSegments = new List<GameObject>();
     private PlayerData player;
-    private TimeSecuence time;
-    private float lerpSpeed;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         player = FindAnyObjectByType<PlayerBase>().playerData;
-        time = FindAnyObjectByType<MovPlayer>().timeSceuence;
-        actionPointAnimBar.gameObject.SetActive(false);
+
+        ResetHealthbar();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void ResetHealthbar()
     {
-        lerpSpeed = 3f * Time.deltaTime;
-
-        healthBar.fillAmount = Mathf.Lerp(healthBar.fillAmount, player.health / (player.maxHealth * 4.0f), lerpSpeed);
-        healthBar.color = Color.Lerp(Color.red, Color.green, (player.health / player.maxHealth));
-
-        actionPointBar.fillAmount = Mathf.Lerp(actionPointBar.fillAmount, time.actualTime / (time.totalTime * 4.0f), lerpSpeed);
+        for (int i = 0; i < player.health; i++)
+        {
+            GameObject segment = Instantiate(healthBarPrefab, transform);
+            segment.transform.localPosition = new Vector3(-841 + i * 114, 475, 0);
+            healthBarSegments.Add(segment);
+        }
     }
 
-    public void NotEnoughStaminaAnim()
+    public void UpdateHealthBar(int damageTaken)
     {
-        StartCoroutine(StaminaAnim());
-    }
-
-    private IEnumerator StaminaAnim()
-    {
-        actionPointAnimBar.gameObject.SetActive(true);
-
-        yield return new WaitForSeconds(0.2f);
-
-        actionPointAnimBar.gameObject.SetActive(false);
-
-        yield return new WaitForSeconds(0.2f);
-
-        actionPointAnimBar.gameObject.SetActive(true);
-
-        yield return new WaitForSeconds(0.2f);
-
-        actionPointAnimBar.gameObject.SetActive(false);
+        for(int i = 0; i < damageTaken; i++)
+        {
+            Destroy(this.transform.GetChild(healthBarSegments.Count - 1).gameObject);
+            healthBarSegments.RemoveAt(healthBarSegments.Count - 1);
+        }
     }
 }

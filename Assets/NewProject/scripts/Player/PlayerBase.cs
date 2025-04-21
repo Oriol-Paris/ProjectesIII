@@ -382,6 +382,7 @@ public class PlayerBase : MonoBehaviour
             StartCoroutine(_camera.FadeInVignette(cameraPostProcesIntensity, cameraPostProcesLength, Color.red));
         }
 
+        FindAnyObjectByType<UIBarManager>().UpdateHealthBar(val);
         SaveCurrentState();
     }
 

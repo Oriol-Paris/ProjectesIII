@@ -14,7 +14,9 @@ public class InteractableTiles : MonoBehaviour
         GetComponentInChildren<Light>().enabled = false;
         isInteractible = false;
 
-        if(PlayerPrefs.GetString("LastLevelCleared") == "" || PlayerPrefs.GetString("LastLevelCleared") == null)
+        if(PlayerPrefs.GetString("LastLevelCleared") == "" || 
+            PlayerPrefs.GetString("LastLevelCleared") == null ||
+            PlayerPrefs.GetString("LastLevelCleared") == "Level6")
         {
             PlayerPrefs.SetString("LastLevelCleared", "Tutorial");
         }
@@ -69,27 +71,32 @@ public class InteractableTiles : MonoBehaviour
                 break;
         }
 
-        /*if(levelName != "ShopScene")
+        if (levelName != "ShopScene" && spawnedEnemies.Count >= 3)
         {
-            if (PlayerPrefs.GetFloat("DifficultyMultiplier") == 1)
+            float difficulty = PlayerPrefs.GetFloat("DifficultyMultiplier", 1f);
+
+            for (int i = 0; i < spawnedEnemies.Count; i++)
+            {
+                spawnedEnemies[i].SetActive(false);
+            }
+
+            if (difficulty == 1)
             {
                 spawnedEnemies[0].SetActive(true);
-                spawnedEnemies[1].SetActive(false);
-                spawnedEnemies[2].SetActive(false);
             }
-            else if (PlayerPrefs.GetFloat("DifficultyMultiplier") == 1.5f)
+            else if (difficulty == 1.5f)
             {
                 spawnedEnemies[0].SetActive(true);
                 spawnedEnemies[1].SetActive(true);
-                spawnedEnemies[2].SetActive(false);
             }
             else
             {
-                spawnedEnemies[0].SetActive(true);
-                spawnedEnemies[1].SetActive(true);
-                spawnedEnemies[2].SetActive(true);
+                for (int i = 0; i < spawnedEnemies.Count; i++)
+                {
+                    spawnedEnemies[i].SetActive(true);
+                }
             }
-        }*/
+        }
     }
 
     private void OnMouseDown()
