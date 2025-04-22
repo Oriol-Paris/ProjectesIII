@@ -100,7 +100,8 @@ public class ControlLiniarRender : MonoBehaviour
     {
         if (endOfLineCursor != null && curvePoints.Count > 0)
         {
-            endOfLineCursor.transform.position = curvePoints[curvePoints.Count - 1];
+            endOfLineCursor.transform.position = new Vector3(curvePoints[curvePoints.Count - 1].x,-0.47f,curvePoints[curvePoints.Count - 1].z);
+            
         }
     }
 
@@ -204,22 +205,32 @@ public class ControlLiniarRender : MonoBehaviour
         if (curvePoints.Count > 0)
         {
             lineRenderer.positionCount = curvePoints.Count;
-            lineRenderer.SetPositions(curvePoints.ToArray());
+
+            // Crear nueva lista con y = -0.48f
+            Vector3[] adjustedPoints = new Vector3[curvePoints.Count];
+            for (int i = 0; i < curvePoints.Count; i++)
+            {
+                Vector3 p = curvePoints[i];
+                adjustedPoints[i] = new Vector3(p.x, -0.48f, p.z);
+            }
+
+            lineRenderer.SetPositions(adjustedPoints);
 
             UpdateCursorPosition();
         }
         else
         {
             lineRenderer.positionCount = 2;
-            lineRenderer.SetPosition(0, transform.position);
-            lineRenderer.SetPosition(1, transform.position + Vector3.forward);
+            lineRenderer.SetPosition(0, new Vector3(transform.position.x, -0.47f, transform.position.z));
+            lineRenderer.SetPosition(1, new Vector3(transform.position.x, -0.47f, transform.position.z + 1f));
 
             if (endOfLineCursor != null)
             {
-                endOfLineCursor.transform.position = transform.position + Vector3.forward;
+                endOfLineCursor.transform.position = new Vector3(transform.position.x, -0.47f, transform.position.z + 1f);
             }
         }
     }
+
 
     public void UpdateCurve()
     {
