@@ -2,6 +2,7 @@ using UnityEngine;
 using TMPro;
 using System.Collections;
 using System.Collections.Generic;
+using System;
 
 public class Dialogue : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class Dialogue : MonoBehaviour
     public TutorialManager tutorialManager; // Add this line
     public bool textFullyDisplayed;
     private int index;
+    public bool IsTyping { get; private set; }
 
     void Start()
     {
@@ -22,23 +24,24 @@ public class Dialogue : MonoBehaviour
     {
         if (Input.GetMouseButtonUp(0))
         {
-            if (textComponent.text == dialogueLines)
+            if (IsTyping)
             {
-                if(tutorialManager != null)
-                {
-                    tutorialManager.DisableCurrentPopup(); 
-                }
-                
-
-            }
-            else
-            {
+                Debug.Log("OUT");
                 StopAllCoroutines();
                 textComponent.text = dialogueLines;
                 textFullyDisplayed = true;
+                IsTyping = false;
+            }
+            else if (textComponent.text == dialogueLines)
+            {
+                if (tutorialManager != null)
+                {
+                    tutorialManager.DisableCurrentPopup();
+                }
             }
         }
     }
+
 
     public void StartDialogue()
     {
@@ -49,12 +52,19 @@ public class Dialogue : MonoBehaviour
     IEnumerator TypeLine()
     {
         textFullyDisplayed = false;
+        IsTyping = true;
+        textComponent.text = string.Empty;
+
         foreach (char c in dialogueLines.ToCharArray())
         {
             textComponent.text += c;
             yield return new WaitForSeconds(textSpeed);
         }
+
+        textFullyDisplayed = true;
+        IsTyping = false;
     }
+
 
     void NextLine()
     {

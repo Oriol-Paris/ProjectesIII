@@ -1,5 +1,7 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class FlipCoinEvent : MonoBehaviour
 {
@@ -13,6 +15,7 @@ public class FlipCoinEvent : MonoBehaviour
     [SerializeField] private eventState currentState;
     [SerializeField] private Canvas buttonCanvas;
     [SerializeField] private Canvas exitCanvas;
+    [SerializeField] private PlayerData playerData;
 
     // Start is called before the first frame update
     void Start()
@@ -25,45 +28,58 @@ public class FlipCoinEvent : MonoBehaviour
 
     void Update()
     {
+        
         if (Input.GetMouseButtonUp(0))
         {
-            if (currentState == eventState.INTRODUCTION && eventText.textFullyDisplayed)
+            if (currentState == eventState.INTRODUCTION && eventText.textFullyDisplayed && !eventText.IsTyping)
             {
                 currentState = eventState.DECISION;
-                eventText.textFullyDisplayed = false;
                 UpdateCurrentState();
             }
         }
     }
+
 
     void UpdateCurrentState()
     {
         switch (currentState)
         {
             case eventState.INTRODUCTION:
-                eventText.dialogueLines = "YOU FIND A MAN WHO PROPOSES TO FLIP A COIN";
                 eventText.StartDialogue();
+                eventText.dialogueLines = "YOU FIND A MAN WHO PROPOSES TO FLIP A COIN";
+                
                 break;
 
             case eventState.DECISION:
+                
                 eventText.dialogueLines = "HEADS OR TAILS?";
                 eventText.StartDialogue();
+
                 buttonCanvas.enabled = false;
                 StartCoroutine(EnableButtonsWhenReady());
                 break;
 
             case eventState.OUTCOME:
                 buttonCanvas.enabled = false;
-                string resultText = $"YOU FLIP A COIN AND IT LANDS ON {prizeSide}.\n";
-                resultText += playerSide == prizeSide ? "YOU WIN THE PRIZE!" : "YOU LOSE!";
-                eventText.dialogueLines = resultText;
                 eventText.StartDialogue();
+                string resultText = $"YOU FLIP A COIN AND IT LANDS ON {prizeSide}.\n";
+               
+                if(playerSide == prizeSide)
+                {
+                    ReceivePrize();
+                }
+                resultText += playerSide == prizeSide ? "YOU WIN THE PRIZE!\n YOU WIN " + 25 + " EXP\nCurrent XP:" + playerData.exp : "YOU LOSE!";
+                eventText.dialogueLines = resultText;
+                //eventText.StartDialogue();
                 exitCanvas.enabled = true;
                 break;
         }
     }
-
-    System.Collections.IEnumerator EnableButtonsWhenReady()
+    void ReceivePrize()
+    {
+        playerData.exp += 25;
+    }
+    IEnumerator EnableButtonsWhenReady()
     {
         while (!eventText.textFullyDisplayed)
         {
@@ -89,5 +105,10 @@ public class FlipCoinEvent : MonoBehaviour
         prizeSide = (Random.value > 0.5f) ? coinSide.HEADS : coinSide.TAILS;
         currentState = eventState.OUTCOME;
         UpdateCurrentState();
+    }
+
+    public void ExitScene()
+    {
+        SceneManager.LoadScene("Node Map");
     }
 }
