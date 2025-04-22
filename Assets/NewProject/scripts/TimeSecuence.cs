@@ -186,8 +186,8 @@ public class TimeSecuence : MonoBehaviour
         actionManager.preShootPath.Clear();
         actionManager.visualPlayerAfterShoot.Clear();
         actionManager.shootpoints.Clear();
-        GetComponent<shootPlayer>().bulletPrefab.Clear();
-        GetComponent<shootPlayer>().SetInternalIterator(0);
+        //GetComponent<shootPlayer>().bulletPrefab.Clear();
+        //GetComponent<shootPlayer>().SetInternalIterator(0);
         isExecuting = false;
 
         FindAnyObjectByType<TopBarManager>().ResetTopBar();
@@ -222,8 +222,8 @@ public class TimeSecuence : MonoBehaviour
             actionManager.preShootPath.RemoveAt(actionManager.preShootPath.Count - 1);
         }
 
-        GetComponent<shootPlayer>().bulletPrefab.Clear();
-        GetComponent<shootPlayer>().SetInternalIterator(0);
+        //GetComponent<shootPlayer>().bulletPrefab.Clear();
+        //GetComponent<shootPlayer>().SetInternalIterator(0);
 
         FindAnyObjectByType<TopBarManager>().EraseLastAction();
     }
