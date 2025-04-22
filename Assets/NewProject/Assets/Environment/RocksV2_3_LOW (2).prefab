@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3686700939076174617}
   - component: {fileID: 7966754472417296440}
   - component: {fileID: -2364751417314414597}
+  - component: {fileID: 83373869452467763}
   m_Layer: 0
   m_Name: RocksV2_3_LOW (2)
   m_TagString: Untagged
@@ -103,3 +104,24 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 0, z: 0}
   m_TimeToStationary: 0.5
+--- !u!65 &83373869452467763
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 591485150062402535}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.51114744, y: 0.8503399, z: 0.3912645}
+  m_Center: {x: 0.03999999, y: 2.9802327e-10, z: -0.020000003}
