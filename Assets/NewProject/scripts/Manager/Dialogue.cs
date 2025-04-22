@@ -9,7 +9,7 @@ public class Dialogue : MonoBehaviour
     public string dialogueLines;
     public float textSpeed;
     public TutorialManager tutorialManager; // Add this line
-
+    public bool textFullyDisplayed;
     private int index;
 
     void Start()
@@ -24,18 +24,23 @@ public class Dialogue : MonoBehaviour
         {
             if (textComponent.text == dialogueLines)
             {
-                tutorialManager.DisableCurrentPopup(); // Add this line
+                if(tutorialManager != null)
+                {
+                    tutorialManager.DisableCurrentPopup(); 
+                }
+                
 
             }
             else
             {
                 StopAllCoroutines();
                 textComponent.text = dialogueLines;
+                textFullyDisplayed = true;
             }
         }
     }
 
-    void StartDialogue()
+    public void StartDialogue()
     {
         index = 0;
         StartCoroutine(TypeLine());
@@ -43,6 +48,7 @@ public class Dialogue : MonoBehaviour
 
     IEnumerator TypeLine()
     {
+        textFullyDisplayed = false;
         foreach (char c in dialogueLines.ToCharArray())
         {
             textComponent.text += c;
