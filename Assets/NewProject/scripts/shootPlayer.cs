@@ -62,4 +62,10 @@ public class shootPlayer : MonoBehaviour
 
     }
 
+    public void ResetShotPlayer()
+    {
+       bulletPrefab.Clear();
+        internalIterator = 0;
+    }
+
 }

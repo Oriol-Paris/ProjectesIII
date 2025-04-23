@@ -1,7 +1,6 @@
 using UnityEngine;
-using UnityEngine.UIElements;
 
-public class BulletArea : MonoBehaviour, IBulletBehavior
+public class HitLaser : MonoBehaviour
 {
     [SerializeField] private bool fromPlayer;
     [SerializeField] public int damage;
@@ -12,6 +11,8 @@ public class BulletArea : MonoBehaviour, IBulletBehavior
 
     [SerializeField] float shootCShakeTime;
     [SerializeField] float shootCShakeRange;
+
+    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         if (fromPlayer)
@@ -28,22 +29,15 @@ public class BulletArea : MonoBehaviour, IBulletBehavior
         StartCoroutine(_camera.Shake(shootCShakeTime, shootCShakeRange));
         transform.position = new Vector3(transform.position.x, 0, transform.position.z);
     }
-    public void setShootDirection(Vector3 _shootDirection, bool itsFromPlayer)
-    {
-        shootDirection = _shootDirection;
-        Vector3 lookDirection = new Vector3(_shootDirection.x, 0f, _shootDirection.z);
-        Quaternion targetRotation = Quaternion.LookRotation(lookDirection);
-        transform.rotation = targetRotation * Quaternion.Euler(0f, -90f, 0f);
-    }
-    // Update is called once per frame
+
     void Update()
     {
         if (timeSecuence.play)
         {
-         
+
             time += Time.deltaTime;
         }
-       
+
 
 
         if (time >= 7f)
@@ -54,11 +48,12 @@ public class BulletArea : MonoBehaviour, IBulletBehavior
 
     }
 
+    // Update is called once per frame
     private void OnTriggerEnter(Collider collision)
     {
         if (collision != null)
         {
-          
+
 
             if (fromPlayer && collision.gameObject.GetComponent<EnemyBase>() != null)
             {
