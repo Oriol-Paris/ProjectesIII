@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Splines;
 
 public class dropWapon : MonoBehaviour
 {
@@ -9,19 +10,22 @@ public class dropWapon : MonoBehaviour
     [Range(0f, 100f)]
     public float probabilidadDrop = 99f;
 
-    void OnDestroy()
+   public void Start()
     {
-        // Evita errores si no hay arma asignada
-        if (armaADropear == null) return;
+      
+           
+            if (armaADropear == null) return;
 
-        // Generamos número aleatorio entre 0 y 100
-        float chance = Random.Range(0f, 100f);
+         
+            float chance = Random.Range(0f, 100f);
 
-        // Si el número es menor que la probabilidad, dropea
-        if (chance < probabilidadDrop)
-        {
-            Instantiate(armaADropear, transform.position, Quaternion.identity);    
-        }
+         
+            if (chance < probabilidadDrop)
+            {
+                Instantiate(armaADropear, transform.position, Quaternion.identity);
+            }
+
         
+
     }
 }

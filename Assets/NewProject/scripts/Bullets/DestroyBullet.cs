@@ -1,5 +1,6 @@
 using System.Net;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.UIElements;
 
 public class DestroyBullet : MonoBehaviour, IBulletBehavior
@@ -19,6 +20,9 @@ public class DestroyBullet : MonoBehaviour, IBulletBehavior
 
 
     public GameObject flash;
+    public GameObject impactEfect;
+
+    
 
     void Start()
     {
@@ -84,7 +88,13 @@ public class DestroyBullet : MonoBehaviour, IBulletBehavior
             {
                 EnemyBase hit = collision.gameObject.GetComponent<EnemyBase>();
                 hit.Damage(damage, collision.gameObject);
+              
+             
+                hit.GetComponent<Rigidbody>().AddForce(shootDirection * 1000);
+               
+
                 Destroy(gameObject);
+
             }
 
             if(!fromPlayer && collision.gameObject.GetComponent<PlayerBase>() != null)
@@ -94,5 +104,12 @@ public class DestroyBullet : MonoBehaviour, IBulletBehavior
                 Destroy(gameObject);
             }
         }
+    }
+
+
+    void OnDestroy()
+    {
+       GameObject impact = Instantiate(impactEfect, this.transform.position , Quaternion.LookRotation(shootDirection));
+        Destroy(impact,2.0f);
     }
 }

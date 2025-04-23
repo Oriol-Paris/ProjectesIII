@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 1201100579626055862}
   - component: {fileID: 535729429190450929}
   - component: {fileID: 262411935793692627}
+  - component: {fileID: 6478771320280442240}
   m_Layer: 6
   m_Name: Enemy
   m_TagString: Enemy
@@ -60,7 +61,7 @@ SpriteRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
-  m_RenderingLayerMask: 1
+  m_RenderingLayerMask: 2
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
@@ -186,7 +187,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 126
+  m_Constraints: 0
   m_CollisionDetection: 1
 --- !u!65 &535729429190450929
 BoxCollider:
@@ -231,6 +232,20 @@ NavMeshAgent:
   m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &6478771320280442240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2547532622408290678}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f01212257cd44aa47874d3748e5aca8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  armaADropear: {fileID: 2930567190566246003, guid: 500352edff27d454c8239d34ca421ebc, type: 3}
+  probabilidadDrop: 63
 --- !u!1 &3148137900309033181
 GameObject:
   m_ObjectHideFlags: 0

@@ -54,6 +54,7 @@ public class EnemyBase : MonoBehaviour
             collider.enabled = false;
             rb2d.useGravity = false;
             rb2d.detectCollisions = false;
+            GetComponent<dropWapon>().enabled = true;
 
         }
 

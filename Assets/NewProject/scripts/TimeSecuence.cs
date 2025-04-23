@@ -33,6 +33,8 @@ public class TimeSecuence : MonoBehaviour
 
     public bool notacction = false;
 
+    public cameraManager cameraManager;
+
     void Start()
     {
         totalTime = playerBase.playerData.maxTime;
@@ -97,7 +99,7 @@ public class TimeSecuence : MonoBehaviour
         int movCount = 0;
         Debug.Log(actions.Count);
         play = true;
-
+        //cameraManager.FollowPlayer();
         for (int i = 0; i < actions.Count; i++)
         {
            
@@ -147,6 +149,7 @@ public class TimeSecuence : MonoBehaviour
 
     void PassTurn()
     {
+       // cameraManager.Original();
         isExecuting = true;
         Debug.Log("Executing stored actions");
         notacction = true;
@@ -169,7 +172,7 @@ public class TimeSecuence : MonoBehaviour
 
     private void ResetTurn()
     {
-       
+        //cameraManager.Original();
         notacction = false;
         play = false;
         canInvokeGhost = true;
