@@ -26,11 +26,11 @@ public class ControlListMovment : MonoBehaviour
         StartCoroutine(InvokeGhost());
     }
 
-    public void AddMovement(ControlLiniarRender controlLiniarRender, float timeConsumition, PlayerBase.ActionEnum action)
+    public void AddMovement(ControlLiniarRender controlLiniarRender, float timeConsumition,float time, PlayerBase.ActionEnum action)
     {
         List<Vector3> curvePoints = controlLiniarRender.getCurvePoint();
 
-        if (currentTime > timeConsumition)
+        if (currentTime >= time)
         {
             // Debug.Log(curvePoints[0]);
             // Debug.Log(curvePoints[1]);
@@ -47,7 +47,7 @@ public class ControlListMovment : MonoBehaviour
             Debug.Log($"Movimiento registrado. Consumo de estamina: {timeConsumition}");
 
             // Deducir la estamina
-            currentTime -= timeConsumition;
+            currentTime -= time;
 
             timeConsum.Add(timeConsumition);
 

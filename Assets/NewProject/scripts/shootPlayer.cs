@@ -30,7 +30,7 @@ public class shootPlayer : MonoBehaviour
             if (Input.GetMouseButtonUp(0))
             {
 
-                controlListMovment.AddMovement(controlLiniarRender, 0.75f, PlayerBase.ActionEnum.SHOOT);
+                controlListMovment.AddMovement(controlLiniarRender,1.0f, 1.0f, PlayerBase.ActionEnum.SHOOT);
                 bulletPrefab.Add(GetComponent<PlayerBase>().GetAction().m_style.prefab);
                 
             }
