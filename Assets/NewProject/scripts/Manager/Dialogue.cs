@@ -24,7 +24,7 @@ public class Dialogue : MonoBehaviour
     {
         if (Input.GetMouseButtonUp(0))
         {
-            if (IsTyping)
+            if (IsTyping && !textFullyDisplayed)
             {
                 Debug.Log("OUT");
                 StopAllCoroutines();
@@ -52,17 +52,14 @@ public class Dialogue : MonoBehaviour
     IEnumerator TypeLine()
     {
         textFullyDisplayed = false;
-        IsTyping = true;
         textComponent.text = string.Empty;
-
         foreach (char c in dialogueLines.ToCharArray())
         {
+            IsTyping = true;
             textComponent.text += c;
+            textFullyDisplayed = false;
             yield return new WaitForSeconds(textSpeed);
         }
-
-        textFullyDisplayed = true;
-        IsTyping = false;
     }
 
 
@@ -80,4 +77,5 @@ public class Dialogue : MonoBehaviour
             tutorialManager.DisableCurrentPopup(); // Add this line
         }
     }
+    public void SetIsTyping(bool condition) { IsTyping = condition; }
 }

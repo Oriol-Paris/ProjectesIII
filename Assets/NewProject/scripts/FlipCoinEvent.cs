@@ -29,11 +29,13 @@ public class FlipCoinEvent : MonoBehaviour
     void Update()
     {
         
-        if (Input.GetMouseButtonUp(0))
+        if (Input.GetMouseButtonUp(0)&& !eventText.IsTyping && eventText.textFullyDisplayed)
         {
-            if (currentState == eventState.INTRODUCTION && eventText.textFullyDisplayed && !eventText.IsTyping)
+            if (currentState == eventState.INTRODUCTION && !eventText.IsTyping)
             {
                 currentState = eventState.DECISION;
+                eventText.SetIsTyping(true);
+                eventText.textFullyDisplayed = false;
                 UpdateCurrentState();
             }
         }
@@ -54,23 +56,22 @@ public class FlipCoinEvent : MonoBehaviour
                 
                 eventText.dialogueLines = "HEADS OR TAILS?";
                 eventText.StartDialogue();
-
                 buttonCanvas.enabled = false;
                 StartCoroutine(EnableButtonsWhenReady());
                 break;
 
             case eventState.OUTCOME:
                 buttonCanvas.enabled = false;
-                eventText.StartDialogue();
+               
                 string resultText = $"YOU FLIP A COIN AND IT LANDS ON {prizeSide}.\n";
                
                 if(playerSide == prizeSide)
                 {
                     ReceivePrize();
                 }
-                resultText += playerSide == prizeSide ? "YOU WIN THE PRIZE!\n YOU WIN " + 25 + " EXP\nCurrent XP:" + playerData.exp : "YOU LOSE!";
+                resultText += playerSide == prizeSide ? "YOU WIN " + 25 + " EXP\nCurrent XP:" + playerData.exp : "YOU LOSE!";
                 eventText.dialogueLines = resultText;
-                //eventText.StartDialogue();
+                eventText.StartDialogue();
                 exitCanvas.enabled = true;
                 break;
         }
