@@ -65,9 +65,7 @@ public class ControlListMovment : MonoBehaviour
         }
         else
         {
-            FindAnyObjectByType<UIBarManager>().NotEnoughStaminaAnim();
             Debug.Log("No tienes suficiente estamina para realizar este trayecto.");
-
         }
     }
 

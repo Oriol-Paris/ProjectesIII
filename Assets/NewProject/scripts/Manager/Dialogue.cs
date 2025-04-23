@@ -2,6 +2,7 @@ using UnityEngine;
 using TMPro;
 using System.Collections;
 using System.Collections.Generic;
+using System;
 
 public class Dialogue : MonoBehaviour
 {
@@ -9,8 +10,9 @@ public class Dialogue : MonoBehaviour
     public string dialogueLines;
     public float textSpeed;
     public TutorialManager tutorialManager; // Add this line
-
+    public bool textFullyDisplayed;
     private int index;
+    public bool IsTyping { get; private set; }
 
     void Start()
     {
@@ -22,20 +24,26 @@ public class Dialogue : MonoBehaviour
     {
         if (Input.GetMouseButtonUp(0))
         {
-            if (textComponent.text == dialogueLines)
+            if (IsTyping && !textFullyDisplayed)
             {
-                tutorialManager.DisableCurrentPopup(); // Add this line
-
-            }
-            else
-            {
+                Debug.Log("OUT");
                 StopAllCoroutines();
                 textComponent.text = dialogueLines;
+                textFullyDisplayed = true;
+                IsTyping = false;
+            }
+            else if (textComponent.text == dialogueLines)
+            {
+                if (tutorialManager != null)
+                {
+                    tutorialManager.DisableCurrentPopup();
+                }
             }
         }
     }
 
-    void StartDialogue()
+
+    public void StartDialogue()
     {
         index = 0;
         StartCoroutine(TypeLine());
@@ -43,12 +51,17 @@ public class Dialogue : MonoBehaviour
 
     IEnumerator TypeLine()
     {
+        textFullyDisplayed = false;
+        textComponent.text = string.Empty;
         foreach (char c in dialogueLines.ToCharArray())
         {
+            IsTyping = true;
             textComponent.text += c;
+            textFullyDisplayed = false;
             yield return new WaitForSeconds(textSpeed);
         }
     }
+
 
     void NextLine()
     {
@@ -64,4 +77,5 @@ public class Dialogue : MonoBehaviour
             tutorialManager.DisableCurrentPopup(); // Add this line
         }
     }
+    public void SetIsTyping(bool condition) { IsTyping = condition; }
 }
