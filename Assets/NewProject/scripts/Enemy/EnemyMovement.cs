@@ -31,8 +31,8 @@ public class EnemyMovement : MonoBehaviour
         Player = FindAnyObjectByType<TimeSecuence>();
         enemyStats = GetComponent<EnemyBase>();
         agent = GetComponent<NavMeshAgent>(); // Obtener el NavMeshAgent
-        agent.speed = velocity * FindAnyObjectByType<CombatManager>().enemyStatMultiplier;
-        range *= FindAnyObjectByType<CombatManager>().enemyStatMultiplier;
+        agent.speed = velocity * PlayerPrefs.GetFloat("DifficultyMultiplier");
+        range *= PlayerPrefs.GetFloat("DifficultyMultiplier");
         agent.updateRotation = false;
         hitBox.enabled = false;
         spriteRenderer = GetComponent<SpriteRenderer>(); // Obtener el componente SpriteRenderer
