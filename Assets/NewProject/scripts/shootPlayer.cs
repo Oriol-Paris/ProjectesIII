@@ -11,7 +11,7 @@ public class shootPlayer : MonoBehaviour
     private int internalIterator = 0;
     public List<GameObject> bulletPrefab;
 
-    GameObject bullet;
+
 
 
 
@@ -30,9 +30,9 @@ public class shootPlayer : MonoBehaviour
             if (Input.GetMouseButtonUp(0))
             {
 
-                controlListMovment.AddMovement(controlLiniarRender,1.0f, 1.0f, PlayerBase.ActionEnum.SHOOT);
+                controlListMovment.AddMovement(controlLiniarRender,1.0f, 0.75f, PlayerBase.ActionEnum.SHOOT);
                 bulletPrefab.Add(GetComponent<PlayerBase>().GetAction().m_style.prefab);
-                
+
             }
         }
         else
@@ -52,29 +52,20 @@ public class shootPlayer : MonoBehaviour
         Vector3 _controlPoint = firstItem.Item2;
 
         Vector3 shootDirection = (_controlPoint - _playerPosition).normalized;
-        
-        if (bulletPrefab[internalIterator] != null) { 
 
-            bullet = Instantiate(bulletPrefab[internalIterator], _playerPosition, Quaternion.identity);
-            internalIterator++;
-        }
-        if (bullet.GetComponent<DestroyBullet>() != null)
-        {
-            bullet.GetComponent<DestroyBullet>().setShootDirection(shootDirection, true);
-            Debug.Log("bullet has gun");
-        } else if(bullet.GetComponent<multiShoot>()!=null)
-        {
-            Debug.Log("Bullet has other gun");
-            bullet.GetComponent<multiShoot>().setShootDirection(shootDirection, true);
-        }else if(bullet.GetComponent<LaserBullet>()!=null)
-        {
-            bullet.GetComponent<LaserBullet>().setShootDirection(shootDirection);
-        }
+        GameObject bullet = Instantiate(bulletPrefab[internalIterator], _playerPosition, Quaternion.identity);
 
-        
+        internalIterator++;
+        bullet.GetComponent<multiShoot>().setShootDirection(shootDirection, true);
+
+
 
     }
 
-    public void SetInternalIterator(int amount) { internalIterator = amount; }
+    public void ResetShotPlayer()
+    {
+       bulletPrefab.Clear();
+        internalIterator = 0;
+    }
 
 }

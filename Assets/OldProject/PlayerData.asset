@@ -19,7 +19,7 @@ MonoBehaviour:
   actionPoints: -21
   maxActionPoints: 3
   maxTime: 3
-  lastLevel: SFX
+  lastLevel: Level1
   levelCompleted: 1
   timesHealed: 0
   timesIncreasedMaxHP: 0

@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class DestroyBullet : MonoBehaviour
+public class DestroyBullet : MonoBehaviour, IBulletBehavior
 {
     [SerializeField] private TimeSecuence timeSecuence;
     [SerializeField] private Rigidbody rb;
@@ -36,6 +36,10 @@ public class DestroyBullet : MonoBehaviour
     public void setShootDirection(Vector3 _shootDirection,bool itsFromPlayer)
     {
         shootDirection = _shootDirection;
+        Vector3 lookDirection = new Vector3(_shootDirection.x, 0f, _shootDirection.z);
+        Quaternion targetRotation = Quaternion.LookRotation(lookDirection);
+        transform.rotation = targetRotation * Quaternion.Euler(90f, -90f, 0f);
+
     }
 
     // Update is called once per frame

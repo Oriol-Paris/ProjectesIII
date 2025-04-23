@@ -18,19 +18,11 @@ MonoBehaviour:
     position: {x: 0, y: 0}
     parentIndex: -1
     childrenIndices: 
-    cleared: 0
+    cleared: 1
     enabled: 0
     isCurrentLevel: 0
   - type: 0
     destination: Level2
-    position: {x: 0, y: 0}
-    parentIndex: -1
-    childrenIndices: 
-    cleared: 0
-    enabled: 0
-    isCurrentLevel: 0
-  - type: 0
-    destination: Level3
     position: {x: 0, y: 0}
     parentIndex: -1
     childrenIndices: 
@@ -54,6 +46,14 @@ MonoBehaviour:
     enabled: 0
     isCurrentLevel: 0
   - type: 0
+    destination: Level3
+    position: {x: 0, y: 0}
+    parentIndex: -1
+    childrenIndices: 
+    cleared: 0
+    enabled: 0
+    isCurrentLevel: 0
+  - type: 0
     destination: Level5
     position: {x: 0, y: 0}
     parentIndex: -1
@@ -61,6 +61,6 @@ MonoBehaviour:
     cleared: 0
     enabled: 0
     isCurrentLevel: 0
-  lastEnteredLevel: 
+  lastEnteredLevel: Level5
   enemyStatMultiplier: 1
   hasPlayedTutorial: 0
