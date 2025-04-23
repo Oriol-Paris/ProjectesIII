@@ -1,3 +1,4 @@
+using System.Net;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -16,6 +17,9 @@ public class DestroyBullet : MonoBehaviour, IBulletBehavior
 
     public float bulletSpeed = 3.0f;
 
+
+    public GameObject flash;
+
     void Start()
     {
         if (fromPlayer)
@@ -31,6 +35,8 @@ public class DestroyBullet : MonoBehaviour, IBulletBehavior
         _camera = FindAnyObjectByType<cameraManager>();
         StartCoroutine(_camera.Shake(shootCShakeTime, shootCShakeRange));
         transform.position = new Vector3(transform.position.x,0,transform.position.z);
+
+        GameObject hitbox = Instantiate(flash, this.transform.position + (shootDirection.normalized * 0.5f) , Quaternion.LookRotation(shootDirection));
     }
 
     public void setShootDirection(Vector3 _shootDirection,bool itsFromPlayer)
