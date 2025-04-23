@@ -103,6 +103,7 @@ GameObject:
   - component: {fileID: 8094846091851707121}
   - component: {fileID: 285907150525029808}
   - component: {fileID: 6448549362661093413}
+  - component: {fileID: 2839371385265692468}
   m_Layer: 6
   m_Name: EnemyShooter
   m_TagString: Enemy
@@ -327,6 +328,20 @@ NavMeshAgent:
   m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &2839371385265692468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2547532622408290678}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f01212257cd44aa47874d3748e5aca8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  armaADropear: {fileID: 0}
+  probabilidadDrop: 99
 --- !u!1 &4429760746157634568
 GameObject:
   m_ObjectHideFlags: 0

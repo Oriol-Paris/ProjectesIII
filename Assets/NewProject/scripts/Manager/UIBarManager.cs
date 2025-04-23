@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using UnityEditor.Rendering;
+
 using UnityEngine;
 
 public class UIBarManager : MonoBehaviour

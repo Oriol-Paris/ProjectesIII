@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Overworld_Land_06_0: -2611723665531540334
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
