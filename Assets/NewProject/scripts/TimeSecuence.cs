@@ -33,6 +33,8 @@ public class TimeSecuence : MonoBehaviour
 
     public bool notacction = false;
 
+    public cameraManager cameraManager;
+
     void Start()
     {
         totalTime = playerBase.playerData.maxTime;
@@ -97,7 +99,7 @@ public class TimeSecuence : MonoBehaviour
         int movCount = 0;
         Debug.Log(actions.Count);
         play = true;
-
+        //cameraManager.FollowPlayer();
         for (int i = 0; i < actions.Count; i++)
         {
            
@@ -113,8 +115,12 @@ public class TimeSecuence : MonoBehaviour
                     //((ShootAction)actionManager.activeActions[PlayerBase.ActionEnum.SHOOT]).bulletPrefab = bulletStyle.prefab; // Add this line
                     // StartCoroutine(actionManager.AttackCoroutine(action, targetPosition,bulletStyle));
                     shootPl.UpdateShoot(movCount);
-                    yield return new WaitForSeconds(0.75f);
-                    actualTime -= 0.75f;
+                    yield return new WaitForSeconds(0.1f);
+                    if (i + 1 < actions.Count && actions[i+1] == PlayerBase.ActionEnum.SHOOT)
+                    {
+                        yield return new WaitForSeconds(0.6f);
+                    }
+                  
                     movCount++;
                     break;
                 case PlayerBase.ActionEnum.MOVE:
@@ -136,13 +142,14 @@ public class TimeSecuence : MonoBehaviour
         //Debug.Log(actualTime);
         //if (actualTime > 0)
         //{
-        //    yield return new WaitForSeconds(actualTime);
+            yield return new WaitForSeconds(0.3f);
         //}
         ResetTurn();
     }
 
     void PassTurn()
     {
+       // cameraManager.Original();
         isExecuting = true;
         Debug.Log("Executing stored actions");
         notacction = true;
@@ -165,7 +172,7 @@ public class TimeSecuence : MonoBehaviour
 
     private void ResetTurn()
     {
-       
+        //cameraManager.Original();
         notacction = false;
         play = false;
         canInvokeGhost = true;
@@ -186,8 +193,8 @@ public class TimeSecuence : MonoBehaviour
         actionManager.preShootPath.Clear();
         actionManager.visualPlayerAfterShoot.Clear();
         actionManager.shootpoints.Clear();
-        GetComponent<shootPlayer>().bulletPrefab.Clear();
-        GetComponent<shootPlayer>().SetInternalIterator(0);
+        GetComponent<shootPlayer>().ResetShotPlayer();
+        
         isExecuting = false;
 
         FindAnyObjectByType<TopBarManager>().ResetTopBar();
@@ -221,9 +228,7 @@ public class TimeSecuence : MonoBehaviour
             Destroy(actionManager.preShootPath[actionManager.preShootPath.Count - 1].gameObject);
             actionManager.preShootPath.RemoveAt(actionManager.preShootPath.Count - 1);
         }
-
-        GetComponent<shootPlayer>().bulletPrefab.Clear();
-        GetComponent<shootPlayer>().SetInternalIterator(0);
+        GetComponent<shootPlayer>().ResetShotPlayer();
 
         FindAnyObjectByType<TopBarManager>().EraseLastAction();
     }

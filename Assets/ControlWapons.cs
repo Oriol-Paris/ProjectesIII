@@ -2,10 +2,11 @@ using UnityEngine;
 
 public class ControlWapons : MonoBehaviour
 {
-    private bool hasSniper = false;
+    public bool hasSniper = false;
 
     [Header("wapon Config")]
     public GameObject objetoObtenido;
+    public BulletCollection bulletCollection;
 
 
     void OnTriggerEnter(Collider other)
@@ -15,6 +16,8 @@ public class ControlWapons : MonoBehaviour
             objetoObtenido = other.gameObject; 
             hasSniper = true;
             objetoObtenido.SetActive(false);
+            bulletCollection.prefabs.Add(objetoObtenido);
+
         }
     }
 

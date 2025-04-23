@@ -76,6 +76,10 @@ public class EnemyMovement : MonoBehaviour
                 hitBox.GetComponent<MeleeEnemyDamage>().hasDealtDamage = false;
             }
         }
+        else
+        {
+            agent.speed = 0;    
+        }
     }
 
     IEnumerator AttackCoroutine()

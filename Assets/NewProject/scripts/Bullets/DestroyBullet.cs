@@ -1,7 +1,9 @@
+using System.Net;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.UIElements;
 
-public class DestroyBullet : MonoBehaviour
+public class DestroyBullet : MonoBehaviour, IBulletBehavior
 {
     [SerializeField] private TimeSecuence timeSecuence;
     [SerializeField] private Rigidbody rb;
@@ -15,6 +17,12 @@ public class DestroyBullet : MonoBehaviour
     [SerializeField] float shootCShakeRange;
 
     public float bulletSpeed = 3.0f;
+
+
+    public GameObject flash;
+    public GameObject impactEfect;
+
+    
 
     void Start()
     {
@@ -31,11 +39,17 @@ public class DestroyBullet : MonoBehaviour
         _camera = FindAnyObjectByType<cameraManager>();
         StartCoroutine(_camera.Shake(shootCShakeTime, shootCShakeRange));
         transform.position = new Vector3(transform.position.x,0,transform.position.z);
+
+        GameObject hitbox = Instantiate(flash, this.transform.position + (shootDirection.normalized * 0.5f) , Quaternion.LookRotation(shootDirection));
     }
 
     public void setShootDirection(Vector3 _shootDirection,bool itsFromPlayer)
     {
         shootDirection = _shootDirection;
+        Vector3 lookDirection = new Vector3(_shootDirection.x, 0f, _shootDirection.z);
+        Quaternion targetRotation = Quaternion.LookRotation(lookDirection);
+        transform.rotation = targetRotation * Quaternion.Euler(90f, -90f, 0f);
+
     }
 
     // Update is called once per frame
@@ -74,7 +88,13 @@ public class DestroyBullet : MonoBehaviour
             {
                 EnemyBase hit = collision.gameObject.GetComponent<EnemyBase>();
                 hit.Damage(damage, collision.gameObject);
+              
+             
+                hit.GetComponent<Rigidbody>().AddForce(shootDirection * 1000);
+               
+
                 Destroy(gameObject);
+
             }
 
             if(!fromPlayer && collision.gameObject.GetComponent<PlayerBase>() != null)
@@ -84,5 +104,12 @@ public class DestroyBullet : MonoBehaviour
                 Destroy(gameObject);
             }
         }
+    }
+
+
+    void OnDestroy()
+    {
+       GameObject impact = Instantiate(impactEfect, this.transform.position , Quaternion.LookRotation(shootDirection));
+        Destroy(impact,2.0f);
     }
 }
