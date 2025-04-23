@@ -140,7 +140,9 @@ public class MovPlayer : MonoBehaviour
 
             float timeConsumption = controlListMovment.CalculateStaminaConsumption(curveLength);
 
-            controlListMovment.AddMovement(controlLiniarRender,timeConsumption, PlayerBase.ActionEnum.MOVE);
+            float time = 1;
+
+            controlListMovment.AddMovement(controlLiniarRender,timeConsumption,time, PlayerBase.ActionEnum.MOVE);
             t = 0f;
           
             isDragging = false;

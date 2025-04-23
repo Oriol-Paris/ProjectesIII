@@ -78,6 +78,7 @@ public class GhostMov : MonoBehaviour
 
 
         List<Tuple<Vector3, Vector3, Vector3>> MovList = _MovList;
+       
         var firstItem = MovList[movCount];
         Vector3 _playerPosition = firstItem.Item1;
         Vector3 _controlPoint = firstItem.Item2;

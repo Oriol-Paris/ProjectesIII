@@ -133,11 +133,11 @@ public class TimeSecuence : MonoBehaviour
             }
         }
      
-        Debug.Log(actualTime);
-        if (actualTime > 0)
-        {
-            yield return new WaitForSeconds(actualTime);
-        }
+        //Debug.Log(actualTime);
+        //if (actualTime > 0)
+        //{
+        //    yield return new WaitForSeconds(actualTime);
+        //}
         ResetTurn();
     }
 

@@ -126,6 +126,6 @@ MonoBehaviour:
   _actions: 
   _timeConsum: []
   maxDistance: 20
-  velocity: 1
+  velocity: 2
   tiemp: 0
   t: 0
