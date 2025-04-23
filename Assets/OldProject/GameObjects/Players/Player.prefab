@@ -176,9 +176,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefabOrderReference: 0
   prefabs:
-  - {fileID: 4841340973275302747, guid: 8c280260248f7e449925f58bc503ee3b, type: 3}
+  - {fileID: 897511901853533497, guid: fbec2877c5e8a124a862087bd152bdf5, type: 3}
   - {fileID: 1680710797403148065, guid: 9dcd6820efc4c4b488ecff9dbb33f555, type: 3}
-  - {fileID: 4841340973275302747, guid: 3db35f2e05067784492ec56c6b262789, type: 3}
+  - {fileID: 897511901853533497, guid: 8521142c8a8726c4a955b9f20f04800f, type: 3}
   numOfBulletTypes: 3
   playerData: {fileID: 11400000, guid: 30cde2f3bd3a0de47a315ed687870d98, type: 2}
   bulletCollection: []
@@ -431,6 +431,7 @@ GameObject:
   - component: {fileID: 2554926273211331863}
   - component: {fileID: 4528686633142332479}
   - component: {fileID: 4026666568815950345}
+  - component: {fileID: 3987113414040899463}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -448,7 +449,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.02753495, y: 0.066083886, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4336953727275008324}
@@ -556,8 +557,8 @@ SpriteRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6993864842785556067}
   m_Enabled: 1
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
@@ -571,7 +572,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
+  - {fileID: 2100000, guid: 3ca21a7dc92494c42b9a6b36a1c7a47f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -709,6 +710,7 @@ MonoBehaviour:
   playerBase: {fileID: 8584045141074783902}
   actionManager: {fileID: 1251202436317223770}
   notacction: 0
+  cameraManager: {fileID: 0}
 --- !u!114 &6045879003536822004
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -725,8 +727,7 @@ MonoBehaviour:
   controlListMovment: {fileID: 4528686633142332479}
   timeSecuence: {fileID: 7189739028029077113}
   fx: {fileID: 6904931311285059048}
-  bulletPrefab:
-  - {fileID: 0}
+  bulletPrefab: []
 --- !u!114 &4476756505495577889
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -825,3 +826,18 @@ MonoBehaviour:
   playerBase: {fileID: 0}
   movementTimeLimit: 5
   timer: 0
+--- !u!114 &3987113414040899463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6993864842785556067}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8127872ff465464c9916343e5d6dea9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hasSniper: 0
+  objetoObtenido: {fileID: 0}
+  bulletCollection: {fileID: 2865400945673019646}
