@@ -24,7 +24,7 @@ MonoBehaviour:
   timesHealed: 0
   timesIncreasedMaxHP: 0
   moveRange: 0
-  exp: 71
+  exp: 101
   isAlive: 1
   victory: 0
   healAmount: 1
