@@ -11,13 +11,14 @@ public class TutorialManager : MonoBehaviour
     public PlayerBase playerBase; // Reference to the PlayerBase component
     public TimeSecuence timeSecuence; // Reference to the TimeSecuence component
     public GameObject dummy;
-
+    public List<GameObject> pinPoints;
     public GameObject dummy1;
 
     private int popUpIndex = 0;
     private bool actionsCompleted = false; // Flag to indicate when the required actions are completed
     private bool isInsideTrigger = false; // Flag to indicate if the player is inside the trigger
-    
+    public GameObject CombatManager;
+    public GameObject VictoryScreen;
     // Dictionary to store the required number of actions for each popUpIndex
     private Dictionary<int, (PlayerBase.ActionEnum action, int count)> requiredActions = new Dictionary<int, (PlayerBase.ActionEnum action, int count)>
     {
@@ -39,43 +40,17 @@ public class TutorialManager : MonoBehaviour
         {
             actionCounts[key] = 0;
         }
-        // Make the dummy invisible at the start
-        var collider = dummy.GetComponent<BoxCollider>();
-        if (collider != null)
+        for(int i = 0; i< pinPoints.Count; i++)
         {
-            collider.enabled = false;
+            pinPoints[i].SetActive(false);
         }
 
-        var spriteRenderer = dummy.GetComponent<SpriteRenderer>();
-        if (spriteRenderer != null)
-        {
-            spriteRenderer.enabled = false;
-        }
-
-        var rigidbody = dummy.GetComponent<Rigidbody>();
-        if (rigidbody != null)
-        {
-            rigidbody.useGravity = false;
-        }
+        CombatManager.SetActive(false);
+        VictoryScreen.SetActive(false);
+        dummy.SetActive(false);
 
         // Make the dummy1 invisible at the start
-        var collider1 = dummy1.GetComponent<BoxCollider>();
-        if (collider1 != null)
-        {
-            collider1.enabled = false;
-        }
-
-        var spriteRenderer1 = dummy1.GetComponent<SpriteRenderer>();
-        if (spriteRenderer1 != null)
-        {
-            spriteRenderer1.enabled = false;
-        }
-
-        var rigidbody1 = dummy1.GetComponent<Rigidbody>();
-        if (rigidbody1 != null)
-        {
-            rigidbody1.useGravity = false;
-        }
+        dummy1.SetActive(false);
         // Display the first popup
         DisplayCurrentPopup();
     }
@@ -122,7 +97,7 @@ public class TutorialManager : MonoBehaviour
         // Enable the current popup
         if (popUpIndex < popUps.Length)
         {
-            actionManager.enabled = false;
+            //actionManager.enabled = false;
             popUps[popUpIndex].SetActive(true);
             Debug.Log("Displaying popUpIndex: " + popUpIndex);
             ExecuteCustomLogicForPopup(popUpIndex); // Execute custom logic for the current popup
@@ -151,7 +126,7 @@ public class TutorialManager : MonoBehaviour
                 {
                     var requiredAction = requiredActions[popUpIndex].action;
                     var requiredCount = requiredActions[popUpIndex].count;
-
+                    pinPoints[index].SetActive(true);
                     if (playerBase.GetAction().m_action == requiredAction && (Input.GetKey(KeyCode.E) || Input.GetKey(KeyCode.Space)))
                     {
                         actionCounts[popUpIndex]++;
@@ -172,7 +147,8 @@ public class TutorialManager : MonoBehaviour
                 {
                     var requiredAction = requiredActions[popUpIndex].action;
                     var requiredCount = requiredActions[popUpIndex].count;
-
+                    pinPoints[index - 1].SetActive(false);
+                    pinPoints[index].SetActive(true);
                     if (playerBase.GetAction().m_action == requiredAction && (Input.GetKey(KeyCode.E) || Input.GetKey(KeyCode.Space)))
                     {
                         actionCounts[popUpIndex]++;
@@ -190,23 +166,8 @@ public class TutorialManager : MonoBehaviour
                 // Custom logic for popup index 2
                 Debug.Log("Custom logic for popup index 2");
                 dummy.SetActive(true);
-                var collider = dummy.GetComponent<BoxCollider>();
-                if (collider != null)
-                {
-                    collider.enabled = true;
-                }
-
-                var spriteRenderer = dummy.GetComponent<SpriteRenderer>();
-                if (spriteRenderer != null)
-                {
-                    spriteRenderer.enabled = true;
-                }
-
-                var rigidbody = dummy.GetComponent<Rigidbody>();
-                if (rigidbody != null)
-                {
-                    rigidbody.useGravity = true;
-                }
+                pinPoints[index - 1].SetActive(false);
+                pinPoints[index].SetActive(true);
                 var enemyBase = dummy.GetComponent<EnemyBase>();
                 if (enemyBase != null && !enemyBase.isAlive)
                 {
@@ -216,26 +177,13 @@ public class TutorialManager : MonoBehaviour
                 break;
 
             case 3:
+                VictoryScreen.SetActive(true);
+                CombatManager.SetActive(true);
+                pinPoints[index - 1].SetActive(false);
+                pinPoints[index].SetActive(true);
                 // Custom logic for popup index 2
                 Debug.Log("Custom logic for popup index 2");
                 dummy1.SetActive(true);
-                var collider1 = dummy1.GetComponent<BoxCollider>();
-                if (collider1 != null)
-                {
-                    collider1.enabled = true;
-                }
-
-                var spriteRenderer1 = dummy1.GetComponent<SpriteRenderer>();
-                if (spriteRenderer1 != null)
-                {
-                    spriteRenderer1.enabled = true;
-                }
-
-                var rigidbody1 = dummy1.GetComponent<Rigidbody>();
-                if (rigidbody1 != null)
-                {
-                    rigidbody1.useGravity = true;
-                }
                 var enemyBase1 = dummy1.GetComponent<EnemyBase>();
                 if (enemyBase1 != null && !enemyBase1.isAlive)
                 {
