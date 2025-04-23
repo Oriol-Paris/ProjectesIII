@@ -24,7 +24,7 @@ MonoBehaviour:
   timesHealed: 0
   timesIncreasedMaxHP: 0
   moveRange: 0
-  exp: 71
+  exp: 263481
   isAlive: 1
   victory: 0
   healAmount: 1
@@ -54,3 +54,9 @@ MonoBehaviour:
     style: {fileID: 0}
     cost: 2
     bulletType: 2
+  - actionType: 0
+    action: 1
+    key: 52
+    style: {fileID: 0}
+    cost: 2
+    bulletType: 1
