@@ -41,8 +41,8 @@ public class MapInteractionManager : MonoBehaviour
             case "Level4":
                 AnimateTileGroup("Level4", false);
                 break;
-            case "Level5":
-                AnimateTileGroup("Level5", false);
+            case "EventScene":
+                AnimateTileGroup("EventScene", false);
                 break;
         }
     }

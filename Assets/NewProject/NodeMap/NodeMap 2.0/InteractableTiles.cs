@@ -16,7 +16,7 @@ public class InteractableTiles : MonoBehaviour
 
         if(PlayerPrefs.GetString("LastLevelCleared") == "" || 
             PlayerPrefs.GetString("LastLevelCleared") == null ||
-            PlayerPrefs.GetString("LastLevelCleared") == "Level6")
+            PlayerPrefs.GetString("LastLevelCleared") == "Level5")
         {
             PlayerPrefs.SetString("LastLevelCleared", "Tutorial");
         }
@@ -38,7 +38,7 @@ public class InteractableTiles : MonoBehaviour
                     isInteractible = true;
                 }
                 break;
-            case "Level4":
+            case "EventScene":
                 if (PlayerPrefs.GetString("LastLevelCleared") == "Level2")
                 {
                     GetComponentInChildren<Light>().enabled = true;
@@ -52,16 +52,16 @@ public class InteractableTiles : MonoBehaviour
                     isInteractible = true;
                 }
                 break;
-            case "Level5":
+            case "Level4":
                 if (PlayerPrefs.GetString("LastLevelCleared") == "ShopScene")
                 {
                     GetComponentInChildren<Light>().enabled = true;
                     isInteractible = true;
                 }
                 break;
-            case "Level6":
+            case "Level5":
                 if (PlayerPrefs.GetString("LastLevelCleared") == "Level4" || 
-                    PlayerPrefs.GetString("LastLevelCleared") == "Level5")
+                    PlayerPrefs.GetString("LastLevelCleared") == "EventScene")
                 {
                     GetComponentInChildren<Light>().enabled = true;
                     isInteractible = true;
@@ -71,7 +71,7 @@ public class InteractableTiles : MonoBehaviour
                 break;
         }
 
-        if (levelName != "ShopScene" && spawnedEnemies.Count >= 3)
+        if (spawnedEnemies.Count >= 3)
         {
             float difficulty = PlayerPrefs.GetFloat("DifficultyMultiplier", 1f);
 

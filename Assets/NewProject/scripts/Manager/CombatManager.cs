@@ -77,7 +77,16 @@ public class CombatManager : MonoBehaviour
                 
             }
 
-            nodeMapData.SetLevelCleared(SceneManager.GetActiveScene().name);
+            if (SceneManager.GetActiveScene().name == "Level6")
+            {
+                PlayerPrefs.SetString("LastLevelCleared", "Tutorial");
+                PlayerPrefs.SetFloat("DifficultyMultiplier", PlayerPrefs.GetFloat("DifficultyMultiplier") + 0.5f);
+            }
+            else
+            {
+                PlayerPrefs.SetString("LastLevelCleared", SceneManager.GetActiveScene().name);
+            }
+
             playerParty[0].SaveCurrentState();
 
             hasCalculatedExp = true;

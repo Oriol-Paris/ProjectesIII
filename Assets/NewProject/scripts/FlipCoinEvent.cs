@@ -110,6 +110,8 @@ public class FlipCoinEvent : MonoBehaviour
 
     public void ExitScene()
     {
+        PlayerPrefs.SetString("LastLevelCleared", SceneManager.GetActiveScene().name);
+
         SceneManager.LoadScene("Node Map 2.0");
     }
 }

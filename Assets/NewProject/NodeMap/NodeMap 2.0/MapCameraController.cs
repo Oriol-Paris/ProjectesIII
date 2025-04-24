@@ -21,7 +21,7 @@ public class MapCameraController : MonoBehaviour
 
     private List<InteractableTiles> levelTiles;
 
-    private void Awake()
+    private void Start()
     {
         levelTiles = new List<InteractableTiles>();
         levelTiles.AddRange(FindObjectsByType<InteractableTiles>(FindObjectsSortMode.None));
@@ -32,11 +32,11 @@ public class MapCameraController : MonoBehaviour
             {
                 if(tile.levelName == "Level6")
                 {
-                    transform.position = new Vector3(tile.transform.position.x, transform.position.y, -20.0f);
+                    transform.position = new Vector3(tile.transform.position.x, transform.position.y, -15.0f);
                 }
                 else
                 {
-                    transform.position = new Vector3(tile.transform.position.x, transform.position.y, tile.transform.position.z - 20.0f);
+                    transform.position = new Vector3(tile.transform.position.x, transform.position.y, tile.transform.position.z - 15.0f);
                 }
             }
         }
