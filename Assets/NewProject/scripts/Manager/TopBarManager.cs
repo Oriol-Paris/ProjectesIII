@@ -98,7 +98,7 @@ public class TopBarManager : MonoBehaviour
     }
     
 
-    void UpdateBottomHotbar()
+    public void UpdateBottomHotbar()
     {
         if (playerData == null)
         {
@@ -289,33 +289,7 @@ public class TopBarManager : MonoBehaviour
         return null;
     }
 
-    private Sprite GetActionImage(PlayerData.ActionData action)
-    {
-        if (action.action == PlayerBase.ActionEnum.SHOOT)
-        {
-            if (action.style.bulletType == BulletType.GUN)
-            {
-                return gunImage;
-            }
-            else if (action.style.bulletType == BulletType.SHOTGUN)
-            {
-                return shotgunImage;
-            }
-            else if (action.style.bulletType == BulletType.LASER)
-            {
-                return laserImage;
-            }
-        }
-        else if (action.action == PlayerBase.ActionEnum.HEAL)
-        {
-            return healImage;
-        }
-        else if (action.action == PlayerBase.ActionEnum.MOVE)
-        {
-            return runImage;
-        }
-        return null;
-    }
+  
 
     private Color GetActionColor(PlayerBase.ActionEnum action)
     {
@@ -332,21 +306,7 @@ public class TopBarManager : MonoBehaviour
         return Color.white;
     }
 
-     public void TriggerUpgradeAnimation(PlayerBase.Action actionData)
-    {
-        int index = actionsDisplayed.FindIndex(action => action.m_style == actionData.m_style);
-        if (index != -1 && index < actionSlots.Count)
-        {
-            Animator animator = actionSlots[index].GetComponent<Animator>();
-            if (animator != null)
-            {
-                animator.SetBool("Upgrade", true);
-
-                // Optionally reset the boolean after the animation is done
-                StartCoroutine(ResetUpgradeAnimation());
-            }
-        }
-    }
+     
 
     private IEnumerator ResetUpgradeAnimation()
     {

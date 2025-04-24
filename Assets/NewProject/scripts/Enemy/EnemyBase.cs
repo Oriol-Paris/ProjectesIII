@@ -66,6 +66,7 @@ public class EnemyBase : MonoBehaviour
     {
         originalPosition = this.transform.position;
         GetComponent<SpriteRenderer>().color = Color.red;
+        Debug.Log(hitObject.name);
         StartCoroutine(Shake(0.2f, 0.3f));
         StartCoroutine(whitecolor());
         Instantiate(bloodSplash, this.transform.position, hitObject.transform.rotation);

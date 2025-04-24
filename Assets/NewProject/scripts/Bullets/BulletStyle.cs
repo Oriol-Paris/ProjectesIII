@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum BulletType { GUN, SHOTGUN, LASER };
+public enum BulletType { GUN, SHOTGUN, LASER,SNIPER };
 
 [Serializable]
 public class BulletStyle : MonoBehaviour
