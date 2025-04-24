@@ -203,3 +203,4 @@ MonoBehaviour:
   shootCShakeRange: 0
   bulletSpeed: 4
   flash: {fileID: 0}
+  impactEfect: {fileID: 0}
