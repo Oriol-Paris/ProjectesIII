@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Overworld_Ocean_03_0: -1851795180982505365
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

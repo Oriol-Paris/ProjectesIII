@@ -22,24 +22,13 @@ public class Dialogue : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonUp(0))
+
+        if (textComponent.text == dialogueLines)
         {
-            if (IsTyping && !textFullyDisplayed)
-            {
-                Debug.Log("OUT");
-                StopAllCoroutines();
-                textComponent.text = dialogueLines;
-                textFullyDisplayed = true;
-                IsTyping = false;
-            }
-            else if (textComponent.text == dialogueLines)
-            {
-                if (tutorialManager != null)
-                {
-                    tutorialManager.DisableCurrentPopup();
-                }
-            }
+            
+            textFullyDisplayed = true;
         }
+
     }
 
 

@@ -29,9 +29,9 @@ public class FlipCoinEvent : MonoBehaviour
     void Update()
     {
         
-        if (Input.GetMouseButtonUp(0)&& !eventText.IsTyping && eventText.textFullyDisplayed)
+        if (Input.GetMouseButtonUp(0)&& eventText.textFullyDisplayed)
         {
-            if (currentState == eventState.INTRODUCTION && !eventText.IsTyping)
+            if (currentState == eventState.INTRODUCTION)
             {
                 currentState = eventState.DECISION;
                 eventText.SetIsTyping(true);
