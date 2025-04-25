@@ -6,6 +6,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem.XR;
 using UnityEngine.SceneManagement;
+using static PlayerData;
 
 public class PlayerActionManager : MonoBehaviour
 {
@@ -329,7 +330,15 @@ public class PlayerActionManager : MonoBehaviour
             actualWalkSoundDelay -= Time.deltaTime;
         }
     }
-
+    public void EquipNewAction(ActionData actionData)
+    {
+        if (actionData.actionType != PlayerBase.ActionType.SINGLE_USE)
+        {
+            actionData.key = (KeyCode)System.Enum.Parse(typeof(KeyCode), "Alpha" + (player.playerData.availableActions.Count + 1));
+            player.playerData.availableActions.Add(actionData);
+            Debug.Log("Item equipped");
+        }
+    }
     public PlayerBase GetPlayer() { return player; }
     public void EndTurn() { turnsDone++; } // Add this method to end the turn after resting
 }
