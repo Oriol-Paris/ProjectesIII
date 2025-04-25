@@ -318,6 +318,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: keg
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 95493d16cf983814faa0f0d6fde8f160, type: 3}
+      propertyPath: m_TagString
+      value: envairoment
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -380,6 +384,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: table_medium_tablecloth
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 9f1eca77e2e7e0e409c1417b10cc4b55, type: 3}
+      propertyPath: m_TagString
+      value: envairoment
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -441,6 +449,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 8e66387fbb3888b419fe14efe0cae57b, type: 3}
       propertyPath: m_Name
       value: sword_shield_gold
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 8e66387fbb3888b419fe14efe0cae57b, type: 3}
+      propertyPath: m_TagString
+      value: envairoment
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -632,6 +644,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 95493d16cf983814faa0f0d6fde8f160, type: 3}
       propertyPath: m_Name
       value: keg
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 95493d16cf983814faa0f0d6fde8f160, type: 3}
+      propertyPath: m_TagString
+      value: envairoment
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -828,6 +844,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 4436f3c93d650594bb67f3ad789bc7cd, type: 3}
       propertyPath: m_Name
       value: sword_shield_broken
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4436f3c93d650594bb67f3ad789bc7cd, type: 3}
+      propertyPath: m_TagString
+      value: envairoment
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1143,6 +1163,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 29f66dbda196f0247a6acd277dfffcdf, type: 3}
       propertyPath: m_Name
       value: table_medium_broken
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 29f66dbda196f0247a6acd277dfffcdf, type: 3}
+      propertyPath: m_TagString
+      value: envairoment
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1893,6 +1917,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: table_medium
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 0a9fbd220f9d421479d6906755625445, type: 3}
+      propertyPath: m_TagString
+      value: envairoment
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1954,6 +1982,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: eb938fa76a2ba1c438e67ccac4c64c59, type: 3}
       propertyPath: m_Name
       value: stairs_wood_decorated
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: eb938fa76a2ba1c438e67ccac4c64c59, type: 3}
+      propertyPath: m_TagString
+      value: envairoment
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2519,6 +2551,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: table_medium_tablecloth
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 9f1eca77e2e7e0e409c1417b10cc4b55, type: 3}
+      propertyPath: m_TagString
+      value: envairoment
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2742,6 +2778,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 421bbf38c88ae654faea48d50f1ca42f, type: 3}
       propertyPath: m_Name
       value: stool
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 421bbf38c88ae654faea48d50f1ca42f, type: 3}
+      propertyPath: m_TagString
+      value: envairoment
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3435,6 +3475,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: table_long_decorated_C
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 456216fdea988a848b7a7af873f7197d, type: 3}
+      propertyPath: m_TagString
+      value: envairoment
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3683,6 +3727,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: table_medium_tablecloth
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 9f1eca77e2e7e0e409c1417b10cc4b55, type: 3}
+      propertyPath: m_TagString
+      value: envairoment
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3749,6 +3797,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 9f1eca77e2e7e0e409c1417b10cc4b55, type: 3}
       propertyPath: m_Name
       value: table_medium_tablecloth
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 9f1eca77e2e7e0e409c1417b10cc4b55, type: 3}
+      propertyPath: m_TagString
+      value: envairoment
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3987,6 +4039,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 144586441ea313e4d865360236f15541, type: 3}
       propertyPath: m_Name
       value: trunk_large_C
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 144586441ea313e4d865360236f15541, type: 3}
+      propertyPath: m_TagString
+      value: envairoment
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6665,6 +6721,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: keg
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 95493d16cf983814faa0f0d6fde8f160, type: 3}
+      propertyPath: m_TagString
+      value: envairoment
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6902,6 +6962,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: f471c496d458290409fe8fa8dea9cbd0, type: 3}
       propertyPath: m_Name
       value: barrier_column
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f471c496d458290409fe8fa8dea9cbd0, type: 3}
+      propertyPath: m_TagString
+      value: envairoment
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7202,6 +7266,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 95493d16cf983814faa0f0d6fde8f160, type: 3}
       propertyPath: m_Name
       value: keg
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 95493d16cf983814faa0f0d6fde8f160, type: 3}
+      propertyPath: m_TagString
+      value: envairoment
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7597,6 +7665,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: keg
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 95493d16cf983814faa0f0d6fde8f160, type: 3}
+      propertyPath: m_TagString
+      value: envairoment
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7782,6 +7854,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: f471c496d458290409fe8fa8dea9cbd0, type: 3}
       propertyPath: m_Name
       value: barrier_column
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f471c496d458290409fe8fa8dea9cbd0, type: 3}
+      propertyPath: m_TagString
+      value: envairoment
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -8466,6 +8542,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: table_medium_tablecloth
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 9f1eca77e2e7e0e409c1417b10cc4b55, type: 3}
+      propertyPath: m_TagString
+      value: envairoment
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -9010,6 +9090,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: table_medium_tablecloth
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 9f1eca77e2e7e0e409c1417b10cc4b55, type: 3}
+      propertyPath: m_TagString
+      value: envairoment
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -9133,6 +9217,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 9f1eca77e2e7e0e409c1417b10cc4b55, type: 3}
       propertyPath: m_Name
       value: table_medium_tablecloth
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 9f1eca77e2e7e0e409c1417b10cc4b55, type: 3}
+      propertyPath: m_TagString
+      value: envairoment
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -9315,6 +9403,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: barrier_column
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f471c496d458290409fe8fa8dea9cbd0, type: 3}
+      propertyPath: m_TagString
+      value: envairoment
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -9433,6 +9525,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 144586441ea313e4d865360236f15541, type: 3}
       propertyPath: m_Name
       value: trunk_large_C
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 144586441ea313e4d865360236f15541, type: 3}
+      propertyPath: m_TagString
+      value: envairoment
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -9739,6 +9835,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: barrier_colum_half
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 025fcffba9689684eaf957d678015433, type: 3}
+      propertyPath: m_TagString
+      value: envairoment
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -9982,6 +10082,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: table_medium_tablecloth_decorated_B
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 17d89a765f486784aa4443162ac78c28, type: 3}
+      propertyPath: m_TagString
+      value: envairoment
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -10130,6 +10234,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 9f1eca77e2e7e0e409c1417b10cc4b55, type: 3}
       propertyPath: m_Name
       value: table_medium_tablecloth
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 9f1eca77e2e7e0e409c1417b10cc4b55, type: 3}
+      propertyPath: m_TagString
+      value: envairoment
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -10560,6 +10668,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: sword_shield_broken
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4436f3c93d650594bb67f3ad789bc7cd, type: 3}
+      propertyPath: m_TagString
+      value: envairoment
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -10683,6 +10795,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 28e63b4582bdbec4da59c8a445689cf2, type: 3}
       propertyPath: m_Name
       value: table_medium_decorated_A
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 28e63b4582bdbec4da59c8a445689cf2, type: 3}
+      propertyPath: m_TagString
+      value: envairoment
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -10860,6 +10976,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: keg
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 95493d16cf983814faa0f0d6fde8f160, type: 3}
+      propertyPath: m_TagString
+      value: envairoment
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -10993,6 +11113,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: cb0c2b8a370db3145944511382ecf136, type: 3}
       propertyPath: m_Name
       value: table_long_decorated_A
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: cb0c2b8a370db3145944511382ecf136, type: 3}
+      propertyPath: m_TagString
+      value: envairoment
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

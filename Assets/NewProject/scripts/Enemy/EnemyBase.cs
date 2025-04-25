@@ -38,7 +38,7 @@ public class EnemyBase : MonoBehaviour
         rb2d = GetComponent<Rigidbody>();
 
         health *= PlayerPrefs.GetFloat("DifficultyMultiplier");
-        
+        //health *= FindAnyObjectByType<CombatManager>().enemyStatMultiplier;
 
     }
 
