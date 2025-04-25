@@ -20,14 +20,14 @@ MonoBehaviour:
   maxActionPoints: 3
   maxTime: 3
   lastLevel: Level4
-  levelCompleted: 1
+  levelCompleted: 0
   timesHealed: 0
   timesIncreasedMaxHP: 0
   moveRange: 0
-  exp: 250909
+  exp: 305022
   isAlive: 1
   victory: 0
-  healAmount: 1
+  healAmount: 16
   bulletLevels:
   - bulletType: 0
     level: 1
@@ -60,3 +60,9 @@ MonoBehaviour:
     style: {fileID: 0}
     cost: 2
     bulletType: 1
+  - actionType: 1
+    action: 2
+    key: 53
+    style: {fileID: 0}
+    cost: 1
+    bulletType: 0
