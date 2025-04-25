@@ -179,7 +179,7 @@ MonoBehaviour:
   - {fileID: 897511901853533497, guid: fbec2877c5e8a124a862087bd152bdf5, type: 3}
   - {fileID: 1680710797403148065, guid: 9dcd6820efc4c4b488ecff9dbb33f555, type: 3}
   - {fileID: 897511901853533497, guid: 8521142c8a8726c4a955b9f20f04800f, type: 3}
-  numOfBulletTypes: 3
+  numOfBulletTypes: 4
   playerData: {fileID: 11400000, guid: 30cde2f3bd3a0de47a315ed687870d98, type: 2}
   bulletCollection: []
 --- !u!1 &4556553994632275070
