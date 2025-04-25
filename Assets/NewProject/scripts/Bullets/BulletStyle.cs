@@ -15,6 +15,15 @@ public class BulletStyle : MonoBehaviour
     public int damage = 0;
     public int damagePerLevel = 0;
 
+
+    private void Update()
+    {
+        if (prefab != null)
+        {
+            Debug.Log("hola");
+        }
+    }
+
     public void Initiazlize(BulletType type, GameObject loadedPrefab)
     {
         prefab = loadedPrefab;

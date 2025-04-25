@@ -15,18 +15,34 @@ public class ControlWapons : MonoBehaviour
         {
             objetoObtenido = other.gameObject; 
             hasSniper = true;
-            objetoObtenido.SetActive(false);
+            other.GetComponent<MeshRenderer>().enabled = false; 
+            other.GetComponent<BoxCollider>().enabled = false; 
             bulletCollection.prefabs.Add(objetoObtenido);
 
+
+            BulletStyle newStyle = new BulletStyle();
+            newStyle.Initiazlize(BulletType.SNIPER, objetoObtenido);
+            bulletCollection.bulletCollection.Add(newStyle);
+
+            PlayerBase player = FindAnyObjectByType<PlayerBase>();
+
+            PlayerBase.Action newAction = new PlayerBase.Action(
+                PlayerBase.ActionType.ACTIVE,
+                PlayerBase.ActionEnum.SHOOT,
+                KeyCode.Alpha5, 
+                cost: 3,
+                style: newStyle
+            );
+
+            player.AddNewAction(newAction);
+           // player.playerData.availableActions.Add(newAction);
+
+            //player.SaveCurrentState();
         }
     }
 
     void Update()
     {
-        if (hasSniper && Input.GetKeyDown(KeyCode.Alpha6))
-        {
-           
-            
-        }
+       
     }
 }

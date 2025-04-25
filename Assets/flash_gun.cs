@@ -41,6 +41,6 @@ public class flash_gun : MonoBehaviour
         }
 
         pointLight.intensity = 0f;
-        Destroy(this.gameObject); ;
+        Destroy(this.transform.parent.gameObject);
     }
 }

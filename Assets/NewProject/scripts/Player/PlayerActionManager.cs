@@ -47,6 +47,11 @@ public class PlayerActionManager : MonoBehaviour
     public bool turnAdded = false;
     public int turnsDone = 0;
 
+    private bool hasMoved = false;
+    private bool hasShotAction = false;
+    private bool hasHealed = false;
+
+
     public float costShoot = 0.4f;
 
     [SerializeField] private float walkSoundDelay;
@@ -59,9 +64,6 @@ public class PlayerActionManager : MonoBehaviour
     [SerializeField] public AudioClip[] shootClip;
     [SerializeField] AudioClip[] walkingClips;
 
-    private bool hasMoved = false;
-    private bool hasShotAction = false;
-    private bool hasHealed = false;
 
 
     public shootPlayer shootP;
@@ -77,56 +79,14 @@ public class PlayerActionManager : MonoBehaviour
     private void Start()
     {
         player = GetComponent<PlayerBase>();
-        if (player == null)
-        {
-            Debug.LogError("PlayerBase component not found on the GameObject.");
-        }
-        else
-        {
-            Debug.Log("PlayerBase component found and assigned.");
-        }
+       
 
         playerData = player.playerData; // Load playerData from PlayerBase
 
-        InitializeActions();
         combatManager = FindAnyObjectByType<CombatManager>();
     }
 
-    private void InitializeActions()
-    {
-        foreach (var actionData in playerData.availableActions)
-        {
-            switch (actionData.actionType)
-            {
-                case PlayerBase.ActionType.ACTIVE:
-                    if (actionData.action == PlayerBase.ActionEnum.MOVE)
-                    {
-                        activeActions.Add(actionData.action, new MoveAction());
-                    }
-                    else if (actionData.action == PlayerBase.ActionEnum.SHOOT)
-                    {
-                        if (!activeActions.ContainsKey(actionData.action))
-                        {
-                            activeActions.Add(actionData.action, new ShootAction());
-                        }
-                    }
-                    else if (actionData.action == PlayerBase.ActionEnum.MELEE)
-                    {
-                        activeActions.Add(actionData.action, new MeleeAction());
-                    }
-                    break;
-                case PlayerBase.ActionType.PASSIVE:
-                    if (actionData.action == PlayerBase.ActionEnum.HEAL)
-                    {
-                        passiveActions.Add(actionData.action, new HealAction());
-                    }
-                    break;
-                case PlayerBase.ActionType.SINGLE_USE:
-                    break;
-                    // Add other cases if you have SingleUse or other action types
-            }
-        }
-    }
+  
     private void Update()
     {
         if (SceneManager.GetActiveScene().name != "ShopScene")
@@ -135,29 +95,9 @@ public class PlayerActionManager : MonoBehaviour
         }
             
 
-        //if(Input.GetKeyDown(KeyCode.C))
-        //{
-        //    movePlayer.finish();
-        //    ShootFinish();
-        //}
+     
     }
-/*
-    private void ShootFinish()
-    {
-        foreach (var line in visualPlayerAfterShoot)
-        {
-            Destroy(line.gameObject);
-        }
-        visualPlayerAfterShoot.Clear();
-        lineRenderer.enabled = false;
-        shootpoints.Clear();
-        curvePoints.Clear();
-        //foreach (var line in algo)
-        //{
-        //    Destroy(line.gameObject);
-        //}
 
-    }*/
 
     public void UpdateAction(Vector3 newPos, float t)
     {

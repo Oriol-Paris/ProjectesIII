@@ -197,7 +197,7 @@ public class PlayerBase : MonoBehaviour
         else
         {
             activeAction = Action.nothing;
-            Debug.Log("Doing nothing");
+            //Debug.Log("Doing nothing");
         }
 
         // Check for death condition
@@ -415,6 +415,7 @@ public class PlayerBase : MonoBehaviour
     public void SetRange(float newRange) { range = newRange; }
     public void SetInAction(bool newVal) { isInAction = newVal; }
     public void AddNewAction(Action action) { availableActions.Add(action); }
+    public void DeleteAction() { availableActions.RemoveAt(availableActions.Count-1); }
 
     #endregion
 

@@ -10,13 +10,22 @@ public class OneTimeShot : MonoBehaviour
         {
             BulletCollection collection = bulletPool.GetComponent<BulletCollection>();
             ControlWapons controlWapons = player.GetComponent<ControlWapons>();
+            PlayerBase playerBase = player.GetComponent<PlayerBase>();
+
             if (collection != null && collection.prefabs.Count > 0)
             {
                
                 collection.prefabs.RemoveAt(collection.prefabs.Count - 1);
                 controlWapons.objetoObtenido = null;
                 controlWapons.hasSniper = false;
-                
+
+                playerBase.availableActions.RemoveAll(action =>
+                   action.m_style != null &&
+                   action.m_style.bulletType == BulletType.SNIPER
+               );
+
+                playerBase.DeleteAction();
+
             }
         }
     }

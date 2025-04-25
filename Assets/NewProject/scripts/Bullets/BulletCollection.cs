@@ -5,7 +5,9 @@ using UnityEngine;
 public class BulletCollection : MonoBehaviour
 {
     [SerializeField] private BulletType prefabOrderReference;
+
     [SerializeField] public List<GameObject> prefabs = new List<GameObject>();
+
     [SerializeField] public int numOfBulletTypes;
 
     [SerializeField] public PlayerData playerData;
