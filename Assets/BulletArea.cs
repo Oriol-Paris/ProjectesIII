@@ -12,6 +12,7 @@ public class BulletArea : MonoBehaviour, IBulletBehavior
 
     [SerializeField] float shootCShakeTime;
     [SerializeField] float shootCShakeRange;
+    public GameObject flash;
     void Start()
     {
         if (fromPlayer)
@@ -27,6 +28,7 @@ public class BulletArea : MonoBehaviour, IBulletBehavior
         _camera = FindAnyObjectByType<cameraManager>();
         StartCoroutine(_camera.Shake(shootCShakeTime, shootCShakeRange));
         transform.position = new Vector3(transform.position.x, 0, transform.position.z);
+        Instantiate(flash, this.transform.position + (shootDirection.normalized * 0.5f), Quaternion.LookRotation(shootDirection));
     }
     public void setShootDirection(Vector3 _shootDirection, bool itsFromPlayer)
     {

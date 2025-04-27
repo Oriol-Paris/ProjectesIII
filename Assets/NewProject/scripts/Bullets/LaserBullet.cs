@@ -7,11 +7,14 @@ public class LaserBullet : MonoBehaviour, IBulletBehavior
     [SerializeField] private float maxDistance = 100f;
     [SerializeField] private LayerMask hitLayers;
     [SerializeField] private GameObject hitboxVisual; // Un prefab tipo cubo con scale (1,1,1)
-
+    public GameObject flash;
     private Vector3 shootDirection;
 
    
-   
+   void Start()
+    {
+        Instantiate(flash, this.transform.position + (shootDirection.normalized * 0.5f), Quaternion.LookRotation(shootDirection));
+    }
    
 
     private void CreateLaserHitbox(Vector3 start, Vector3 end)

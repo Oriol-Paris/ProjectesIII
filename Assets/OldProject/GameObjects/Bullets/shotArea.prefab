@@ -4984,3 +4984,4 @@ MonoBehaviour:
   shootDirection: {x: 0, y: 0, z: 0}
   shootCShakeTime: 0.1
   shootCShakeRange: 0.2
+  flash: {fileID: 8955470750186880802, guid: 14905379dd15d7b409531ae67aaf51d1, type: 3}
