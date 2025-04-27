@@ -6018,13 +6018,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79c3a1292f4b11d459d7dce0a77e0cb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  head: {fileID: 1043207098}
-  lineRenderer: {fileID: 581377210}
-  segmentCount: 20
-  segmentDistance: 0.75
-  maxBendFactor: 1
-  minBendFactor: 0.1
-  tail: {fileID: 1087057460}
 --- !u!120 &581377210
 LineRenderer:
   serializedVersion: 2
@@ -22766,6 +22759,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2865400945673019646, guid: 135a33f42603095498418b3997897017, type: 3}
+      propertyPath: 'prefabs.Array.data[1]'
+      value: 
+      objectReference: {fileID: 1680710797403148065, guid: 9dcd6820efc4c4b488ecff9dbb33f555, type: 3}
+    - target: {fileID: 2865400945673019646, guid: 135a33f42603095498418b3997897017, type: 3}
+      propertyPath: 'prefabs.Array.data[2]'
+      value: 
+      objectReference: {fileID: 897511901853533497, guid: 8521142c8a8726c4a955b9f20f04800f, type: 3}
     - target: {fileID: 6993864842785556067, guid: 135a33f42603095498418b3997897017, type: 3}
       propertyPath: m_Name
       value: Player

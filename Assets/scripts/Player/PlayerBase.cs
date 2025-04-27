@@ -35,7 +35,7 @@ public class PlayerBase : MonoBehaviour
 
     #region VARIABLES
 
-    private cameraManager _camera;
+    [SerializeField] private cameraManager _camera;
     private float cameraPostProcesLength = 0.5f;
     private float cameraPostProcesIntensity = 0.3f;
     public BulletStyle activeStyle { get; private set; }
@@ -46,14 +46,14 @@ public class PlayerBase : MonoBehaviour
     public float maxActionPoints;
     public float range;
     public float exp = 0;
-    private OG_MovementByMouse checkMovement;
+    
     public PlayerActionManager turnsDone;
 
     public Action activeAction { get; private set; }
     public List<Action> availableActions = new List<Action>();
 
     private float hitFeedBackTime = 0.3f;
-
+    [SerializeField] TimeSecuence isExecuting;
     private bool isInAction;
     private bool isAlive;
     public bool victory;
@@ -114,8 +114,8 @@ public class PlayerBase : MonoBehaviour
 
         isInAction = false;
         turnsDone = GetComponent<PlayerActionManager>();
-        checkMovement = GetComponent<OG_MovementByMouse>();
-        _camera = FindAnyObjectByType<cameraManager>();
+        
+        
 
         // Only save level start state if this is a new level
         if (playerData.lastLevel != SceneManager.GetActiveScene().name)
@@ -173,7 +173,7 @@ public class PlayerBase : MonoBehaviour
     {
         if (!victory && isAlive && !defeat)
         {
-            if (!checkMovement.GetIsMoving())
+            if (!isExecuting.isExecuting)
             {
                 foreach (Action action in availableActions)
                 {

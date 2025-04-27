@@ -21,7 +21,7 @@ public class ShootAction : ActiveAction
             return;
         }
 
-        OG_MovementByMouse movementScript = player.GetComponent<OG_MovementByMouse>();
+       
 
         Vector3 direction = (targetPosition - player.transform.position).normalized;
 
@@ -44,7 +44,7 @@ public class ShootAction : ActiveAction
                 if (shotgunBullet != null)
                 {
                     shotgunBullet.Shoot(direction, offset);
-                    movementScript.RegisterBullet(shotgunBullet);
+                    //movementScript.RegisterBullet(shotgunBullet);
                     bulletCount++;
                 }
                 else
@@ -69,12 +69,12 @@ public class ShootAction : ActiveAction
                 {
                     
                     bullet.Shoot(direction);
-                    movementScript.RegisterBullet(bullet);
+                    
                 }
                 else if (bullet is LaserBullet)
                 {
                     bullet.Shoot(direction);
-                    movementScript.RegisterBullet(bullet);
+                    
                 }
                 else
                 {
@@ -82,9 +82,7 @@ public class ShootAction : ActiveAction
                 }
                 if (bullet.isHit)
                 {
-                    movementScript.positionDesired = movementScript.transform.position;
-                    movementScript.t = 1;
-                    movementScript.isMoving = false;
+                    
                 }
             }
             else

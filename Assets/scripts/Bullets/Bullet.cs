@@ -15,16 +15,12 @@ public abstract class Bullet : MonoBehaviour
     protected Vector3 originalDirection;
     protected Vector3 originalTargetPosition;
 
-    private OG_MovementByMouse movementScript;
+    
 
     private void Start()
     {
         playerData = FindAnyObjectByType<PlayerData>();
-        movementScript = FindAnyObjectByType<OG_MovementByMouse>();
-        if (movementScript != null)
-        {
-            movementScript.RegisterBullet(this);
-        }
+       
         
         
     }
@@ -63,10 +59,7 @@ public abstract class Bullet : MonoBehaviour
 
     protected void DestroyBullet()
     {
-        if (movementScript != null)
-        {
-            movementScript.UnregisterBullet(this);
-        }
+        
        // Destroy(gameObject);
     }
 

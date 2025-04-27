@@ -14,7 +14,7 @@ public class MovPlayer : MonoBehaviour
 
     public float t;
     
-    [SerializeField] private float velocity = 0.5f;
+    [SerializeField] public float velocity = 0.5f;
     [SerializeField] private float tiemp = 0f;
    
    
@@ -26,16 +26,6 @@ public class MovPlayer : MonoBehaviour
     public bool placeSelected;
     public bool isMoving;
     public bool isDragging;
-
-
-    
-
-  
-
-   
-
-    
-
 
     void Start(){
         

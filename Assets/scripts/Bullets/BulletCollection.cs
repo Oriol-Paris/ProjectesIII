@@ -7,8 +7,7 @@ public class BulletCollection : MonoBehaviour
     [SerializeField] private BulletType prefabOrderReference;
     [SerializeField] public List<GameObject> prefabs = new List<GameObject>();
     [SerializeField] public int numOfBulletTypes;
-    GameObject bulletToInitialize;
-    BulletStyle bullet;
+
     [SerializeField] public PlayerData playerData;
 
     [SerializeField] public List<BulletStyle> bulletCollection = new List<BulletStyle>();
@@ -28,9 +27,7 @@ public class BulletCollection : MonoBehaviour
         {
             if (prefabs[i] != null)
             {
-
-                bulletToInitialize.AddComponent<BulletStyle>();
-                bullet  = bulletToInitialize.GetComponent<BulletStyle>();
+                BulletStyle bullet = new BulletStyle();
                 bullet.Initiazlize((BulletType)i, prefabs[i]);
 
                 bulletCollection.Add(bullet);

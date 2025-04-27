@@ -167,13 +167,13 @@ public class PlayerActionManager : MonoBehaviour
 
         var currentAction = player.GetAction();
 
-        if (currentAction.m_action == PlayerBase.ActionEnum.MOVE && (!player.GetComponent<OG_MovementByMouse>().isMoving || isMoving))
+        if (currentAction.m_action == PlayerBase.ActionEnum.MOVE && (!player.GetComponent<TimeSecuence>().isExecuting || isMoving))
         {
             isMoving = true;
             movePlayer.PreStartMov();
         }
 
-        if (currentAction.m_action == PlayerBase.ActionEnum.SHOOT && (!player.GetComponent<OG_MovementByMouse>().isMoving || isShooting))
+        if (currentAction.m_action == PlayerBase.ActionEnum.SHOOT && (!player.GetComponent<TimeSecuence>().isExecuting || isShooting))
         {
 
             //Debug.Log("aaaaaaaaaaaa");
@@ -186,7 +186,7 @@ public class PlayerActionManager : MonoBehaviour
 
         }
 
-        if (currentAction.m_action == PlayerBase.ActionEnum.MELEE && (!player.GetComponent<OG_MovementByMouse>().GetIsMoving() || isMoving))
+        if (currentAction.m_action == PlayerBase.ActionEnum.MELEE && (!player.GetComponent<TimeSecuence>().isExecuting || isMoving))
         {
             if (currentAction.m_cost <= playerData.actionPoints)
             {
