@@ -1,8 +1,6 @@
 using UnityEngine.UI;
 using UnityEngine;
-using static PlayerData;
 using TMPro;
-using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 using System.Collections;
 
@@ -10,11 +8,10 @@ using System.Collections;
 public class TopBarManager : MonoBehaviour
 {
     public GridLayoutGroup topPanel;
-    public GridLayoutGroup bottomPanel;
+    public List<GameObject> actions;
 
     public GameObject topActionPrefab;
     public GameObject bottomActionPrefab;
-    public TextMeshProUGUI actionKeyIndex;
     private PlayerBase playerData;
     private List<GameObject> actionSlots = new List<GameObject>();
     private List<PlayerBase.Action> actionsDisplayed = new List<PlayerBase.Action>();
@@ -27,11 +24,6 @@ public class TopBarManager : MonoBehaviour
 
     void Start()
     {
-        actionKeyIndex = bottomActionPrefab.GetComponentInChildren<TextMeshProUGUI>();
-        if(actionKeyIndex != null)
-        {
-            Debug.Log("Found and assigned");
-        }
         playerData = FindAnyObjectByType<PlayerBase>();
 
         if (playerData == null)
@@ -106,31 +98,28 @@ public class TopBarManager : MonoBehaviour
             return;
         }
 
+        foreach(var action in actions)
+        {
+            action.transform.Find("Image").gameObject.SetActive(false);
+            action.transform.Find("Key").gameObject.SetActive(false);
+        }
+
         var availableActions = playerData.availableActions;
         int actionCount = availableActions.Count;
-        Vector2 slotSize = CalculateSlotSize(actionCount);
 
         // Update existing slots or create new ones if necessary
         for (int i = 0; i < actionCount; i++)
         {
-            GameObject slot;
-            if (i < actionSlots.Count)
-            {
-                // Reuse existing slot
-                slot = actionSlots[i];
-            }
-            else
-            {
-                // Create new slot
-                slot = Instantiate(bottomActionPrefab, bottomPanel.transform);
-                actionSlots.Add(slot);
-            }
+            actions[i].transform.Find("Image").gameObject.SetActive(true);
+            actions[i].transform.Find("Key").gameObject.SetActive(true);
 
-            RectTransform slotRectTransform = slot.GetComponent<RectTransform>();
-            slotRectTransform.sizeDelta = slotSize;
+            Image actionImage = actions[i].transform.Find("Image").GetComponent<Image>();
+            Image actionBorder = actions[i].transform.Find("Border").GetComponent<Image>();
 
             var action = availableActions[i];
             PlayerBase player = FindAnyObjectByType<PlayerBase>();
+
+            actionImage.overrideSprite = GetActionImage(action);
 
             // Highlight the selected action
             if (action.m_action == player.GetAction().m_action)
@@ -140,43 +129,26 @@ public class TopBarManager : MonoBehaviour
                 {
                     if (action.m_style.bulletType == player.GetAction().m_style.bulletType)
                     {
-                        slot.GetComponent<Image>().color = Color.yellow;
-                        
+                        actionBorder.color = Color.yellow;
                     }
                     else
                     {
-                        slot.GetComponent<Image>().color = Color.white;
+                        actionBorder.color = Color.white;
                     }
                 }
                 else
                 {
-                    slot.GetComponent<Image>().color = Color.yellow;
-                    
-
+                    actionBorder.color = Color.yellow;
                 }
             }
             else
             {
-                slot.GetComponent<Image>().color = Color.white;
+                actionBorder.color = Color.white;
             }
 
             // Update slot visuals
-            slot.transform.Find("Action Image").GetComponent<Image>().overrideSprite = GetActionImage(action);
-            slot.transform.Find("Action Image").GetComponent<Image>().color = GetActionColor(action.m_action);
-
-            // Set the action key index
-            TextMeshProUGUI actionKeyIndexText = slot.GetComponentInChildren<TextMeshProUGUI>();
-            if (actionKeyIndexText != null)
-            {
-                actionKeyIndexText.text = (i + 1).ToString();
-            }
-        }
-
-        // Remove extra slots if action count has decreased
-        for (int i = actionSlots.Count - 1; i >= actionCount; i--)
-        {
-            Destroy(actionSlots[i]);
-            actionSlots.RemoveAt(i);
+            actionImage.overrideSprite = GetActionImage(action);
+            actionImage.color = GetActionColor(action.m_action);
         }
 
         // Update the displayed actions list
@@ -194,14 +166,6 @@ public class TopBarManager : MonoBehaviour
     public void EraseLastAction()
     {
         Destroy(topPanel.transform.GetChild(topPanel.transform.childCount - 1).gameObject);
-    }
-
-    Vector2 CalculateSlotSize(int actionCount)
-    {
-        float hotbarWidth = bottomPanel.GetComponent<RectTransform>().rect.width;
-        float slotWidth = hotbarWidth / actionCount;
-        float slotHeight = bottomPanel.GetComponent<RectTransform>().rect.height;
-        return new Vector2(slotWidth, slotHeight);
     }
 
     private bool HaveActionsChanged()
@@ -305,8 +269,6 @@ public class TopBarManager : MonoBehaviour
 
         return Color.white;
     }
-
-     
 
     private IEnumerator ResetUpgradeAnimation()
     {
