@@ -1,0 +1,12 @@
+fileFormatVersion: 2
+<<<<<<< HEAD:Assets/OldProject/Settings/Renderer2D.asset.meta
+guid: 36d5784729840d444bbcc115ebf697ef
+=======
+guid: 5d2ce5abcc76b8a4abedb176f376864a
+>>>>>>> feature/CodeReview:Assets/Settings/DefaultVolumeProfile 1.asset.meta
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 11400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
