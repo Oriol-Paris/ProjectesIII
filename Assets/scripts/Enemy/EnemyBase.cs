@@ -14,9 +14,9 @@ public class EnemyBase : MonoBehaviour
     [SerializeField] SpriteRenderer spriteRenderer;
     [SerializeField] Collider enemyCollider;
     [SerializeField] Rigidbody rb2d;
-
+    [SerializeField] Animator animator;
     [SerializeField] GameObject bloodSplash;
-
+    [SerializeField] dropWapon dropWeapon;
 
     private UnityEngine.Vector3 originalPosition;
     private bool isMoving;
@@ -46,17 +46,7 @@ public class EnemyBase : MonoBehaviour
     void Update()
     {
 
-        if (health <= 0)
-        {
-            this.GetComponent<Animator>().SetBool("isDead", true);
-            isAlive = false;
-            spriteRenderer.color = Color.grey;
-            GetComponent<Collider>().enabled = false;
-            rb2d.useGravity = false;
-            rb2d.detectCollisions = false;
-            GetComponent<dropWapon>().enabled = true;
-
-        }
+        
 
     }
 
@@ -73,9 +63,20 @@ public class EnemyBase : MonoBehaviour
         SoundEffectsManager.instance.PlaySoundFXClip(damageClips, transform, 1f);
         health -= val;
         health = Mathf.Max(health, 0); // Ensure health doesn't go below 0
-        
-       
-        
+        if (health <= 0)
+        {
+            animator.SetBool("isDead", true);
+            dropWeapon.DropWeapon();
+            isAlive = false;
+            spriteRenderer.color = Color.grey;
+            GetComponent<Collider>().enabled = false;
+            rb2d.useGravity = false;
+            rb2d.detectCollisions = false;
+            GetComponent<dropWapon>().enabled = true;
+
+        }
+
+
     }
 
     IEnumerator whitecolor()

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UIElements;
 
 public class EnemyMovementShooter : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class EnemyMovementShooter : MonoBehaviour
     [SerializeField] private float range;
     [SerializeField] private float minDistance = 2f;
     [SerializeField] private AudioClip[] shootingClips;
+    [SerializeField] private Animator animator;
     public Animator fx;
     private bool onCooldown = false;
     private bool isPerformingAction = false;
@@ -87,7 +89,7 @@ public class EnemyMovementShooter : MonoBehaviour
 
             case TurnActions.SHOOT:
                 agent.isStopped = true;
-                GetComponent<Animator>().SetBool("isMoving", false);
+                animator.SetBool("isMoving", false);
                 StartCoroutine(AttackCoroutine());
                 break;
 
@@ -201,22 +203,12 @@ public class EnemyMovementShooter : MonoBehaviour
         {
             Debug.Log("BANG");
             GameObject bullet = Instantiate(bulletShot, transform.position, Quaternion.identity);
-            if (bullet.GetComponent<multiShoot>() != null)
-            {
-                bullet.GetComponent<multiShoot>().setShootDirection((closestPlayerPos - transform.position).normalized, false);
-            }
-            else if (bullet.GetComponent<tripleShoot>() != null)
-            {
-                bullet.GetComponent<tripleShoot>().setShootDirection((closestPlayerPos - transform.position).normalized, true);
-            }
-            else if (bullet.GetComponent<DestroyBullet>() != null)
-            {
-                bullet.GetComponent<DestroyBullet>().setShootDirection((closestPlayerPos - transform.position).normalized, true);
-            }
+            bullet.GetComponent<multiShoot>().setShootDirection((closestPlayerPos - transform.position).normalized, false);
+            
 
             hasShot = true; // Mark that it has shot this turn
 
-            //SoundEffectsManager.instance.PlaySoundFXClip(shootingClips, transform, 1f);
+            SoundEffectsManager.instance.PlaySoundFXClip(shootingClips, transform, 1f);
 
             // Register the bullet with the closest player's movement script
             //closestPlayer.RegisterBullet(bulletScript);
