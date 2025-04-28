@@ -40,7 +40,7 @@ public class HitLaser : MonoBehaviour
 
 
 
-        if (time >= 7f)
+        if (time >= 0.2f)
         {
 
             Destroy(gameObject);
@@ -59,14 +59,14 @@ public class HitLaser : MonoBehaviour
             {
                 EnemyBase hit = collision.gameObject.GetComponent<EnemyBase>();
                 hit.Damage(damage, collision.gameObject);
-                Destroy(gameObject);
+                Destroy(gameObject,0.2f);
             }
 
             if (!fromPlayer && collision.gameObject.GetComponent<PlayerBase>() != null)
             {
                 PlayerBase hit = collision.gameObject.GetComponent<PlayerBase>();
                 hit.Damage(damage, collision.gameObject);
-                Destroy(gameObject);
+                Destroy(gameObject,0.2f);
             }
         }
     }

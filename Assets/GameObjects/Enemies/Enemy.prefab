@@ -132,7 +132,7 @@ MonoBehaviour:
   oldRange: 4
   shootingRange: 5
   spriteRenderer: {fileID: 7086546256689271642}
-  collider: {fileID: 535729429190450929}
+  enemyCollider: {fileID: 0}
   rb2d: {fileID: 1201100579626055862}
   bloodSplash: {fileID: 7700263313313388815, guid: 34d4d40cf4e3e3045972def69b9f3dc4, type: 3}
   isAlive: 1

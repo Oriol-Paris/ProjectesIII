@@ -202,7 +202,7 @@ MonoBehaviour:
   oldRange: 5
   shootingRange: 10
   spriteRenderer: {fileID: 7086546256689271642}
-  collider: {fileID: 285907150525029808}
+  enemyCollider: {fileID: 0}
   rb2d: {fileID: 8094846091851707121}
   bloodSplash: {fileID: 7700263313313388815, guid: 34d4d40cf4e3e3045972def69b9f3dc4, type: 3}
   isAlive: 0
@@ -236,6 +236,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: fc8dae0e97caff040998967dcf1ff972, type: 3}
   fx: {fileID: 8189897864542917949}
   actionCooldown: 1
+  combatManager: {fileID: 0}
 --- !u!95 &6209296037174827964
 Animator:
   serializedVersion: 7
