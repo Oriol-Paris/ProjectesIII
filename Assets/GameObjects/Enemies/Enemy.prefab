@@ -132,9 +132,11 @@ MonoBehaviour:
   oldRange: 4
   shootingRange: 5
   spriteRenderer: {fileID: 7086546256689271642}
-  collider: {fileID: 535729429190450929}
+  enemyCollider: {fileID: 0}
   rb2d: {fileID: 1201100579626055862}
+  animator: {fileID: 3406163879126349490}
   bloodSplash: {fileID: 7700263313313388815, guid: 34d4d40cf4e3e3045972def69b9f3dc4, type: 3}
+  dropWeapon: {fileID: 6478771320280442240}
   isAlive: 1
   damageClips:
   - {fileID: 8300000, guid: 94e3b24d75a0cda4980ec5134a8e6da9, type: 3}
@@ -239,13 +241,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2547532622408290678}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f01212257cd44aa47874d3748e5aca8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   armaADropear: {fileID: 2930567190566246003, guid: 500352edff27d454c8239d34ca421ebc, type: 3}
-  probabilidadDrop: 63
+  probabilidadDrop: 65
 --- !u!1 &3148137900309033181
 GameObject:
   m_ObjectHideFlags: 0

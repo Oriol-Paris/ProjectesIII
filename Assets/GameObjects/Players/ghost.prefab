@@ -125,7 +125,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _actions: 
   _timeConsum: []
-  maxDistance: 20
   velocity: 2
   tiemp: 0
   t: 0
