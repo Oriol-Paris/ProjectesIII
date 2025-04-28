@@ -38,6 +38,7 @@ public class TitleScreenManager : MonoBehaviour
         File.Delete(playerDataPath);
         File.Delete(nodeMapPath);
 
+        playerData.InitializeAllData();
         playerData.LoadOriginalPlayer();
 
         SceneManager.LoadScene("Tutorial");
