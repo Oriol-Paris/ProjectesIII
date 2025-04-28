@@ -88,11 +88,11 @@ public class EnemyMovement : MonoBehaviour
         Debug.Log("Attacking");
         GetComponent<Animator>().SetTrigger("attack");
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.7f);
       // Tiempo de animación del ataque
         hitBox.enabled = true;
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
        // Duración del ataque
         hitBox.enabled = false;
 

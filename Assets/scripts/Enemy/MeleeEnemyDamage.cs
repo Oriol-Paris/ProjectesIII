@@ -7,11 +7,12 @@ public class MeleeEnemyDamage : MonoBehaviour
 
     public void OnEnable()
     {
-        hasDealtDamage = false; // Reset the flag when the collider is enabled
+        hasDealtDamage = false; 
     }
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log("PIUMA");
         if(this.GetComponentInParent<EnemyBase>().isAlive) {
             if (!hasDealtDamage && other.gameObject.CompareTag("Player"))
             {
