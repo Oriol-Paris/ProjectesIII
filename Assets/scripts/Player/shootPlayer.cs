@@ -11,8 +11,36 @@ public class shootPlayer : MonoBehaviour
     private int internalIterator = 0;
     public List<GameObject> bulletPrefab;
 
+    public bool oneTime = true;
 
 
+    public void preEspecialShoot()
+    {
+        if (!timeSecuence.notacction)
+        {
+            controlLiniarRender.Disable(false);
+            if (!Input.GetMouseButton(0))
+            {
+
+
+                controlLiniarRender.ControlLiniarRenderer();
+                controlLiniarRender.UpdateLineRendererr();
+            }
+            if (Input.GetMouseButtonUp(0) && oneTime == true)
+            {
+
+                controlListMovment.AddMovement(controlLiniarRender, 1.0f, 1.0f, PlayerBase.ActionEnum.ESPECIALSHOOT);
+                bulletPrefab.Add(GetComponent<PlayerBase>().GetAction().m_style.prefab);
+                oneTime = false;
+
+
+            }
+        }
+        else
+        {
+            controlLiniarRender.Disable(true);
+        }
+    }
 
 
     public void preShoot()

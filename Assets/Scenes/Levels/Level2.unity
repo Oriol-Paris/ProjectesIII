@@ -24623,10 +24623,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy
       objectReference: {fileID: 0}
-    - target: {fileID: 3400037044067970028, guid: 40da685f188bc2e4bb1c0608ce87ae0a, type: 3}
-      propertyPath: health
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4733029159631704140, guid: 40da685f188bc2e4bb1c0608ce87ae0a, type: 3}
       propertyPath: Player
       value: 
@@ -24671,9 +24667,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7931825162647696330, guid: 40da685f188bc2e4bb1c0608ce87ae0a, type: 3}
-      propertyPath: health
-      value: 1
+    - target: {fileID: 6478771320280442240, guid: 40da685f188bc2e4bb1c0608ce87ae0a, type: 3}
+      propertyPath: armaADropear
+      value: 
+      objectReference: {fileID: 4818474983771764526, guid: 047b0e437f94dd14a8cb7513527bd571, type: 3}
+    - target: {fileID: 6478771320280442240, guid: 40da685f188bc2e4bb1c0608ce87ae0a, type: 3}
+      propertyPath: probabilidadDrop
+      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -43,6 +43,7 @@ public class PlayerActionManager : MonoBehaviour
 
     public bool isMoving = true;
     public bool isShooting = true;
+  
     public bool isHealing = true; // New flag for healing
     public bool turnAdded = false;
     public int turnsDone = 0;
@@ -116,14 +117,22 @@ public class PlayerActionManager : MonoBehaviour
 
         if (currentAction.m_action == PlayerBase.ActionEnum.SHOOT && (!player.GetComponent<TimeSecuence>().isExecuting || isShooting))
         {
-
-            //Debug.Log("aaaaaaaaaaaa");
+   
             isShooting = true;
-            hasShot = true; // Set the flag to indicate a shot has been fired
+            hasShot = true; 
             isMoving = false;
             shootP.preShoot();
-            //StartCoroutine(AttackCoroutine(PlayerBase.ActionEnum.SHOOT, newPos));
 
+        }
+        if (currentAction.m_action == PlayerBase.ActionEnum.ESPECIALSHOOT )
+        {
+
+            isShooting = true;
+            hasShot = true;
+            isMoving = false;
+           
+            shootP.preEspecialShoot();
+         
 
         }
 

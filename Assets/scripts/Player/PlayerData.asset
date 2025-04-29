@@ -15,16 +15,16 @@ MonoBehaviour:
   originalPlayer: {fileID: 0}
   playerAtStartOfLevel: {fileID: 0}
   health: 1
-  maxHealth: 6
-  actionPoints: -32
+  maxHealth: 5
+  actionPoints: -21
   maxActionPoints: 3
   maxTime: 3
-  lastLevel: Tutorial
-  levelCompleted: 0
+  lastLevel: Level2
+  levelCompleted: 1
   timesHealed: 0
   timesIncreasedMaxHP: 0
   moveRange: 0
-  exp: 605
+  exp: 238935
   isAlive: 1
   victory: 0
   healAmount: 1
@@ -54,7 +54,7 @@ MonoBehaviour:
     action: 1
     key: 51
     style: {fileID: 0}
-    cost: 6
+    cost: 2
     bulletType: 2
   - actionType: 0
     action: 1
