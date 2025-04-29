@@ -174,7 +174,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 10
-  m_Sprite: {fileID: -2113100340588763545, guid: ecd7ba7dae77d13458e7faa2d5b58ef9, type: 3}
+  m_Sprite: {fileID: 9041428293049349298, guid: 28fb283065f86b4499b690939d6aa22e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -197,8 +197,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ff018788fa94464086a1c065bb491b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 1
-  range: 10
+  health: 3
+  range: 7
   oldRange: 5
   shootingRange: 10
   spriteRenderer: {fileID: 7086546256689271642}
@@ -228,9 +228,9 @@ MonoBehaviour:
   players: []
   closestPlayer: {fileID: 0}
   enemyStats: {fileID: 7931825162647696330}
-  bulletShot: {fileID: 4841340973275302747, guid: a317dacd44aa3d64da68bf5295072605, type: 3}
+  bulletShot: {fileID: 1680710797403148065, guid: 9dcd6820efc4c4b488ecff9dbb33f555, type: 3}
   velocity: 2
-  range: 10
+  range: 5
   minDistance: 2
   shootingClips:
   - {fileID: 8300000, guid: 3fdff599a87b80a4dbdcbe89e60062ce, type: 3}
@@ -284,7 +284,7 @@ Rigidbody:
     m_Bits: 64
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 126
