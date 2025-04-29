@@ -79,7 +79,7 @@ public class DestroyBullet : MonoBehaviour, IBulletBehavior
     {
         if (collision != null)
         {
-            if (collision.gameObject.CompareTag("envairoment"))
+            if (collision.gameObject.CompareTag("envairoment")|| collision.gameObject.CompareTag("Explosive"))
             {
                 Destroy(gameObject);
             }
