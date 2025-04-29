@@ -50,7 +50,7 @@ public class TimeSecuence : MonoBehaviour
 
     void Update()
     {
-        
+        Time.timeScale = 1f;
 
         if (actualTime > 0)
         {

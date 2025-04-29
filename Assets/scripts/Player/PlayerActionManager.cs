@@ -268,7 +268,7 @@ public class PlayerActionManager : MonoBehaviour
 
     public void WalkingSound()
     {
-        Debug.Log("PLAYING WALK");
+        
         if (actualWalkSoundDelay < 0)
         {
             SoundEffectsManager.instance.PlaySoundFXClip(walkingClips, transform, 1f);

@@ -729,6 +729,7 @@ MonoBehaviour:
   timeSecuence: {fileID: 7189739028029077113}
   fx: {fileID: 6904931311285059048}
   bulletPrefab: []
+  oneTime: 1
 --- !u!114 &4476756505495577889
 MonoBehaviour:
   m_ObjectHideFlags: 0
