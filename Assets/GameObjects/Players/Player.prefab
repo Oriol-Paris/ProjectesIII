@@ -509,6 +509,7 @@ GameObject:
   - component: {fileID: 2554926273211331863}
   - component: {fileID: 4528686633142332479}
   - component: {fileID: 3987113414040899463}
+  - component: {fileID: 1688115950272225785}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -896,6 +897,23 @@ MonoBehaviour:
   hasSniper: 0
   objetoObtenido: {fileID: 0}
   bulletCollection: {fileID: 2865400945673019646}
+--- !u!114 &1688115950272225785
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6993864842785556067}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cbcef73722212a645a5c75d51e55a055, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wallMaterial: {fileID: 2100000, guid: e400f287326250f479e65badc02e0bea, type: 2}
+  gameCamera: {fileID: 0}
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 1
 --- !u!1 &7744015455595018832
 GameObject:
   m_ObjectHideFlags: 0

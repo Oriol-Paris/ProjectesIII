@@ -228,6 +228,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7635826562936255635, guid: 295e08282e42a7c4f8f9973c73689dfc, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: e400f287326250f479e65badc02e0bea, type: 2}
     - target: {fileID: 919132149155446097, guid: 295e08282e42a7c4f8f9973c73689dfc, type: 3}
       propertyPath: m_Name
       value: wall_doorway
@@ -424,6 +428,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7635826562936255635, guid: 275d339cfa9123b4985f631a243dc84f, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: e400f287326250f479e65badc02e0bea, type: 2}
     - target: {fileID: 919132149155446097, guid: 275d339cfa9123b4985f631a243dc84f, type: 3}
       propertyPath: m_Name
       value: wall_cracked
@@ -931,6 +939,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: ac8ce37efbf66de4eba5bb52aa49f2cc, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: e400f287326250f479e65badc02e0bea, type: 2}
     - target: {fileID: 919132149155446097, guid: ac8ce37efbf66de4eba5bb52aa49f2cc, type: 3}
       propertyPath: m_Name
       value: box_stacked
@@ -1411,6 +1423,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7635826562936255635, guid: 275d339cfa9123b4985f631a243dc84f, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: e400f287326250f479e65badc02e0bea, type: 2}
     - target: {fileID: 919132149155446097, guid: 275d339cfa9123b4985f631a243dc84f, type: 3}
       propertyPath: m_Name
       value: wall_cracked
@@ -1668,6 +1684,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7635826562936255635, guid: 456216fdea988a848b7a7af873f7197d, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: e400f287326250f479e65badc02e0bea, type: 2}
     - target: {fileID: 919132149155446097, guid: 456216fdea988a848b7a7af873f7197d, type: 3}
       propertyPath: m_Name
       value: table_long_decorated_C
@@ -2008,6 +2028,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7635826562936255635, guid: 275d339cfa9123b4985f631a243dc84f, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: e400f287326250f479e65badc02e0bea, type: 2}
     - target: {fileID: 919132149155446097, guid: 275d339cfa9123b4985f631a243dc84f, type: 3}
       propertyPath: m_Name
       value: wall_cracked
@@ -2855,6 +2879,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7635826562936255635, guid: 0a45a7f085fbd59498e7e4c2758f9ef7, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: e400f287326250f479e65badc02e0bea, type: 2}
     - target: {fileID: 919132149155446097, guid: 0a45a7f085fbd59498e7e4c2758f9ef7, type: 3}
       propertyPath: m_Name
       value: table_long
@@ -3642,6 +3670,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7635826562936255635, guid: 0d0f5a9421c17464096fcf82789f1f92, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: e400f287326250f479e65badc02e0bea, type: 2}
     - target: {fileID: 919132149155446097, guid: 0d0f5a9421c17464096fcf82789f1f92, type: 3}
       propertyPath: m_Name
       value: wall
@@ -3703,6 +3735,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7635826562936255635, guid: 275d339cfa9123b4985f631a243dc84f, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: e400f287326250f479e65badc02e0bea, type: 2}
     - target: {fileID: 919132149155446097, guid: 275d339cfa9123b4985f631a243dc84f, type: 3}
       propertyPath: m_Name
       value: wall_cracked
@@ -12121,6 +12157,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 60139e9c33564d1468c204af67971c3e, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: e400f287326250f479e65badc02e0bea, type: 2}
     - target: {fileID: 919132149155446097, guid: 60139e9c33564d1468c204af67971c3e, type: 3}
       propertyPath: m_Name
       value: table_small_decorated_B
@@ -12268,6 +12308,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7635826562936255635, guid: 275d339cfa9123b4985f631a243dc84f, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: e400f287326250f479e65badc02e0bea, type: 2}
     - target: {fileID: 919132149155446097, guid: 275d339cfa9123b4985f631a243dc84f, type: 3}
       propertyPath: m_Name
       value: wall_cracked
@@ -12329,6 +12373,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: c51811f17b5eced4bb7c92e58abe22b0, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: e400f287326250f479e65badc02e0bea, type: 2}
     - target: {fileID: 919132149155446097, guid: c51811f17b5eced4bb7c92e58abe22b0, type: 3}
       propertyPath: m_Name
       value: table_small_decorated_A
@@ -12400,6 +12448,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7635826562936255635, guid: 295e08282e42a7c4f8f9973c73689dfc, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: e400f287326250f479e65badc02e0bea, type: 2}
     - target: {fileID: 919132149155446097, guid: 295e08282e42a7c4f8f9973c73689dfc, type: 3}
       propertyPath: m_Name
       value: wall_doorway
@@ -12575,6 +12627,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7635826562936255635, guid: 0d0f5a9421c17464096fcf82789f1f92, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: e400f287326250f479e65badc02e0bea, type: 2}
     - target: {fileID: 919132149155446097, guid: 0d0f5a9421c17464096fcf82789f1f92, type: 3}
       propertyPath: m_Name
       value: wall
@@ -13290,6 +13346,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7635826562936255635, guid: 275d339cfa9123b4985f631a243dc84f, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: e400f287326250f479e65badc02e0bea, type: 2}
     - target: {fileID: 919132149155446097, guid: 275d339cfa9123b4985f631a243dc84f, type: 3}
       propertyPath: m_Name
       value: wall_cracked
@@ -13863,7 +13923,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 6892232844440235036, guid: 6b0b5d612a61d334182779e8087b6c30, type: 3}
+  - {fileID: 2100000, guid: e400f287326250f479e65badc02e0bea, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -14218,6 +14278,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7635826562936255635, guid: e089f42909fca80459e0e5cf8ff85895, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: e400f287326250f479e65badc02e0bea, type: 2}
     - target: {fileID: 919132149155446097, guid: e089f42909fca80459e0e5cf8ff85895, type: 3}
       propertyPath: m_Name
       value: wall_pillar
@@ -14282,6 +14346,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7635826562936255635, guid: 0d0f5a9421c17464096fcf82789f1f92, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: e400f287326250f479e65badc02e0bea, type: 2}
     - target: {fileID: 919132149155446097, guid: 0d0f5a9421c17464096fcf82789f1f92, type: 3}
       propertyPath: m_Name
       value: wall
@@ -14587,7 +14655,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 6892232844440235036, guid: 6b0b5d612a61d334182779e8087b6c30, type: 3}
+  - {fileID: 2100000, guid: e400f287326250f479e65badc02e0bea, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -15026,6 +15094,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7635826562936255635, guid: 456216fdea988a848b7a7af873f7197d, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: e400f287326250f479e65badc02e0bea, type: 2}
     - target: {fileID: 919132149155446097, guid: 456216fdea988a848b7a7af873f7197d, type: 3}
       propertyPath: m_Name
       value: table_long_decorated_C
@@ -15092,6 +15164,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7635826562936255635, guid: 275d339cfa9123b4985f631a243dc84f, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: e400f287326250f479e65badc02e0bea, type: 2}
     - target: {fileID: 919132149155446097, guid: 275d339cfa9123b4985f631a243dc84f, type: 3}
       propertyPath: m_Name
       value: wall_cracked
@@ -15163,6 +15239,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7635826562936255635, guid: 0a45a7f085fbd59498e7e4c2758f9ef7, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: e400f287326250f479e65badc02e0bea, type: 2}
     - target: {fileID: 919132149155446097, guid: 0a45a7f085fbd59498e7e4c2758f9ef7, type: 3}
       propertyPath: m_Name
       value: table_long
@@ -15867,6 +15947,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7635826562936255635, guid: 0a45a7f085fbd59498e7e4c2758f9ef7, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: e400f287326250f479e65badc02e0bea, type: 2}
     - target: {fileID: 919132149155446097, guid: 0a45a7f085fbd59498e7e4c2758f9ef7, type: 3}
       propertyPath: m_Name
       value: table_long
@@ -16266,6 +16350,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7635826562936255635, guid: 01c316f7242c1934488fb66df3529772, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: e400f287326250f479e65badc02e0bea, type: 2}
     - target: {fileID: 919132149155446097, guid: 01c316f7242c1934488fb66df3529772, type: 3}
       propertyPath: m_Name
       value: wall_corner_small
@@ -16327,6 +16415,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7635826562936255635, guid: 0d0f5a9421c17464096fcf82789f1f92, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: e400f287326250f479e65badc02e0bea, type: 2}
     - target: {fileID: 919132149155446097, guid: 0d0f5a9421c17464096fcf82789f1f92, type: 3}
       propertyPath: m_Name
       value: wall
@@ -17377,6 +17469,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7635826562936255635, guid: 0d0f5a9421c17464096fcf82789f1f92, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: e400f287326250f479e65badc02e0bea, type: 2}
     - target: {fileID: 919132149155446097, guid: 0d0f5a9421c17464096fcf82789f1f92, type: 3}
       propertyPath: m_Name
       value: wall
@@ -17499,6 +17595,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7635826562936255635, guid: 6b0b5d612a61d334182779e8087b6c30, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: e400f287326250f479e65badc02e0bea, type: 2}
     - target: {fileID: 919132149155446097, guid: 6b0b5d612a61d334182779e8087b6c30, type: 3}
       propertyPath: m_Name
       value: pillar
@@ -17617,6 +17717,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7635826562936255635, guid: 0d0f5a9421c17464096fcf82789f1f92, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: e400f287326250f479e65badc02e0bea, type: 2}
     - target: {fileID: 919132149155446097, guid: 0d0f5a9421c17464096fcf82789f1f92, type: 3}
       propertyPath: m_Name
       value: wall
@@ -17891,6 +17995,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7635826562936255635, guid: 0d0f5a9421c17464096fcf82789f1f92, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: e400f287326250f479e65badc02e0bea, type: 2}
     - target: {fileID: 919132149155446097, guid: 0d0f5a9421c17464096fcf82789f1f92, type: 3}
       propertyPath: m_Name
       value: wall
@@ -18793,6 +18901,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7635826562936255635, guid: 168461bf4be2e1f45b6d23db2e17fcb2, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: e400f287326250f479e65badc02e0bea, type: 2}
     - target: {fileID: 919132149155446097, guid: 168461bf4be2e1f45b6d23db2e17fcb2, type: 3}
       propertyPath: m_Name
       value: table_long_broken
@@ -18928,6 +19040,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7635826562936255635, guid: 275d339cfa9123b4985f631a243dc84f, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: e400f287326250f479e65badc02e0bea, type: 2}
     - target: {fileID: 919132149155446097, guid: 275d339cfa9123b4985f631a243dc84f, type: 3}
       propertyPath: m_Name
       value: wall_cracked
@@ -19053,6 +19169,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7635826562936255635, guid: 0d0f5a9421c17464096fcf82789f1f92, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: e400f287326250f479e65badc02e0bea, type: 2}
     - target: {fileID: 919132149155446097, guid: 0d0f5a9421c17464096fcf82789f1f92, type: 3}
       propertyPath: m_Name
       value: wall
@@ -20827,6 +20947,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7635826562936255635, guid: 0a45a7f085fbd59498e7e4c2758f9ef7, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: e400f287326250f479e65badc02e0bea, type: 2}
     - target: {fileID: 919132149155446097, guid: 0a45a7f085fbd59498e7e4c2758f9ef7, type: 3}
       propertyPath: m_Name
       value: table_long
@@ -21397,6 +21521,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7635826562936255635, guid: 295e08282e42a7c4f8f9973c73689dfc, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: e400f287326250f479e65badc02e0bea, type: 2}
     - target: {fileID: 919132149155446097, guid: 295e08282e42a7c4f8f9973c73689dfc, type: 3}
       propertyPath: m_Name
       value: wall_doorway
@@ -22888,6 +23016,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7635826562936255635, guid: 0d0f5a9421c17464096fcf82789f1f92, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: e400f287326250f479e65badc02e0bea, type: 2}
     - target: {fileID: 919132149155446097, guid: 0d0f5a9421c17464096fcf82789f1f92, type: 3}
       propertyPath: m_Name
       value: wall
@@ -23412,7 +23544,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 6892232844440235036, guid: 01c316f7242c1934488fb66df3529772, type: 3}
+  - {fileID: 2100000, guid: e400f287326250f479e65badc02e0bea, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -23869,6 +24001,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 60cf5e36bfbea594ab6a7166219e533a, type: 3}
   m_PrefabInstance: {fileID: 1412311006}
+  m_PrefabAsset: {fileID: 0}
+--- !u!20 &1420686054 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 4516204800986412716, guid: 3ff5e2a98159e6140a4096f3b250f762, type: 3}
+  m_PrefabInstance: {fileID: 603375521}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &1420781527 stripped
 Transform:
@@ -24341,6 +24478,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7635826562936255635, guid: 0d0f5a9421c17464096fcf82789f1f92, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: e400f287326250f479e65badc02e0bea, type: 2}
     - target: {fileID: 919132149155446097, guid: 0d0f5a9421c17464096fcf82789f1f92, type: 3}
       propertyPath: m_Name
       value: wall
@@ -24405,6 +24546,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7635826562936255635, guid: 275d339cfa9123b4985f631a243dc84f, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: e400f287326250f479e65badc02e0bea, type: 2}
     - target: {fileID: 919132149155446097, guid: 275d339cfa9123b4985f631a243dc84f, type: 3}
       propertyPath: m_Name
       value: wall_cracked
@@ -24466,6 +24611,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7635826562936255635, guid: 275d339cfa9123b4985f631a243dc84f, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: e400f287326250f479e65badc02e0bea, type: 2}
     - target: {fileID: 919132149155446097, guid: 275d339cfa9123b4985f631a243dc84f, type: 3}
       propertyPath: m_Name
       value: wall_cracked
@@ -24722,6 +24871,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7635826562936255635, guid: 275d339cfa9123b4985f631a243dc84f, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: e400f287326250f479e65badc02e0bea, type: 2}
     - target: {fileID: 919132149155446097, guid: 275d339cfa9123b4985f631a243dc84f, type: 3}
       propertyPath: m_Name
       value: wall_cracked
@@ -25592,6 +25745,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7635826562936255635, guid: e089f42909fca80459e0e5cf8ff85895, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: e400f287326250f479e65badc02e0bea, type: 2}
     - target: {fileID: 919132149155446097, guid: e089f42909fca80459e0e5cf8ff85895, type: 3}
       propertyPath: m_Name
       value: wall_pillar
@@ -26031,6 +26188,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7635826562936255635, guid: 295e08282e42a7c4f8f9973c73689dfc, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: e400f287326250f479e65badc02e0bea, type: 2}
     - target: {fileID: 919132149155446097, guid: 295e08282e42a7c4f8f9973c73689dfc, type: 3}
       propertyPath: m_Name
       value: wall_doorway
@@ -26097,6 +26258,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7635826562936255635, guid: 456216fdea988a848b7a7af873f7197d, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: e400f287326250f479e65badc02e0bea, type: 2}
     - target: {fileID: 919132149155446097, guid: 456216fdea988a848b7a7af873f7197d, type: 3}
       propertyPath: m_Name
       value: table_long_decorated_C
@@ -26897,6 +27062,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7635826562936255635, guid: 0d0f5a9421c17464096fcf82789f1f92, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: e400f287326250f479e65badc02e0bea, type: 2}
     - target: {fileID: 919132149155446097, guid: 0d0f5a9421c17464096fcf82789f1f92, type: 3}
       propertyPath: m_Name
       value: wall
@@ -27751,6 +27920,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7635826562936255635, guid: 275d339cfa9123b4985f631a243dc84f, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: e400f287326250f479e65badc02e0bea, type: 2}
     - target: {fileID: 919132149155446097, guid: 275d339cfa9123b4985f631a243dc84f, type: 3}
       propertyPath: m_Name
       value: wall_cracked
@@ -27820,7 +27993,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 6892232844440235036, guid: 01c316f7242c1934488fb66df3529772, type: 3}
+  - {fileID: 2100000, guid: e400f287326250f479e65badc02e0bea, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -28431,6 +28604,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 60139e9c33564d1468c204af67971c3e, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: e400f287326250f479e65badc02e0bea, type: 2}
     - target: {fileID: 919132149155446097, guid: 60139e9c33564d1468c204af67971c3e, type: 3}
       propertyPath: m_Name
       value: table_small_decorated_B
@@ -28665,7 +28842,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 6892232844440235036, guid: 6b0b5d612a61d334182779e8087b6c30, type: 3}
+  - {fileID: 2100000, guid: e400f287326250f479e65badc02e0bea, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -28804,6 +28981,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7635826562936255635, guid: 0d0f5a9421c17464096fcf82789f1f92, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: e400f287326250f479e65badc02e0bea, type: 2}
     - target: {fileID: 919132149155446097, guid: 0d0f5a9421c17464096fcf82789f1f92, type: 3}
       propertyPath: m_Name
       value: wall
@@ -29774,6 +29955,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7635826562936255635, guid: 01c316f7242c1934488fb66df3529772, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: e400f287326250f479e65badc02e0bea, type: 2}
     - target: {fileID: 919132149155446097, guid: 01c316f7242c1934488fb66df3529772, type: 3}
       propertyPath: m_Name
       value: wall_corner_small
@@ -29896,6 +30081,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7635826562936255635, guid: 275d339cfa9123b4985f631a243dc84f, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: e400f287326250f479e65badc02e0bea, type: 2}
     - target: {fileID: 919132149155446097, guid: 275d339cfa9123b4985f631a243dc84f, type: 3}
       propertyPath: m_Name
       value: wall_cracked
@@ -29993,6 +30182,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7635826562936255635, guid: 275d339cfa9123b4985f631a243dc84f, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: e400f287326250f479e65badc02e0bea, type: 2}
     - target: {fileID: 919132149155446097, guid: 275d339cfa9123b4985f631a243dc84f, type: 3}
       propertyPath: m_Name
       value: wall_cracked
@@ -30126,7 +30319,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 6892232844440235036, guid: 01c316f7242c1934488fb66df3529772, type: 3}
+  - {fileID: 2100000, guid: e400f287326250f479e65badc02e0bea, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -31489,6 +31682,10 @@ PrefabInstance:
       propertyPath: walkSoundDelay
       value: 0.1
       objectReference: {fileID: 0}
+    - target: {fileID: 1688115950272225785, guid: 135a33f42603095498418b3997897017, type: 3}
+      propertyPath: gameCamera
+      value: 
+      objectReference: {fileID: 1420686054}
     - target: {fileID: 6993864842785556067, guid: 135a33f42603095498418b3997897017, type: 3}
       propertyPath: m_Name
       value: Player
@@ -31503,7 +31700,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7985519555228967366, guid: 135a33f42603095498418b3997897017, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 5.51
       objectReference: {fileID: 0}
     - target: {fileID: 7985519555228967366, guid: 135a33f42603095498418b3997897017, type: 3}
       propertyPath: m_LocalPosition.y
@@ -31511,7 +31708,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7985519555228967366, guid: 135a33f42603095498418b3997897017, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -7
+      value: 4.8
       objectReference: {fileID: 0}
     - target: {fileID: 7985519555228967366, guid: 135a33f42603095498418b3997897017, type: 3}
       propertyPath: m_LocalRotation.w
@@ -31792,6 +31989,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7635826562936255635, guid: 0d0f5a9421c17464096fcf82789f1f92, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: e400f287326250f479e65badc02e0bea, type: 2}
     - target: {fileID: 919132149155446097, guid: 0d0f5a9421c17464096fcf82789f1f92, type: 3}
       propertyPath: m_Name
       value: wall
@@ -31983,7 +32184,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 6892232844440235036, guid: 01c316f7242c1934488fb66df3529772, type: 3}
+  - {fileID: 2100000, guid: e400f287326250f479e65badc02e0bea, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -32061,6 +32262,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7635826562936255635, guid: 275d339cfa9123b4985f631a243dc84f, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: e400f287326250f479e65badc02e0bea, type: 2}
     - target: {fileID: 919132149155446097, guid: 275d339cfa9123b4985f631a243dc84f, type: 3}
       propertyPath: m_Name
       value: wall_cracked
@@ -32191,6 +32396,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7635826562936255635, guid: 275d339cfa9123b4985f631a243dc84f, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: e400f287326250f479e65badc02e0bea, type: 2}
     - target: {fileID: 919132149155446097, guid: 275d339cfa9123b4985f631a243dc84f, type: 3}
       propertyPath: m_Name
       value: wall_cracked
