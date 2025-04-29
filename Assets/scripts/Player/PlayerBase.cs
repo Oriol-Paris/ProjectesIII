@@ -362,7 +362,7 @@ public class PlayerBase : MonoBehaviour
         GetComponent<SpriteRenderer>().color = Color.red;
         StartCoroutine(whitecolor());
 
-        //SoundEffectsManager.instance.PlaySoundFXClip(damageClips, transform, 1f);
+        SoundEffectsManager.instance.PlaySoundFXClip(damageClips, transform, 1f);
         StartCoroutine(_camera.Flash(1f, 0.8f, Color.red));
         StartCoroutine(_camera.Shake(0.3f, 0.8f));
         Instantiate(bloodSplash, this.transform.position, hitObject.transform.rotation);
