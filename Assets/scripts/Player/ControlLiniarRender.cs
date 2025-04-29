@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class ControlLiniarRender : MonoBehaviour
@@ -178,8 +179,10 @@ public class ControlLiniarRender : MonoBehaviour
 
         if (curvePoints.Count > 0)
         {
-            newLine.positionCount = curvePoints.Count;
-            newLine.SetPositions(curvePoints.ToArray());
+            Vector3 offset = new Vector3(0f, -0.45f, 0f);
+            Vector3[] adjustedPoints = curvePoints.Select(p => p + offset).ToArray();
+            newLine.positionCount = adjustedPoints.Length;
+            newLine.SetPositions(adjustedPoints);
             newLine.SetColors(Color.white, Color.white);
             lineList.Add(newLine);
 
