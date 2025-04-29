@@ -9,6 +9,10 @@ public class UIBarManager : MonoBehaviour
     private List<GameObject> healthBarSegments = new List<GameObject>();
     private PlayerData player;
 
+    public Vector3 startPos;
+    public Vector3 scale;
+    public float xOffset;
+
     void Start()
     {
         player = FindAnyObjectByType<PlayerBase>().playerData;
@@ -22,7 +26,8 @@ public class UIBarManager : MonoBehaviour
         {
             GameObject segment = Instantiate(healthBarPrefab, transform);
             segment.transform.Find("Fill").GetComponent<Image>().color = Color.red;
-            segment.transform.localPosition = new Vector3(-841 + i * 90, 475, 0);
+            segment.transform.localPosition = startPos + new Vector3(i * xOffset, 0, 0);
+            segment.transform.localScale = scale;
             healthBarSegments.Add(segment);
         }
     }
