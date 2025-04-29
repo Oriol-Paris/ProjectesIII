@@ -80,20 +80,23 @@ public class InteractableTiles : MonoBehaviour
                 spawnedEnemies[i].SetActive(false);
             }
 
-            if (difficulty == 1)
+            if(isInteractible)
             {
-                spawnedEnemies[0].SetActive(true);
-            }
-            else if (difficulty == 1.5f)
-            {
-                spawnedEnemies[0].SetActive(true);
-                spawnedEnemies[1].SetActive(true);
-            }
-            else
-            {
-                for (int i = 0; i < spawnedEnemies.Count; i++)
+                if (difficulty == 1)
                 {
-                    spawnedEnemies[i].SetActive(true);
+                    spawnedEnemies[0].SetActive(true);
+                }
+                else if (difficulty == 1.5f)
+                {
+                    spawnedEnemies[0].SetActive(true);
+                    spawnedEnemies[1].SetActive(true);
+                }
+                else
+                {
+                    for (int i = 0; i < spawnedEnemies.Count; i++)
+                    {
+                        spawnedEnemies[i].SetActive(true);
+                    }
                 }
             }
         }
