@@ -10,6 +10,7 @@ public class MovPlayer : MonoBehaviour
     public ControlLiniarRender controlLiniarRender;
     public ControlListMovment controlListMovment;
     public TimeSecuence timeSecuence;
+    
 
 
     public float t;
@@ -68,8 +69,8 @@ public class MovPlayer : MonoBehaviour
             Vector3 _playerPosition = firstItem.Item1;
             Vector3 _controlPoint = firstItem.Item2;
             Vector3 _positionDesired = firstItem.Item3;
+       
 
-      
         this.GetComponent<PlayerActionManager>().WalkingSound();
        
         float duration = controlListMovment.timeConsum[movCount]; // Tiempo deseado para el movimiento
@@ -94,6 +95,7 @@ public class MovPlayer : MonoBehaviour
     {
         t = 0f;
         timeSceuence.actualTime = currentTime;
+        
         
     }
 

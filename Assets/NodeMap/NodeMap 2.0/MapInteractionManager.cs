@@ -13,6 +13,7 @@ public class MapInteractionManager : MonoBehaviour
         public List<AnimateMapTile> tiles;
     }
 
+   [SerializeField] private GameObject player;
     public List<AnimateMapTile> interactableTiles;
 
     public List<TileGroup> tileGroups;
@@ -70,6 +71,7 @@ public class MapInteractionManager : MonoBehaviour
         foreach (AnimateMapTile tile in tiles)
         {
             tile.wasVisited = true;
+            player.transform.position = new Vector3(tile.transform.position.x,tile.transform.position.y+3,tile.transform.position.z-2.15f);
             tile.AnimateTile();
             yield return new WaitForSeconds(0.1f);
         }
