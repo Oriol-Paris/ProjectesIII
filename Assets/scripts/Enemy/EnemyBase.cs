@@ -66,13 +66,14 @@ public class EnemyBase : MonoBehaviour
         if (health <= 0)
         {
             animator.SetBool("isDead", true);
-            dropWeapon.DropWeapon();
+            //dropWeapon.DropWeapon();
+            GetComponent<dropWapon>().enabled = true;
             isAlive = false;
             spriteRenderer.color = Color.grey;
             GetComponent<Collider>().enabled = false;
             rb2d.useGravity = false;
             rb2d.detectCollisions = false;
-            GetComponent<dropWapon>().enabled = true;
+          
 
         }
 

@@ -12,15 +12,6 @@ public class dropWapon : MonoBehaviour
 
    public void Start()
     {
-      
-           
-            
-
-        
-
-    }
-    public void DropWeapon()
-    {
         if (armaADropear == null) return;
 
 
@@ -31,5 +22,11 @@ public class dropWapon : MonoBehaviour
         {
             Instantiate(armaADropear, transform.position, Quaternion.identity);
         }
+
+
+
+
+
     }
+   
 }

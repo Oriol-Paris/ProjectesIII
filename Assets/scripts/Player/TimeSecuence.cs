@@ -14,6 +14,7 @@ public class TimeSecuence : MonoBehaviour
     public Vector3 lastPosition;
 
     public bool play = false;
+   
 
     public MovPlayer movPlayer;
 
@@ -122,6 +123,23 @@ public class TimeSecuence : MonoBehaviour
                   
                     movCount++;
                     break;
+
+                case PlayerBase.ActionEnum.ESPECIALSHOOT:
+                   
+                    shootPl.UpdateShoot(movCount);
+
+                    Time.timeScale = 0f;
+                    yield return new WaitForSecondsRealtime(0.3f); 
+                    Time.timeScale = 1f;
+
+                    yield return new WaitForSeconds(0.1f);
+                    if (i + 1 < actions.Count && actions[i + 1] == PlayerBase.ActionEnum.SHOOT)
+                    {
+                        yield return new WaitForSeconds(0.6f);
+                    }
+
+                    movCount++;
+                    break;
                 case PlayerBase.ActionEnum.MOVE:
 
 
@@ -149,6 +167,7 @@ public class TimeSecuence : MonoBehaviour
     void PassTurn()
     {
        // cameraManager.Original();
+       shootPl.oneTime = true;
         isExecuting = true;
         Debug.Log("Executing stored actions");
         notacction = true;
@@ -172,6 +191,7 @@ public class TimeSecuence : MonoBehaviour
     private void ResetTurn()
     {
         //cameraManager.Original();
+        shootPl.oneTime = true;
         notacction = false;
         play = false;
         canInvokeGhost = true;
