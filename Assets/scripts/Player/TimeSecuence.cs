@@ -127,6 +127,11 @@ public class TimeSecuence : MonoBehaviour
                 case PlayerBase.ActionEnum.ESPECIALSHOOT:
                    
                     shootPl.UpdateShoot(movCount);
+
+                    Time.timeScale = 0f;
+                    yield return new WaitForSecondsRealtime(0.3f); 
+                    Time.timeScale = 1f;
+
                     yield return new WaitForSeconds(0.1f);
                     if (i + 1 < actions.Count && actions[i + 1] == PlayerBase.ActionEnum.SHOOT)
                     {
