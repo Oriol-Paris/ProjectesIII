@@ -107,6 +107,10 @@ public class HotbarManager : MonoBehaviour
                 {
                     slot.transform.Find("Texts").transform.Find("Action Stats").gameObject.SetActive(false);
                 }
+                else
+                {
+                    slot.transform.Find("Texts").transform.Find("Action Stats").gameObject.SetActive(false);
+                }
             }
             else
             {

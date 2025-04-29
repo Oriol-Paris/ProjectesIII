@@ -1261,6 +1261,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthBarPrefab: {fileID: 6632909104858812616, guid: b919ece06175c7942b1399f5716de3c0, type: 3}
+  startPos: {x: -841, y: 475, z: 0}
+  scale: {x: 1, y: 1, z: 1}
+  xOffset: 90
 --- !u!1 &3468273226001778265
 GameObject:
   m_ObjectHideFlags: 0
