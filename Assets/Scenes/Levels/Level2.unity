@@ -24478,6 +24478,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Combat UI
       objectReference: {fileID: 0}
+    - target: {fileID: 2102460365194555068, guid: 86b5e03058826fa47abc3c555286ee76, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4445338213239201112, guid: 86b5e03058826fa47abc3c555286ee76, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -24666,14 +24670,6 @@ PrefabInstance:
     - target: {fileID: 5779656468157418596, guid: 40da685f188bc2e4bb1c0608ce87ae0a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6478771320280442240, guid: 40da685f188bc2e4bb1c0608ce87ae0a, type: 3}
-      propertyPath: armaADropear
-      value: 
-      objectReference: {fileID: 4818474983771764526, guid: 047b0e437f94dd14a8cb7513527bd571, type: 3}
-    - target: {fileID: 6478771320280442240, guid: 40da685f188bc2e4bb1c0608ce87ae0a, type: 3}
-      propertyPath: probabilidadDrop
-      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
