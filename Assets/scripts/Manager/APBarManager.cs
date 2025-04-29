@@ -8,7 +8,7 @@ public class APBarManager : MonoBehaviour
 {
     public GameObject APBarPrefab;
     private PlayerBase player;
-    private List<GameObject> apBars = new List<GameObject>();
+    [SerializeField]private List<GameObject> apBars = new List<GameObject>();
     private int currentAP = 0;
 
     [Header("Animation Settings")]
@@ -23,7 +23,7 @@ public class APBarManager : MonoBehaviour
 
     public void InitBar()
     {
-        player = FindAnyObjectByType<PlayerBase>();
+        player = GetComponentInParent<PlayerBase>();
 
         for (int i = 0; i < player.playerData.maxActionPoints; i++)
         {
@@ -41,6 +41,7 @@ public class APBarManager : MonoBehaviour
         foreach (var item in apBars)
         {
             Destroy(item);
+            apBars.Remove(item);
         }
 
         InitBar();
@@ -57,6 +58,7 @@ public class APBarManager : MonoBehaviour
         for (int i = (int)player.playerData.maxActionPoints - 1; i > currentAP; i--)
         {
             Destroy(apBars[i]);
+            apBars.Remove(apBars[i]);
         }
     }
 
