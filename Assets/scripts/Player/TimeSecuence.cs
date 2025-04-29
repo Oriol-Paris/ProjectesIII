@@ -115,9 +115,7 @@ public class TimeSecuence : MonoBehaviour
             switch (action)
             {
                 case PlayerBase.ActionEnum.SHOOT:
-                    //Debug.Log("Using bullet style: " + bulletStyle.prefab.name); // Add this line
-                    //((ShootAction)actionManager.activeActions[PlayerBase.ActionEnum.SHOOT]).bulletPrefab = bulletStyle.prefab; // Add this line
-                    // StartCoroutine(actionManager.AttackCoroutine(action, targetPosition,bulletStyle));
+                    
                     shootPl.UpdateShoot(movCount);
                     yield return new WaitForSeconds(0.1f);
                     if (i + 1 < actions.Count && actions[i+1] == PlayerBase.ActionEnum.SHOOT)
