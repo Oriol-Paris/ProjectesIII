@@ -29,7 +29,7 @@ public class ControlWapons : MonoBehaviour
             PlayerBase.Action newAction = new PlayerBase.Action(
                 PlayerBase.ActionType.ACTIVE,
                 PlayerBase.ActionEnum.ESPECIALSHOOT,
-                KeyCode.Alpha5, 
+                KeyCode.Alpha6, 
                 cost: 1,
                 style: newStyle
             );

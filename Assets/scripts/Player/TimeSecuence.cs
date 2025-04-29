@@ -50,8 +50,7 @@ public class TimeSecuence : MonoBehaviour
 
     void Update()
     {
-        Time.timeScale = 1f;
-
+       
         if (actualTime > 0)
         {
             // Check for action selection
@@ -65,10 +64,7 @@ public class TimeSecuence : MonoBehaviour
                     this.GetComponent<ControlLiniarRender>().ChangeLineColor(action);
                 }
             }
-            if(actions.Count > 0&&Input.GetKeyDown(KeyCode.R)&&!isExecuting) 
-            {
-                ResetTurn();
-            }
+          
             //if (actions.Count > 0 && Input.GetKeyDown(KeyCode.Mouse1) && !isExecuting)
             //{
             //    RemoveLastAction();
@@ -84,6 +80,10 @@ public class TimeSecuence : MonoBehaviour
                   //selectedAction = PlayerBase.Action.nothing; // Reset the selected action
               }*/
         }
+        if (actions.Count > 0 && Input.GetKeyDown(KeyCode.R) && !isExecuting)
+        {
+            ResetTurn();
+        }
 
         if ((Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Space)) && !isExecuting)
         {
@@ -91,7 +91,10 @@ public class TimeSecuence : MonoBehaviour
         }
     }
 
-    public void AddAction(PlayerBase.ActionEnum action) { actions.Add(action);}
+    public void AddAction(PlayerBase.ActionEnum action) 
+    { 
+        actions.Add(action);
+    }
 
     IEnumerator ExecuteActions()
     {
@@ -99,6 +102,7 @@ public class TimeSecuence : MonoBehaviour
         int movCount = 0;
         Debug.Log(actions.Count);
         play = true;
+        FindAnyObjectByType<APBarManager>().DestroyUsedAP();
         //cameraManager.FollowPlayer();
         for (int i = 0; i < actions.Count; i++)
         {
@@ -190,6 +194,8 @@ public class TimeSecuence : MonoBehaviour
 
     private void ResetTurn()
     {
+        controlListMovment.DestroyAllGhostrs();
+       
         //cameraManager.Original();
         shootPl.oneTime = true;
         notacction = false;
@@ -217,7 +223,8 @@ public class TimeSecuence : MonoBehaviour
         isExecuting = false;
 
         FindAnyObjectByType<TopBarManager>().ResetTopBar();
-        controlListMovment.DestroyAllGhostrs();
+        FindAnyObjectByType<APBarManager>().ResetBar();
+
     }
 
     public void RemoveLastAction()

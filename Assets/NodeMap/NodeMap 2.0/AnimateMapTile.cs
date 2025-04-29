@@ -1,13 +1,15 @@
 using UnityEngine;
 using System.Collections;
+using System;
 
 public class AnimateMapTile : MonoBehaviour
 {
     float speed = 0.25f;
     Vector3 basePos;
-    Vector3 liftedPos;
+    [NonSerialized] public Vector3 liftedPos;
 
     bool isAnimating = false;
+    [NonSerialized] public bool isAnimationDone = true;
     Coroutine hoverLoop;
 
     float hoverY = 0.3f;
@@ -30,6 +32,7 @@ public class AnimateMapTile : MonoBehaviour
     IEnumerator Animate()
     {
         isAnimating = true;
+        isAnimationDone = false;
         float elapsed = 0f;
         float duration = 1f / speed;
 
@@ -44,6 +47,7 @@ public class AnimateMapTile : MonoBehaviour
 
         transform.position = liftedPos;
         isAnimating = false;
+        isAnimationDone = true;
 
         if (hoverLoop == null)
             hoverLoop = StartCoroutine(Hover());
