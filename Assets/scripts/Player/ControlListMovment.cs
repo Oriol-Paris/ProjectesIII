@@ -62,6 +62,7 @@ public class ControlListMovment : MonoBehaviour
             controlLiniarRender.InstantiateLineMovment();
 
 
+            FindAnyObjectByType<APBarManager>().AnimateLastAP();
         }
         else
         {

@@ -68,19 +68,14 @@ public class MapInteractionManager : MonoBehaviour
 
     IEnumerator TileGroupAnim(List<AnimateMapTile> tiles, string name = null)
     {
+        FindAnyObjectByType<PlayerPathFollower>().SetTilePath(tiles, name);
+
         foreach (AnimateMapTile tile in tiles)
         {
             tile.wasVisited = true;
             player.transform.position = new Vector3(tile.transform.position.x,tile.transform.position.y+3,tile.transform.position.z-2.15f);
             tile.AnimateTile();
             yield return new WaitForSeconds(0.1f);
-        }
-
-        yield return new WaitForSeconds(1f);
-
-        if(name != null)
-        {
-            SceneManager.LoadScene(name);
         }
     }
 }

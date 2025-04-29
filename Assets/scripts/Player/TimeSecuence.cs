@@ -91,7 +91,10 @@ public class TimeSecuence : MonoBehaviour
         }
     }
 
-    public void AddAction(PlayerBase.ActionEnum action) { actions.Add(action);}
+    public void AddAction(PlayerBase.ActionEnum action) 
+    { 
+        actions.Add(action);
+    }
 
     IEnumerator ExecuteActions()
     {
@@ -99,6 +102,7 @@ public class TimeSecuence : MonoBehaviour
         int movCount = 0;
         Debug.Log(actions.Count);
         play = true;
+        FindAnyObjectByType<APBarManager>().DestroyUsedAP();
         //cameraManager.FollowPlayer();
         for (int i = 0; i < actions.Count; i++)
         {
@@ -217,6 +221,7 @@ public class TimeSecuence : MonoBehaviour
         isExecuting = false;
 
         FindAnyObjectByType<TopBarManager>().ResetTopBar();
+        FindAnyObjectByType<APBarManager>().ResetBar();
         controlListMovment.DestroyAllGhostrs();
     }
 
