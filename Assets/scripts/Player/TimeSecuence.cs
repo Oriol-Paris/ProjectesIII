@@ -194,6 +194,8 @@ public class TimeSecuence : MonoBehaviour
 
     private void ResetTurn()
     {
+        controlListMovment.DestroyAllGhostrs();
+       
         //cameraManager.Original();
         shootPl.oneTime = true;
         notacction = false;
@@ -222,7 +224,7 @@ public class TimeSecuence : MonoBehaviour
 
         FindAnyObjectByType<TopBarManager>().ResetTopBar();
         FindAnyObjectByType<APBarManager>().ResetBar();
-        controlListMovment.DestroyAllGhostrs();
+
     }
 
     public void RemoveLastAction()

@@ -24,7 +24,6 @@ public class APBarManager : MonoBehaviour
     public void InitBar()
     {
         player = GetComponentInParent<PlayerBase>();
-
         for (int i = 0; i < player.playerData.maxActionPoints; i++)
         {
             GameObject apBar = Instantiate(APBarPrefab, transform);
@@ -41,16 +40,33 @@ public class APBarManager : MonoBehaviour
         foreach (var item in apBars)
         {
             Destroy(item);
-            apBars.Remove(item);
         }
+        apBars.Clear();
 
         InitBar();
     }
+
 
     public void AnimateLastAP()
     {
         StartCoroutine(AnimateBar(apBars[(int)currentAP]));
         currentAP--;
+    }
+    public void AnimateAPCost()
+    {
+        int cost = player.GetAction().m_cost;
+
+        for (int i = 0; i < cost; i++)
+        {
+            int index = (int)currentAP - i;
+            if (index >= 0 && index < apBars.Count)
+            {
+                StartCoroutine(AnimateBar(apBars[index]));
+            }
+        }
+
+        currentAP -= cost;
+        if (currentAP < -1) currentAP = -1;
     }
 
     public void DestroyUsedAP()
