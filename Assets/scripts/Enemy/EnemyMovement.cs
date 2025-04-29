@@ -23,6 +23,8 @@ public class EnemyMovement : MonoBehaviour
     private bool isResting = false; // Indica si el enemigo está en descanso
     [SerializeField] private float stopDistance = 1.0f; // Distance to stop from the player
 
+    [SerializeField] AudioClip[] attackClips;
+
     #endregion
 
     public enum ActionEnum { MOVE, SHOOT, HEAL, MELEE, NOTHING };
@@ -105,6 +107,7 @@ public class EnemyMovement : MonoBehaviour
         if (!isResting) // Evita que ataque si aún está descansando
         {
             StartCoroutine(AttackCoroutine());
+            SoundEffectsManager.instance.PlaySoundFXClip(attackClips, transform, 1f);
         }
     }
 }

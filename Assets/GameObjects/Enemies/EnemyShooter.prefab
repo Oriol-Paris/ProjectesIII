@@ -233,8 +233,8 @@ MonoBehaviour:
   range: 5
   minDistance: 2
   shootingClips:
-  - {fileID: 8300000, guid: 3fdff599a87b80a4dbdcbe89e60062ce, type: 3}
-  - {fileID: 8300000, guid: 6a3e850acd190164d9bea800f4e24812, type: 3}
+  - {fileID: 8300000, guid: b7e2079f5f509ec4480adfd38e747929, type: 3}
+  - {fileID: 8300000, guid: b7e2079f5f509ec4480adfd38e747929, type: 3}
   - {fileID: 8300000, guid: fc8dae0e97caff040998967dcf1ff972, type: 3}
   animator: {fileID: 6209296037174827964}
   fx: {fileID: 8189897864542917949}
