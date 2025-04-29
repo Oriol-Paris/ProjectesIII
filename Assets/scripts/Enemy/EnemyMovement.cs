@@ -16,11 +16,14 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] private float velocity;
     [SerializeField] private float range;
     [SerializeField] private float restTime = 1.5f; // Tiempo de descanso tras un ataque
-    [SerializeField] private Collider hitBox;
+   
     [SerializeField]private NavMeshAgent agent; // Referencia al NavMeshAgent
+    [SerializeField]private GameObject attack; 
     private SpriteRenderer spriteRenderer; // Referencia al SpriteRenderer
     private bool isResting = false; // Indica si el enemigo está en descanso
     [SerializeField] private float stopDistance = 1.0f; // Distance to stop from the player
+
+    [SerializeField] AudioClip[] attackClips;
 
     #endregion
 
@@ -34,7 +37,7 @@ public class EnemyMovement : MonoBehaviour
         agent.speed = velocity * PlayerPrefs.GetFloat("DifficultyMultiplier");
         range *= PlayerPrefs.GetFloat("DifficultyMultiplier");
         agent.updateRotation = false;
-        hitBox.enabled = false;
+       
         spriteRenderer = GetComponent<SpriteRenderer>(); // Obtener el componente SpriteRenderer
     }
 
@@ -48,10 +51,7 @@ public class EnemyMovement : MonoBehaviour
             // Voltear sprite dependiendo de la posición del jugador
             spriteRenderer.flipX = PlayerPos.x < transform.position.x;
 
-            // Ajustar la posición de la hitBox según la dirección
-            Vector3 hitBoxPosition = hitBox.transform.localPosition;
-            hitBoxPosition.x = spriteRenderer.flipX ? -Mathf.Abs(hitBoxPosition.x) : Mathf.Abs(hitBoxPosition.x);
-            hitBox.transform.localPosition = hitBoxPosition;
+           
 
             if (Player.GetIsExecuting() || Player.GetComponent<PlayerBase>().GetInAction())
             {
@@ -73,7 +73,7 @@ public class EnemyMovement : MonoBehaviour
                 GetComponent<Animator>().SetBool("isMoving", false);
                 agent.isStopped = true;
                 agent.velocity = Vector3.zero;
-                hitBox.GetComponent<MeleeEnemyDamage>().hasDealtDamage = false;
+               
             }
         }
         else
@@ -88,13 +88,14 @@ public class EnemyMovement : MonoBehaviour
         Debug.Log("Attacking");
         GetComponent<Animator>().SetTrigger("attack");
 
+        GameObject _attack = Instantiate(attack, transform.position, Quaternion.identity,transform);
         yield return new WaitForSeconds(0.5f);
-      // Tiempo de animación del ataque
-        hitBox.enabled = true;
+     
+       
 
-        yield return new WaitForSeconds(1f);
-       // Duración del ataque
-        hitBox.enabled = false;
+       
+     
+       Destroy(_attack);
 
         yield return new WaitForSeconds(restTime); // Tiempo de descanso después del ataque
       
@@ -106,6 +107,7 @@ public class EnemyMovement : MonoBehaviour
         if (!isResting) // Evita que ataque si aún está descansando
         {
             StartCoroutine(AttackCoroutine());
+            SoundEffectsManager.instance.PlaySoundFXClip(attackClips, transform, 1f);
         }
     }
 }

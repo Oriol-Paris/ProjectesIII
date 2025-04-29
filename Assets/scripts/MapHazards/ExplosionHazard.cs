@@ -14,7 +14,7 @@ public class ExplosionHazard : MonoBehaviour
     [SerializeField] private ParticleSystem explosionEffects;
     [SerializeField] protected float explosionSpreadDelay;
     [SerializeField] private cameraManager cameraShake;
-
+    [SerializeField] private AudioClip[] ExplosionClip;
 
     private void Start()
     {
@@ -44,7 +44,10 @@ public class ExplosionHazard : MonoBehaviour
 
     private void Explode(float radius, bool spread, GameObject DamageOrigin)
     {
+
         StartCoroutine(DelayAction(explosionSpreadDelay, spread, radius, DamageOrigin));
+        SoundEffectsManager.instance.PlaySoundFXClip(ExplosionClip, transform, 0.8f);
+
     }
 
     IEnumerator DelayAction(float delay, bool spread, float radius, GameObject DamageOrigin)
