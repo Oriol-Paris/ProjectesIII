@@ -11,6 +11,8 @@ public class FloatingRotatingObject : MonoBehaviour
 
     private Vector3 startPos;
 
+    [SerializeField] private GameObject torch;
+
     void Start()
     {
         startPos = transform.position;
@@ -24,5 +26,10 @@ public class FloatingRotatingObject : MonoBehaviour
        
         float newY = startPos.y + Mathf.Sin(Time.time * floatFrequency) * floatAmplitude;
         transform.position = new Vector3(transform.position.x, newY, transform.position.z);
+
+        if (GetComponent<MeshRenderer>().enabled == false )
+        {
+            torch.SetActive(false);
+        }
     }
 }
