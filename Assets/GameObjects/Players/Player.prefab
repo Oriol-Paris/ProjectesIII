@@ -482,6 +482,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   APBarPrefab: {fileID: 6632909104858812616, guid: b919ece06175c7942b1399f5716de3c0, type: 3}
+  apBars: []
   fadeDuration: 0.5
   minAlpha: 0.3
   maxAlpha: 1

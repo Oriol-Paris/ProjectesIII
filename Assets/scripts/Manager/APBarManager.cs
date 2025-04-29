@@ -23,7 +23,7 @@ public class APBarManager : MonoBehaviour
 
     public void InitBar()
     {
-        player = GetComponentInParent<PlayerBase>();
+        player = FindAnyObjectByType<PlayerBase>();
 
         for (int i = 0; i < player.playerData.maxActionPoints; i++)
         {
