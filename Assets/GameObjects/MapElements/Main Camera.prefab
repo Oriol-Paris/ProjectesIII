@@ -169,6 +169,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa83a42b1259d834a9f229aeee5204b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  indicatorPrefab: {fileID: 0}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  mov: {x: 0, y: 0, z: 0}
 --- !u!114 &53153409772772216
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -181,3 +186,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa83a42b1259d834a9f229aeee5204b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  indicatorPrefab: {fileID: 8532767830892029132, guid: 5cc0bec8f8cd3794b8b1f12a3fc3fca1, type: 3}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  mov: {x: 0.26, y: 0, z: 0.73}
