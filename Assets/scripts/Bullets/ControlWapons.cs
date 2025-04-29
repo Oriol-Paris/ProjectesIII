@@ -30,7 +30,7 @@ public class ControlWapons : MonoBehaviour
                 PlayerBase.ActionType.ACTIVE,
                 PlayerBase.ActionEnum.ESPECIALSHOOT,
                 KeyCode.Alpha5, 
-                cost: 3,
+                cost: 1,
                 style: newStyle
             );
 
