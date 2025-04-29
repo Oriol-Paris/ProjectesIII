@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+<<<<<<< HEAD:Assets/OldProject/InputSystem_Actions.inputactions.meta
+guid: 6d237b4ed9ab0764bbeb2e5b0d356ee6
+=======
+guid: 78a6d3e284638c94e9ddfb39e313441a
+>>>>>>> feature/CodeReview:Assets/scripts/InputSystem/InputSystem_Actions.inputactions.meta
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 8404be70184654265930450def6a9037, type: 3}
+  generateWrapperCode: 0
+  wrapperCodePath: 
+  wrapperClassName: 
+  wrapperCodeNamespace: 
