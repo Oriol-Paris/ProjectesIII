@@ -856,6 +856,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6117016437605025760}
+  - component: {fileID: 3082726582401716970}
   m_Layer: 0
   m_Name: Combat UI
   m_TagString: Untagged
@@ -880,6 +881,20 @@ Transform:
   - {fileID: 8005853703134150633}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3082726582401716970
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2102460365194555068}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65fe77119796e754a91d64d59c05d4df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  transparentAlpha: 0.5
+  pauseMenu: {fileID: 483316932414175716}
 --- !u!1 &2574009935709432173
 GameObject:
   m_ObjectHideFlags: 0
@@ -2203,7 +2218,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5406870040359552366
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3328,6 +3343,10 @@ PrefabInstance:
       propertyPath: combatUI
       value: 
       objectReference: {fileID: 3756221182688151061}
+    - target: {fileID: 5935945455553391026, guid: 7ccf08d1ffd93904ea8cdfaab44636aa, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6117016437605025760, guid: 7ccf08d1ffd93904ea8cdfaab44636aa, type: 3}
       propertyPath: m_LocalPosition.x
       value: 820.1922
@@ -3373,6 +3392,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7ccf08d1ffd93904ea8cdfaab44636aa, type: 3}
+--- !u!114 &483316932414175716 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4416788497169924589, guid: 7ccf08d1ffd93904ea8cdfaab44636aa, type: 3}
+  m_PrefabInstance: {fileID: 4323037333325756425}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9e8c3ba548b3864e90c3c313f32fb72, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &8005853703134150633 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6117016437605025760, guid: 7ccf08d1ffd93904ea8cdfaab44636aa, type: 3}
