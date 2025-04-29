@@ -13,7 +13,8 @@ public class TutorialManager : MonoBehaviour
     public GameObject dummy;
     public List<GameObject> pinPoints;
     public GameObject dummy1;
-
+    private bool particlesEmmited = false;
+    private bool particlesEmmited1 = false;
     private int popUpIndex = 0;
     private bool actionsCompleted = false; // Flag to indicate when the required actions are completed
     private bool isInsideTrigger = false; // Flag to indicate if the player is inside the trigger
@@ -127,7 +128,7 @@ public class TutorialManager : MonoBehaviour
                     var requiredAction = requiredActions[popUpIndex].action;
                     var requiredCount = requiredActions[popUpIndex].count;
                     pinPoints[index].SetActive(true);
-                    if (playerBase.GetAction().m_action == requiredAction && (Input.GetKey(KeyCode.E) || Input.GetKey(KeyCode.Space)))
+                    if (pinPoints[index].GetComponent<crossPinPoint>().crossedPinPoint)
                     {
                         actionCounts[popUpIndex]++;
                         Debug.Log($"{requiredAction} performed {actionCounts[popUpIndex]} times");
@@ -149,7 +150,7 @@ public class TutorialManager : MonoBehaviour
                     var requiredCount = requiredActions[popUpIndex].count;
                     pinPoints[index - 1].SetActive(false);
                     pinPoints[index].SetActive(true);
-                    if (playerBase.GetAction().m_action == requiredAction && (Input.GetKey(KeyCode.E) || Input.GetKey(KeyCode.Space)))
+                    if (pinPoints[index].GetComponent<crossPinPoint>().crossedPinPoint && pinPoints[index].GetComponentInChildren<crossPinPoint>().crossedPinPoint)
                     {
                         actionCounts[popUpIndex]++;
                         Debug.Log($"{requiredAction} performed {actionCounts[popUpIndex]} times");
@@ -166,6 +167,11 @@ public class TutorialManager : MonoBehaviour
                 // Custom logic for popup index 2
                 Debug.Log("Custom logic for popup index 2");
                 dummy.SetActive(true);
+                if (!particlesEmmited)
+                {
+                    dummy.GetComponent<ParticleSystem>().Play();
+                    particlesEmmited = true;
+                }
                 pinPoints[index - 1].SetActive(false);
                 pinPoints[index].SetActive(true);
                 var enemyBase = dummy.GetComponent<EnemyBase>();
@@ -184,6 +190,11 @@ public class TutorialManager : MonoBehaviour
                 // Custom logic for popup index 2
                 Debug.Log("Custom logic for popup index 2");
                 dummy1.SetActive(true);
+                if (!particlesEmmited1)
+                {
+                    dummy1.GetComponent<ParticleSystem>().Play();
+                    particlesEmmited1 = true;
+                }
                 var enemyBase1 = dummy1.GetComponent<EnemyBase>();
                 if (enemyBase1 != null && !enemyBase1.isAlive)
                 {

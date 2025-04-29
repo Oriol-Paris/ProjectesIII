@@ -4,29 +4,30 @@ using UnityEngine;
 public class crossPinPoint : MonoBehaviour
 {
     Animator animator;
+    public bool crossedPinPoint;
     private void Start()
     {
         animator = GetComponent<Animator>();
         animator.SetBool("Start", true);
+        crossedPinPoint = false;
     }
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player")||other.CompareTag("Bullet"))
         {
-            animator.SetBool("Start", false);
-            animator.SetBool("PointCrossed", true);
+            //animator.SetBool("Start", false);
+            if(crossedPinPoint==false) {
+                animator.SetBool("PointCrossed", true);
+                crossedPinPoint = true;
+            }
             StartCoroutine(WaitForAnimationAndDestroy());
+
         }
     }
     private IEnumerator WaitForAnimationAndDestroy()
     {
-        AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
-        while (stateInfo.normalizedTime < 1.0f || !stateInfo.IsName("PointCrossed"))
-        {
-            yield return null;
-            
-            stateInfo = animator.GetCurrentAnimatorStateInfo(0);
-        }
-        gameObject.SetActive(false);
+        yield return new WaitForSeconds(1f);
+        GetComponent<SpriteRenderer>().sprite = null;
+        GetComponent<SpriteRenderer>().enabled = false;
     }
 }
