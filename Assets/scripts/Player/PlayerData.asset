@@ -19,7 +19,7 @@ MonoBehaviour:
   actionPoints: -21
   maxActionPoints: 3
   maxTime: 3
-  lastLevel: Level1
+  lastLevel: Tutorial
   levelCompleted: 0
   timesHealed: 0
   timesIncreasedMaxHP: 0
