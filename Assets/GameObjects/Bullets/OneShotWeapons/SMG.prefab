@@ -245,6 +245,7 @@ MonoBehaviour:
   rotationSpeed: 45
   floatAmplitude: 0.2
   floatFrequency: 1
+  torch: {fileID: 5622234180711486342}
 --- !u!114 &155262729989292001
 MonoBehaviour:
   m_ObjectHideFlags: 0
