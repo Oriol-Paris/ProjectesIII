@@ -68,7 +68,10 @@ public class MapInteractionManager : MonoBehaviour
 
     IEnumerator TileGroupAnim(List<AnimateMapTile> tiles, string name = null)
     {
-        FindAnyObjectByType<PlayerPathFollower>().SetTilePath(tiles, name);
+        if(name != null)
+        {
+            FindAnyObjectByType<PlayerPathFollower>().SetTilePath(tiles, name);
+        }
 
         foreach (AnimateMapTile tile in tiles)
         {
