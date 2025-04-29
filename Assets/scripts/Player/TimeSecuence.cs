@@ -50,8 +50,7 @@ public class TimeSecuence : MonoBehaviour
 
     void Update()
     {
-        Time.timeScale = 1f;
-
+       
         if (actualTime > 0)
         {
             // Check for action selection
@@ -65,10 +64,7 @@ public class TimeSecuence : MonoBehaviour
                     this.GetComponent<ControlLiniarRender>().ChangeLineColor(action);
                 }
             }
-            if(actions.Count > 0&&Input.GetKeyDown(KeyCode.R)&&!isExecuting) 
-            {
-                ResetTurn();
-            }
+          
             //if (actions.Count > 0 && Input.GetKeyDown(KeyCode.Mouse1) && !isExecuting)
             //{
             //    RemoveLastAction();
@@ -83,6 +79,10 @@ public class TimeSecuence : MonoBehaviour
                   Debug.Log("Stored action: " + selectedAction.m_action + " at position: " + targetPosition);
                   //selectedAction = PlayerBase.Action.nothing; // Reset the selected action
               }*/
+        }
+        if (actions.Count > 0 && Input.GetKeyDown(KeyCode.R) && !isExecuting)
+        {
+            ResetTurn();
         }
 
         if ((Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.Space)) && !isExecuting)
