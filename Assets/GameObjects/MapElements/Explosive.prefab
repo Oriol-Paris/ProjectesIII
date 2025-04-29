@@ -175,6 +175,8 @@ MonoBehaviour:
   explosionEffects: {fileID: -7494575573292175062}
   explosionSpreadDelay: 0.2
   cameraShake: {fileID: 0}
+  ExplosionClip:
+  - {fileID: 8300000, guid: ae5300217d965a04fb0086780faf825c, type: 3}
 --- !u!198 &-7494575573292175062
 ParticleSystem:
   m_ObjectHideFlags: 0

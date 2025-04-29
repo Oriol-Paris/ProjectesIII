@@ -571,7 +571,7 @@ MonoBehaviour:
   walkSoundDelay: 0.1
   movePlayer: {fileID: 4476756505495577889}
   shootClip:
-  - {fileID: 8300000, guid: 6a3e850acd190164d9bea800f4e24812, type: 3}
+  - {fileID: 8300000, guid: 44afddfb3c1b5a446ab6f9d9a5d59aa3, type: 3}
   walkingClips:
   - {fileID: 8300000, guid: 800348d9004d7344fbfe34d05735214e, type: 3}
   - {fileID: 8300000, guid: 3c86f529a7726ba449d33a82786f52eb, type: 3}

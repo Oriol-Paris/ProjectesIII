@@ -23,6 +23,7 @@ public class EnemyBase : MonoBehaviour
     private bool isShoooting;
     public bool isAlive;
     [SerializeField]AudioClip[] damageClips;
+    
     private float hitFeedBackTime = 0.3f;
     // Start is called before the first frame update
     void Start()

@@ -2271,17 +2271,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3ff5e2a98159e6140a4096f3b250f762, type: 3}
---- !u!114 &231044207 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2745767474560588585, guid: 3ff5e2a98159e6140a4096f3b250f762, type: 3}
-  m_PrefabInstance: {fileID: 231044206}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cc3e07f7e63ec3a45bd59413e869fcc8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &235196523
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24836,25 +24825,9 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2865400945673019646, guid: 135a33f42603095498418b3997897017, type: 3}
-      propertyPath: 'prefabs.Array.data[1]'
-      value: 
-      objectReference: {fileID: 1680710797403148065, guid: 9dcd6820efc4c4b488ecff9dbb33f555, type: 3}
-    - target: {fileID: 2865400945673019646, guid: 135a33f42603095498418b3997897017, type: 3}
-      propertyPath: 'prefabs.Array.data[2]'
-      value: 
-      objectReference: {fileID: 897511901853533497, guid: 8521142c8a8726c4a955b9f20f04800f, type: 3}
     - target: {fileID: 6993864842785556067, guid: 135a33f42603095498418b3997897017, type: 3}
       propertyPath: m_Name
       value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 7985519555228967366, guid: 135a33f42603095498418b3997897017, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7985519555228967366, guid: 135a33f42603095498418b3997897017, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7985519555228967366, guid: 135a33f42603095498418b3997897017, type: 3}
       propertyPath: m_LocalPosition.x
@@ -24896,10 +24869,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8584045141074783902, guid: 135a33f42603095498418b3997897017, type: 3}
-      propertyPath: _camera
-      value: 
-      objectReference: {fileID: 231044207}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
