@@ -7334,6 +7334,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Run
       objectReference: {fileID: 0}
+    - target: {fileID: 1160356261127867848, guid: 34c246fb73a2d534f9b2ab47d8bdfb03, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 5629362d2b5f4ae4eafc0168dcfe3157, type: 2}
     - target: {fileID: 3626916397498700004, guid: 34c246fb73a2d534f9b2ab47d8bdfb03, type: 3}
       propertyPath: m_SortingOrder
       value: 1000

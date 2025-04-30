@@ -16,9 +16,10 @@ public class PlayerPathFollower : MonoBehaviour
 
     void Start()
     {
+
         List<InteractableTiles>  levelTiles = new List<InteractableTiles>();
         levelTiles.AddRange(FindObjectsByType<InteractableTiles>(FindObjectsSortMode.None));
-
+        
         foreach (InteractableTiles tile in levelTiles)
         {
             if (tile.levelName == PlayerPrefs.GetString("LastLevelCleared"))
@@ -63,7 +64,7 @@ public class PlayerPathFollower : MonoBehaviour
                 passedCurrentTile = true;
             }
 
-            if (passedCurrentTile)
+            if (passedCurrentTile && currentIndex != pathTiles.Count)
             {
                 transform.SetParent(null);
 
