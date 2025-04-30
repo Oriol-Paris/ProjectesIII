@@ -5997,7 +5997,7 @@ MonoBehaviour:
   m_CustomShadowLayers: 0
   m_ShadowLayerMask: 1
   m_ShadowRenderingLayers: 1
-  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieSize: {x: 20, y: 20}
   m_LightCookieOffset: {x: 0, y: 0}
   m_SoftShadowQuality: 0
 --- !u!108 &850690538
@@ -6011,7 +6011,7 @@ Light:
   serializedVersion: 11
   m_Type: 1
   m_Color: {r: 0.4747668, g: 0.81201476, b: 0.90188676, a: 1}
-  m_Intensity: 0.5
+  m_Intensity: 2
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -6042,7 +6042,7 @@ Light:
       e32: 0
       e33: 1
     m_UseCullingMatrixOverride: 0
-  m_Cookie: {fileID: 0}
+  m_Cookie: {fileID: 8600000, guid: b02ffbf634488d348a96445666105ed2, type: 2}
   m_DrawHalo: 0
   m_Flare: {fileID: 0}
   m_RenderMode: 0
@@ -6073,13 +6073,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 850690536}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.5924758, y: -0.08156375, z: 0.12038716, w: 0.79235524}
+  m_LocalRotation: {x: 0.35605028, y: -0.15893863, z: 0.20801972, w: 0.89704776}
   m_LocalPosition: {x: -1.7838846, y: -6.4541397, z: -3.324193}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 73.444, y: 2.695, z: 19.289}
+  m_LocalEulerAnglesHint: {x: 44.822, y: -11.138, z: 21.506}
 --- !u!1 &855453372
 GameObject:
   m_ObjectHideFlags: 0

@@ -5714,7 +5714,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3261416090597597630}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4eb1a3aadcd540d4cac6d8b7a6ba4a5d, type: 3}
   m_Name: 
@@ -8994,7 +8994,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 835ee301fa059f844b201182135e437d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1130381661}
+  player: {fileID: 1506150659}
   interactableTiles:
   - {fileID: 1683020241}
   - {fileID: 266160154}
@@ -10214,6 +10214,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 5f1dbebda1c482c44891a0896c9b106a, type: 3}
   m_PrefabInstance: {fileID: 1502378266}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1506150659 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -2253911629886400664, guid: 34c246fb73a2d534f9b2ab47d8bdfb03, type: 3}
+  m_PrefabInstance: {fileID: 1130381660}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1513593738
 PrefabInstance:
@@ -14814,23 +14819,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   mov: {x: 0.26, y: 0, z: 0.73}
---- !u!114 &2335131261133432860
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7840261294183863666}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IsGlobal: 0
-  priority: 1
-  blendDistance: 0
-  weight: 1
-  sharedProfile: {fileID: 11400000, guid: 3414349641a3f834ab6ea93e1c4b1f46, type: 2}
 --- !u!81 &2367704585527197953
 AudioListener:
   m_ObjectHideFlags: 0
@@ -14863,11 +14851,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3261416090597597630}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cc3e07f7e63ec3a45bd59413e869fcc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  volumeProfile: {fileID: 11400000, guid: 3414349641a3f834ab6ea93e1c4b1f46, type: 2}
   colorPostProces: {fileID: 0}
   player: {fileID: 0}
   zoomedFOV: 50
@@ -15003,7 +14992,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4753804141047951926}
-  - component: {fileID: 2335131261133432860}
   - component: {fileID: 5714267568076410160}
   m_Layer: 0
   m_Name: Global Volume
