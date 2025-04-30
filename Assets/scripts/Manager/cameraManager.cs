@@ -2,12 +2,14 @@ using System.Collections;
 using System.Timers;
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.Rendering.PostProcessing;
 using UnityEngine.UIElements;
 
 public class cameraManager : MonoBehaviour
 {
     [SerializeField]VolumeProfile volumeProfile;
-    public UnityEngine.Rendering.Universal.Vignette colorPostProces;
+    [SerializeField]public Vignette colorPostProces;
+
     Vector3 originalPosition;
     Vector3 movingPosition;
 
@@ -34,7 +36,7 @@ public class cameraManager : MonoBehaviour
         if (!volumeProfile) throw new System.NullReferenceException(nameof(VolumeProfile));
         if (colorPostProces != null)
         {
-            if (!volumeProfile.TryGet(out colorPostProces)) throw new System.NullReferenceException(nameof(colorPostProces));
+            //if (!volumeProfile.TryGet(out colorPostProces)) throw new System.NullReferenceException(nameof(colorPostProces));
         }
        
         
@@ -169,6 +171,7 @@ public class cameraManager : MonoBehaviour
         }
 
         yield return null;
+        
     }
     public void RemoveVignette()
     {
