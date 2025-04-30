@@ -414,8 +414,8 @@ public class PlayerBase : MonoBehaviour
 
     public void SetRange(float newRange) { range = newRange; }
     public void SetInAction(bool newVal) { isInAction = newVal; }
-    public void AddNewAction(Action action) { availableActions.Add(action); }
-    public void DeleteAction() { availableActions.RemoveAt(availableActions.Count-1); }
+    public void AddNewAction(Action action) { availableActions.Add(action); playerData.Save(); }
+    public void DeleteAction() { availableActions.RemoveAt(availableActions.Count-1); playerData.Save(); }
 
     #endregion
 

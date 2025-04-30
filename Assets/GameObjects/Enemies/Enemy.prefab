@@ -108,8 +108,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player: {fileID: 0}
-  velocity: 3
-  range: 5
+  velocity: 1
+  range: 2
   restTime: 1.5
   agent: {fileID: 0}
   attack: {fileID: 7759827871994263388, guid: 6ce8b6e7e6db5eb4f9a071dcca88a7a8, type: 3}
@@ -223,10 +223,10 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 2
-  m_Acceleration: 8
+  m_Speed: 1.5
+  m_Acceleration: 5
   avoidancePriority: 50
-  m_AngularSpeed: 120
+  m_AngularSpeed: 75
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
