@@ -6,7 +6,7 @@ using UnityEngine.UIElements;
 
 public class cameraManager : MonoBehaviour
 {
-    VolumeProfile volumeProfile;
+    [SerializeField]VolumeProfile volumeProfile;
     public UnityEngine.Rendering.Universal.Vignette colorPostProces;
     Vector3 originalPosition;
     Vector3 movingPosition;
@@ -32,8 +32,11 @@ public class cameraManager : MonoBehaviour
         
         volumeProfile = GameObject.Find("Global Volume").GetComponent<Volume>()?.profile;
         if (!volumeProfile) throw new System.NullReferenceException(nameof(VolumeProfile));
-        
-        if (!volumeProfile.TryGet(out colorPostProces)) throw new System.NullReferenceException(nameof(colorPostProces));
+        if (colorPostProces != null)
+        {
+            if (!volumeProfile.TryGet(out colorPostProces)) throw new System.NullReferenceException(nameof(colorPostProces));
+        }
+       
         
         
     }
