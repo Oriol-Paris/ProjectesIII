@@ -8,7 +8,7 @@ using UnityEngine.UIElements;
 public class cameraManager : MonoBehaviour
 {
     [SerializeField]VolumeProfile volumeProfile;
-    [SerializeField]public Vignette colorPostProces;
+    [SerializeField]public UnityEngine.Rendering.Universal.Vignette colorPostProces;
 
     Vector3 originalPosition;
     Vector3 movingPosition;
@@ -30,17 +30,23 @@ public class cameraManager : MonoBehaviour
     void Start()
     {
         
-        originalPosition = transform.position;
+      /*  originalPosition = transform.position;
         
         volumeProfile = GameObject.Find("Global Volume").GetComponent<Volume>()?.profile;
         if (!volumeProfile) throw new System.NullReferenceException(nameof(VolumeProfile));
         if (colorPostProces != null)
         {
-            //if (!volumeProfile.TryGet(out colorPostProces)) throw new System.NullReferenceException(nameof(colorPostProces));
-        }
-       
-        
-        
+            if (!volumeProfile.TryGet(out colorPostProces)) throw new System.NullReferenceException(nameof(colorPostProces));
+        }*/
+
+        originalPosition = transform.position;
+
+volumeProfile = GameObject.Find("Global Volume").GetComponent<Volume>()?.profile;
+if (!volumeProfile) throw new System.NullReferenceException(nameof(VolumeProfile));
+
+if (!volumeProfile.TryGet(out colorPostProces)) throw new System.NullReferenceException(nameof(colorPostProces));
+//StartCoroutine(FadeInVignette(0.3f, 0.5f, Color.red));
+
     }
 
     public void FollowPlayer()
