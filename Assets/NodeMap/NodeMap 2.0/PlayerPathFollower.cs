@@ -77,7 +77,7 @@ public class PlayerPathFollower : MonoBehaviour
                 {
                     elapsed += Time.deltaTime;
                     float t = Mathf.Clamp01((elapsed * moveSpeed) / distance);
-                    transform.position = Vector3.Lerp(start, target, t);
+                    //transform.position = Vector3.Lerp(start, target, t);
                     yield return null;
                 }
 

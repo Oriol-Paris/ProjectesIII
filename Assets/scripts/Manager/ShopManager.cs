@@ -139,7 +139,7 @@ public class ShopManager : MonoBehaviour
         statIncreaseCount[actionData]++;
         if (statIncreaseCount[actionData] > 5 && (actionData.action == PlayerBase.ActionEnum.SHOOT || actionData.action == PlayerBase.ActionEnum.HEAL))
         {
-            actionData.cost += 1;  // Increase the cost of executing the action
+            if (actionData.cost < 3) { actionData.cost += 1; } //Maximum increase of 3 in cost
         }
 
         switch (actionData.action)

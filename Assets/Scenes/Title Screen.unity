@@ -61733,7 +61733,8 @@ MonoBehaviour:
   titleScreen: {fileID: 1747569848}
   creditsScreen: {fileID: 1474425243}
   continueButton: {fileID: 1241712935}
-  playerData: {fileID: 11400000, guid: 30cde2f3bd3a0de47a315ed687870d98, type: 2}
+  playerData: {fileID: 11400000, guid: 662eee5fd8a873f478dccf0dfc86e8c7, type: 2}
+  nodeMapData: {fileID: 11400000, guid: 6ef68e3488c0059429efc21e0680add7, type: 2}
 --- !u!4 &1747599880 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 14068967db4e5904eaf714f4f961fbb5, type: 3}

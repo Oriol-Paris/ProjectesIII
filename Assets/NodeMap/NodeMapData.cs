@@ -128,6 +128,25 @@ public class NodeMapData : ScriptableObject
             Save();
         }
     }
+    public void ResetData()
+    {
+        foreach (var node in nodes)
+        {
+            node.cleared = false;
+            node.enabled = false;
+            node.isCurrentLevel = false;
+        }
+
+        // Activar el primer nodo si quieres que el mapa empiece desde ahí
+        if (nodes.Count > 0)
+            nodes[0].enabled = true;
+
+        lastEnteredLevel = "";
+        enemyStatMultiplier = 1;
+        hasPlayedTutorial = false;
+
+        Save();
+    }
 
     public bool IsLevelCleared(string levelName)
     {

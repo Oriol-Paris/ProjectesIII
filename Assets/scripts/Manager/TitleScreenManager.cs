@@ -11,6 +11,7 @@ public class TitleScreenManager : MonoBehaviour
 
     [SerializeField] private Button continueButton;
     [SerializeField] private PlayerData playerData;
+    [SerializeField] private NodeMapData nodeMapData;
 
     private const string LEVEL_START_PATH = "/PlayerDataLevelStart.json";
     private const string PLAYERDATA_START_PATH = "/PlayerData.json";
@@ -18,14 +19,9 @@ public class TitleScreenManager : MonoBehaviour
 
     public void Continue()
     {
-        if(File.Exists(Application.persistentDataPath + NODEMAP_START_PATH))
-        {
-            SceneManager.LoadScene("NodeMap");
-        }
-        else
-        {
-            SceneManager.LoadScene("Tutorial");
-        }
+        
+    SceneManager.LoadScene("Node Map 2.0");
+        
     }
 
     public void NewGame()
@@ -38,9 +34,10 @@ public class TitleScreenManager : MonoBehaviour
         File.Delete(playerDataPath);
         File.Delete(nodeMapPath);
 
-        playerData.InitializeAllData();
-        playerData.LoadOriginalPlayer();
-
+        playerData.CopyDataFrom(playerData.originalPlayer);
+        playerData.Save();
+        nodeMapData.ResetData();
+        nodeMapData.Save();
         SceneManager.LoadScene("Tutorial");
     }
 
