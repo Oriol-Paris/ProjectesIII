@@ -202,8 +202,8 @@
     },
     "m_FragmentContext": {
         "m_Position": {
-            "x": 130.99998474121095,
-            "y": 197.99998474121095
+            "x": 119.00001525878906,
+            "y": 192.99998474121095
         },
         "m_Blocks": [
             {
@@ -821,7 +821,7 @@
     "m_Hidden": false,
     "m_ShaderOutputName": "Metallic",
     "m_StageCapability": 2,
-    "m_Value": 0.0,
+    "m_Value": 2.0,
     "m_DefaultValue": 0.0,
     "m_Labels": []
 }
@@ -1440,10 +1440,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -732.0,
-            "y": -86.66665649414063,
-            "width": 209.3333740234375,
-            "height": 280.0
+            "x": -872.0,
+            "y": -99.0000228881836,
+            "width": 208.00006103515626,
+            "height": 278.0000305175781
         }
     },
     "m_Slots": [
@@ -1569,9 +1569,9 @@
     "m_ShaderOutputName": "Emission",
     "m_StageCapability": 2,
     "m_Value": {
-        "x": 0.0,
-        "y": 0.0,
-        "z": 0.0
+        "x": 0.009433984756469727,
+        "y": 0.0036044956650584938,
+        "z": 0.0036044942680746319
     },
     "m_DefaultValue": {
         "x": 0.0,
@@ -1604,7 +1604,7 @@
     "m_RenderFace": 0,
     "m_AlphaClip": true,
     "m_CastShadows": true,
-    "m_ReceiveShadows": true,
+    "m_ReceiveShadows": false,
     "m_DisableTint": false,
     "m_AdditionalMotionVectorMode": 0,
     "m_AlembicMotionVectors": false,
