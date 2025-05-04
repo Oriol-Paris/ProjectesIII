@@ -428,7 +428,7 @@ public class PlayerData : ScriptableObject
         isAlive = source.isAlive;
         victory = source.victory;
         healAmount = source.healAmount;
-
+        bulletLevels = source.bulletLevels;
         availableActions.Clear();
         foreach (var action in source.availableActions)
         {

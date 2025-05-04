@@ -36,7 +36,7 @@ public class ControlWapons : MonoBehaviour
             );
 
             player.AddNewAction(newAction);
-           
+            hasSniper = false;
         }
     }
 

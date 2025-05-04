@@ -21,7 +21,7 @@ MonoBehaviour:
   maxTime: 3
   lastLevel: Tutorial
   levelCompleted: 0
-  timesHealed: 4
+  timesHealed: 0
   timesIncreasedMaxHP: 0
   moveRange: 0
   exp: 10
