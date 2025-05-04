@@ -60,6 +60,7 @@ public class PlayerBase : MonoBehaviour
     public bool defeat;
     [SerializeField] AudioClip[] damageClips;
     [SerializeField] GameObject bloodSplash;
+    [SerializeField] private UIBarManager healthManager;
 
     #endregion
 
@@ -334,7 +335,7 @@ public class PlayerBase : MonoBehaviour
 
         health = Mathf.Min(health, maxHealth);
         playerData.health = Mathf.Min(playerData.health, maxHealth);
-
+        healthManager.AddSlot(playerData.healAmount);
         activeAction = Action.nothing;
     }
 

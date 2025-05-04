@@ -25,7 +25,6 @@ public class PlayerActionManager : MonoBehaviour
 
     [SerializeField] public List<GameObject> visualPlayerAfterShoot = new List<GameObject>();
     [SerializeField] public List<LineRenderer> preShootPath = new List<LineRenderer>();
-
     public GameObject prefPreShoot;
 
     public TimeSecuence timeSceuence;
@@ -243,12 +242,14 @@ public class PlayerActionManager : MonoBehaviour
 
     private IEnumerator HealCoroutine(Vector3 newPos)
     {
+        
         passiveActions[PlayerBase.ActionEnum.HEAL].Execute(player, newPos);
-        if (!actionPointReduced)
+        if (!actionPointReduced && player.health < player.maxHealth)
         {
             actionPointReduced = true;
             player.actionPoints -= player.GetAction().m_cost;
             playerData.actionPoints -= player.GetAction().m_cost;
+            
         }
         yield return new WaitForSeconds(1f); // Adjust the delay as needed
         if (!hasHealed)
