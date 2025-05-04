@@ -9,6 +9,9 @@ public class PlayerStatsSlider : MonoBehaviour
     public GameObject blurBG;
     public GameObject exitText;
 
+    public AudioSource enterSfxSource;
+    public AudioSource exitSfxSource;
+
     private void Start()
     {
         startPos = transform.position;
@@ -18,11 +21,13 @@ public class PlayerStatsSlider : MonoBehaviour
 
     public void SlideOut()
     {
+        enterSfxSource.Play();
         StartCoroutine(LerpMovement(startPos, endPos, true));
     }
 
     public void SlideIn()
     {
+        exitSfxSource.Play();
         StartCoroutine(LerpMovement(endPos, startPos, false));
         blurBG.SetActive(false);
         exitText.SetActive(false);

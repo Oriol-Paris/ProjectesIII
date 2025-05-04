@@ -22,6 +22,8 @@ public class ShopManager : MonoBehaviour
     public Sprite maxHPImage;
     public Sprite laserImage;
     [SerializeField] private HotbarManager hotbarManager;
+    [SerializeField] private AudioSource buyItemSfx;
+
 
     private List<PlayerData.ActionData> actionPool;
     private List<PlayerData.ActionData> activeActions;
@@ -46,6 +48,7 @@ public class ShopManager : MonoBehaviour
 
     public void BuyItem(TextMeshProUGUI itemText)
     {
+        buyItemSfx.Play();
         string itemName = itemText.text;
         ActionData actionData = actionPool.Find(action => GetActionDisplayName(action) == itemName);
         int index = buttons.FindIndex(button => button.transform.Find("Item Name").GetComponent<TextMeshProUGUI>().text == itemName);

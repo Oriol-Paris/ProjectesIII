@@ -21,6 +21,7 @@ public class TopBarManager : MonoBehaviour
     public Sprite shotgunImage;
     public Sprite laserImage;
     public Sprite healImage;
+    public Sprite weaponPickupImage;
 
     void Start()
     {
@@ -124,21 +125,13 @@ public class TopBarManager : MonoBehaviour
             // Highlight the selected action
             if (action.m_action == player.GetAction().m_action)
             {
-                
-                if (action.m_action == PlayerBase.ActionEnum.SHOOT)
+                if (action.m_key == player.GetAction().m_key)
                 {
-                    if (action.m_style.bulletType == player.GetAction().m_style.bulletType)
-                    {
-                        actionBorder.color = Color.yellow;
-                    }
-                    else
-                    {
-                        actionBorder.color = Color.white;
-                    }
+                    actionBorder.color = Color.yellow;
                 }
                 else
                 {
-                    actionBorder.color = Color.yellow;
+                    actionBorder.color = Color.white;
                 }
             }
             else
@@ -249,6 +242,10 @@ public class TopBarManager : MonoBehaviour
         else if (action.m_action == PlayerBase.ActionEnum.MOVE)
         {
             return runImage;
+        }
+        else if (action.m_action == PlayerBase.ActionEnum.ESPECIALSHOOT)
+        {
+            return weaponPickupImage;
         }
         return null;
     }

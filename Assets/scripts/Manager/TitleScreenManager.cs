@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -13,42 +15,33 @@ public class TitleScreenManager : MonoBehaviour
     [SerializeField] private PlayerData playerData;
     [SerializeField] private NodeMapData nodeMapData;
 
+    [SerializeField] private AudioSource enterSfxSource;
+    [SerializeField] private AudioSource exitSfxSource;
+
     private const string LEVEL_START_PATH = "/PlayerDataLevelStart.json";
     private const string PLAYERDATA_START_PATH = "/PlayerData.json";
     private const string NODEMAP_START_PATH = "/NodeMapData.json";
 
     public void Continue()
     {
-        
-    SceneManager.LoadScene("Node Map 2.0");
-        
+        StartCoroutine(PlaySFX(false));
     }
 
     public void NewGame()
     {
-        string levelStartPath = Application.persistentDataPath + LEVEL_START_PATH;
-        string playerDataPath = Application.persistentDataPath + PLAYERDATA_START_PATH;
-        string nodeMapPath = Application.persistentDataPath + NODEMAP_START_PATH;
-
-        File.Delete(levelStartPath);
-        File.Delete(playerDataPath);
-        File.Delete(nodeMapPath);
-
-        playerData.CopyDataFrom(playerData.originalPlayer);
-        playerData.Save();
-        nodeMapData.ResetData();
-        nodeMapData.Save();
-        SceneManager.LoadScene("Tutorial");
+        StartCoroutine(PlaySFX(true));
     }
 
     public void BootSettings()
     {
+        enterSfxSource.Play();
         creditsScreen.enabled = false;
         settings.enabled = true;
         titleScreen.enabled = false;
     }
     public void BootCredits()
     {
+        enterSfxSource.Play();
         creditsScreen.enabled = true;
         settings.enabled = false;
         titleScreen.enabled = false;
@@ -58,6 +51,7 @@ public class TitleScreenManager : MonoBehaviour
     {
         if (creditsScreen.enabled)
         {
+            exitSfxSource.Play();
             settings.enabled = false;
             creditsScreen.enabled = false;
             titleScreen.enabled = true;
@@ -67,6 +61,7 @@ public class TitleScreenManager : MonoBehaviour
     {
         if (settings.enabled)
         {
+            exitSfxSource.Play();
             settings.enabled = false;
             creditsScreen.enabled = false;
             titleScreen.enabled = true;
@@ -84,6 +79,37 @@ public class TitleScreenManager : MonoBehaviour
 
     public void CloseGame()
     {
+        exitSfxSource.Play();
         Application.Quit();
+    }
+
+    private IEnumerator PlaySFX(bool newGame)
+    {
+        enterSfxSource.Play();
+        yield return new WaitForSeconds(0.1f);
+        
+        if(newGame)
+        {
+            string levelStartPath = Application.persistentDataPath + LEVEL_START_PATH;
+            string playerDataPath = Application.persistentDataPath + PLAYERDATA_START_PATH;
+            string nodeMapPath = Application.persistentDataPath + NODEMAP_START_PATH;
+
+            File.Delete(levelStartPath);
+            File.Delete(playerDataPath);
+            File.Delete(nodeMapPath);
+
+            playerData.CopyDataFrom(playerData.originalPlayer);
+            playerData.Save();
+            nodeMapData.ResetData();
+            nodeMapData.Save();
+            PlayerPrefs.SetFloat("DifficultyMultiplier", 1);
+            PlayerPrefs.SetString("LastLevelCleared", "");
+
+            SceneManager.LoadScene("Tutorial");
+        }
+        else
+        {
+            SceneManager.LoadScene("Node Map 2.0");
+        }
     }
 }

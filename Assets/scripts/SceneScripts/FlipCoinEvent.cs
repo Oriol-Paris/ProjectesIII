@@ -17,6 +17,8 @@ public class FlipCoinEvent : MonoBehaviour
     [SerializeField] private Canvas exitCanvas;
     [SerializeField] private PlayerData playerData;
 
+    [SerializeField] private AudioSource audioSource;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -33,6 +35,7 @@ public class FlipCoinEvent : MonoBehaviour
         {
             if (currentState == eventState.INTRODUCTION)
             {
+                audioSource.Play();
                 currentState = eventState.DECISION;
                 eventText.SetIsTyping(true);
                 eventText.textFullyDisplayed = false;
@@ -103,6 +106,7 @@ public class FlipCoinEvent : MonoBehaviour
 
     void FlipCoin()
     {
+        audioSource.Play();
         prizeSide = (Random.value > 0.5f) ? coinSide.HEADS : coinSide.TAILS;
         currentState = eventState.OUTCOME;
         UpdateCurrentState();
@@ -110,6 +114,8 @@ public class FlipCoinEvent : MonoBehaviour
 
     public void ExitScene()
     {
+        audioSource.Play();
+        DontDestroyOnLoad(audioSource);
         PlayerPrefs.SetString("LastLevelCleared", SceneManager.GetActiveScene().name);
 
         SceneManager.LoadScene("Node Map 2.0");
