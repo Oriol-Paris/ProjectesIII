@@ -8,14 +8,8 @@ public class GoToFight : MonoBehaviour
 
     public void NextRound()
     {
-        StartCoroutine(NextRoundwSfx());
-    }
-
-    private IEnumerator NextRoundwSfx()
-    {
         enterSfxSource.Play();
-        yield return new WaitForSeconds(enterSfxSource.clip.length);
-
+        DontDestroyOnLoad(enterSfxSource);
         PlayerPrefs.SetString("LastLevelCleared", SceneManager.GetActiveScene().name);
         SceneManager.LoadScene("Node Map 2.0");
     }
