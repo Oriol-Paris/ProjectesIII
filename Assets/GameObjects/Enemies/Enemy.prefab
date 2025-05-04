@@ -369,7 +369,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f01212257cd44aa47874d3748e5aca8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  armaADropear: {fileID: 2963957361952757195, guid: a7614af2d32765440a4cb398a6fae786, type: 3}
+  armaADropear:
+  - {fileID: 4818474983771764526, guid: 047b0e437f94dd14a8cb7513527bd571, type: 3}
+  - {fileID: 2963957361952757195, guid: a7614af2d32765440a4cb398a6fae786, type: 3}
+  - {fileID: 2930567190566246003, guid: 500352edff27d454c8239d34ca421ebc, type: 3}
   probabilidadDrop: 86.1
 --- !u!1 &3148137900309033181
 GameObject:

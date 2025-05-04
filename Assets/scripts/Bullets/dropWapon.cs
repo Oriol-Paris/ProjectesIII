@@ -1,32 +1,32 @@
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Splines;
 
 public class dropWapon : MonoBehaviour
 {
-    [Header("Prefab del arma a soltar")]
-    public GameObject armaADropear;
+    [Header("Prefabs de armas a soltar")]
+    public List<GameObject> armaADropear;
 
-    [Header("Probabilidad de soltar el arma (en %)")]
+    [Header("Probabilidad de soltar un arma (en %)")]
     [Range(0f, 100f)]
     public float probabilidadDrop = 99f;
 
-   public void Start()
+    public void Start()
     {
-        if (armaADropear == null) return;
+        
+        if (armaADropear == null || armaADropear.Count == 0) return;
 
-
+        
         float chance = Random.Range(0f, 100f);
-
-
         if (chance < probabilidadDrop)
         {
-            Instantiate(armaADropear, transform.position, Quaternion.identity);
+            
+            int index = Random.Range(0, armaADropear.Count);
+            GameObject arma = armaADropear[index];
+
+            if (arma != null)
+            {
+                Instantiate(arma, transform.position, Quaternion.identity);
+            }
         }
-
-
-
-
-
     }
-   
 }
