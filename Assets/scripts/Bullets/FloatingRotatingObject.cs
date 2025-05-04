@@ -27,7 +27,7 @@ public class FloatingRotatingObject : MonoBehaviour
         float newY = startPos.y + Mathf.Sin(Time.time * floatFrequency) * floatAmplitude;
         transform.position = new Vector3(transform.position.x, newY, transform.position.z);
 
-        if (GetComponent<MeshRenderer>().enabled == false )
+        if (GetComponent<SpriteRenderer>().enabled == false )
         {
             torch.SetActive(false);
         }
