@@ -16,7 +16,7 @@ public class ControlWapons : MonoBehaviour
         {
             objetoObtenido = other.gameObject; 
             hasSniper = true;
-            other.GetComponent<MeshRenderer>().enabled = false; 
+            other.GetComponent<SpriteRenderer>().enabled = false; 
             other.GetComponent<BoxCollider>().enabled = false; 
             bulletCollection.prefabs.Add(objetoObtenido);
 

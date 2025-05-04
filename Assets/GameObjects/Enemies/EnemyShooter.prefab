@@ -466,7 +466,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f01212257cd44aa47874d3748e5aca8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  armaADropear: {fileID: 0}
+  armaADropear: {fileID: 2930567190566246003, guid: 500352edff27d454c8239d34ca421ebc, type: 3}
   probabilidadDrop: 99
 --- !u!1 &4429760746157634568
 GameObject:
