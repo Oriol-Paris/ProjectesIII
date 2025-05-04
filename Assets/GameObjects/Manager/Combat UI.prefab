@@ -2499,8 +2499,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Execute Sequence
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 3fe0eb6918950e74283f4f926376cc9d, type: 2}
+  m_sharedMaterial: {fileID: -7990055617794105862, guid: 3fe0eb6918950e74283f4f926376cc9d, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2524,8 +2524,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 22
-  m_fontSizeBase: 22
+  m_fontSize: 25
+  m_fontSizeBase: 25
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2635,8 +2635,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Reset Sequence
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 3fe0eb6918950e74283f4f926376cc9d, type: 2}
+  m_sharedMaterial: {fileID: -7990055617794105862, guid: 3fe0eb6918950e74283f4f926376cc9d, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -2660,8 +2660,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 22
-  m_fontSizeBase: 22
+  m_fontSize: 25
+  m_fontSizeBase: 25
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -3337,18 +3337,6 @@ PrefabInstance:
     - target: {fileID: 2102460365194555068, guid: 7ccf08d1ffd93904ea8cdfaab44636aa, type: 3}
       propertyPath: m_Name
       value: Pause Menu
-      objectReference: {fileID: 0}
-    - target: {fileID: 2102460365194555068, guid: 7ccf08d1ffd93904ea8cdfaab44636aa, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4416788497169924589, guid: 7ccf08d1ffd93904ea8cdfaab44636aa, type: 3}
-      propertyPath: combatUI
-      value: 
-      objectReference: {fileID: 3756221182688151061}
-    - target: {fileID: 5935945455553391026, guid: 7ccf08d1ffd93904ea8cdfaab44636aa, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6117016437605025760, guid: 7ccf08d1ffd93904ea8cdfaab44636aa, type: 3}
       propertyPath: m_LocalPosition.x
