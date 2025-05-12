@@ -138,6 +138,7 @@ GameObject:
   - component: {fileID: 535729429190450929}
   - component: {fileID: 262411935793692627}
   - component: {fileID: 6478771320280442240}
+  - component: {fileID: 4689391498173898529}
   m_Layer: 6
   m_Name: Enemy
   m_TagString: Enemy
@@ -374,6 +375,18 @@ MonoBehaviour:
   - {fileID: 2963957361952757195, guid: a7614af2d32765440a4cb398a6fae786, type: 3}
   - {fileID: 2930567190566246003, guid: 500352edff27d454c8239d34ca421ebc, type: 3}
   probabilidadDrop: 86.1
+--- !u!114 &4689391498173898529
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2547532622408290678}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73070a3688dc95a45a1b0df9dcc7f4de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3148137900309033181
 GameObject:
   m_ObjectHideFlags: 0
