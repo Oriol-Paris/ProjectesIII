@@ -1,116 +1,156 @@
 using UnityEngine;
 using UnityEngine.AI;
+using System.Collections;
+using UnityEngine.Splines;
 
 public class Enemies : MonoBehaviour
 {
+    [Header("Stats")]
     public float speed;
-    public float rango;
+    public float range;
     public float preAttack;
     public float timeAttack;
     public float postAttack;
-    public bool isAttacking = false; 
+    public bool isAlive;
+
+    [Space(5)]
+    [Header("States")]
+    public bool isAttacking = false;
     public bool isSleeping = false;
 
+    [Space(5)]
+    [Header("Health")]
+    [SerializeField] private int health;
 
+    [Space(5)]
+    [Header("Player Reference")]
     [SerializeField] private TimeSecuence Player;
-    private Vector3 PlayerPos;
-    private EnemyBase enemyStats;
-    [SerializeField] private float velocity;
-    [SerializeField] private float range;
-    [SerializeField] private float restTime = 1.5f; // Tiempo de descanso tras un ataque
 
-    [SerializeField] private NavMeshAgent agent; // Referencia al NavMeshAgent
+    [Space(5)]
+    [Header("Components")]
+    [SerializeField] private SpriteRenderer spriteRenderer;
+    [SerializeField] private NavMeshAgent agent;
+    [SerializeField] private Animator animator;
+
+    [Space(5)]
+    [Header("Combat")]
     [SerializeField] private GameObject attack;
-    private SpriteRenderer spriteRenderer; // Referencia al SpriteRenderer
-    private bool isResting = false; // Indica si el enemigo está en descanso
-    [SerializeField] private float stopDistance = 1.0f; // Distance to stop from the player
+    [SerializeField] private GameObject bloodSplash;
+    [SerializeField] private AudioClip[] attackClips;
+    [SerializeField] private AudioClip[] damageClips;
 
-    [SerializeField] AudioClip[] attackClips;
-
+    [Space(5)]
+    [Header("Runtime/Internal")]
+    private EnemyBase enemyStats;
+    private Vector3 PlayerPos;
+    private bool isResting = false;
 
 
     void Start()
     {
-        Player = FindAnyObjectByType<TimeSecuence>();
+
         enemyStats = GetComponent<EnemyBase>();
-        agent = GetComponent<NavMeshAgent>(); // Obtener el NavMeshAgent
-        agent.speed = velocity * PlayerPrefs.GetFloat("DifficultyMultiplier");
-        range *= PlayerPrefs.GetFloat("DifficultyMultiplier");
-        agent.updateRotation = false;
-
-        spriteRenderer = GetComponent<SpriteRenderer>(); // Obtener el componente SpriteRenderer
+        agent = GetComponent<NavMeshAgent>();
+        agent.acceleration = 999f;
+        agent.angularSpeed = 999f;
+        isAlive = true;
     }
-
-   
     void Update()
     {
-        if (enemyStats.isAlive) // No moverse si está descansando
+        if (enemyStats.isAlive && !isResting) // No moverse si está descansando
         {
-            PlayerPos = Player.transform.position;
-            float distanceToPlayer = Vector3.Distance(transform.position, PlayerPos);
-
-            // Voltear sprite dependiendo de la posición del jugador
+            Movment();
             spriteRenderer.flipX = PlayerPos.x < transform.position.x;
-
-
-
-            if (Player.GetIsExecuting() || Player.GetComponent<PlayerBase>().GetInAction())
-            {
-                if (distanceToPlayer <= range)
-                {
-                    Attack();
-                }
-                agent.isStopped = false;
-                GetComponent<Animator>().SetBool("isMoving", true);
-
-                // Calculate the destination with an offset
-                Vector3 directionToPlayer = (PlayerPos - transform.position).normalized;
-                Vector3 destination = PlayerPos - directionToPlayer * stopDistance;
-                agent.SetDestination(destination); // Usar NavMeshAgent para moverse hacia el jugador
-            }
-            else
-            {
-
-                GetComponent<Animator>().SetBool("isMoving", false);
-                agent.isStopped = true;
-                agent.velocity = Vector3.zero;
-
-            }
         }
         else
         {
-            agent.speed = 0;
+            agent.isStopped = true;
+        }
+
+    }
+    void Movment()
+    {
+
+        PlayerPos = Player.transform.position;
+        float distanceToPlayer = Vector3.Distance(transform.position, PlayerPos);
+        if (Player.GetIsExecuting())
+        {
+            if (distanceToPlayer <= range)
+            {
+                StartCoroutine(AttackCoroutine());
+                SoundEffectsManager.instance.PlaySoundFXClip(attackClips, transform, 1f);
+            }
+            animator.SetBool("isMoving", true);
+
+            agent.isStopped = false;
+            agent.SetDestination(PlayerPos);
+        }
+        else
+        {
+            animator.SetBool("isMoving", false);
+            agent.isStopped = true;
+            agent.velocity = Vector3.zero;
+           
         }
     }
 
     IEnumerator AttackCoroutine()
     {
         isResting = true; // Comienza el descanso
-        Debug.Log("Attacking");
+
+        GetComponent<Animator>().SetTrigger("preAttack");
+        yield return new WaitForSeconds(preAttack);
+
         GetComponent<Animator>().SetTrigger("attack");
 
         GameObject _attack = Instantiate(attack, transform.position, Quaternion.identity, transform);
-        yield return new WaitForSeconds(0.5f);
+
+        yield return new WaitForSeconds(timeAttack);
 
         Destroy(_attack);
 
-        yield return new WaitForSeconds(restTime);
+
+        yield return new WaitForSeconds(postAttack);
 
         isResting = false;
     }
 
-    public void Attack()
+    public void Damage(int val, GameObject hitObject)
     {
-        if (!isResting) // Evita que ataque si aún está descansando
+      
+        health -= val;
+        health = Mathf.Max(health, 0);
+        Instantiate(bloodSplash, this.transform.position, hitObject.transform.rotation);
+        if (health > 0)
         {
-            StartCoroutine(AttackCoroutine());
-            SoundEffectsManager.instance.PlaySoundFXClip(attackClips, transform, 1f);
+            StartCoroutine(StopMovementTemporarily(0.2f));
         }
+        else
+        {
+            animator.SetBool("isDead", true);
+            GetComponent<dropWapon>().enabled = true;
+            isAlive = false;
+            GetComponent<Collider>().enabled = false;
+        }   
     }
 
-
+    private IEnumerator StopMovementTemporarily(float duration)
+    {
+        agent.isStopped = true;
+        animator.SetBool("isMoving", false);
+        StartCoroutine(Shake(0.2f, 0.3f));      
+        SoundEffectsManager.instance.PlaySoundFXClip(damageClips, transform, 1f);
+        yield return new WaitForSeconds(duration);       
+        if (Player.GetIsExecuting() && !isResting)
+        {
+            agent.isStopped = false;
+            animator.SetBool("isMoving", true);
+        }
+    }
+    public float GetHealth() { return health; }
     public IEnumerator Shake(float timeLenght, float range)
     {
+        UnityEngine.Vector3 originalPosition = this.transform.position;
         float elapsed = 0.0f;
         while (elapsed < timeLenght)
         {

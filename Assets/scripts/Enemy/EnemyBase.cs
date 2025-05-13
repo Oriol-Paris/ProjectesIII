@@ -129,10 +129,6 @@ public class EnemyBase : MonoBehaviour
         transform.position = originalPosition;
 
     }
-
-    public float GetRange() { return range; }
-    public void SetRange(float newRange) { range = newRange; }
-    public float GetOldRange() { return oldRange; }
-    public bool GetIsMoving() { return isMoving; }
-    public bool GetIsShoooting() { return isShoooting; }
+ 
+   
 }
