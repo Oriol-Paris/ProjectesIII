@@ -24,7 +24,7 @@ public class PlayerPathFollower : MonoBehaviour
         {
             if (tile.levelName == PlayerPrefs.GetString("LastLevelCleared"))
             {
-                if (tile.levelName == "Level6")
+                if (tile.levelName == "Level5")
                 {
                     transform.position = levelTiles[0].transform.position + new Vector3(0, yOffset, 0);
                     transform.SetParent(levelTiles[0].transform);

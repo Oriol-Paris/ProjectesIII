@@ -77,7 +77,7 @@ public class CombatManager : MonoBehaviour
                 
             }
 
-            if (SceneManager.GetActiveScene().name == "Level6")
+            if (SceneManager.GetActiveScene().name == "Level5")
             {
                 PlayerPrefs.SetString("LastLevelCleared", "Tutorial");
                 PlayerPrefs.SetFloat("DifficultyMultiplier", PlayerPrefs.GetFloat("DifficultyMultiplier") + 0.5f);

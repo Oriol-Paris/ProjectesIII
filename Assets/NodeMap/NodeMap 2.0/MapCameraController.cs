@@ -30,7 +30,7 @@ public class MapCameraController : MonoBehaviour
         {
             if(tile.levelName == PlayerPrefs.GetString("LastLevelCleared"))
             {
-                if(tile.levelName == "Level6")
+                if(tile.levelName == "Level5")  
                 {
                     transform.position = new Vector3(tile.transform.position.x, transform.position.y, -15.0f);
                 }
