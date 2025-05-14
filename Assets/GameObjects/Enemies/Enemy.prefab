@@ -387,6 +387,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73070a3688dc95a45a1b0df9dcc7f4de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 0
+  range: 0
+  preAttack: 0
+  timeAttack: 0
+  postAttack: 0
+  isAlive: 0
+  isAttacking: 0
+  isSleeping: 0
+  health: 0
+  Player: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  agent: {fileID: 0}
+  animator: {fileID: 0}
+  attack: {fileID: 0}
+  bloodSplash: {fileID: 0}
+  attackClips: []
+  damageClips: []
 --- !u!1 &3148137900309033181
 GameObject:
   m_ObjectHideFlags: 0
