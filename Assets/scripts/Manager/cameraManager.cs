@@ -2,12 +2,14 @@ using System.Collections;
 using System.Timers;
 using UnityEngine;
 using UnityEngine.Rendering;
+using UnityEngine.Rendering.PostProcessing;
 using UnityEngine.UIElements;
 
 public class cameraManager : MonoBehaviour
 {
-    VolumeProfile volumeProfile;
-    public UnityEngine.Rendering.Universal.Vignette colorPostProces;
+    [SerializeField]VolumeProfile volumeProfile;
+    [SerializeField]public UnityEngine.Rendering.Universal.Vignette colorPostProces;
+
     Vector3 originalPosition;
     Vector3 movingPosition;
 
@@ -28,14 +30,23 @@ public class cameraManager : MonoBehaviour
     void Start()
     {
         
-        originalPosition = transform.position;
+      /*  originalPosition = transform.position;
         
         volumeProfile = GameObject.Find("Global Volume").GetComponent<Volume>()?.profile;
         if (!volumeProfile) throw new System.NullReferenceException(nameof(VolumeProfile));
-        
-        if (!volumeProfile.TryGet(out colorPostProces)) throw new System.NullReferenceException(nameof(colorPostProces));
-        
-        
+        if (colorPostProces != null)
+        {
+            if (!volumeProfile.TryGet(out colorPostProces)) throw new System.NullReferenceException(nameof(colorPostProces));
+        }*/
+
+        originalPosition = transform.position;
+
+volumeProfile = GameObject.Find("Global Volume").GetComponent<Volume>()?.profile;
+if (!volumeProfile) throw new System.NullReferenceException(nameof(VolumeProfile));
+
+if (!volumeProfile.TryGet(out colorPostProces)) throw new System.NullReferenceException(nameof(colorPostProces));
+//StartCoroutine(FadeInVignette(0.3f, 0.5f, Color.red));
+
     }
 
     public void FollowPlayer()
@@ -166,6 +177,7 @@ public class cameraManager : MonoBehaviour
         }
 
         yield return null;
+        
     }
     public void RemoveVignette()
     {

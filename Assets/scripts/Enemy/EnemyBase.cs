@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class EnemyBase : MonoBehaviour
 {
-    [SerializeField] private float health;
+    [SerializeField] private int health;
     [SerializeField] private float range;
     [SerializeField] private float oldRange;//Esto para clase shooter
     [SerializeField] private float shootingRange;//Esto para cuando hagamos clase shooter
@@ -38,7 +38,7 @@ public class EnemyBase : MonoBehaviour
         enemyCollider = GetComponent<Collider>();
         rb2d = GetComponent<Rigidbody>();
 
-        health *= PlayerPrefs.GetFloat("DifficultyMultiplier");
+        health *= (int)PlayerPrefs.GetFloat("DifficultyMultiplier");
         //health *= FindAnyObjectByType<CombatManager>().enemyStatMultiplier;
 
     }

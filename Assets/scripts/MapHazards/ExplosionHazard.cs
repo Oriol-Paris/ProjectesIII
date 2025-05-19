@@ -15,11 +15,13 @@ public class ExplosionHazard : MonoBehaviour
     [SerializeField] protected float explosionSpreadDelay;
     [SerializeField] private cameraManager cameraShake;
     [SerializeField] private AudioClip[] ExplosionClip;
+    [SerializeField] GameObject explosionSprite;
 
     private void Start()
     {
         cameraShake = FindAnyObjectByType<cameraManager>();
-
+        explosionEffects.Stop();
+        explosionSprite.SetActive(false);
 
     }
 
@@ -52,11 +54,13 @@ public class ExplosionHazard : MonoBehaviour
 
     IEnumerator DelayAction(float delay, bool spread, float radius, GameObject DamageOrigin)
     {
+        
         if (spread)
         {
             yield return new WaitForSeconds(delay);
         }
         explosionEffects.Play();
+        explosionSprite.SetActive(true);
         StartCoroutine(cameraShake.Shake(0.1f, 0.8f));
         GameObject player = null;
         player = GameObject.FindGameObjectWithTag("Player");
@@ -95,11 +99,17 @@ public class ExplosionHazard : MonoBehaviour
             }
 
         }
+        
+        
         GetComponent<SpriteRenderer>().enabled = false;
         GetComponent<BoxCollider>().enabled = false;
         GetComponentInChildren<LineRenderer>().enabled = false;
         GetComponentInChildren<RadiusPrint>().enabled = false;
-      
+        
+        yield return new WaitForSeconds(delay);
+        explosionSprite.SetActive(false);
+
+
     }
 
    

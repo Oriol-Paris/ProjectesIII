@@ -35,10 +35,10 @@ public class EnemyMovementShooter : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         agent.speed = velocity;
         //agent.stoppingDistance = range;
-        players.AddRange(FindObjectsOfType<TimeSecuence>());
+        players.AddRange(FindObjectsByType<TimeSecuence>(FindObjectsSortMode.None));
 
         
-        initialMultiplier = combatManager.enemyStatMultiplier;
+        initialMultiplier = PlayerPrefs.GetFloat("DifficultyMultiplier");
         UpdateStats(initialMultiplier);
 
         agent.updateRotation = false;
@@ -47,9 +47,9 @@ public class EnemyMovementShooter : MonoBehaviour
     void Update()
     {
         
-        if (combatManager.enemyStatMultiplier != initialMultiplier)
+        if (PlayerPrefs.GetFloat("DifficultyMultiplier") != initialMultiplier)
         {
-            initialMultiplier = combatManager.enemyStatMultiplier;
+            initialMultiplier = PlayerPrefs.GetFloat("DifficultyMultiplier");
             UpdateStats(initialMultiplier);
         }
 

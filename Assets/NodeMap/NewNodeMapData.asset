@@ -18,15 +18,15 @@ MonoBehaviour:
     position: {x: 0, y: 0}
     parentIndex: -1
     childrenIndices: 
-    cleared: 1
-    enabled: 0
+    cleared: 0
+    enabled: 1
     isCurrentLevel: 0
   - type: 2
     destination: ShopScene
     position: {x: 0, y: 0}
     parentIndex: -1
     childrenIndices: 
-    cleared: 1
+    cleared: 0
     enabled: 0
     isCurrentLevel: 0
   - type: 0
@@ -34,7 +34,7 @@ MonoBehaviour:
     position: {x: 0, y: 0}
     parentIndex: -1
     childrenIndices: 
-    cleared: 1
+    cleared: 0
     enabled: 0
     isCurrentLevel: 0
   - type: 0
@@ -42,7 +42,7 @@ MonoBehaviour:
     position: {x: 0, y: 0}
     parentIndex: -1
     childrenIndices: 
-    cleared: 1
+    cleared: 0
     enabled: 0
     isCurrentLevel: 0
   - type: 0
@@ -50,7 +50,7 @@ MonoBehaviour:
     position: {x: 0, y: 0}
     parentIndex: -1
     childrenIndices: 
-    cleared: 1
+    cleared: 0
     enabled: 0
     isCurrentLevel: 0
   - type: 0

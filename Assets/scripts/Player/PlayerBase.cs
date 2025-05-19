@@ -60,6 +60,7 @@ public class PlayerBase : MonoBehaviour
     public bool defeat;
     [SerializeField] AudioClip[] damageClips;
     [SerializeField] GameObject bloodSplash;
+    [SerializeField] private UIBarManager healthManager;
 
     #endregion
 
@@ -334,7 +335,7 @@ public class PlayerBase : MonoBehaviour
 
         health = Mathf.Min(health, maxHealth);
         playerData.health = Mathf.Min(playerData.health, maxHealth);
-
+        healthManager.AddSlot(playerData.healAmount);
         activeAction = Action.nothing;
     }
 
@@ -362,7 +363,7 @@ public class PlayerBase : MonoBehaviour
         GetComponent<SpriteRenderer>().color = Color.red;
         StartCoroutine(whitecolor());
 
-        //SoundEffectsManager.instance.PlaySoundFXClip(damageClips, transform, 1f);
+        SoundEffectsManager.instance.PlaySoundFXClip(damageClips, transform, 1f);
         StartCoroutine(_camera.Flash(1f, 0.8f, Color.red));
         StartCoroutine(_camera.Shake(0.3f, 0.8f));
         Instantiate(bloodSplash, this.transform.position, hitObject.transform.rotation);
@@ -414,8 +415,8 @@ public class PlayerBase : MonoBehaviour
 
     public void SetRange(float newRange) { range = newRange; }
     public void SetInAction(bool newVal) { isInAction = newVal; }
-    public void AddNewAction(Action action) { availableActions.Add(action); }
-    public void DeleteAction() { availableActions.RemoveAt(availableActions.Count-1); }
+    public void AddNewAction(Action action) { availableActions.Add(action); playerData.Save(); }
+    public void DeleteAction() { availableActions.RemoveAt(availableActions.Count-1); playerData.Save(); }
 
     #endregion
 

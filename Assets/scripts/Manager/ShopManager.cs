@@ -7,7 +7,6 @@ using System;
 
 public class ShopManager : MonoBehaviour
 {
-    public TextMeshProUGUI rerollText;
     [SerializeField] private GameObject buttonPrefab; // Reference to the button prefab
     public Transform buttonContainer; // Reference to the container where buttons will be instantiated
     [SerializeField] public PlayerBase player;
@@ -23,9 +22,9 @@ public class ShopManager : MonoBehaviour
     public Sprite maxHPImage;
     public Sprite laserImage;
     [SerializeField] private HotbarManager hotbarManager;
+    [SerializeField] private AudioSource buyItemSfx;
 
-    public int rerollPrice;
-    bool actionExists;
+
     private List<PlayerData.ActionData> actionPool;
     private List<PlayerData.ActionData> activeActions;
     private List<int> pricePool;
@@ -47,30 +46,9 @@ public class ShopManager : MonoBehaviour
         currentXP.text = "EXP: " + player.playerData.exp;
     }
 
-    public void Reroll()
-    {
-        if (player.playerData.exp >= rerollPrice)
-        {
-            player.playerData.exp -= rerollPrice;
-            rerollPrice++;
-            rerollText.text = rerollPrice + " EXP";
-            boughtItem.enabled = false;
-
-            // Clear existing buttons and price pool
-            foreach (var button in buttons)
-            {
-                Destroy(button);
-            }
-            buttons.Clear();
-            pricePool.Clear();
-
-            // Re-initialize the shop with new actions and prices
-            InitializeShop();
-        }
-    }
-
     public void BuyItem(TextMeshProUGUI itemText)
     {
+        buyItemSfx.Play();
         string itemName = itemText.text;
         ActionData actionData = actionPool.Find(action => GetActionDisplayName(action) == itemName);
         int index = buttons.FindIndex(button => button.transform.Find("Item Name").GetComponent<TextMeshProUGUI>().text == itemName);
@@ -164,7 +142,7 @@ public class ShopManager : MonoBehaviour
         statIncreaseCount[actionData]++;
         if (statIncreaseCount[actionData] > 5 && (actionData.action == PlayerBase.ActionEnum.SHOOT || actionData.action == PlayerBase.ActionEnum.HEAL))
         {
-            actionData.cost += 1;  // Increase the cost of executing the action
+            if (actionData.cost < 3) { actionData.cost += 1; } //Maximum increase of 3 in cost
         }
 
         switch (actionData.action)
@@ -238,6 +216,10 @@ public class ShopManager : MonoBehaviour
             // Set item text
             TextMeshProUGUI itemText = button.transform.Find("Item Name").GetComponent<TextMeshProUGUI>();
             itemText.text = GetActionDisplayName(actionData);
+
+            // Set item description
+            TextMeshProUGUI itemDescription = button.transform.Find("Upgrade Text").GetComponent<TextMeshProUGUI>();
+            itemDescription.text = UpgradeText(actionData);
 
             //Set item image
             Image itemImage = button.transform.Find("Item Image").GetComponent<Image>();
@@ -371,6 +353,46 @@ public class ShopManager : MonoBehaviour
             return 20 + 20 * player.playerData.timesIncreasedMaxHP;
 
         return 100000;
+    }
+
+    public string UpgradeText(ActionData actionData)
+    {
+        if (actionData.action == PlayerBase.ActionEnum.SHOOT)
+        {
+            if (actionData.style.bulletType == BulletType.GUN)
+            {
+                return "+ Damage \n + Range";
+            }
+            else if (actionData.style.bulletType == BulletType.SHOTGUN)
+            {
+                return "++ Damage \n + Range";
+            }
+            else if (actionData.style.bulletType == BulletType.LASER)
+            {
+                return "++ Damage";
+            }
+        }
+        else if (actionData.action == PlayerBase.ActionEnum.HEAL)
+        {
+            return "+ HP healed";
+        }
+        else if (actionData.action == PlayerBase.ActionEnum.MOVE)
+        {
+            return "+ Range";
+        }
+        else if (actionData.action == PlayerBase.ActionEnum.RECOVERY)
+        {
+            return "Recover HP";
+        }
+        else if (actionData.action == PlayerBase.ActionEnum.SPEED_UP)
+        {
+            return "+ Player Speed";
+        }
+        else if (actionData.action == PlayerBase.ActionEnum.MAX_HP_INCREASE)
+        {
+            return "+ Max HP";
+        }
+        return null;
     }
 
     void UpdatePrices()

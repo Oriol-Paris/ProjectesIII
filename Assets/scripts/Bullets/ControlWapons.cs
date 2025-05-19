@@ -1,4 +1,5 @@
 using UnityEngine;
+using static PlayerData;
 
 public class ControlWapons : MonoBehaviour
 {
@@ -15,7 +16,7 @@ public class ControlWapons : MonoBehaviour
         {
             objetoObtenido = other.gameObject; 
             hasSniper = true;
-            other.GetComponent<MeshRenderer>().enabled = false; 
+            other.GetComponent<SpriteRenderer>().enabled = false; 
             other.GetComponent<BoxCollider>().enabled = false; 
             bulletCollection.prefabs.Add(objetoObtenido);
 
@@ -28,16 +29,14 @@ public class ControlWapons : MonoBehaviour
 
             PlayerBase.Action newAction = new PlayerBase.Action(
                 PlayerBase.ActionType.ACTIVE,
-                PlayerBase.ActionEnum.ESPECIALSHOOT,
-                KeyCode.Alpha6, 
+                PlayerBase.ActionEnum.ESPECIALSHOOT,            
+                (KeyCode)System.Enum.Parse(typeof(KeyCode), "Alpha" + (player.playerData.availableActions.Count + 1)), 
                 cost: 1,
                 style: newStyle
             );
 
             player.AddNewAction(newAction);
-           // player.playerData.availableActions.Add(newAction);
-
-            //player.SaveCurrentState();
+            hasSniper = false;
         }
     }
 
