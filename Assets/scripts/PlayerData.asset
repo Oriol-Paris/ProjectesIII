@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalPlayer: {fileID: 11400000, guid: 30cde2f3bd3a0de47a315ed687870d98, type: 2}
   playerAtStartOfLevel: {fileID: 0}
-  health: 4
+  health: 3
   maxHealth: 5
   actionPoints: -21
   maxActionPoints: 3
@@ -24,7 +24,7 @@ MonoBehaviour:
   timesHealed: 0
   timesIncreasedMaxHP: 0
   moveRange: 0
-  exp: 128
+  exp: 163
   isAlive: 1
   victory: 0
   healAmount: 1
