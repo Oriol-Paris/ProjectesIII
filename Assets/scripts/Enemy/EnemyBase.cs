@@ -54,6 +54,7 @@ public class EnemyBase : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         agent.acceleration = 999f;
         agent.angularSpeed = 999f;
+        agent.updateRotation = false;
         isAlive = true;
     }
     void Update()
