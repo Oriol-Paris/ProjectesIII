@@ -326,6 +326,7 @@ MonoBehaviour:
   isAlive: 0
   isAttacking: 0
   isSleeping: 0
+  NeedToSeePlayer: 0
   health: 3
   Player: {fileID: 0}
   spriteRenderer: {fileID: 7086546256689271642}
