@@ -21,10 +21,10 @@ MonoBehaviour:
   maxTime: 3
   lastLevel: Level1
   levelCompleted: 1
-  timesHealed: 2
+  timesHealed: 0
   timesIncreasedMaxHP: 0
   moveRange: 0
-  exp: 37
+  exp: 75
   isAlive: 1
   victory: 0
   healAmount: 1
