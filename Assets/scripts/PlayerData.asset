@@ -14,17 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   originalPlayer: {fileID: 11400000, guid: 30cde2f3bd3a0de47a315ed687870d98, type: 2}
   playerAtStartOfLevel: {fileID: 0}
-  health: 1
+  health: 3
   maxHealth: 5
   actionPoints: -21
   maxActionPoints: 3
   maxTime: 3
-  lastLevel: Level5
+  lastLevel: Level7
   levelCompleted: 1
   timesHealed: 0
   timesIncreasedMaxHP: 0
   moveRange: 0
-  exp: 163
+  exp: 108
   isAlive: 1
   victory: 0
   healAmount: 1
