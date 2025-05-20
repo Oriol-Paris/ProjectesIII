@@ -60,10 +60,12 @@ public class DestroyBullet : MonoBehaviour, IBulletBehavior
         {
             rb.linearVelocity = shootDirection * bulletSpeed;
             time += Time.deltaTime;
+            GetComponentInChildren<TrailRenderer>().time = 0.5f;
         }
         else
         {
             rb.linearVelocity = Vector3.zero;
+            GetComponentInChildren<TrailRenderer>().time = 1000000000;
         }
 
 

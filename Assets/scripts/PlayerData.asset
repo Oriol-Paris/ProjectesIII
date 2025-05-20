@@ -19,7 +19,7 @@ MonoBehaviour:
   actionPoints: -31
   maxActionPoints: 3
   maxTime: 3
-  lastLevel: Level6
+  lastLevel: Level8
   levelCompleted: 1
   timesHealed: 0
   timesIncreasedMaxHP: 0
