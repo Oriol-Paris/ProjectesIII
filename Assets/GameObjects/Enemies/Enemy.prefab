@@ -138,6 +138,7 @@ GameObject:
   - component: {fileID: 535729429190450929}
   - component: {fileID: 262411935793692627}
   - component: {fileID: 6478771320280442240}
+  - component: {fileID: 4689391498173898529}
   m_Layer: 6
   m_Name: Enemy
   m_TagString: Enemy
@@ -171,7 +172,7 @@ SpriteRenderer:
   m_GameObject: {fileID: 2547532622408290678}
   m_Enabled: 1
   m_CastShadows: 1
-  m_ReceiveShadows: 0
+  m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
@@ -224,7 +225,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2547532622408290678}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ef213062deee36343a9c717057e33f36, type: 3}
   m_Name: 
@@ -250,17 +251,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ff018788fa94464086a1c065bb491b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 1
-  range: 3
-  oldRange: 4
-  shootingRange: 5
-  spriteRenderer: {fileID: 7086546256689271642}
-  enemyCollider: {fileID: 0}
-  rb2d: {fileID: 1201100579626055862}
-  animator: {fileID: 3406163879126349490}
-  bloodSplash: {fileID: 7700263313313388815, guid: 34d4d40cf4e3e3045972def69b9f3dc4, type: 3}
-  dropWeapon: {fileID: 6478771320280442240}
+  speed: 10
+  range: 1
+  preAttack: 0.3
+  timeAttack: 0.3
+  postAttack: 0.3
   isAlive: 1
+  isAttacking: 0
+  isSleeping: 0
+  NeedToSeePlayer: 0
+  health: 3
+  Player: {fileID: 0}
+  spriteRenderer: {fileID: 7086546256689271642}
+  agent: {fileID: 262411935793692627}
+  animator: {fileID: 3406163879126349490}
+  attack: {fileID: 7759827871994263388, guid: 6ce8b6e7e6db5eb4f9a071dcca88a7a8, type: 3}
+  bloodSplash: {fileID: 7700263313313388815, guid: 34d4d40cf4e3e3045972def69b9f3dc4, type: 3}
+  attackClips: []
   damageClips:
   - {fileID: 8300000, guid: 94e3b24d75a0cda4980ec5134a8e6da9, type: 3}
   - {fileID: 8300000, guid: fc8dae0e97caff040998967dcf1ff972, type: 3}
@@ -374,6 +381,35 @@ MonoBehaviour:
   - {fileID: 2963957361952757195, guid: a7614af2d32765440a4cb398a6fae786, type: 3}
   - {fileID: 2930567190566246003, guid: 500352edff27d454c8239d34ca421ebc, type: 3}
   probabilidadDrop: 86.1
+--- !u!114 &4689391498173898529
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2547532622408290678}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73070a3688dc95a45a1b0df9dcc7f4de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 0
+  range: 0
+  preAttack: 0
+  timeAttack: 0
+  postAttack: 0
+  isAlive: 0
+  isAttacking: 0
+  isSleeping: 0
+  health: 0
+  Player: {fileID: 0}
+  spriteRenderer: {fileID: 0}
+  agent: {fileID: 0}
+  animator: {fileID: 0}
+  attack: {fileID: 0}
+  bloodSplash: {fileID: 0}
+  attackClips: []
+  damageClips: []
 --- !u!1 &3148137900309033181
 GameObject:
   m_ObjectHideFlags: 0

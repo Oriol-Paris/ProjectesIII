@@ -53,7 +53,7 @@ public class EnemyMovement : MonoBehaviour
 
            
 
-            if (Player.GetIsExecuting() || Player.GetComponent<PlayerBase>().GetInAction())
+            if (Player.GetIsExecuting() )
             {
                 if (distanceToPlayer <= range)
                 {
@@ -61,17 +61,18 @@ public class EnemyMovement : MonoBehaviour
                 }
                 agent.isStopped = false;
                 GetComponent<Animator>().SetBool("isMoving", true);
-
+                agent.speed = 2;
                 // Calculate the destination with an offset
                 Vector3 directionToPlayer = (PlayerPos - transform.position).normalized;
                 Vector3 destination = PlayerPos - directionToPlayer * stopDistance;
-                agent.SetDestination(destination); // Usar NavMeshAgent para moverse hacia el jugador
+                agent.SetDestination(PlayerPos); // Usar NavMeshAgent para moverse hacia el jugador
             }
             else
             {
               
                 GetComponent<Animator>().SetBool("isMoving", false);
                 agent.isStopped = true;
+                agent.speed = 0;
                 agent.velocity = Vector3.zero;
                
             }
@@ -88,18 +89,14 @@ public class EnemyMovement : MonoBehaviour
         Debug.Log("Attacking");
         GetComponent<Animator>().SetTrigger("attack");
 
-        GameObject _attack = Instantiate(attack, transform.position, Quaternion.identity,transform);
+        GameObject _attack = Instantiate(attack, transform.position, Quaternion.identity, transform);
         yield return new WaitForSeconds(0.5f);
-     
-       
 
-       
-     
-       Destroy(_attack);
+        Destroy(_attack);
 
-        yield return new WaitForSeconds(restTime); // Tiempo de descanso después del ataque
-      
-        isResting = false; // El enemigo puede volver a moverse y atacar
+        yield return new WaitForSeconds(restTime);
+
+        isResting = false;
     }
 
     public void Attack()
@@ -110,4 +107,7 @@ public class EnemyMovement : MonoBehaviour
             SoundEffectsManager.instance.PlaySoundFXClip(attackClips, transform, 1f);
         }
     }
+
+
+   
 }

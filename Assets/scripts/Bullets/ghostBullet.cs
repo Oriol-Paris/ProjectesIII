@@ -34,7 +34,7 @@ public class ghostBullet : MonoBehaviour
 
     private void OnTriggerEnter(Collider collision)
     {
-        if (collision.gameObject.CompareTag("envairoment"))
+        if (collision.gameObject.CompareTag("envairoment")|| collision.gameObject.CompareTag("Walls"))
         {
             Destroy(gameObject);
         }

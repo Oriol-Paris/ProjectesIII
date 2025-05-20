@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6722198555629147429}
   - component: {fileID: 6171388147638530017}
   m_Layer: 0
-  m_Name: oneShot 1
+  m_Name: oneShotLaser
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -47,7 +47,7 @@ MonoBehaviour:
   shootDirection: {x: 0, y: 0, z: 0}
   bulletPrefab: {fileID: 0}
   playerPrefab: {fileID: 4841340973275302747, guid: 3db35f2e05067784492ec56c6b262789, type: 3}
-  enemyPrefab: {fileID: 4841340973275302747, guid: a317dacd44aa3d64da68bf5295072605, type: 3}
+  enemyPrefab: {fileID: 4841340973275302747, guid: 7b093dcb6aaabda4599b61005d4c54fd, type: 3}
   shootingClips:
   - {fileID: 8300000, guid: 94e3b24d75a0cda4980ec5134a8e6da9, type: 3}
   - {fileID: 8300000, guid: fc8dae0e97caff040998967dcf1ff972, type: 3}

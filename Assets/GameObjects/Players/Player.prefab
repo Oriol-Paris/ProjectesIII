@@ -609,6 +609,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 99c93718a1dd29d4ca7143890c1f322b, type: 3}
   - {fileID: 8300000, guid: d6548e28d68c9af44977fec30ad7ee0a, type: 3}
   bloodSplash: {fileID: 7700263313313388815, guid: 34d4d40cf4e3e3045972def69b9f3dc4, type: 3}
+  healthManager: {fileID: 0}
 --- !u!95 &73541132482798089
 Animator:
   serializedVersion: 7
