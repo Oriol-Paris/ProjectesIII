@@ -3,7 +3,9 @@
 
 public class LaserBullet : MonoBehaviour, IBulletBehavior
 {
-    public float sideDeviationAmount = 2f;
+    public float sideDeviationAmount = 2f;           
+    public float minDistanceForFullDeviation = 5f;    
+    public float maxExtraDeviation = 3f;
     [SerializeField] private float maxDistance = 100f;
     [SerializeField] private LayerMask hitLayers;
     [SerializeField] private GameObject hitboxVisual; // Un prefab tipo cubo con scale (1,1,1)
@@ -50,7 +52,7 @@ public class LaserBullet : MonoBehaviour, IBulletBehavior
 
         if (Physics.Raycast(ray, out hit, maxDistance, hitLayers))
         {
-            if (hit.collider.CompareTag("envairoment"))
+            if (hit.collider.CompareTag("Walls"))
             {
                 endPoint = hit.point;
                 endPoint.y = transform.position.y;

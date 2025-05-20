@@ -19,6 +19,10 @@ public class EnemyBase : MonoBehaviour
     public bool isAttacking = false;
     public bool isSleeping = false;
 
+    [Header("Vision")]
+    public bool NeedToSeePlayer = false;
+  
+
     [Space(5)]
     [Header("Health")]
     [SerializeField] private int health;
@@ -77,13 +81,34 @@ public class EnemyBase : MonoBehaviour
         float distanceToPlayer = Vector3.Distance(transform.position, PlayerPos);
         if (Player.GetIsExecuting())
         {
-            if (distanceToPlayer <= range)
+            if (NeedToSeePlayer)
+            {
+                Vector3 origin = transform.position + Vector3.up * 1f;
+                Vector3 direction = (PlayerPos - origin).normalized;
+                float distance = Vector3.Distance(origin, PlayerPos);
+
+                if (Physics.Raycast(origin, direction, out RaycastHit hit, distance))
+                {
+                   
+                    if (hit.collider.CompareTag("envairoment"))
+                    {
+                      
+                        animator.SetBool("isMoving", true);
+                        agent.isStopped = false;
+                        agent.SetDestination(PlayerPos);
+                        return;
+                    }
+                }
+            }
+
+           
+            if (distanceToPlayer <= range && !isAttacking && !isResting)
             {
                 StartCoroutine(AttackCoroutine());
-               // SoundEffectsManager.instance.PlaySoundFXClip(attackClips, transform, 1f);
             }
-            animator.SetBool("isMoving", true);
 
+         
+            animator.SetBool("isMoving", true);
             agent.isStopped = false;
             agent.SetDestination(PlayerPos);
         }
@@ -92,7 +117,6 @@ public class EnemyBase : MonoBehaviour
             animator.SetBool("isMoving", false);
             agent.isStopped = true;
             agent.velocity = Vector3.zero;
-
         }
     }
 
