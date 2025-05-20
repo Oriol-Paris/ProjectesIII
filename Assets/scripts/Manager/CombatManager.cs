@@ -13,8 +13,6 @@ public class CombatManager : MonoBehaviour
     [SerializeField] private int numberOfTurns;
     [SerializeField] Canvas winCondition;
 
-    [SerializeField] NodeMapData nodeMapData;
-
     private bool hasCalculatedExp = false;  // Bandera para controlar que la suma de experiencia solo se haga una vez
 
     void Start()
