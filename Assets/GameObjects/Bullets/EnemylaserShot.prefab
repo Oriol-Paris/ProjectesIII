@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 4611151845898006163}
   - component: {fileID: 5771522541761666437}
   - component: {fileID: -192010467985181773}
-  - component: {fileID: 1343492287975722477}
   - component: {fileID: 5155770874992587173}
   - component: {fileID: 6451322245072288980}
   m_Layer: 0
@@ -89,25 +88,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &1343492287975722477
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4841340973275302747}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f3aabef4a664a44399afa43ee742c99, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fromPlayer: 1
-  damage: 0
-  timeSecuence: {fileID: 0}
-  time: 0
-  shootDirection: {x: 0, y: 0, z: 0}
-  shootCShakeTime: 0.1
-  shootCShakeRange: 0.2
 --- !u!65 &5155770874992587173
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -141,3 +121,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49b6d59d549dd994fae40ff28d2fcf65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fromPlayer: 0
+  damage: 0
+  timeSecuence: {fileID: 0}
+  time: 0
+  shootDirection: {x: 0, y: 0, z: 0}
+  shootCShakeTime: 0
+  shootCShakeRange: 0

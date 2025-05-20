@@ -219,7 +219,6 @@ GameObject:
   - component: {fileID: 5779656468157418596}
   - component: {fileID: 7086546256689271642}
   - component: {fileID: 7931825162647696330}
-  - component: {fileID: -5676328429409097243}
   - component: {fileID: 6209296037174827964}
   - component: {fileID: 8094846091851707121}
   - component: {fileID: 285907150525029808}
@@ -339,34 +338,6 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 94e3b24d75a0cda4980ec5134a8e6da9, type: 3}
   - {fileID: 8300000, guid: fc8dae0e97caff040998967dcf1ff972, type: 3}
   - {fileID: 8300000, guid: f76dafa51ef36cc42a86cc9a6ecbabdc, type: 3}
---- !u!114 &-5676328429409097243
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2547532622408290678}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a93d676f73144c14787c12d286606f94, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  turnAction: 3
-  players: []
-  closestPlayer: {fileID: 0}
-  enemyStats: {fileID: 7931825162647696330}
-  bulletShot: {fileID: 1680710797403148065, guid: 9dcd6820efc4c4b488ecff9dbb33f555, type: 3}
-  velocity: 2
-  range: 5
-  minDistance: 2
-  shootingClips:
-  - {fileID: 8300000, guid: b7e2079f5f509ec4480adfd38e747929, type: 3}
-  - {fileID: 8300000, guid: b7e2079f5f509ec4480adfd38e747929, type: 3}
-  - {fileID: 8300000, guid: fc8dae0e97caff040998967dcf1ff972, type: 3}
-  animator: {fileID: 6209296037174827964}
-  fx: {fileID: 8189897864542917949}
-  actionCooldown: 1
-  combatManager: {fileID: 0}
 --- !u!95 &6209296037174827964
 Animator:
   serializedVersion: 7
@@ -580,7 +551,7 @@ MonoBehaviour:
   fleeindicator: {fileID: -8612798535301835411, guid: 7c1fda7ec085f1240b841e8a13f76b51, type: 3}
   shootIndicator: {fileID: 5831601287507135270, guid: 05c10a90c6463fc4f9da8c9e6d310e1d, type: 3}
   waitindicator: {fileID: -4545164963265384688, guid: 709db180e71a47c4aadc363e99ecc592, type: 3}
-  enemyMovementShooter: {fileID: -5676328429409097243}
+  enemyMovementShooter: {fileID: 0}
 --- !u!1 &6609814708366440987
 GameObject:
   m_ObjectHideFlags: 0
