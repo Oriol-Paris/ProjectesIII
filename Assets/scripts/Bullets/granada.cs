@@ -15,7 +15,7 @@ public class granada : MonoBehaviour
     public GameObject collisionImact;
 
 
-    private  Transform player;
+    private  GameObject player;
     private Vector3 targetPosition;
     private GameObject markerInstance;
    
@@ -23,7 +23,7 @@ public class granada : MonoBehaviour
 
     void Start()
     {
-        player = GameObject.Find("Player").transform;
+        player = GameObject.Find("Player");
         if (player == null)
         {
           
@@ -36,7 +36,7 @@ public class granada : MonoBehaviour
             Random.Range(-deviationRange, deviationRange)
         );
 
-        targetPosition = player.position + offset;
+        targetPosition = player.transform.position + offset;
 
         // Instanciar el marcador en el suelo
         markerInstance = Instantiate(impactMarkerPrefab, targetPosition, Quaternion.identity);
@@ -45,7 +45,9 @@ public class granada : MonoBehaviour
         Invoke(nameof(BeginLaunch), targetingTime);
     }
 
-    private void BeginLaunch()
+
+
+        private void BeginLaunch()
     {
         if (!hasLaunched)
         {
@@ -58,19 +60,22 @@ public class granada : MonoBehaviour
     {
         Vector3 startPos = transform.position;
         float elapsed = 0f;
-        Debug.Log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+      
         while (elapsed < travelTime)
         {
-           
-            elapsed += Time.deltaTime;
-            float t = elapsed / travelTime;
+           if(player.GetComponent<TimeSecuence>().GetIsExecuting())
+            {
+                elapsed += Time.deltaTime;
+                float t = elapsed / travelTime;
 
-            // Interpolación horizontal
-            Vector3 horizontalPos = Vector3.Lerp(startPos, targetPosition, t);
+                // Interpolación horizontal
+                Vector3 horizontalPos = Vector3.Lerp(startPos, targetPosition, t);
 
-            // Altura parabólica
-            float height = Mathf.Sin(t * Mathf.PI) * heightArc;
-            transform.position = new Vector3(horizontalPos.x, horizontalPos.y + height, horizontalPos.z);
+                // Altura parabólica
+                float height = Mathf.Sin(t * Mathf.PI) * heightArc;
+                transform.position = new Vector3(horizontalPos.x, horizontalPos.y + height, horizontalPos.z);
+            }
+            
 
             yield return null;
         }
