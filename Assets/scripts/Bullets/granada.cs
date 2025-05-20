@@ -12,10 +12,13 @@ public class granada : MonoBehaviour
 
     [Header("Marcador visual")]
     public GameObject impactMarkerPrefab;
+    public GameObject collisionImact;
+
 
     private  Transform player;
     private Vector3 targetPosition;
     private GameObject markerInstance;
+   
     private bool hasLaunched = false;
 
     void Start()
@@ -79,11 +82,12 @@ public class granada : MonoBehaviour
     {
         if (markerInstance != null)
             Destroy(markerInstance);
-
         // Llamada a tu función de daño en área
         SendMessage("ApplyAreaDamage", SendMessageOptions.DontRequireReceiver);
 
-        
-        Destroy(gameObject);
+        collisionImact.SetActive(true);
+
+
+        Destroy(gameObject, 1f);
     }
 }
