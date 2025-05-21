@@ -122,6 +122,8 @@ public class EnemyBase : MonoBehaviour
 
     IEnumerator AttackCoroutine()
     {
+        yield return new WaitUntil(() => Player.GetIsExecuting());
+
         isResting = true; // Comienza el descanso
 
         GetComponent<Animator>().SetTrigger("preAttack");

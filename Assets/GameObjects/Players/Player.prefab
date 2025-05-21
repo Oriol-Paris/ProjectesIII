@@ -484,7 +484,7 @@ MonoBehaviour:
   APBarPrefab: {fileID: 6632909104858812616, guid: b919ece06175c7942b1399f5716de3c0, type: 3}
   apBars: []
   fadeDuration: 0.5
-  minAlpha: 0.3
+  minAlpha: 0.1
   maxAlpha: 1
 --- !u!1 &6993864842785556067
 GameObject:

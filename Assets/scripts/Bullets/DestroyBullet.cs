@@ -11,7 +11,7 @@ public class DestroyBullet : MonoBehaviour, IBulletBehavior
     [SerializeField] public float time;
     [SerializeField] private bool fromPlayer;
     [SerializeField] public int damage;
-
+    [SerializeField] bool isNeutral;
     private cameraManager _camera;
     [SerializeField] float shootCShakeTime;
     [SerializeField] float shootCShakeRange;
@@ -81,30 +81,56 @@ public class DestroyBullet : MonoBehaviour, IBulletBehavior
     {
         if (collision != null)
         {
-            if (collision.gameObject.CompareTag("envairoment")|| collision.gameObject.CompareTag("Explosive")|| collision.gameObject.CompareTag("Walls"))
+            if (collision.gameObject.CompareTag("envairoment") || collision.gameObject.CompareTag("Explosive") || collision.gameObject.CompareTag("Walls"))
             {
                 Destroy(gameObject);
             }
-
-            if (fromPlayer && collision.gameObject.GetComponent<EnemyBase>() != null)
+            if (isNeutral)
             {
-                EnemyBase hit = collision.gameObject.GetComponent<EnemyBase>();
-                hit.Damage(damage, collision.gameObject);
-              
-             
-                hit.GetComponent<Rigidbody>().AddForce(shootDirection * 1000);
-               
+                if (collision.gameObject.GetComponent<PlayerBase>() != null)
+                {
+                    PlayerBase hit = collision.gameObject.GetComponent<PlayerBase>();
+                    hit.Damage(damage, collision.gameObject);
+                    Destroy(gameObject);
+                }
+                if (collision.gameObject.GetComponent<EnemyBase>() != null)
+                {
 
-                Destroy(gameObject);
+                    EnemyBase hit = collision.gameObject.GetComponent<EnemyBase>();
+                    hit.Damage(damage, collision.gameObject);
 
+
+                    hit.GetComponent<Rigidbody>().AddForce(shootDirection * 1000);
+
+
+                    Destroy(gameObject);
+                }
+            }
+            else {
+
+
+
+                if (fromPlayer && collision.gameObject.GetComponent<EnemyBase>() != null)
+                {
+                    EnemyBase hit = collision.gameObject.GetComponent<EnemyBase>();
+                    hit.Damage(damage, collision.gameObject);
+
+
+                    hit.GetComponent<Rigidbody>().AddForce(shootDirection * 1000);
+
+
+                    Destroy(gameObject);
+
+                }
+
+                if (!fromPlayer && collision.gameObject.GetComponent<PlayerBase>() != null)
+                {
+                    PlayerBase hit = collision.gameObject.GetComponent<PlayerBase>();
+                    hit.Damage(damage, collision.gameObject);
+                    Destroy(gameObject);
+                }
             }
 
-            if(!fromPlayer && collision.gameObject.GetComponent<PlayerBase>() != null)
-            {
-                PlayerBase hit = collision.gameObject.GetComponent<PlayerBase>();
-                hit.Damage(damage, collision.gameObject);
-                Destroy(gameObject);
-            }
         }
     }
 
