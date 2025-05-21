@@ -13,7 +13,6 @@ public class TitleScreenManager : MonoBehaviour
 
     [SerializeField] private Button continueButton;
     [SerializeField] private PlayerData playerData;
-    [SerializeField] private NodeMapData nodeMapData;
 
     [SerializeField] private AudioSource enterSfxSource;
     [SerializeField] private AudioSource exitSfxSource;
@@ -100,8 +99,6 @@ public class TitleScreenManager : MonoBehaviour
 
             playerData.CopyDataFrom(playerData.originalPlayer);
             playerData.Save();
-            nodeMapData.ResetData();
-            nodeMapData.Save();
             PlayerPrefs.SetFloat("DifficultyMultiplier", 1);
             PlayerPrefs.SetString("LastLevelCleared", "");
 

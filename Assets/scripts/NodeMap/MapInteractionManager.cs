@@ -24,27 +24,12 @@ public class MapInteractionManager : MonoBehaviour
             PlayerPrefs.SetFloat("DifficultyMultiplier", 1);
         }
 
-        switch (PlayerPrefs.GetString("LastLevelCleared"))
+        if(PlayerPrefs.GetString("LastLevelCleared") != "Tutorial")
         {
-            case "Level1":
-                AnimateTileGroup("Level1", false);
-                break;
-            case "Level2":
-                AnimateTileGroup("Level2", false);
-                break;
-            case "Level3":
-                AnimateTileGroup("Level3", false);
-                break;
-            case "ShopScene":
-                AnimateTileGroup("ShopScene", false);
-                break;
-            case "Level4":
-                AnimateTileGroup("Level4", false);
-                break;
-            case "EventScene":
-                AnimateTileGroup("EventScene", false);
-                break;
+            AnimateTileGroup(PlayerPrefs.GetString("LastLevelCleared"), false);
         }
+
+        PlayerPrefs.SetString("EneteredMap", SceneManager.GetActiveScene().name);
     }
 
     public void AnimateTileGroup(string groupName, bool loadNextScene = true)

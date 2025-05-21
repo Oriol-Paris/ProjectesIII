@@ -24,18 +24,9 @@ public class PlayerPathFollower : MonoBehaviour
         {
             if (tile.levelName == PlayerPrefs.GetString("LastLevelCleared"))
             {
-                if (tile.levelName == "Level6")
-                {
-                    transform.position = levelTiles[0].transform.position + new Vector3(0, yOffset, 0);
-                    transform.SetParent(levelTiles[0].transform);
-                    currentTile = levelTiles[0].GetComponent<AnimateMapTile>();
-                }
-                else
-                {
-                    transform.position = tile.transform.position + new Vector3(0, yOffset, 0);
-                    transform.SetParent(tile.transform);
-                    currentTile = tile.GetComponent<AnimateMapTile>();
-                }
+                transform.position = tile.transform.position + new Vector3(0, yOffset, 0);
+                transform.SetParent(tile.transform);
+                currentTile = tile.GetComponent<AnimateMapTile>();
             }
         }
     }
@@ -93,6 +84,11 @@ public class PlayerPathFollower : MonoBehaviour
 
         if (sceneToLoad != null)
         {
+            if(sceneToLoad == "BeachMap" || sceneToLoad == "ForestMap")
+            {
+                PlayerPrefs.SetString("LastLevelCleared", "");
+            }
+
             SceneManager.LoadScene(sceneToLoad);
         }
     }
