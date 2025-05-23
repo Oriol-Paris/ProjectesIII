@@ -113,7 +113,7 @@ public class MovPlayer : MonoBehaviour
            
             isDragging = false;  
             placeSelected = false;
-            controlLiniarRender.ControlLiniarRenderer();
+            controlLiniarRender.ControlLiniarRenderer(true);
             controlLiniarRender.UpdateLineRendererr();
         }
 
