@@ -5164,6 +5164,7 @@ MonoBehaviour:
   time: 0
   fromPlayer: 1
   damage: 0
+  isNeutral: 0
   shootCShakeTime: 0.2
   shootCShakeRange: 0.5
   bulletSpeed: 30

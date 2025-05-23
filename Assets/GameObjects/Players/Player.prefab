@@ -258,7 +258,7 @@ LineRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 10
+  m_SortingOrder: 999
   m_Positions:
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 1}
@@ -857,6 +857,7 @@ MonoBehaviour:
   scrollSpeed: 0.5
   scrollReverse: 1
   lineRenderer: {fileID: 1145941097933022349}
+  time: {fileID: 0}
   lineList: []
   endOfLineCursor: {fileID: 4946164215817653845}
   lineColors:

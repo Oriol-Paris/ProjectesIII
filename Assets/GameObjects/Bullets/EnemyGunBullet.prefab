@@ -337,6 +337,7 @@ MonoBehaviour:
   time: 0
   fromPlayer: 0
   damage: 0
+  isNeutral: 0
   shootCShakeTime: 0
   shootCShakeRange: 0
   bulletSpeed: 4
