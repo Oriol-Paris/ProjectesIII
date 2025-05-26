@@ -13,8 +13,6 @@ public class CombatManager : MonoBehaviour
     [SerializeField] private int numberOfTurns;
     [SerializeField] Canvas winCondition;
 
-    [SerializeField] NodeMapData nodeMapData;
-
     private bool hasCalculatedExp = false;  // Bandera para controlar que la suma de experiencia solo se haga una vez
 
     void Start()
@@ -77,9 +75,10 @@ public class CombatManager : MonoBehaviour
                 
             }
 
-            if (SceneManager.GetActiveScene().name == "Level6")
+            if (SceneManager.GetActiveScene().name == "Level7")
             {
-                PlayerPrefs.SetString("LastLevelCleared", "Tutorial");
+                PlayerPrefs.SetString("LastLevelCleared", "");
+                PlayerPrefs.SetString("EnteredMap", "StarterNodeMap");
                 PlayerPrefs.SetFloat("DifficultyMultiplier", PlayerPrefs.GetFloat("DifficultyMultiplier") + 0.5f);
             }
             else

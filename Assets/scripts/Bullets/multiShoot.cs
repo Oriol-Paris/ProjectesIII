@@ -34,7 +34,11 @@ public class multiShoot : MonoBehaviour
 
             GameObject bullet = Instantiate(bulletPrefab, this.transform.position, Quaternion.identity);
             //SoundEffectsManager.instance.PlaySoundFXClip(shootingClips, transform, 1f);
-            bullet.GetComponent<IBulletBehavior>().setShootDirection(rotatedDirection,true);
+            if (bullet.GetComponent<IBulletBehavior>() != null)
+            {
+                bullet.GetComponent<IBulletBehavior>().setShootDirection(rotatedDirection, true);
+            }
+          
             yield return new WaitForSeconds(shotBetweenShots);
         }
 

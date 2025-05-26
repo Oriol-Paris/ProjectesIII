@@ -23,7 +23,7 @@ public class shootPlayer : MonoBehaviour
             {
 
 
-                controlLiniarRender.ControlLiniarRenderer();
+                controlLiniarRender.ControlLiniarRenderer(false);
                 controlLiniarRender.UpdateLineRendererr();
             }
             if (Input.GetMouseButtonUp(0) && oneTime == true)
@@ -52,7 +52,7 @@ public class shootPlayer : MonoBehaviour
             {
 
 
-                controlLiniarRender.ControlLiniarRenderer();
+                controlLiniarRender.ControlLiniarRenderer(false);
                 controlLiniarRender.UpdateLineRendererr();
             }
             if (Input.GetMouseButtonUp(0))
