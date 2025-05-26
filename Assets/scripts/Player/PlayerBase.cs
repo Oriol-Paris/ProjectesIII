@@ -335,7 +335,7 @@ public class PlayerBase : MonoBehaviour
 
         health = Mathf.Min(health, maxHealth);
         playerData.health = Mathf.Min(playerData.health, maxHealth);
-        healthManager.AddSlot(playerData.healAmount);
+        healthManager.UpdateHealthbar();
         activeAction = Action.nothing;
     }
 
@@ -383,7 +383,7 @@ public class PlayerBase : MonoBehaviour
             StartCoroutine(_camera.FadeInVignette(cameraPostProcesIntensity, cameraPostProcesLength, Color.red));
         }
 
-        FindAnyObjectByType<UIBarManager>().UpdateHealthBar(val);
+        FindAnyObjectByType<UIBarManager>().UpdateHealthbar();
         SaveCurrentState();
     }
 
@@ -416,7 +416,7 @@ public class PlayerBase : MonoBehaviour
     public void SetRange(float newRange) { range = newRange; }
     public void SetInAction(bool newVal) { isInAction = newVal; }
     public void AddNewAction(Action action) { availableActions.Add(action); playerData.Save(); }
-    public void DeleteAction() { availableActions.RemoveAt(availableActions.Count-1); playerData.Save(); }
+    public void DeleteAction(int index) { availableActions.RemoveAt(index); playerData.Save(); }
 
     #endregion
 

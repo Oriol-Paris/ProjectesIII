@@ -258,7 +258,7 @@ LineRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 10
+  m_SortingOrder: 999
   m_Positions:
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 1}
@@ -484,7 +484,7 @@ MonoBehaviour:
   APBarPrefab: {fileID: 6632909104858812616, guid: b919ece06175c7942b1399f5716de3c0, type: 3}
   apBars: []
   fadeDuration: 0.5
-  minAlpha: 0.3
+  minAlpha: 0.1
   maxAlpha: 1
 --- !u!1 &6993864842785556067
 GameObject:
@@ -857,6 +857,7 @@ MonoBehaviour:
   scrollSpeed: 0.5
   scrollReverse: 1
   lineRenderer: {fileID: 1145941097933022349}
+  time: {fileID: 0}
   lineList: []
   endOfLineCursor: {fileID: 4946164215817653845}
   lineColors:

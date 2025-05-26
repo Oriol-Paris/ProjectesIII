@@ -20,6 +20,7 @@ public class ControlLiniarRender : MonoBehaviour
     [SerializeField] private float maxReach = 10f;
     [SerializeField] private float tileScale = 1.0f;
     [SerializeField] private Material lineMaterial;
+  
 
     [SerializeField] private bool animateLine = true;
     [SerializeField] private float scrollSpeed = 0.5f;
@@ -27,6 +28,7 @@ public class ControlLiniarRender : MonoBehaviour
     private float textureOffset = 0f;
 
     public LineRenderer lineRenderer;
+    [SerializeField] private TimeSecuence time;
     public List<LineRenderer> lineList = new List<LineRenderer>();
     public GameObject endOfLineCursor;
 
@@ -127,7 +129,7 @@ public class ControlLiniarRender : MonoBehaviour
         }
     }
 
-    public void ControlLiniarRenderer()
+    public void ControlLiniarRenderer(bool _rang)
     {
         if (lineRenderer == null) return;
 
@@ -143,24 +145,33 @@ public class ControlLiniarRender : MonoBehaviour
         Vector3 direction = (mousePosition - playerPosition).normalized;
         float distance = Vector3.Distance(playerPosition, mousePosition);
 
-        if (distance > maxReach)
-        {
-            positionDesired = playerPosition + direction * maxReach;
-            distance = maxReach;
-        }
-        else
-        {
-            positionDesired = mousePosition;
-        }
-
+      
+            if (distance > maxReach&&_rang)
+            {
+                positionDesired = playerPosition + direction * maxReach;
+                distance = maxReach;
+            }
+            else
+            {
+                positionDesired = mousePosition;
+            }
+          
+        
         if (Physics.Raycast(playerPosition, direction, out hit, distance))
         {
+
             if (hit.collider.CompareTag("envairoment"))
             {
                 float margin = 0.2f;
                 positionDesired = hit.point - (direction * margin);
             }
+
         }
+      
+
+        
+
+     
 
         curvePoints.Add(positionDesired);
 

@@ -11,6 +11,6 @@ public class GoToFight : MonoBehaviour
         enterSfxSource.Play();
         DontDestroyOnLoad(enterSfxSource);
         PlayerPrefs.SetString("LastLevelCleared", SceneManager.GetActiveScene().name);
-        SceneManager.LoadScene("Node Map 2.0");
+        SceneManager.LoadScene(PlayerPrefs.GetString("EneteredMap"));
     }
 }

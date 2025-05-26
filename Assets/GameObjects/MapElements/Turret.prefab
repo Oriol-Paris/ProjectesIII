@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff0b19b4f64a5434f87d7fe4329c6d10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletShot: {fileID: 897511901853533497, guid: fbec2877c5e8a124a862087bd152bdf5, type: 3}
+  bulletShot: {fileID: 897511901853533497, guid: b8cb3872eb517614ea01f820034e1ca4, type: 3}
   shootingClips:
   - {fileID: 8300000, guid: 0242d94a1879ce543963e0240a4ac11e, type: 3}
   fx: {fileID: 3015059011364957033}

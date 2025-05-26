@@ -4992,7 +4992,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4611151845898006163}
   - component: {fileID: 8691793027047177071}
-  - component: {fileID: 3584146164476778208}
   - component: {fileID: 2990912560374432514}
   - component: {fileID: 2572626133480285931}
   - component: {fileID: 6361544129041346084}
@@ -5077,25 +5076,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3584146164476778208
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4841340973275302747}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 22e3876fa198c1943a8b884c9bc0802d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerData: {fileID: 11400000, guid: 662eee5fd8a873f478dccf0dfc86e8c7, type: 2}
-  isHit: 0
-  range: 5
-  speed: 5
-  damage: 1
-  isFromPlayer: 1
-  velocity: {x: 1, y: 1, z: 1}
 --- !u!95 &2990912560374432514
 Animator:
   serializedVersion: 7
@@ -5184,6 +5164,7 @@ MonoBehaviour:
   time: 0
   fromPlayer: 1
   damage: 0
+  isNeutral: 0
   shootCShakeTime: 0.2
   shootCShakeRange: 0.5
   bulletSpeed: 30

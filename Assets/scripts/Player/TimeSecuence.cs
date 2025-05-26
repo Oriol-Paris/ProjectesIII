@@ -29,7 +29,7 @@ public class TimeSecuence : MonoBehaviour
 
     [SerializeField] private PlayerBase playerBase;
     [SerializeField] private PlayerActionManager actionManager;
-    private PlayerBase.Action selectedAction;
+    public PlayerBase.Action selectedAction;
 
     public bool notacction = false;
 

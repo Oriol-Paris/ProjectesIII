@@ -12,7 +12,7 @@ public class ChangeScene : MonoBehaviour
         FindAnyObjectByType<PlayerBase>().playerData.lastLevel = SceneManager.GetActiveScene().name;
         FindAnyObjectByType<PlayerBase>().playerData.levelCompleted = FindAnyObjectByType<CombatManager>().allEnemiesDead;
 
-        SceneManager.LoadScene("Node Map 2.0");
+        SceneManager.LoadScene(PlayerPrefs.GetString("EneteredMap"));
     }
 
     void Update()
