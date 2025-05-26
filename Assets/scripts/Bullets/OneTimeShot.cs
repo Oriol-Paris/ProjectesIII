@@ -23,9 +23,18 @@ public class OneTimeShot : MonoBehaviour
                    action.m_style != null &&
                    action.m_style.bulletType == BulletType.SNIPER
                );
+                
+                
+                KeyCode key = playerBase.activeAction.m_key;
 
-                playerBase.DeleteAction();
-
+                if (key >= KeyCode.Alpha1 && key <= KeyCode.Alpha9)
+                {
+                    int indexToRemove = (int)key - (int)KeyCode.Alpha1; // convierte la tecla en índice
+                    if (indexToRemove >= 0 && indexToRemove < playerBase.availableActions.Count)
+                    {
+                        playerBase.DeleteAction(indexToRemove);
+                    }
+                }
             }
         }
     }

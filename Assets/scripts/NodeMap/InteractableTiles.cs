@@ -7,6 +7,7 @@ public class InteractableTiles : MonoBehaviour
     public string levelName;
     public List<string> lastLevelNames;
     public bool isInteractible = false;
+    public bool isPressed = false;
 
     public List<GameObject> spawnedEnemies;
 
@@ -64,9 +65,10 @@ public class InteractableTiles : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if(isInteractible)
+        if(isInteractible && !isPressed)
         {
             FindAnyObjectByType<MapInteractionManager>().AnimateTileGroup(levelName);
+            isPressed = true;
         }
     }
 }
