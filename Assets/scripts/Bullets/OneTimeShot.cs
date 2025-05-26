@@ -33,6 +33,8 @@ public class OneTimeShot : MonoBehaviour
                     if (indexToRemove >= 0 && indexToRemove < playerBase.availableActions.Count)
                     {
                         playerBase.DeleteAction(indexToRemove);
+                        playerBase.ResetActiveAction();
+                        FindAnyObjectByType<TopBarManager>().UpdateBottomHotbar();
                     }
                 }
             }

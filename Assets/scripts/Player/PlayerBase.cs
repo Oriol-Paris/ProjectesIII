@@ -413,6 +413,7 @@ public class PlayerBase : MonoBehaviour
         SaveCurrentState();
     }
 
+    public void ResetActiveAction() { activeAction = availableActions[0]; }
     public void SetRange(float newRange) { range = newRange; }
     public void SetInAction(bool newVal) { isInAction = newVal; }
     public void AddNewAction(Action action) { availableActions.Add(action); playerData.Save(); }

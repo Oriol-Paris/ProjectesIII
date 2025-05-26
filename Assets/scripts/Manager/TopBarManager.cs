@@ -108,6 +108,7 @@ public class TopBarManager : MonoBehaviour
         {
             action.transform.Find("Image").gameObject.SetActive(false);
             action.transform.Find("Key").gameObject.SetActive(false);
+            action.transform.Find("Border").GetComponent<Image>().color = Color.white;
         }
 
         var availableActions = playerData.availableActions;
