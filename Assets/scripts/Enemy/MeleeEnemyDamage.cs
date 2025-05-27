@@ -6,6 +6,11 @@ public class MeleeEnemyDamage : MonoBehaviour
     public int damage;
     public bool hasDealtDamage = false;
 
+    public void Start()
+    {
+        damage *= (int)PlayerPrefs.GetFloat("DifficultyMultiplier");
+       
+    }
     public void OnEnable()
     {
         hasDealtDamage = false; // Reset the flag when the collider is enabled

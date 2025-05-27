@@ -49,10 +49,13 @@ public class EnemyBase : MonoBehaviour
     private EnemyBase enemyStats;
     private Vector3 PlayerPos;
     private bool isResting = false;
+    
 
 
     void Start()
     {
+        speed *= PlayerPrefs.GetFloat("DifficultyMultiplier");
+        health *= (int)PlayerPrefs.GetFloat("DifficultyMultiplier");
 
         enemyStats = GetComponent<EnemyBase>();
         agent = GetComponent<NavMeshAgent>();
@@ -60,6 +63,7 @@ public class EnemyBase : MonoBehaviour
         agent.angularSpeed = 999f;
         agent.updateRotation = false;
         isAlive = true;
+        agent.speed = speed;
     }
     void Update()
     {
@@ -107,8 +111,8 @@ public class EnemyBase : MonoBehaviour
                 StartCoroutine(AttackCoroutine());
             }
 
-         
-            animator.SetBool("isMoving", true);
+          
+             animator.SetBool("isMoving", true);
             agent.isStopped = false;
             agent.SetDestination(PlayerPos);
         }
@@ -122,23 +126,25 @@ public class EnemyBase : MonoBehaviour
 
     IEnumerator AttackCoroutine()
     {
+        isResting = true;
         yield return new WaitUntil(() => Player.GetIsExecuting());
 
-        isResting = true; // Comienza el descanso
 
         GetComponent<Animator>().SetTrigger("preAttack");
         yield return new WaitForSeconds(preAttack);
 
         GetComponent<Animator>().SetTrigger("attack");
 
-        GameObject _attack = Instantiate(attack, transform.position, Quaternion.identity,transform);
+        GameObject _attack = Instantiate(attack, transform.position, Quaternion.identity, transform);
+
         if (_attack.GetComponent<multiShoot>() != null)
         {
             _attack.GetComponent<multiShoot>().setShootDirection((Player.transform.position - transform.position).normalized, false);
         }
-      
+     
 
-        yield return new WaitForSeconds(timeAttack);
+
+            yield return new WaitForSeconds(timeAttack);
 
         //Destroy(_attack);
 

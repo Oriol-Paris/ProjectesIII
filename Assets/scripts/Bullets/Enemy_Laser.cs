@@ -21,7 +21,7 @@ public class Enemy_Laser : MonoBehaviour
         }
         else
         {
-            damage = 1;
+            damage = 1 * (int)PlayerPrefs.GetFloat("DifficultyMultiplier");
         }
 
         timeSecuence = FindFirstObjectByType<TimeSecuence>();
