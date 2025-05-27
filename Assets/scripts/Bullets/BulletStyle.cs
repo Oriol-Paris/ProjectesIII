@@ -49,7 +49,7 @@ public class BulletStyle : MonoBehaviour
 
     public void LevelUpBullet(int currentLevel, int numOfLevels = 1)
     {
-        range = rangePerLevel * (currentLevel + numOfLevels);
-        damage = damagePerLevel * (currentLevel + numOfLevels);
+        range = rangePerLevel * (currentLevel );
+        damage = damagePerLevel * (currentLevel );
     }
 }

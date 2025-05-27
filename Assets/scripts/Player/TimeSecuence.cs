@@ -100,7 +100,7 @@ public class TimeSecuence : MonoBehaviour
     {
         canInvokeGhost = false;
         int movCount = 0;
-        Debug.Log(actions.Count);
+        
         play = true;
         FindAnyObjectByType<APBarManager>().DestroyUsedAP();
         //cameraManager.FollowPlayer();
