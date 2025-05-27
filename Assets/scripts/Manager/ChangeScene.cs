@@ -12,7 +12,18 @@ public class ChangeScene : MonoBehaviour
         FindAnyObjectByType<PlayerBase>().playerData.lastLevel = SceneManager.GetActiveScene().name;
         FindAnyObjectByType<PlayerBase>().playerData.levelCompleted = FindAnyObjectByType<CombatManager>().allEnemiesDead;
 
-        SceneManager.LoadScene(PlayerPrefs.GetString("EneteredMap"));
+        if (FindAnyObjectByType<CombatManager>().allEnemiesDead)
+        {
+            SceneManager.LoadScene(PlayerPrefs.GetString("EneteredMap"));
+        } else
+        {
+            PlayerBase player = FindAnyObjectByType<PlayerBase>();
+            player.playerData.lastLevel = SceneManager.GetActiveScene().name;
+            PlayerPrefs.SetString("LastLevelCleared", "");
+            player.playerData.CopyDataFrom(player.playerData.originalPlayer);
+            SceneManager.LoadScene("Title Screen");
+        }
+       
     }
 
     void Update()

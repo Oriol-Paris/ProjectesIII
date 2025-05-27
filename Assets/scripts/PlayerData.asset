@@ -19,12 +19,12 @@ MonoBehaviour:
   actionPoints: -21
   maxActionPoints: 3
   maxTime: 3
-  lastLevel: Level7
-  levelCompleted: 1
+  lastLevel: Tutorial
+  levelCompleted: 0
   timesHealed: 0
   timesIncreasedMaxHP: 0
   moveRange: 0
-  exp: 110
+  exp: 10
   isAlive: 1
   victory: 0
   healAmount: 1

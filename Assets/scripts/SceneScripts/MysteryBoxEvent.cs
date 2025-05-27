@@ -3,23 +3,19 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class FlipCoinEvent : MonoBehaviour
+public class MysteryBoxEvent : MonoBehaviour
 {
     [SerializeField] private Dialogue eventText;
-    private enum eventState { INTRODUCTION, DECISION, OUTCOME }
-    private enum coinSide { HEADS, TAILS }
-
-    private coinSide playerSide;
-    private coinSide prizeSide;
-
-    [SerializeField] private eventState currentState;
     [SerializeField] private GameObject buttonCanvas;
     [SerializeField] private Canvas exitCanvas;
     [SerializeField] private PlayerData playerData;
-
     [SerializeField] private AudioSource audioSource;
 
-    // Start is called before the first frame update
+    public enum eventState { INTRODUCTION, DECISION, OUTCOME }
+    private eventState currentState;
+
+    private string outcomeMessage = "";
+
     void Awake()
     {
         currentState = eventState.INTRODUCTION;
@@ -30,8 +26,7 @@ public class FlipCoinEvent : MonoBehaviour
 
     void Update()
     {
-        
-        if (Input.GetMouseButtonUp(0)&& eventText.textFullyDisplayed)
+        if (Input.GetMouseButtonUp(0) && eventText.textFullyDisplayed)
         {
             if (currentState == eventState.INTRODUCTION)
             {
@@ -44,18 +39,17 @@ public class FlipCoinEvent : MonoBehaviour
         }
     }
 
-
     void UpdateCurrentState()
     {
         switch (currentState)
         {
             case eventState.INTRODUCTION:
                 eventText.StartDialogue();
-                eventText.dialogueLines = "YOU FIND A MAN WHO PROPOSES TO FLIP A COIN";
+                eventText.dialogueLines = "YOU FIND A MYSTERIOUS BOX FOR SALE...";
                 break;
 
             case eventState.DECISION:
-                eventText.dialogueLines = "HEADS OR TAILS?";
+                eventText.dialogueLines = "WHAT DO YOU DO?";
                 eventText.StartDialogue();
                 buttonCanvas.SetActive(false);
                 StartCoroutine(EnableButtonsWhenReady());
@@ -63,32 +57,12 @@ public class FlipCoinEvent : MonoBehaviour
 
             case eventState.OUTCOME:
                 buttonCanvas.SetActive(false);
-
-                string resultText = $"YOU FLIP A COIN AND IT LANDS ON {prizeSide}.\n";
-                if (playerSide == prizeSide)
-                {
-                    ReceivePrize();
-                    resultText += "YOU WIN! YOUR XP DOUBLES.\n";
-                }
-                else
-                {
-                    playerData.exp /= 2;
-                    resultText += "YOU LOSE! YOUR XP IS HALVED.\n";
-                }
-                resultText += "Current XP: " + playerData.exp;
-                eventText.dialogueLines = resultText;
+                eventText.dialogueLines = outcomeMessage + "\nCurrent XP: " + playerData.exp;
                 eventText.StartDialogue();
                 exitCanvas.enabled = true;
                 break;
         }
     }
-    void ReceivePrize()
-    {
-        int original = playerData.exp;
-        playerData.exp *= 2;
-    }
-
-    
 
     IEnumerator EnableButtonsWhenReady()
     {
@@ -97,25 +71,46 @@ public class FlipCoinEvent : MonoBehaviour
             yield return null;
         }
         buttonCanvas.SetActive(true);
-
     }
 
-    public void Heads()
+    public void BuyBox()
     {
-        playerSide = coinSide.HEADS;
-        FlipCoin();
+        if (playerData.exp >= 15)
+        {
+            playerData.exp -= 15;
+            int reward = Random.Range(25, 46);
+            playerData.exp += reward;
+            outcomeMessage = $"YOU BUY THE BOX. INSIDE YOU FIND XP!\n+{reward} XP";
+        }
+        else
+        {
+            outcomeMessage = "YOU DON'T HAVE ENOUGH XP TO BUY THE BOX.";
+        }
+        currentState = eventState.OUTCOME;
+        UpdateCurrentState();
     }
 
-    public void Tails()
+    public void StealBox()
     {
-        playerSide = coinSide.TAILS;
-        FlipCoin();
+        bool takesDamage = Random.value < 0.5f;
+        int reward = Random.Range(10, 31);
+        playerData.exp += reward;
+        if (takesDamage)
+        {
+            playerData.health -= 1;
+            outcomeMessage = $"YOU STEAL THE BOX AND GET HURT.\n-1 HP, +{reward} XP";
+        }
+        else
+        {
+            outcomeMessage = $"YOU SUCCESSFULLY STEAL THE BOX!\n+{reward} XP";
+        }
+        currentState = eventState.OUTCOME;
+        UpdateCurrentState();
     }
 
-    void FlipCoin()
+    public void LeaveBox()
     {
-        audioSource.Play();
-        prizeSide = (Random.value > 0.5f) ? coinSide.HEADS : coinSide.TAILS;
+        outcomeMessage = "YOU DECIDE TO WALK AWAY FROM THE BOX.";
         currentState = eventState.OUTCOME;
         UpdateCurrentState();
     }
@@ -125,7 +120,6 @@ public class FlipCoinEvent : MonoBehaviour
         audioSource.Play();
         DontDestroyOnLoad(audioSource);
         PlayerPrefs.SetString("LastLevelCleared", SceneManager.GetActiveScene().name);
-
         SceneManager.LoadScene(PlayerPrefs.GetString("EneteredMap"));
     }
 }
