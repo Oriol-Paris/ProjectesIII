@@ -10344,7 +10344,7 @@ MonoBehaviour:
     - {fileID: 385446698}
     - {fileID: 1419577337}
     - {fileID: 1275658022}
-  - groupName: Level6
+  - groupName: Level7
     tiles:
     - {fileID: 201345746}
     - {fileID: 1532060067}
@@ -10380,7 +10380,7 @@ MonoBehaviour:
     - {fileID: 510150343}
     - {fileID: 1583867887}
     - {fileID: 1467117909}
-  - groupName: Level7
+  - groupName: Level8
     tiles:
     - {fileID: 1035053461}
     - {fileID: 1324560054}
@@ -11345,7 +11345,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelName: EventScene
   lastLevelNames:
-  - Level5
+  - Level6
   isInteractible: 0
   isPressed: 0
   spawnedEnemies: []
