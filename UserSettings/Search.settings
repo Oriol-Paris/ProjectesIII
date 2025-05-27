@@ -72,6 +72,8 @@ providers = {
 objectSelectors = {
 }
 recentSearches = [
+	"h: ref=\"Assets/scripts/Manager/HotbarManager.cs\""
+	"h: ref=<$object:none$>"
 	"skybox"
 	""
 ]
@@ -82,7 +84,7 @@ showSavedSearchPanel = false
 hideTabs = false
 expandedQueries = [
 ]
-queryBuilder = true
+queryBuilder = false
 ignoredProperties = "id;name;classname;imagecontentshash"
 helperWidgetCurrentArea = "all"
 disabledIndexers = ""
