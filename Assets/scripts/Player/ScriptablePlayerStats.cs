@@ -459,10 +459,9 @@ public class PlayerData : ScriptableObject
                 FindAnyObjectByType<BulletCollection>().GetBullet(bullet.bulletType).LevelUpBullet(bullet.level);
                 Debug.Log(bullet.level);
                 bullet.level += amountOfLevels;
-               
+                Save();
+                return;
             }
         }
-
-        Save();
     }
 }

@@ -1065,15 +1065,19 @@ MonoBehaviour:
   m_WindowGUID: cc27987af1a868c49b0894db9c0f5429
   m_Gizmos: 1
   m_OverrideSceneCullingMask: 6917529027641081856
-  m_SceneIsLit: 1
+  m_SceneIsLit: 0
   m_SceneLighting: 1
-  m_2DMode: 0
+  m_2DMode: 1
   m_isRotationLocked: 0
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_DebugDrawModesUseInteractiveLightBakingData: 0
   m_Position:
+<<<<<<< HEAD
     m_Target: {x: -0.8977784, y: -0.2676907, z: 3.3197174}
+=======
+    m_Target: {x: -0.00001859665, y: -0.000027656555, z: 90}
+>>>>>>> origin/feature/--HOTFIXES--
     speed: 2
     m_Value: {x: -0.441671, y: -3.1127722, z: -1.9138514}
   m_RenderMode: 0
@@ -1121,15 +1125,23 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
+<<<<<<< HEAD
     m_Target: {x: 0.22030422, y: 0.15234661, z: -0.033113267, w: 0.96319944}
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
     m_Target: 9.904326
+=======
+    m_Target: {x: 0, y: 0, z: 0, w: 1}
+    speed: 2
+    m_Value: {x: 0, y: 0, z: 0, w: 1}
+  m_Size:
+    m_Target: 10.198675
+>>>>>>> origin/feature/--HOTFIXES--
     speed: 2
     m_Value: 4.5377097
   m_Ortho:
-    m_Target: 0
+    m_Target: 1
     speed: 2
     m_Value: 1
   m_CameraSettings:
@@ -1907,7 +1919,11 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 239.6}
     m_SelectedIDs: e4f90200
     m_LastClickedID: 195044
+<<<<<<< HEAD
     m_ExpandedIDs: 0000000028e500002ae500002ce500002ee5000030e5000032e5000034e5000036e5000038e500003ae500003ce500003ee5000040e5000042e5000044e5000046e5000048e500004ae500004ce500004ee5000050e5000052e5000054e5000056e5000058e500005ae500005ce500005ee5000060e5000062e5000064e50000
+=======
+    m_ExpandedIDs: 0000000026d3000028d300002ad300002cd300002ed3000030d30000
+>>>>>>> origin/feature/--HOTFIXES--
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1936,7 +1952,11 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
+<<<<<<< HEAD
     m_ExpandedIDs: 0000000028e500002ae500002ce500002ee5000030e5000032e5000034e5000036e5000038e500003ae500003ce500003ee5000040e5000042e5000044e5000046e5000048e500004ae500004ce500004ee5000050e5000052e5000054e5000056e5000058e500005ae500005ce500005ee5000060e5000062e5000064e50000
+=======
+    m_ExpandedIDs: 0000000026d3000028d300002ad300002cd300002ed3000030d30000
+>>>>>>> origin/feature/--HOTFIXES--
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -2060,7 +2080,11 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 694}
     m_SelectedIDs: fa080100
     m_LastClickedID: 67834
+<<<<<<< HEAD
     m_ExpandedIDs: 0000000028e500002ae500002ce500002ee5000030e5000032e5000034e5000036e5000038e500003ae500003ce500003ee5000040e5000042e5000044e5000046e5000048e500004ae500004ce500004ee5000050e5000052e5000054e5000056e5000058e500005ae500005ce500005ee5000060e5000062e5000064e50000
+=======
+    m_ExpandedIDs: 0000000026d3000028d300002ad300002cd300002ed3000030d30000
+>>>>>>> origin/feature/--HOTFIXES--
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -2089,7 +2113,11 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
+<<<<<<< HEAD
     m_ExpandedIDs: 0000000028e500002ae500002ce500002ee5000030e5000032e5000034e5000036e5000038e500003ae500003ce500003ee5000040e5000042e5000044e5000046e5000048e500004ae500004ce500004ee5000050e5000052e5000054e5000056e5000058e500005ae500005ce500005ee5000060e5000062e5000064e50000
+=======
+    m_ExpandedIDs: 0000000026d3000028d300002ad300002cd300002ed3000030d30000
+>>>>>>> origin/feature/--HOTFIXES--
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
