@@ -64,4 +64,48 @@ public class MapInteractionManager : MonoBehaviour
             yield return new WaitForSeconds(0.1f);
         }
     }
+
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Keypad1))
+        {
+            SceneManager.LoadScene("Level1");
+        }
+        else if (Input.GetKeyDown(KeyCode.Keypad2))
+        {
+            SceneManager.LoadScene("Level2");
+        }
+        else if (Input.GetKeyDown(KeyCode.Keypad3))
+        {
+            SceneManager.LoadScene("Level3");
+        }
+        else if (Input.GetKeyDown(KeyCode.Keypad4))
+        {
+            SceneManager.LoadScene("Level4");
+        }
+        else if (Input.GetKeyDown(KeyCode.Keypad5))
+        {
+            SceneManager.LoadScene("Level5");
+        }
+        else if (Input.GetKeyDown(KeyCode.Keypad6))
+        {
+            SceneManager.LoadScene("Level6");
+        }
+        else if (Input.GetKeyDown(KeyCode.Keypad7))
+        {
+            SceneManager.LoadScene("Level7");
+        }
+        else if (Input.GetKeyDown(KeyCode.Keypad8))
+        {
+            SceneManager.LoadScene("Level8");
+        }
+        else if (Input.GetKeyDown(KeyCode.Keypad9))
+        {
+            SceneManager.LoadScene("ShopScene");
+        }
+        else if (Input.GetKeyDown(KeyCode.Keypad0))
+        {
+            SceneManager.LoadScene("EventScene");
+        }
+    }
 }
