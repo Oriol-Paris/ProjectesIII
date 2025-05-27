@@ -334,15 +334,24 @@ public class ShopManager : MonoBehaviour
             if (action.action == playerAction.action && BulletCollection.CompareBullets(action.style, playerAction.style))
             {
                 if (action.action == PlayerBase.ActionEnum.MOVE)
-                    return 10 + (Mathf.FloorToInt(Mathf.Pow(player.playerData.moveRange, 1.25f)));
+                    return 10 + (Mathf.FloorToInt(Mathf.Pow(player.playerData.moveRange, 1.5f)));
                 else if (action.action == PlayerBase.ActionEnum.HEAL)
-                    return 10 + (Mathf.FloorToInt(Mathf.Pow(player.playerData.healAmount, 1.25f)));
-                else if (action.action == PlayerBase.ActionEnum.SHOOT && action.style.bulletType == BulletType.GUN)
-                    return 15 + (Mathf.FloorToInt(Mathf.Pow(action.style.range, 1.25f)));
-                else if (action.action == PlayerBase.ActionEnum.SHOOT && action.style.bulletType == BulletType.SHOTGUN)
-                    return 25 + (Mathf.FloorToInt(Mathf.Pow(action.style.range, 1.25f)));
-                else if (action.action == PlayerBase.ActionEnum.SHOOT && action.style.bulletType == BulletType.LASER)
-                    return 25 + (Mathf.FloorToInt(Mathf.Pow(action.style.range, 1.25f)));
+                    return 10 + (Mathf.FloorToInt(Mathf.Pow(player.playerData.healAmount, 1.5f)));
+                else if (action.action == PlayerBase.ActionEnum.SHOOT)
+                {
+                    foreach(var bullet in player.playerData.bulletLevels)
+                    {
+                        if(action.style.bulletType == bullet.bulletType)
+                        {
+                            if (action.style.bulletType == BulletType.GUN)
+                                return 15 + Mathf.FloorToInt(Mathf.Pow(15, bullet.level));
+                            else if (action.style.bulletType == BulletType.SHOTGUN)
+                                return 25 + Mathf.FloorToInt(Mathf.Pow(15, bullet.level));
+                            else if (action.style.bulletType == BulletType.LASER)
+                                return 25 + Mathf.FloorToInt(Mathf.Pow(15, bullet.level));
+                        }
+                    }
+                }
             }
         }
 
