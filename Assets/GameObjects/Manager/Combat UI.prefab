@@ -1591,6 +1591,7 @@ MonoBehaviour:
   - {fileID: 8646500748383836429}
   - {fileID: 9099028019562476474}
   - {fileID: 5661227579037106774}
+  costIndicatorPrefab: {fileID: 8655032155819557984, guid: 6fc74242154bd1740b2982e70cb9b938, type: 3}
   topActionPrefab: {fileID: 8655032155819557984, guid: 78e37625c1b26a647a1561622e4a2754, type: 3}
   bottomActionPrefab: {fileID: 8655032155819557984, guid: 6fc74242154bd1740b2982e70cb9b938, type: 3}
   runImage: {fileID: 21300000, guid: 80a31360147518a4c878052c987d2472, type: 3}

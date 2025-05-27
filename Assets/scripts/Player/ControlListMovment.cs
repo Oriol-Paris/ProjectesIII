@@ -60,7 +60,7 @@ public class ControlListMovment : MonoBehaviour
 
 
             controlLiniarRender.InstantiateLineMovment();
-            FindAnyObjectByType<APBarManager>().AnimateAPCost();
+            FindAnyObjectByType<APBarManager>().PaintAPCost();
         }
         else
         {

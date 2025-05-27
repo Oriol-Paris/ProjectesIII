@@ -1791,9 +1791,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   APBarPrefab: {fileID: 6632909104858812616, guid: b919ece06175c7942b1399f5716de3c0, type: 3}
   apBars: []
-  fadeDuration: 0.5
-  minAlpha: 0.3
-  maxAlpha: 1
+  runImage: {fileID: 0}
+  gunImage: {fileID: 0}
+  shotgunImage: {fileID: 0}
+  laserImage: {fileID: 0}
+  healImage: {fileID: 0}
+  weaponPickupImage: {fileID: 0}
 --- !u!114 &1206168422
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3431,6 +3434,7 @@ MonoBehaviour:
   playerData: {fileID: 435037521}
   hotbarPanel: {fileID: 2097931703}
   actionSlotPrefab: {fileID: 8655032155819557984, guid: 78f3d334c2b66914498d9760491e170c, type: 3}
+  apPointPrefab: {fileID: 0}
   hotbarAnimator: {fileID: 0}
 --- !u!4 &2105453033
 Transform:

@@ -2,19 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEngine.Rendering.HableCurve;
 
 public class APBarManager : MonoBehaviour
 {
     public GameObject APBarPrefab;
     private PlayerBase player;
-    [SerializeField]private List<GameObject> apBars = new List<GameObject>();
+    [SerializeField] private List<GameObject> apBars = new List<GameObject>();
     private int currentAP = 0;
 
-    [Header("Animation Settings")]
-    [SerializeField] private float fadeDuration = 0.5f;
-    [SerializeField] private float minAlpha = 0.3f;
-    [SerializeField] private float maxAlpha = 1f;
+    [Header("Sprites")]
+    public Sprite runImage;
+    public Sprite gunImage;
+    public Sprite shotgunImage;
+    public Sprite laserImage;
+    public Sprite healImage;
+    public Sprite weaponPickupImage;
+
+
+    public Color shootColor;
+    public Color healColor;
+    public Color moveColor;
 
     void Start()
     {
@@ -28,7 +35,8 @@ public class APBarManager : MonoBehaviour
         for (int i = 0; i < player.playerData.maxActionPoints; i++)
         {
             GameObject apBar = Instantiate(APBarPrefab, transform);
-            apBar.transform.Find("Fill").GetComponent<Image>().color = Color.blue;
+            apBar.transform.Find("ActionSprite").GetComponent<Image>().sprite = null;
+            apBar.transform.Find("ActionSprite").GetComponent<Image>().color = Color.clear;
             apBar.transform.localScale = new Vector3(0.006f, 0.006f, 1f);
             apBars.Add(apBar);
         }
@@ -43,26 +51,37 @@ public class APBarManager : MonoBehaviour
             Destroy(item);
         }
         apBars.Clear();
-
         InitBar();
     }
 
-
-    public void AnimateLastAP()
+    public void PaintAPCost()
     {
-        StartCoroutine(AnimateBar(apBars[(int)currentAP]));
-        currentAP--;
-    }
-    public void AnimateAPCost()
-    {
-        int cost = player.GetAction().m_cost;
+        var action = player.GetAction();
+        int cost = action.m_cost;
+        Sprite actionSprite = GetActionImage(action);
+        Color actionColor = GetActionColor(action);
 
         for (int i = 0; i < cost; i++)
         {
-            int index = (int)currentAP - i;
+            int index = currentAP - i;
             if (index >= 0 && index < apBars.Count)
             {
-                StartCoroutine(AnimateBar(apBars[index]));
+                Image fill = apBars[index].transform.Find("ActionSprite").GetComponent<Image>();
+                Image fillImage = apBars[index].transform.Find("Fill").GetComponent<Image>();
+
+                if (fillImage == null)
+                {
+                    Debug.LogError("Fill Image not found in AP bar prefab.");
+                }
+                else
+                {
+                    fillImage.color = actionColor;
+                }
+
+                fill.sprite = actionSprite;
+                fill.color = Color.white;
+                fill.type = Image.Type.Simple;
+                fill.preserveAspect = true;
             }
         }
 
@@ -70,40 +89,66 @@ public class APBarManager : MonoBehaviour
         if (currentAP < -1) currentAP = -1;
     }
 
+
+    private Sprite GetActionImage(PlayerBase.Action action)
+    {
+        if (action.m_action == PlayerBase.ActionEnum.SHOOT)
+        {
+            switch (action.m_style.bulletType)
+            {
+                case BulletType.GUN: return gunImage;
+                case BulletType.SHOTGUN: return shotgunImage;
+                case BulletType.LASER: return laserImage;
+            }
+        }
+        else if (action.m_action == PlayerBase.ActionEnum.HEAL)
+        {
+            return healImage;
+        }
+        else if (action.m_action == PlayerBase.ActionEnum.MOVE)
+        {
+            return runImage;
+        }
+        else if (action.m_action == PlayerBase.ActionEnum.ESPECIALSHOOT)
+        {
+            return weaponPickupImage;
+        }
+
+        return null;
+    }
+    private Color GetActionColor(PlayerBase.Action action)
+    {
+        if (action.m_action == PlayerBase.ActionEnum.SHOOT)
+        {
+            switch (action.m_style.bulletType)
+            {
+                case BulletType.GUN: return shootColor;
+                case BulletType.SHOTGUN: return shootColor;
+                case BulletType.LASER: return shootColor;
+            }
+        }
+        else if (action.m_action == PlayerBase.ActionEnum.HEAL)
+        {
+            return healColor;
+        }
+        else if (action.m_action == PlayerBase.ActionEnum.MOVE)
+        {
+            return moveColor;
+        }
+        else if (action.m_action == PlayerBase.ActionEnum.ESPECIALSHOOT)
+        {
+            return shootColor;
+        }
+
+        return Color.white;
+    }
+
     public void DestroyUsedAP()
     {
         for (int i = (int)player.playerData.maxActionPoints - 1; i > currentAP; i--)
         {
             Destroy(apBars[i]);
-            apBars.Remove(apBars[i]);
-        }
-    }
-
-    IEnumerator AnimateBar(GameObject obj)
-    {
-        Image fillImg = obj.transform.Find("Fill").GetComponent<Image>();
-        Image borderImg = obj.transform.Find("Border").GetComponent<Image>();
-        if (fillImg == null || borderImg == null) yield break;
-
-        List<Image> images = new List<Image> { fillImg, borderImg };
-
-        while (true)
-        {
-            float phase = Mathf.PingPong(Time.time / fadeDuration, 1f);
-
-            float alpha = Mathf.Lerp(minAlpha, maxAlpha, phase);
-
-            foreach (var img in images)
-            {
-                if (img != null)
-                {
-                    Color c = img.color;
-                    c.a = alpha;
-                    img.color = c;
-                }
-            }
-
-            yield return null; // Continuar en el siguiente frame
+            apBars.RemoveAt(i);
         }
     }
 }

@@ -1,4 +1,4 @@
-using UnityEngine.UI;
+﻿using UnityEngine.UI;
 using UnityEngine;
 using TMPro;
 using System.Collections.Generic;
@@ -9,7 +9,7 @@ public class TopBarManager : MonoBehaviour
 {
     public GridLayoutGroup topPanel;
     public List<GameObject> actions;
-
+    public GameObject costIndicatorPrefab;
     public GameObject topActionPrefab;
     public GameObject bottomActionPrefab;
     private PlayerBase playerData;
@@ -93,28 +93,36 @@ public class TopBarManager : MonoBehaviour
         GameObject newAction = Instantiate(topActionPrefab, topPanel.transform);
         newAction.GetComponent<Image>().overrideSprite = GetActionImage(playerData.activeAction);
     }
-    
+
 
     public void UpdateBottomHotbar()
     {
-      
         if (playerData == null)
         {
             Debug.LogError("Player is null in HotbarManager.");
             return;
         }
 
-        foreach(var action in actions)
+        foreach (var action in actions)
         {
             action.transform.Find("Image").gameObject.SetActive(false);
             action.transform.Find("Key").gameObject.SetActive(false);
             action.transform.Find("Border").GetComponent<Image>().color = Color.white;
+
+            // Limpiar indicadores de coste (por si quedaron residuos)
+            Transform costContainer = action.transform.Find("CostContainer");
+            if (costContainer != null)
+            {
+                foreach (Transform child in costContainer)
+                {
+                    Destroy(child.gameObject);
+                }
+            }
         }
 
         var availableActions = playerData.availableActions;
         int actionCount = availableActions.Count;
 
-        // Update existing slots or create new ones if necessary
         for (int i = 0; i < actionCount; i++)
         {
             actions[i].transform.Find("Image").gameObject.SetActive(true);
@@ -128,7 +136,7 @@ public class TopBarManager : MonoBehaviour
 
             actionImage.overrideSprite = GetActionImage(action);
 
-            // Highlight the selected action
+            // Resaltar si es la acción seleccionada
             if (action.m_action == player.GetAction().m_action)
             {
                 if (action.m_key == player.GetAction().m_key)
@@ -145,14 +153,36 @@ public class TopBarManager : MonoBehaviour
                 actionBorder.color = Color.white;
             }
 
-            // Update slot visuals
+            
             actionImage.overrideSprite = GetActionImage(action);
             actionImage.color = GetActionColor(action.m_action);
+
+            
+            Transform costContainer = actions[i].transform.Find("Border");
+            
+            if (costContainer != null && costIndicatorPrefab != null)
+            {
+                foreach (Transform child in costContainer)
+                    Destroy(child.gameObject);
+
+                float offset = 20f;
+                for (int c = 0; c < action.m_cost; c++)
+                {
+                    GameObject indicator = Instantiate(costIndicatorPrefab, costContainer);
+                    RectTransform rt = indicator.GetComponent<RectTransform>();
+
+                   
+                    float x = -(action.m_cost - 1.5f - c) * offset;
+                    rt.anchoredPosition = new Vector2(x, 40);
+                }
+
+            }
+
         }
 
-        // Update the displayed actions list
         actionsDisplayed = new List<PlayerBase.Action>(availableActions);
     }
+
 
     public void ResetTopBar()
     {

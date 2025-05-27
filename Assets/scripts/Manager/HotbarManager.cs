@@ -15,7 +15,7 @@ public class HotbarManager : MonoBehaviour
     private GameObject slot;
     private List<GameObject> actionSlots = new List<GameObject>();
     private List<PlayerData.ActionData> actionsDisplayed = new List<PlayerData.ActionData>();
-
+    public GameObject apPointPrefab; // Prefab que representa 1 punto de acción visualmente
     public Animator hotbarAnimator; // Reference to the Animator
 
     private List<PlayerData.ActionData> previousActions = new List<PlayerData.ActionData>(); // Tracks the previous state of actions
@@ -139,6 +139,7 @@ public class HotbarManager : MonoBehaviour
                     slot.transform.Find("Texts").transform.Find("Action Stats").GetComponent<TextMeshProUGUI>().text =
                         
                         "Damage: " + FindAnyObjectByType<BulletCollection>().GetBullet(action.bulletType).damage;
+                        
                 }
                 else if (action.actionType == PlayerBase.ActionType.SINGLE_USE || action.actionType == PlayerBase.ActionType.PASSIVE)
                 {
@@ -156,6 +157,21 @@ public class HotbarManager : MonoBehaviour
                     }
 
                     inputText.text = inputKey;
+                }
+            }
+            // Coste visual
+            Transform costContainer = slot.transform.Find("CostContainer");
+            if (costContainer != null)
+            {
+                // Limpia cualquier coste anterior
+                foreach (Transform child in costContainer)
+                {
+                    Destroy(child.gameObject);
+                }
+
+                for (int i = 0; i < action.cost; i++)
+                {
+                    Instantiate(apPointPrefab, costContainer);
                 }
             }
 
