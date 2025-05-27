@@ -3,35 +3,30 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class FlipCoinEvent : MonoBehaviour
+public class InfectedTownEvent : MonoBehaviour
 {
     [SerializeField] private Dialogue eventText;
-    private enum eventState { INTRODUCTION, DECISION, OUTCOME }
-    private enum coinSide { HEADS, TAILS }
-
-    private coinSide playerSide;
-    private coinSide prizeSide;
-
-    [SerializeField] private eventState currentState;
     [SerializeField] private GameObject buttonCanvas;
     [SerializeField] private Canvas exitCanvas;
     [SerializeField] private PlayerData playerData;
-
     [SerializeField] private AudioSource audioSource;
 
-    // Start is called before the first frame update
+    public enum eventState { INTRODUCTION, DECISION, OUTCOME }
+    private eventState currentState;
+    private bool hasHealingSkill;
+
     void Awake()
     {
         currentState = eventState.INTRODUCTION;
         buttonCanvas.SetActive(false);
+
         exitCanvas.enabled = false;
         UpdateCurrentState();
     }
 
     void Update()
     {
-        
-        if (Input.GetMouseButtonUp(0)&& eventText.textFullyDisplayed)
+        if (Input.GetMouseButtonUp(0) && eventText.textFullyDisplayed)
         {
             if (currentState == eventState.INTRODUCTION)
             {
@@ -44,51 +39,53 @@ public class FlipCoinEvent : MonoBehaviour
         }
     }
 
-
     void UpdateCurrentState()
     {
         switch (currentState)
         {
             case eventState.INTRODUCTION:
                 eventText.StartDialogue();
-                eventText.dialogueLines = "YOU FIND A MAN WHO PROPOSES TO FLIP A COIN";
+                eventText.dialogueLines = "YOU ENCOUNTER A VILLAGE PLAGUED BY DISEASE...";
+                
                 break;
 
             case eventState.DECISION:
-                eventText.dialogueLines = "HEADS OR TAILS?";
+                eventText.dialogueLines = "DO YOU HELP THEM?";
                 eventText.StartDialogue();
                 buttonCanvas.SetActive(false);
+
                 StartCoroutine(EnableButtonsWhenReady());
                 break;
 
             case eventState.OUTCOME:
                 buttonCanvas.SetActive(false);
-
-                string resultText = $"YOU FLIP A COIN AND IT LANDS ON {prizeSide}.\n";
-                if (playerSide == prizeSide)
-                {
-                    ReceivePrize();
-                    resultText += "YOU WIN! YOUR XP DOUBLES.\n";
-                }
-                else
-                {
-                    playerData.exp /= 2;
-                    resultText += "YOU LOSE! YOUR XP IS HALVED.\n";
-                }
-                resultText += "Current XP: " + playerData.exp;
-                eventText.dialogueLines = resultText;
-                eventText.StartDialogue();
                 exitCanvas.enabled = true;
+                for (int i = 0; i<playerData.availableActions.Count; i++)
+                {
+                    if (playerData.availableActions[i].action == PlayerBase.ActionEnum.HEAL)
+                    {
+                        hasHealingSkill = true;
+                        break;
+                    }
+                    else
+                    {
+                        hasHealingSkill = false;
+                    }
+                }
+                string outcome = hasHealingSkill
+                    ? "YOU CURE THE VILLAGERS. THEY THANK YOU.\n+100 XP"
+                    : "YOU LACK THE SKILL TO HELP.\nTHE VILLAGERS SUFFER.";
+                if (hasHealingSkill)
+                {
+                    playerData.exp += 100;
+                }
+                eventText.dialogueLines = outcome + "\nCurrent XP: " + playerData.exp;
+                
+                eventText.StartDialogue();
+                
                 break;
         }
     }
-    void ReceivePrize()
-    {
-        int original = playerData.exp;
-        playerData.exp *= 2;
-    }
-
-    
 
     IEnumerator EnableButtonsWhenReady()
     {
@@ -100,22 +97,14 @@ public class FlipCoinEvent : MonoBehaviour
 
     }
 
-    public void Heads()
+    public void HelpVillage()
     {
-        playerSide = coinSide.HEADS;
-        FlipCoin();
+        currentState = eventState.OUTCOME;
+        UpdateCurrentState();
     }
 
-    public void Tails()
+    public void LeaveVillage()
     {
-        playerSide = coinSide.TAILS;
-        FlipCoin();
-    }
-
-    void FlipCoin()
-    {
-        audioSource.Play();
-        prizeSide = (Random.value > 0.5f) ? coinSide.HEADS : coinSide.TAILS;
         currentState = eventState.OUTCOME;
         UpdateCurrentState();
     }
@@ -125,7 +114,6 @@ public class FlipCoinEvent : MonoBehaviour
         audioSource.Play();
         DontDestroyOnLoad(audioSource);
         PlayerPrefs.SetString("LastLevelCleared", SceneManager.GetActiveScene().name);
-
         SceneManager.LoadScene(PlayerPrefs.GetString("EneteredMap"));
     }
 }
