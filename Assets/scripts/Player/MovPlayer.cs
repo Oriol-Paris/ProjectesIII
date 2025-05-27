@@ -6,7 +6,7 @@ using UnityEngine;
 public class MovPlayer : MonoBehaviour
 {
 
-
+    public PlayerData playerData;
     public ControlLiniarRender controlLiniarRender;
     public ControlListMovment controlListMovment;
     public TimeSecuence timeSecuence;
@@ -29,7 +29,7 @@ public class MovPlayer : MonoBehaviour
     public bool isDragging;
 
     void Start(){
-        
+        velocity = playerData.velocity;
         t = 0;
     }
 

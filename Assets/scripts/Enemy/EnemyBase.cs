@@ -49,6 +49,7 @@ public class EnemyBase : MonoBehaviour
     private EnemyBase enemyStats;
     private Vector3 PlayerPos;
     private bool isResting = false;
+    private bool godMode = false;
     
 
 
@@ -75,6 +76,12 @@ public class EnemyBase : MonoBehaviour
         else
         {
             agent.isStopped = true;
+        }
+
+        if(Input.GetKeyDown(KeyCode.G))
+        {
+            godMode = !godMode;
+
         }
 
     }
@@ -160,6 +167,13 @@ public class EnemyBase : MonoBehaviour
         health -= val;
         health = Mathf.Max(health, 0);
         Instantiate(bloodSplash, this.transform.position, hitObject.transform.rotation);
+
+        if(godMode)
+        { 
+         health -= 100;
+         health = Mathf.Max(health, 0);
+        }
+
         if (health > 0)
         {
             StartCoroutine(StopMovementTemporarily(0.2f));

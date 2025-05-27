@@ -23,7 +23,8 @@ MonoBehaviour:
   levelCompleted: 0
   timesHealed: 0
   timesIncreasedMaxHP: 0
-  moveRange: 0
+  moveRange: 5
+  velocity: 2
   exp: 10
   isAlive: 1
   victory: 0

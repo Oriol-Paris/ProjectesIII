@@ -11,7 +11,7 @@ public class ControlLiniarRender : MonoBehaviour
         public Color m_color;
         public PlayerBase.ActionEnum m_action;
     }
-
+    public PlayerData playerData;
     public Vector3 mousePosition;
     public Vector3 positionDesired;
     public Vector3 playerPosition;
@@ -40,6 +40,8 @@ public class ControlLiniarRender : MonoBehaviour
 
     void Start()
     {
+        maxReach = playerData.moveRange;
+
         playerPosition = transform.position;
 
         if (lineRenderer == null)

@@ -43,6 +43,11 @@ public class ShopManager : MonoBehaviour
 
     public void Update()
     {
+        if(Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            player.playerData.exp += 100;
+        }
+
         currentXP.text = "EXP: " + player.playerData.exp;
     }
 
@@ -157,6 +162,7 @@ public class ShopManager : MonoBehaviour
                 break;
             case PlayerBase.ActionEnum.MOVE:
                 boughtItem.text = "Increased move range";
+               
                 player.playerData.moveRange += 1; // Increase move range
                 break;
             case PlayerBase.ActionEnum.RECOVERY:
@@ -166,6 +172,7 @@ public class ShopManager : MonoBehaviour
                 break;
             case PlayerBase.ActionEnum.SPEED_UP:
                 boughtItem.text = "Player Speed Up";
+                player.playerData.velocity += 1;
                 //player speed up
                 break;
             case PlayerBase.ActionEnum.MAX_HP_INCREASE:

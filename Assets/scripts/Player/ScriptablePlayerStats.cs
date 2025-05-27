@@ -24,6 +24,7 @@ public class PlayerData : ScriptableObject
     public int timesHealed;
     public int timesIncreasedMaxHP;
     public int moveRange;
+    public int velocity;
     public int exp;
     public bool isAlive;
     public bool victory;
@@ -80,6 +81,7 @@ public class PlayerData : ScriptableObject
         public int timesHealed;
         public int timesIncreasedMaxHP;
         public int moveRange;
+        public int velocity;
         public int exp;
         public bool isAlive;
         public bool victory;
@@ -126,6 +128,7 @@ public class PlayerData : ScriptableObject
                 timesHealed = this.timesHealed,
                 timesIncreasedMaxHP = this.timesIncreasedMaxHP,
                 moveRange = this.moveRange,
+                velocity = this.velocity,
                 exp = this.exp,
                 isAlive = this.isAlive,
                 victory = this.victory,
@@ -181,6 +184,7 @@ public class PlayerData : ScriptableObject
                 data.timesHealed = wrapper.timesHealed;
                 data.timesIncreasedMaxHP = wrapper.timesIncreasedMaxHP;
                 data.moveRange = wrapper.moveRange;
+                data.velocity = wrapper.velocity;
                 data.exp = wrapper.exp;
                 data.isAlive = wrapper.isAlive;
                 data.victory = wrapper.victory;
@@ -271,6 +275,7 @@ public class PlayerData : ScriptableObject
             timesHealed = this.timesHealed,
             timesIncreasedMaxHP = this.timesIncreasedMaxHP,
             moveRange = this.moveRange,
+            velocity = this.velocity,
             exp = this.exp,
             isAlive = this.isAlive,
             victory = this.victory,
@@ -328,6 +333,7 @@ public class PlayerData : ScriptableObject
                 data.timesHealed = wrapper.timesHealed;
                 data.timesIncreasedMaxHP = wrapper.timesIncreasedMaxHP;
                 data.moveRange = wrapper.moveRange;
+                data.velocity = wrapper.velocity;
                 data.exp = wrapper.exp;
                 data.isAlive = wrapper.isAlive;
                 data.victory = wrapper.victory;
@@ -424,6 +430,7 @@ public class PlayerData : ScriptableObject
         timesHealed = source.timesHealed;
         timesIncreasedMaxHP = source.timesIncreasedMaxHP;
         moveRange = source.moveRange;
+        velocity = source.velocity;
         exp = source.exp;
         isAlive = source.isAlive;
         victory = source.victory;
@@ -450,8 +457,9 @@ public class PlayerData : ScriptableObject
             if (bullet.bulletType == type)
             {
                 FindAnyObjectByType<BulletCollection>().GetBullet(bullet.bulletType).LevelUpBullet(bullet.level);
+                Debug.Log(bullet.level);
                 bullet.level += amountOfLevels;
-                return;
+               
             }
         }
 
