@@ -4339,6 +4339,26 @@ BoxCollider:
   m_Size: {x: 3.2001112, y: 0.9939734, z: 3.0807314}
   m_Center: {x: -0.042313933, y: 0.5257934, z: -0.058262587}
 --- !u!1001 &471892376
+--- !u!114 &516230006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 516230003}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dac4c679969926478971682492ab515, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelName: Level8
+  lastLevelNames:
+  - EventScene
+  - Level7
+  isInteractible: 0
+  isPressed: 0
+  spawnedEnemies: []
+--- !u!1001 &526338699
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -12426,6 +12446,28 @@ BoxCollider:
   m_Size: {x: 3.2001112, y: 0.9939734, z: 3.0807314}
   m_Center: {x: -0.042313933, y: 0.5257934, z: -0.058262587}
 --- !u!1001 &1298210079
+--- !u!114 &1544060285
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1544060282}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6dac4c679969926478971682492ab515, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelName: Level7
+  lastLevelNames:
+  - ShopScene
+  isInteractible: 0
+  isPressed: 0
+  spawnedEnemies:
+  - {fileID: 1012086479}
+  - {fileID: 1627142499}
+  - {fileID: 1373318521}
+--- !u!1001 &1547223023
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2

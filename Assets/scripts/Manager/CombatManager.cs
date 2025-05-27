@@ -75,7 +75,7 @@ public class CombatManager : MonoBehaviour
                 
             }
 
-            if (SceneManager.GetActiveScene().name == "Level7")
+            if (SceneManager.GetActiveScene().name == "Level8")
             {
                 PlayerPrefs.SetString("LastLevelCleared", "");
                 PlayerPrefs.SetString("EnteredMap", "StarterNodeMap");
