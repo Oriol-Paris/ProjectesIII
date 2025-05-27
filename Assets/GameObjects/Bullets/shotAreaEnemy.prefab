@@ -4978,9 +4978,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fromPlayer: 0
-  damage: 0
+  damage: 10
   timeSecuence: {fileID: 0}
   time: 0
   shootDirection: {x: 0, y: 0, z: 0}
   shootCShakeTime: 0.1
   shootCShakeRange: 0.2
+  flash: {fileID: 0}

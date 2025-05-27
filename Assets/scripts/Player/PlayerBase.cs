@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -46,6 +47,8 @@ public class PlayerBase : MonoBehaviour
     public float maxActionPoints;
     public float range;
     public float exp = 0;
+
+    public bool godMode = false;
     
     public PlayerActionManager turnsDone;
 
@@ -60,6 +63,7 @@ public class PlayerBase : MonoBehaviour
     public bool defeat;
     [SerializeField] AudioClip[] damageClips;
     [SerializeField] GameObject bloodSplash;
+    [SerializeField] GameObject aro;
     [SerializeField] private UIBarManager healthManager;
 
     #endregion
@@ -172,8 +176,22 @@ public class PlayerBase : MonoBehaviour
 
     void Update()
     {
+        if (godMode)
+        {
+            aro.SetActive(true);
+        }
+        else
+        {
+            aro.SetActive(false);
+        }
+
         if (!victory && isAlive && !defeat)
         {
+            if (Input.GetKeyDown(KeyCode.G))
+            {
+                godMode = !godMode;
+
+            }
             if (!isExecuting.isExecuting)
             {
                 foreach (Action action in availableActions)
@@ -356,35 +374,40 @@ public class PlayerBase : MonoBehaviour
 
     public void Damage(int val, GameObject hitObject) 
     {
-        Debug.Log("AUCH");
-        health -= val; 
-        playerData.health -= val;
-       
-        GetComponent<SpriteRenderer>().color = Color.red;
-        StartCoroutine(whitecolor());
-
-        SoundEffectsManager.instance.PlaySoundFXClip(damageClips, transform, 1f);
-        StartCoroutine(_camera.Flash(1f, 0.8f, Color.red));
-        StartCoroutine(_camera.Shake(0.3f, 0.8f));
-        Instantiate(bloodSplash, this.transform.position, hitObject.transform.rotation);
-
-        // Check for death condition immediately after taking damage
-        if (health <= 0 || playerData.health <= 0)
+        if (!godMode)
         {
-            if (isAlive)
+
+
+          
+            health -= val;
+            playerData.health -= val;
+
+            GetComponent<SpriteRenderer>().color = Color.red;
+            StartCoroutine(whitecolor());
+
+            SoundEffectsManager.instance.PlaySoundFXClip(damageClips, transform, 1f);
+            StartCoroutine(_camera.Flash(1f, 0.8f, Color.red));
+            StartCoroutine(_camera.Shake(0.3f, 0.8f));
+            Instantiate(bloodSplash, this.transform.position, hitObject.transform.rotation);
+
+            // Check for death condition immediately after taking damage
+            if (health <= 0 || playerData.health <= 0)
             {
-                isAlive = false;
-                StartCoroutine(DeathCoroutine());
+                if (isAlive)
+                {
+                    isAlive = false;
+                    StartCoroutine(DeathCoroutine());
+                }
             }
-        }
-        if (health <= 2/* && (float)_camera.colorPostProces.intensity <= cameraPostProcesIntensity / 2*/)
-        {
+            if (health <= 2/* && (float)_camera.colorPostProces.intensity <= cameraPostProcesIntensity / 2*/)
+            {
 
-            StartCoroutine(_camera.FadeInVignette(cameraPostProcesIntensity, cameraPostProcesLength, Color.red));
-        }
+                StartCoroutine(_camera.FadeInVignette(cameraPostProcesIntensity, cameraPostProcesLength, Color.red));
+            }
 
-        FindAnyObjectByType<UIBarManager>().UpdateHealthbar();
-        SaveCurrentState();
+            FindAnyObjectByType<UIBarManager>().UpdateHealthbar();
+            SaveCurrentState();
+        }
     }
 
     public void InstantHeal(int amount = 1)
