@@ -79,7 +79,7 @@ public class CombatManager : MonoBehaviour
             if (SceneManager.GetActiveScene().name == "Level8")
             {
                 PlayerPrefs.SetString("LastLevelCleared", "");
-                PlayerPrefs.SetString("EnteredMap", "StarterNodeMap");
+                PlayerPrefs.SetString("EneteredMap", "");
                 PlayerPrefs.SetFloat("DifficultyMultiplier", PlayerPrefs.GetFloat("DifficultyMultiplier") + 0.5f);
             }
             else

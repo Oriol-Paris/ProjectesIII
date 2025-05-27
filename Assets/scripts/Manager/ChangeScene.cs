@@ -12,7 +12,7 @@ public class ChangeScene : MonoBehaviour
         FindAnyObjectByType<PlayerBase>().playerData.lastLevel = SceneManager.GetActiveScene().name;
         FindAnyObjectByType<PlayerBase>().playerData.levelCompleted = FindAnyObjectByType<CombatManager>().allEnemiesDead;
 
-        if(PlayerPrefs.GetString("EneteredMap") != null || PlayerPrefs.GetString("EneteredMap") != "")
+        if(PlayerPrefs.GetString("EneteredMap") != null && PlayerPrefs.GetString("EneteredMap") != "")
         {
             if (FindAnyObjectByType<CombatManager>().allEnemiesDead)
             {
@@ -23,6 +23,7 @@ public class ChangeScene : MonoBehaviour
                 PlayerBase player = FindAnyObjectByType<PlayerBase>();
                 player.playerData.lastLevel = SceneManager.GetActiveScene().name;
                 PlayerPrefs.SetString("LastLevelCleared", "");
+                PlayerPrefs.SetFloat("DifficultyMultiplier", 1f);
                 player.playerData.CopyDataFrom(player.playerData.originalPlayer);
                 SceneManager.LoadScene("Title Screen");
             }
@@ -31,9 +32,6 @@ public class ChangeScene : MonoBehaviour
         {
             SceneManager.LoadScene("StarterNodeMap");
         }
-
-
-            
     }
 
     void Update()

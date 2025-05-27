@@ -18,7 +18,7 @@ public class InteractableTiles : MonoBehaviour
 
         if(PlayerPrefs.GetString("LastLevelCleared") == "" || 
             PlayerPrefs.GetString("LastLevelCleared") == null ||
-            PlayerPrefs.GetString("LastLevelCleared") == "Level7")
+            PlayerPrefs.GetString("LastLevelCleared") == "Level8")
         {
             PlayerPrefs.SetString("LastLevelCleared", "Tutorial");
         }

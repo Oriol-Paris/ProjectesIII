@@ -56,7 +56,7 @@ public class EnemyBase : MonoBehaviour
     void Start()
     {
         speed *= PlayerPrefs.GetFloat("DifficultyMultiplier");
-        health *= (int)PlayerPrefs.GetFloat("DifficultyMultiplier");
+        health = Mathf.CeilToInt((float)health * PlayerPrefs.GetFloat("DifficultyMultiplier"));
 
         enemyStats = GetComponent<EnemyBase>();
         agent = GetComponent<NavMeshAgent>();
