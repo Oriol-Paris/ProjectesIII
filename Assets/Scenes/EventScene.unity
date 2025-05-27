@@ -560,9 +560,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 64457179}
+      - m_Target: {fileID: 64457181}
         m_TargetAssemblyTypeName: InfectedTownEvent, Assembly-CSharp
-        m_MethodName: HelpVillage
+        m_MethodName: LeaveVillage
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2558,6 +2558,7 @@ GameObject:
   m_Component:
   - component: {fileID: 64457180}
   - component: {fileID: 64457179}
+  - component: {fileID: 64457181}
   m_Layer: 0
   m_Name: InfectedTownManager
   m_TagString: Untagged
@@ -2577,11 +2578,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df3d659d73cfc0e4c8458ecb00e73a80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventText: {fileID: 2020398226}
-  buttonCanvas: {fileID: 850562615}
-  exitCanvas: {fileID: 1727881569}
-  playerData: {fileID: 11400000, guid: 662eee5fd8a873f478dccf0dfc86e8c7, type: 2}
-  audioSource: {fileID: 296627335}
 --- !u!4 &64457180
 Transform:
   m_ObjectHideFlags: 0
@@ -2598,6 +2594,23 @@ Transform:
   - {fileID: 850562619}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &64457181
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 64457178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45d4a274cb6322d4182e791939dd81d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventText: {fileID: 2020398226}
+  buttonCanvas: {fileID: 850562615}
+  exitCanvas: {fileID: 1727881569}
+  playerData: {fileID: 11400000, guid: 662eee5fd8a873f478dccf0dfc86e8c7, type: 2}
+  audioSource: {fileID: 472137400}
 --- !u!1001 &66222869
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5223,6 +5236,7 @@ GameObject:
   m_Component:
   - component: {fileID: 142110504}
   - component: {fileID: 142110503}
+  - component: {fileID: 142110505}
   m_Layer: 0
   m_Name: MysteryBoxManager
   m_TagString: Untagged
@@ -5242,11 +5256,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd25651ab1b3a0342a036a2c6c5e27ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventText: {fileID: 2020398226}
-  buttonCanvas: {fileID: 805337346}
-  exitCanvas: {fileID: 1727881569}
-  playerData: {fileID: 11400000, guid: 662eee5fd8a873f478dccf0dfc86e8c7, type: 2}
-  audioSource: {fileID: 296627335}
 --- !u!4 &142110504
 Transform:
   m_ObjectHideFlags: 0
@@ -5263,6 +5272,23 @@ Transform:
   - {fileID: 805337350}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &142110505
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 142110502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b21c553119265a0428f4cebf9cfd2107, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  eventText: {fileID: 2020398226}
+  buttonCanvas: {fileID: 805337346}
+  exitCanvas: {fileID: 1727881569}
+  playerData: {fileID: 11400000, guid: 662eee5fd8a873f478dccf0dfc86e8c7, type: 2}
+  audioSource: {fileID: 472137400}
 --- !u!1001 &145734407
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16999,6 +17025,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 65186cc571728f042ba2de15114cae8d, type: 3}
   m_PrefabInstance: {fileID: 470021844}
   m_PrefabAsset: {fileID: 0}
+--- !u!82 &472137400 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 5297226955300494981, guid: 409dfeb6c58253a41be741064f47110f, type: 3}
+  m_PrefabInstance: {fileID: 1466780888}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &476454062
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -27774,7 +27805,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 791120820}
-  - component: {fileID: 791120819}
+  - component: {fileID: 791120821}
   m_Layer: 0
   m_Name: EventSelector
   m_TagString: Untagged
@@ -27782,22 +27813,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &791120819
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 791120818}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4a4cf2ea3f4d9c046aa283c0aa404952, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  events:
-  - {fileID: 499723366}
-  - {fileID: 142110502}
-  - {fileID: 64457178}
 --- !u!4 &791120820
 Transform:
   m_ObjectHideFlags: 0
@@ -27813,6 +27828,22 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &791120821
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 791120818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80ff039b174f6304dac89be61cc43274, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  events:
+  - {fileID: 142110502}
+  - {fileID: 64457178}
+  - {fileID: 499723366}
 --- !u!1001 &791872490
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -31370,7 +31401,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 64457179}
+      - m_Target: {fileID: 64457181}
         m_TargetAssemblyTypeName: InfectedTownEvent, Assembly-CSharp
         m_MethodName: HelpVillage
         m_Mode: 1
@@ -54119,7 +54150,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 142110503}
+      - m_Target: {fileID: 142110505}
         m_TargetAssemblyTypeName: MysteryBoxEvent, Assembly-CSharp
         m_MethodName: LeaveBox
         m_Mode: 1
@@ -56047,7 +56078,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 142110503}
+      - m_Target: {fileID: 142110505}
         m_TargetAssemblyTypeName: MysteryBoxEvent, Assembly-CSharp
         m_MethodName: StealBox
         m_Mode: 1
@@ -65146,7 +65177,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 142110503}
+      - m_Target: {fileID: 142110505}
         m_TargetAssemblyTypeName: MysteryBoxEvent, Assembly-CSharp
         m_MethodName: BuyBox
         m_Mode: 1

@@ -370,15 +370,15 @@ public class ShopManager : MonoBehaviour
         {
             if (actionData.style.bulletType == BulletType.GUN)
             {
-                return "+ Damage \n + Range";
+                return "+Damage \n";
             }
             else if (actionData.style.bulletType == BulletType.SHOTGUN)
             {
-                return "++ Damage \n + Range";
+                return "Shoots 3 bullets in a row \n Action Cost: 2";
             }
             else if (actionData.style.bulletType == BulletType.LASER)
             {
-                return "++ Damage";
+                return "Pierces obstacles & enemies \n Cost: 2";
             }
         }
         else if (actionData.action == PlayerBase.ActionEnum.HEAL)

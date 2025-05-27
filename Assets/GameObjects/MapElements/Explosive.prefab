@@ -380,7 +380,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 740116d5cf2cba34b9d557a27bf79324, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  explosionDamage: 1
+  explosionDamage: 10
   explosionRadius: 3
   explosionEffects: {fileID: -7494575573292175062}
   explosionSpreadDelay: 0.2

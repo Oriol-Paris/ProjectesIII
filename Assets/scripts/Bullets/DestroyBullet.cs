@@ -28,8 +28,11 @@ public class DestroyBullet : MonoBehaviour, IBulletBehavior
     {
         if (fromPlayer)
         {
-            damage = FindAnyObjectByType<BulletCollection>().GetBullet(BulletType.GUN).damage ;
-            Debug.Log(damage);
+            if (damage < 10)
+            {
+                damage = FindAnyObjectByType<BulletCollection>().GetBullet(BulletType.GUN).damage;
+                Debug.Log(damage);
+            }
         }
         else
         {
