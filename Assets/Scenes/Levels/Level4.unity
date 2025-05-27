@@ -3451,9 +3451,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioMixer: {fileID: 24100000, guid: 45b75f7574a90e4458d75870f0902f17, type: 2}
-  masterVolumeSlider: {fileID: 0}
-  soundFXVolumeSlider: {fileID: 0}
-  musicVolumeSlider: {fileID: 0}
+  masterVolumeSlider: {fileID: 4102551693016585041}
+  soundFXVolumeSlider: {fileID: 4102551693016585040}
+  musicVolumeSlider: {fileID: 4102551693016585039}
 --- !u!4 &533759385
 Transform:
   m_ObjectHideFlags: 0
@@ -8437,7 +8437,7 @@ AudioSource:
   m_GameObject: {fileID: 1133745563}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: -9050755741168520203, guid: 45b75f7574a90e4458d75870f0902f17, type: 2}
   m_audioClip: {fileID: 8300000, guid: 7032b71806aa6a44a9fce1e3ca815a59, type: 3}
   m_Resource: {fileID: 8300000, guid: 7032b71806aa6a44a9fce1e3ca815a59, type: 3}
   m_PlayOnAwake: 1
@@ -59701,6 +59701,39 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 25ff33ce903fd0247a465aa9d6ea2ff5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4102551693016585039 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1249307080207467796, guid: 86b5e03058826fa47abc3c555286ee76, type: 3}
+  m_PrefabInstance: {fileID: 4102551693016585037}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4102551693016585040 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3497402958759350065, guid: 86b5e03058826fa47abc3c555286ee76, type: 3}
+  m_PrefabInstance: {fileID: 4102551693016585037}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4102551693016585041 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1438822549964106432, guid: 86b5e03058826fa47abc3c555286ee76, type: 3}
+  m_PrefabInstance: {fileID: 4102551693016585037}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &9222438173843218710

@@ -61910,7 +61910,6 @@ MonoBehaviour:
   creditsScreen: {fileID: 1474425243}
   continueButton: {fileID: 1241712935}
   playerData: {fileID: 11400000, guid: 662eee5fd8a873f478dccf0dfc86e8c7, type: 2}
-  nodeMapData: {fileID: 11400000, guid: 6ef68e3488c0059429efc21e0680add7, type: 2}
   enterSfxSource: {fileID: 1508984318}
   exitSfxSource: {fileID: 1118751930}
 --- !u!4 &1747599880 stripped
@@ -62423,11 +62422,11 @@ PrefabInstance:
     - target: {fileID: 5297226955300494981, guid: 409dfeb6c58253a41be741064f47110f, type: 3}
       propertyPath: m_Resource
       value: 
-      objectReference: {fileID: 8300000, guid: 0ec64e460a8c66d4db5562cd8d27fb54, type: 3}
+      objectReference: {fileID: 8300000, guid: dc1b1edc624c0ef458deb70d7655831e, type: 3}
     - target: {fileID: 5297226955300494981, guid: 409dfeb6c58253a41be741064f47110f, type: 3}
       propertyPath: m_audioClip
       value: 
-      objectReference: {fileID: 8300000, guid: 0ec64e460a8c66d4db5562cd8d27fb54, type: 3}
+      objectReference: {fileID: 8300000, guid: dc1b1edc624c0ef458deb70d7655831e, type: 3}
     - target: {fileID: 5297226955300494981, guid: 409dfeb6c58253a41be741064f47110f, type: 3}
       propertyPath: m_PlayOnAwake
       value: 1

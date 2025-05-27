@@ -11,12 +11,15 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/NodeMap/StarterNodeMap.unity
     guid: c5c8708a52d68b242ae9630b2fb0d9f5
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/NodeMap/BeachMap.unity
     guid: 86336382ac3ea3e4b97686cbb72e0129
   - enabled: 1
+    path: Assets/BeachMap.unity
+    guid: 006a9d7cede3d7445bfefeb176a52ce3
+  - enabled: 1
     path: Assets/Scenes/NodeMap/ForestMap.unity
-    guid: a2511d01597b0cf40a2aadaa59162d3a
+    guid: 90f1cff049e624441a258f349d4e568c
   - enabled: 1
     path: Assets/Scenes/Levels/Tutorial.unity
     guid: f1b898b8d57963a4bbeeb85406677d5e

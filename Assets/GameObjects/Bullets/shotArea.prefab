@@ -5010,7 +5010,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fromPlayer: 1
-  damage: 10
+  damage: 1000
   timeSecuence: {fileID: 0}
   time: 0
   shootDirection: {x: 0, y: 0, z: 0}

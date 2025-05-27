@@ -31,7 +31,7 @@ public class ControlWapons : MonoBehaviour
                 PlayerBase.ActionType.ACTIVE,
                 PlayerBase.ActionEnum.ESPECIALSHOOT,            
                 (KeyCode)System.Enum.Parse(typeof(KeyCode), "Alpha" + (player.playerData.availableActions.Count + 1)), 
-                cost: 1,
+                cost: 3,
                 style: newStyle
             );
 

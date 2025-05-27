@@ -61,17 +61,18 @@ public class CombatManager : MonoBehaviour
                 if (playerParty[i].GetIsAlive())
                 {
                     // 1. Experiencia base de 25
-                    playerParty[i].exp += 25;
+                    playerParty[i].playerData.exp += 25;
 
                     // 2. Sumar la vida del jugador
-                    playerParty[i].exp += playerParty[i].health;
+                    playerParty[i].playerData.exp += (int)playerParty[i].health;
 
                     // 3. Agregar 1 de experiencia extra por cada 20 de experiencia
-                    int bonusExp = (int)playerParty[i].exp/20;
-                    playerParty[i].exp += bonusExp;
+                    int bonusExp = (int)playerParty[i].playerData.exp/20;
+                    playerParty[i].playerData.exp += bonusExp;
                     Debug.Log($"Player {i} EXP: {bonusExp}");
                 }
                 playerParty[i].playerData.exp = (int)playerParty[i].exp;
+                playerParty[i].playerData.Save();
                 
             }
 

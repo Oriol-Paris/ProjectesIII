@@ -15,14 +15,7 @@ public class BulletArea : MonoBehaviour, IBulletBehavior
     public GameObject flash;
     void Start()
     {
-        if (fromPlayer)
-        {
-            damage = FindAnyObjectByType<BulletCollection>().GetBullet(BulletType.GUN).damage;
-        }
-        else
-        {
-            damage = 1;
-        }
+        
 
         timeSecuence = FindFirstObjectByType<TimeSecuence>();
         _camera = FindAnyObjectByType<cameraManager>();

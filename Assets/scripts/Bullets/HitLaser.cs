@@ -17,7 +17,7 @@ public class HitLaser : MonoBehaviour
     {
         if (fromPlayer)
         {
-            damage = FindAnyObjectByType<BulletCollection>().GetBullet(BulletType.GUN).damage;
+            damage = 10;
         }
         else
         {
