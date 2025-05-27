@@ -76,7 +76,7 @@ public class ExplosionHazard : MonoBehaviour
 
               if (IsWithinCircle(enemies[i].transform.position, this.transform.position, radius))
               {
-                  enemies[i].GetComponent<EnemyBase>().Damage(1, this.gameObject);
+                  enemies[i].GetComponent<EnemyBase>().Damage(explosionDamage, this.gameObject);
 
               }
           }
