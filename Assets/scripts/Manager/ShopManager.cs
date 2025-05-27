@@ -81,7 +81,9 @@ public class ShopManager : MonoBehaviour
             {
                 for (int i = 0; i < player.playerData.availableActions.Count; ++i)
                 {
-                    if (player.playerData.availableActions[i] == repeatAction)
+                    if (player.playerData.availableActions[i].action == repeatAction.action &&
+                        player.playerData.availableActions[i].style?.bulletType == repeatAction.style?.bulletType)
+
                     {
                         player.playerData.exp -= pricePool[index];
                         boughtItem.enabled = true;
