@@ -3950,10 +3950,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6dac4c679969926478971682492ab515, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelName: Level7
+  levelName: Level8
   lastLevelNames:
   - EventScene
-  - Level6
+  - Level7
   isInteractible: 0
   isPressed: 0
   spawnedEnemies: []
@@ -10781,7 +10781,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6dac4c679969926478971682492ab515, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelName: Level6
+  levelName: Level7
   lastLevelNames:
   - ShopScene
   isInteractible: 0
