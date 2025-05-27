@@ -228,11 +228,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ff018788fa94464086a1c065bb491b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  speed: 2
   range: 1
   preAttack: 0.3
   timeAttack: 0.3
-  postAttack: 0.3
+  postAttack: 1
   isAlive: 1
   isAttacking: 0
   isSleeping: 0

@@ -43,6 +43,11 @@ public class ShopManager : MonoBehaviour
 
     public void Update()
     {
+        if(Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            player.playerData.exp += 100;
+        }
+
         currentXP.text = "EXP: " + player.playerData.exp;
     }
 
@@ -81,7 +86,9 @@ public class ShopManager : MonoBehaviour
             {
                 for (int i = 0; i < player.playerData.availableActions.Count; ++i)
                 {
-                    if (player.playerData.availableActions[i] == repeatAction)
+                    if (player.playerData.availableActions[i].action == repeatAction.action &&
+                        player.playerData.availableActions[i].style?.bulletType == repeatAction.style?.bulletType)
+
                     {
                         player.playerData.exp -= pricePool[index];
                         boughtItem.enabled = true;
@@ -157,6 +164,7 @@ public class ShopManager : MonoBehaviour
                 break;
             case PlayerBase.ActionEnum.MOVE:
                 boughtItem.text = "Increased move range";
+               
                 player.playerData.moveRange += 1; // Increase move range
                 break;
             case PlayerBase.ActionEnum.RECOVERY:
@@ -166,6 +174,7 @@ public class ShopManager : MonoBehaviour
                 break;
             case PlayerBase.ActionEnum.SPEED_UP:
                 boughtItem.text = "Player Speed Up";
+                player.playerData.velocity += 1;
                 //player speed up
                 break;
             case PlayerBase.ActionEnum.MAX_HP_INCREASE:

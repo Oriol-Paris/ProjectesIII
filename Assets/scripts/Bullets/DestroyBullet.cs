@@ -28,11 +28,12 @@ public class DestroyBullet : MonoBehaviour, IBulletBehavior
     {
         if (fromPlayer)
         {
-            damage = FindAnyObjectByType<BulletCollection>().GetBullet(BulletType.GUN).damage;
+            damage = FindAnyObjectByType<BulletCollection>().GetBullet(BulletType.GUN).damage ;
+            Debug.Log(damage);
         }
         else
         {
-            damage = 1;
+            damage = 1 * (int)PlayerPrefs.GetFloat("DifficultyMultiplier");
         }
 
         timeSecuence = FindFirstObjectByType<TimeSecuence>();

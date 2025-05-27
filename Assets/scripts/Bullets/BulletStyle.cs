@@ -18,6 +18,8 @@ public class BulletStyle : MonoBehaviour
 
     private void Update()
     {
+
+      
         if (prefab != null)
         {
             Debug.Log("hola");
@@ -49,7 +51,9 @@ public class BulletStyle : MonoBehaviour
 
     public void LevelUpBullet(int currentLevel, int numOfLevels = 1)
     {
-        range = rangePerLevel * (currentLevel + numOfLevels);
-        damage = damagePerLevel * (currentLevel + numOfLevels);
+        range = rangePerLevel * (currentLevel );
+
+        damage = damagePerLevel * (currentLevel);
+        Debug.Log(damage);
     }
 }

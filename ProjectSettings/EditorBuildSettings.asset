@@ -13,7 +13,7 @@ EditorBuildSettings:
     guid: c5c8708a52d68b242ae9630b2fb0d9f5
   - enabled: 1
     path: Assets/Scenes/NodeMap/BeachMap.unity
-    guid: 2bfa60e0a39d59f4ca92c4aed133c25f
+    guid: 86336382ac3ea3e4b97686cbb72e0129
   - enabled: 1
     path: Assets/Scenes/NodeMap/ForestMap.unity
     guid: a2511d01597b0cf40a2aadaa59162d3a
@@ -39,17 +39,17 @@ EditorBuildSettings:
     path: Assets/Scenes/Levels/Level6.unity
     guid: 366ed1d79ae339b4a924d13921c88094
   - enabled: 1
-    path: Assets/Scenes/ShopScene.unity
-    guid: 7199331da1ea89b478cb1e8b2e13be49
+    path: Assets/Scenes/Levels/Level7.unity
+    guid: 772b959e7b1c443449a8c671d48deb81
   - enabled: 1
     path: Assets/Scenes/Levels/Level8.unity
     guid: 4375526b5c2a39f4996d31f3c283fd8e
   - enabled: 1
+    path: Assets/Scenes/ShopScene.unity
+    guid: 7199331da1ea89b478cb1e8b2e13be49
+  - enabled: 1
     path: Assets/Scenes/EventScene.unity
     guid: e266ce5524989f24fa2ea8306f471f84
-  - enabled: 1
-    path: Assets/Scenes/Levels/Level7.unity
-    guid: 772b959e7b1c443449a8c671d48deb81
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0

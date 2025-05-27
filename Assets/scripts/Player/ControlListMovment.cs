@@ -7,7 +7,7 @@ public class ControlListMovment : MonoBehaviour
 {
     public TimeSecuence timeSceuence;
     private float currentTime;
-
+    public PlayerBase player;
     public List<Tuple<Vector3, Vector3, Vector3>> MovList = new List<Tuple<Vector3, Vector3, Vector3>>();
     public List<float> timeConsum = new List<float>();
     public List<GameObject> ghostsPlayers = new List<GameObject>();

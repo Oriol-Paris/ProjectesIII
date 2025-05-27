@@ -55,8 +55,10 @@ public class TopBarManager : MonoBehaviour
 
     private void CheckForActionKeyPress()
     {
+    
         for (int i = 0; i < actionSlots.Count; i++)
         {
+           
             // Convert the index to the corresponding key (1-9)
             KeyCode key = KeyCode.Alpha1 + i;
 
@@ -69,13 +71,15 @@ public class TopBarManager : MonoBehaviour
 
     private void TriggerActionAnimation(int index)
     {
+       
         if (index >= 0 && index < actionSlots.Count)
         {
             Animator animator = actionSlots[index].GetComponent<Animator>();
+           
             if (animator != null)
             {
                 animator.SetBool("Upgrade", true);
-
+              
                 // Optionally reset the animation after a short delay
                 StartCoroutine(ResetUpgradeAnimation());
             }
@@ -93,6 +97,7 @@ public class TopBarManager : MonoBehaviour
 
     public void UpdateBottomHotbar()
     {
+      
         if (playerData == null)
         {
             Debug.LogError("Player is null in HotbarManager.");
@@ -103,6 +108,7 @@ public class TopBarManager : MonoBehaviour
         {
             action.transform.Find("Image").gameObject.SetActive(false);
             action.transform.Find("Key").gameObject.SetActive(false);
+            action.transform.Find("Border").GetComponent<Image>().color = Color.white;
         }
 
         var availableActions = playerData.availableActions;
@@ -154,7 +160,11 @@ public class TopBarManager : MonoBehaviour
         {
             Destroy(child.gameObject);
         }
+        TriggerActionAnimation(0);
     }
+
+   
+
 
     public void EraseLastAction()
     {
