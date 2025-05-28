@@ -67,11 +67,13 @@ public class CombatManager : MonoBehaviour
                     playerParty[i].playerData.exp += (int)playerParty[i].health;
 
                     // 3. Agregar 1 de experiencia extra por cada 20 de experiencia
-                    int bonusExp = (int)playerParty[i].playerData.exp/20;
+                    int bonusExp = (int)playerParty[i].playerData.exp+10;
                     playerParty[i].playerData.exp += bonusExp;
-                    Debug.Log($"Player {i} EXP: {bonusExp}");
+
+                    Debug.Log($"Player {i} EXP: {playerParty[i].playerData.exp}");
                 }
-                playerParty[i].playerData.exp = (int)playerParty[i].exp;
+                
+                Debug.Log($"Player {i} EXP after calculation: {playerParty[i].playerData.exp}");
                 playerParty[i].playerData.Save();
                 
             }

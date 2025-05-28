@@ -5256,6 +5256,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd25651ab1b3a0342a036a2c6c5e27ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  eventText: {fileID: 2020398226}
+  buttonCanvas: {fileID: 805337346}
+  exitCanvas: {fileID: 1727881569}
+  playerData: {fileID: 11400000, guid: 662eee5fd8a873f478dccf0dfc86e8c7, type: 2}
+  audioSource: {fileID: 296627335}
 --- !u!4 &142110504
 Transform:
   m_ObjectHideFlags: 0
@@ -5284,11 +5289,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b21c553119265a0428f4cebf9cfd2107, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  eventText: {fileID: 2020398226}
-  buttonCanvas: {fileID: 805337346}
-  exitCanvas: {fileID: 1727881569}
-  playerData: {fileID: 11400000, guid: 662eee5fd8a873f478dccf0dfc86e8c7, type: 2}
-  audioSource: {fileID: 472137400}
 --- !u!1001 &145734407
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -54150,7 +54150,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 142110505}
+      - m_Target: {fileID: 142110503}
         m_TargetAssemblyTypeName: MysteryBoxEvent, Assembly-CSharp
         m_MethodName: LeaveBox
         m_Mode: 1
@@ -56078,7 +56078,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 142110505}
+      - m_Target: {fileID: 142110503}
         m_TargetAssemblyTypeName: MysteryBoxEvent, Assembly-CSharp
         m_MethodName: StealBox
         m_Mode: 1
@@ -65177,7 +65177,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 142110505}
+      - m_Target: {fileID: 142110503}
         m_TargetAssemblyTypeName: MysteryBoxEvent, Assembly-CSharp
         m_MethodName: BuyBox
         m_Mode: 1
