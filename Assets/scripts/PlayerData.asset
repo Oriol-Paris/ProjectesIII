@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe6b8f5bf0e5ea24fa2c8558c5c006ce, type: 3}
+  m_Name: PlayerData
+  m_EditorClassIdentifier: 
+  originalPlayer: {fileID: 11400000, guid: 30cde2f3bd3a0de47a315ed687870d98, type: 2}
+  playerAtStartOfLevel: {fileID: 0}
+  health: 5
+  maxHealth: 5
+  actionPoints: -21
+  maxActionPoints: 3
+  maxTime: 3
+  lastLevel: ShopScene
+  levelCompleted: 0
+  timesHealed: 0
+  timesIncreasedMaxHP: 0
+  moveRange: 5
+  velocity: 2
+  exp: 10
+  isAlive: 1
+  victory: 0
+  healAmount: 1
+  bulletLevels:
+  - bulletType: 0
+    level: 1
+  - bulletType: 1
+    level: 1
+  - bulletType: 2
+    level: 1
+  - bulletType: 3
+    level: 1
+  availableActions:
+  - actionType: 0
+    action: 0
+    key: 49
+    style: {fileID: 0}
+    cost: 1
+    bulletType: 0
+  - actionType: 0
+    action: 1
+    key: 50
+    style: {fileID: 0}
+    cost: 1
+    bulletType: 0

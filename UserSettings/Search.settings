@@ -11,7 +11,11 @@ showStatusBar = false
 scopes = {
 	"last_search.66F56946" = ""
 	"OpenInspectorPreview.66F56946" = "0"
-	"currentGroup.66F56946" = null
+	"currentGroup.66F56946" = "all"
+	"picker_window_position_offset.075BCD15" = "72,80005;323,2;320;550,4"
+	"picker_visibility_flags.075BCD15" = "264"
+	"picker_item_size.075BCD15" = "96"
+	"picker_inspector.075BCD15" = "0"
 }
 providers = {
 	asset = {
@@ -68,6 +72,9 @@ providers = {
 objectSelectors = {
 }
 recentSearches = [
+	"h: ref=\"Assets/scripts/Manager/HotbarManager.cs\""
+	"h: ref=<$object:none$>"
+	"skybox"
 	""
 ]
 searchItemFavorites = [
@@ -77,7 +84,7 @@ showSavedSearchPanel = false
 hideTabs = false
 expandedQueries = [
 ]
-queryBuilder = true
+queryBuilder = false
 ignoredProperties = "id;name;classname;imagecontentshash"
 helperWidgetCurrentArea = "all"
 disabledIndexers = ""

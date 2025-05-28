@@ -9,6 +9,7 @@ TagManager:
   - Walls
   - envairoment
   - Explosive
+  - wapon
   layers:
   - Default
   - TransparentFX
@@ -19,7 +20,7 @@ TagManager:
   - Enemy
   - floor
   - Player
-  - 
+  - weapon
   - 
   - 
   - 
@@ -57,3 +58,5 @@ TagManager:
     locked: 0
   m_RenderingLayers:
   - Default
+  - Map
+  - Objects
