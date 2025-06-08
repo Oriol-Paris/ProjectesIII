@@ -1,0 +1,168 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: StringLocation Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: StringLocation
+  m_TableCollectionNameGuidString: 3aa954cc0f81ffe43904f88fe4e818a5
+  m_Entries:
+  - m_Id: 25489682432
+    m_Key: TitleScreen_Continue
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2006904057856
+    m_Key: TitleScreen_NewGame
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2407929851904
+    m_Key: TitleScreen_Settings
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2587731275776
+    m_Key: TitleScreen_Credits
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2776265240576
+    m_Key: TitleScreen_Exit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12695995527168
+    m_Key: TitleScreen_Language
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13514308431872
+    m_Key: BACK TO TITLE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14472279076864
+    m_Key: "PLAYER \nSTATS"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15950335029248
+    m_Key: Health
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16163669913600
+    m_Key: ActionPoints
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16366795862016
+    m_Key: Press outside this menu to exit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 42024230039552
+    m_Key: locBoughtDamage
+    m_Metadata:
+      m_Items: []
+  - m_Id: 42044891181056
+    m_Key: locBoughtHeal
+    m_Metadata:
+      m_Items: []
+  - m_Id: 42059457998848
+    m_Key: locBoughtMove
+    m_Metadata:
+      m_Items: []
+  - m_Id: 42072900743168
+    m_Key: locPlayerHealed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 42103682740224
+    m_Key: locPlayerSpeedUp
+    m_Metadata:
+      m_Items: []
+  - m_Id: 42120371875840
+    m_Key: locMaxHPUp
+    m_Metadata:
+      m_Items: []
+  - m_Id: 42134145970176
+    m_Key: locNotEnoughExp
+    m_Metadata:
+      m_Items: []
+  - m_Id: 42148565987328
+    m_Key: locJustBought
+    m_Metadata:
+      m_Items: []
+  - m_Id: 42162675625984
+    m_Key: gunLoc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 42176336474112
+    m_Key: shotgunLoc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 42189221376000
+    m_Key: laserLoc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 42202936750080
+    m_Key: healLoc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 42216484352000
+    m_Key: moveLoc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 42231692898304
+    m_Key: recoveryLoc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 42243680219136
+    m_Key: speedUpLoc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 42255923392512
+    m_Key: maxHpUpLoc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 42268309172224
+    m_Key: gunUpgradeLoc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 42281340874752
+    m_Key: shotgunUpgradeLoc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 42294607458304
+    m_Key: laserUpgradeLoc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 42306733191168
+    m_Key: healUpgradeLoc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 42318850535424
+    m_Key: moveUpgradeLoc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 42332523966464
+    m_Key: recoveryUpgradeLoc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 42345434034176
+    m_Key: speedUpUpgradeLoc
+    m_Metadata:
+      m_Items: []
+  - m_Id: 42355806547968
+    m_Key: maxHpUpUpgradeLoc
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 7889549173533442266
+  references:
+    version: 2
+    RefIds:
+    - rid: 7889549173533442266
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1749374520514

@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class TitleScreenManager : MonoBehaviour
 {
     [SerializeField] private Canvas settings;
+    [SerializeField] private Canvas lenguage;
     [SerializeField] private Canvas titleScreen;
     [SerializeField] private Canvas creditsScreen;
 
@@ -36,12 +37,23 @@ public class TitleScreenManager : MonoBehaviour
         enterSfxSource.Play();
         creditsScreen.enabled = false;
         settings.enabled = true;
+       
         titleScreen.enabled = false;
+        lenguage.enabled = false;
     }
     public void BootCredits()
     {
         enterSfxSource.Play();
         creditsScreen.enabled = true;
+        settings.enabled = false;
+        titleScreen.enabled = false;
+        lenguage.enabled = false;
+    }
+    public void BootLenguage()
+    {
+        enterSfxSource.Play();
+        creditsScreen.enabled = false;
+        lenguage.enabled = true;
         settings.enabled = false;
         titleScreen.enabled = false;
     }
@@ -53,6 +65,7 @@ public class TitleScreenManager : MonoBehaviour
             exitSfxSource.Play();
             settings.enabled = false;
             creditsScreen.enabled = false;
+            lenguage.enabled = false;
             titleScreen.enabled = true;
         }
     } 
@@ -63,6 +76,18 @@ public class TitleScreenManager : MonoBehaviour
             exitSfxSource.Play();
             settings.enabled = false;
             creditsScreen.enabled = false;
+            lenguage.enabled = false;
+            titleScreen.enabled = true;
+        }
+    }
+    public void ExitLenguage()
+    {
+        if (lenguage.enabled)
+        {
+            exitSfxSource.Play();
+            settings.enabled = false;
+            creditsScreen.enabled = false;
+            lenguage.enabled = false;
             titleScreen.enabled = true;
         }
     }

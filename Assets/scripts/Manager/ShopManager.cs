@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using static PlayerData;
 using System;
+using UnityEngine.Localization;
+using UnityEngine.Localization.Settings;
 
 public class ShopManager : MonoBehaviour
 {
@@ -12,6 +14,36 @@ public class ShopManager : MonoBehaviour
     [SerializeField] public PlayerBase player;
     [SerializeField] public TextMeshProUGUI boughtItem;
     [SerializeField] public TextMeshProUGUI currentXP;
+
+
+    public LocalizedString locBoughtDamage;
+    public LocalizedString locBoughtHeal;
+    public LocalizedString locBoughtMove;
+    public LocalizedString locPlayerHealed;
+    public LocalizedString locPlayerSpeedUp;
+    public LocalizedString locMaxHPUp;
+    public LocalizedString locNotEnoughExp;
+    public LocalizedString locJustBought;
+
+    [SerializeField] private LocalizedString gunLoc;
+    [SerializeField] private LocalizedString shotgunLoc;
+    [SerializeField] private LocalizedString laserLoc;
+    [SerializeField] private LocalizedString healLoc;
+    [SerializeField] private LocalizedString moveLoc;
+    [SerializeField] private LocalizedString recoveryLoc;
+    [SerializeField] private LocalizedString speedUpLoc;
+    [SerializeField] private LocalizedString maxHpUpLoc;
+
+    [SerializeField] private LocalizedString gunUpgradeLoc;
+    [SerializeField] private LocalizedString shotgunUpgradeLoc;
+    [SerializeField] private LocalizedString laserUpgradeLoc;
+    [SerializeField] private LocalizedString healUpgradeLoc;
+    [SerializeField] private LocalizedString moveUpgradeLoc;
+    [SerializeField] private LocalizedString recoveryUpgradeLoc;
+    [SerializeField] private LocalizedString speedUpUpgradeLoc;
+    [SerializeField] private LocalizedString maxHpUpUpgradeLoc;
+
+
     public Sprite moveImage;
     public Sprite gunImage;
     public Sprite shotgunImage;
@@ -29,6 +61,7 @@ public class ShopManager : MonoBehaviour
     private List<PlayerData.ActionData> activeActions;
     private List<int> pricePool;
     private List<GameObject> buttons;
+
 
     
     private Dictionary<PlayerData.ActionData, int> statIncreaseCount;
@@ -55,7 +88,12 @@ public class ShopManager : MonoBehaviour
     {
         buyItemSfx.Play();
         string itemName = itemText.text;
-        ActionData actionData = actionPool.Find(action => GetActionDisplayName(action) == itemName);
+        ActionData actionData = actionPool.Find(action =>
+        {
+            var localized = GetActionDisplayName(action);
+            var localizedString = localized.GetLocalizedString(); 
+            return localizedString == itemName;
+        });
         int index = buttons.FindIndex(button => button.transform.Find("Item Name").GetComponent<TextMeshProUGUI>().text == itemName);
         if (actionData != null && player.playerData.exp >= pricePool[index])
         {
@@ -115,7 +153,8 @@ public class ShopManager : MonoBehaviour
                 EquipNewAction(actionData);
 
                 boughtItem.enabled = true;
-                boughtItem.text = "Just bought: " + itemName;
+                //boughtItem.text = "Just bought: " + itemName;
+                SetLocalizedText(locJustBought, boughtItem, "item", itemName);
 
                 // Trigger animation for the new action slot
                 hotbarManager.TriggerUpgradeAnimation(actionData);
@@ -125,7 +164,8 @@ public class ShopManager : MonoBehaviour
             UpdatePrices();
         }
         else if (player.exp < pricePool[index])
-            boughtItem.text = "Not enough experience";
+            SetLocalizedText(locNotEnoughExp, boughtItem);
+        //boughtItem.text = "Not enough experience";
     }
 
     private void EquipNewAction(ActionData actionData)
@@ -155,30 +195,35 @@ public class ShopManager : MonoBehaviour
         switch (actionData.action)
         {
             case PlayerBase.ActionEnum.SHOOT:
-                boughtItem.text = "Increased bullet damage and range";
+                //boughtItem.text = "Increased bullet damage and range";
+                SetLocalizedText(locBoughtDamage, boughtItem);
                 player.playerData.LevelUpBullet(actionData.bulletType);
                 break;
             case PlayerBase.ActionEnum.HEAL:
-                boughtItem.text = "Increased healing amount";
+                // boughtItem.text = "Increased healing amount";
+                SetLocalizedText(locBoughtHeal, boughtItem);
                 player.playerData.healAmount += 5; // Increase healing value
                 break;
             case PlayerBase.ActionEnum.MOVE:
-                boughtItem.text = "Increased move range";
-               
+                //boughtItem.text = "Increased move range";
+                SetLocalizedText(locBoughtMove, boughtItem);
                 player.playerData.moveRange += 1; // Increase move range
                 break;
             case PlayerBase.ActionEnum.RECOVERY:
-                boughtItem.text = "Player Healed";
+                //boughtItem.text = "Player Healed";
+                SetLocalizedText(locPlayerHealed, boughtItem);
                 player.InstantHeal(3);
                 player.playerData.timesHealed += 1;
                 break;
             case PlayerBase.ActionEnum.SPEED_UP:
-                boughtItem.text = "Player Speed Up";
+                //boughtItem.text = "Player Speed Up";
+                SetLocalizedText(locPlayerSpeedUp, boughtItem);
                 player.playerData.velocity += 1;
                 //player speed up
                 break;
             case PlayerBase.ActionEnum.MAX_HP_INCREASE:
-                boughtItem.text = "Player MaxHP Up";
+                //boughtItem.text = "Player MaxHP Up";
+                SetLocalizedText(locMaxHPUp, boughtItem);
                 player.InstantMaxHPIncrease();
                 break;
         }
@@ -224,11 +269,11 @@ public class ShopManager : MonoBehaviour
 
             // Set item text
             TextMeshProUGUI itemText = button.transform.Find("Item Name").GetComponent<TextMeshProUGUI>();
-            itemText.text = GetActionDisplayName(actionData);
+            SetLocalizedText(GetActionDisplayName(actionData), itemText);
 
             // Set item description
             TextMeshProUGUI itemDescription = button.transform.Find("Upgrade Text").GetComponent<TextMeshProUGUI>();
-            itemDescription.text = UpgradeText(actionData);
+            SetLocalizedText(UpgradeText(actionData), itemDescription);
 
             //Set item image
             Image itemImage = button.transform.Find("Item Image").GetComponent<Image>();
@@ -247,44 +292,44 @@ public class ShopManager : MonoBehaviour
         }
     }
 
-    public string GetActionDisplayName(ActionData actionData)
+    public LocalizedString GetActionDisplayName(ActionData actionData)
     {
         if (actionData.action == PlayerBase.ActionEnum.SHOOT)
         {
             if (actionData.style.bulletType == BulletType.GUN)
             {
-                return "Gun";
+                return gunLoc;
             }
             else if (actionData.style.bulletType == BulletType.SHOTGUN)
             {
-                return "Shotgun";
+                return shotgunLoc;
             }
             else if (actionData.style.bulletType == BulletType.LASER)
             {
-                return "Laser";
+                return laserLoc;
             }
         }
         else if (actionData.action == PlayerBase.ActionEnum.HEAL)
         {
-            return "Heal";
+            return healLoc;
         }
         else if (actionData.action == PlayerBase.ActionEnum.MOVE)
         {
-            return "Move";
+            return moveLoc;
         }
         else if (actionData.action == PlayerBase.ActionEnum.RECOVERY)
         {
-            return "Instant HP Recovery";
+            return recoveryLoc;
         }
         else if (actionData.action == PlayerBase.ActionEnum.SPEED_UP)
         {
-            return "Speed Up";
+            return speedUpLoc;
         }
         else if (actionData.action == PlayerBase.ActionEnum.MAX_HP_INCREASE)
         {
-            return "Max HP Up";
+            return maxHpUpLoc;
         }
-        return actionData.action.ToString();
+        return new LocalizedString { TableReference = "General", TableEntryReference = actionData.action.ToString() };
     }
 
     public Sprite GetActionImage(PlayerData.ActionData actionData)
@@ -373,44 +418,45 @@ public class ShopManager : MonoBehaviour
         return 100000;
     }
 
-    public string UpgradeText(ActionData actionData)
+    public LocalizedString UpgradeText(ActionData actionData)
     {
-        if (actionData.action == PlayerBase.ActionEnum.SHOOT)
-        {
-            if (actionData.style.bulletType == BulletType.GUN)
+        
+            if (actionData.action == PlayerBase.ActionEnum.SHOOT)
             {
-                return "+Damage \n";
+                if (actionData.style.bulletType == BulletType.GUN)
+                {
+                    return gunUpgradeLoc;
+                }
+                else if (actionData.style.bulletType == BulletType.SHOTGUN)
+                {
+                    return shotgunUpgradeLoc;
+                }
+                else if (actionData.style.bulletType == BulletType.LASER)
+                {
+                    return laserUpgradeLoc;
+                }
             }
-            else if (actionData.style.bulletType == BulletType.SHOTGUN)
+            else if (actionData.action == PlayerBase.ActionEnum.HEAL)
             {
-                return "Shoots 3 bullets in a row \n Action Cost: 2";
+                return healUpgradeLoc;
             }
-            else if (actionData.style.bulletType == BulletType.LASER)
+            else if (actionData.action == PlayerBase.ActionEnum.MOVE)
             {
-                return "Pierces obstacles & enemies \n Cost: 2";
+                return moveUpgradeLoc;
             }
-        }
-        else if (actionData.action == PlayerBase.ActionEnum.HEAL)
-        {
-            return "+ HP healed";
-        }
-        else if (actionData.action == PlayerBase.ActionEnum.MOVE)
-        {
-            return "+ Range";
-        }
-        else if (actionData.action == PlayerBase.ActionEnum.RECOVERY)
-        {
-            return "Recover HP";
-        }
-        else if (actionData.action == PlayerBase.ActionEnum.SPEED_UP)
-        {
-            return "+ Player Speed";
-        }
-        else if (actionData.action == PlayerBase.ActionEnum.MAX_HP_INCREASE)
-        {
-            return "+ Max HP";
-        }
-        return null;
+            else if (actionData.action == PlayerBase.ActionEnum.RECOVERY)
+            {
+                return recoveryUpgradeLoc;
+            }
+            else if (actionData.action == PlayerBase.ActionEnum.SPEED_UP)
+            {
+                return speedUpUpgradeLoc;
+            }
+            else if (actionData.action == PlayerBase.ActionEnum.MAX_HP_INCREASE)
+            {
+                return maxHpUpUpgradeLoc;
+            }
+        return new LocalizedString { TableReference = "General", TableEntryReference = "DefaultUpgradeText" };
     }
 
     void UpdatePrices()
@@ -423,5 +469,23 @@ public class ShopManager : MonoBehaviour
             pricePool.Add(price);
             buttons[i].transform.Find("Price").GetComponent<TextMeshProUGUI>().text = price.ToString() + " EXP";
         }
+    }
+
+
+    private void SetLocalizedText(LocalizedString locString, TextMeshProUGUI target, string argName = null, object argValue = null)
+    {
+        if (argName != null)
+        {
+            locString.Arguments = new[] { new { name = argName, value = argValue } };
+        }
+
+        var op = locString.GetLocalizedStringAsync();
+        if (op.IsDone)
+            target.text = op.Result;
+        else
+        {
+            op.Completed += callback => target.text = callback.Result;
+        }
+        target.enabled = true;
     }
 }

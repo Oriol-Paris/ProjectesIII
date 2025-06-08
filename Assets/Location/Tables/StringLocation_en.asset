@@ -1,0 +1,163 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: StringLocation_en
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: 3aa954cc0f81ffe43904f88fe4e818a5, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 25489682432
+    m_Localized: CONTINUE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2006904057856
+    m_Localized: NEW GAME
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2407929851904
+    m_Localized: SETTINGS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2587731275776
+    m_Localized: CREDITS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2776265240576
+    m_Localized: EXIT
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12695995527168
+    m_Localized: "LANGUAGE\t"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13514308431872
+    m_Localized: BACK
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14472279076864
+    m_Localized: "PLAYER \nSTATS"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15950335029248
+    m_Localized: 'Health:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16163669913600
+    m_Localized: 'Action Points:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16366795862016
+    m_Localized: Press outside this menu to exit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 42024230039552
+    m_Localized: Damage upgraded
+    m_Metadata:
+      m_Items: []
+  - m_Id: 42044891181056
+    m_Localized: Heal upgraded
+    m_Metadata:
+      m_Items: []
+  - m_Id: 42059457998848
+    m_Localized: Move upgraded
+    m_Metadata:
+      m_Items: []
+  - m_Id: 42072900743168
+    m_Localized: "Player healed\t"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 42103682740224
+    m_Localized: "Speed increased\t"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 42120371875840
+    m_Localized: "Max HP increased\t"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 42134145970176
+    m_Localized: "Not enough EXP\t"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 42148565987328
+    m_Localized: "Bought!\t"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 42162675625984
+    m_Localized: Gun
+    m_Metadata:
+      m_Items: []
+  - m_Id: 42176336474112
+    m_Localized: Shotgun
+    m_Metadata:
+      m_Items: []
+  - m_Id: 42189221376000
+    m_Localized: Laser
+    m_Metadata:
+      m_Items: []
+  - m_Id: 42202936750080
+    m_Localized: Heal
+    m_Metadata:
+      m_Items: []
+  - m_Id: 42216484352000
+    m_Localized: Move
+    m_Metadata:
+      m_Items: []
+  - m_Id: 42231692898304
+    m_Localized: Instant HP recovery
+    m_Metadata:
+      m_Items: []
+  - m_Id: 42243680219136
+    m_Localized: Speed Up
+    m_Metadata:
+      m_Items: []
+  - m_Id: 42255923392512
+    m_Localized: Max HP Up
+    m_Metadata:
+      m_Items: []
+  - m_Id: 42268309172224
+    m_Localized: + Damage
+    m_Metadata:
+      m_Items: []
+  - m_Id: 42281340874752
+    m_Localized: Shoots 3 bullets in a row
+    m_Metadata:
+      m_Items: []
+  - m_Id: 42294607458304
+    m_Localized: Pierces obstacles & enemies
+    m_Metadata:
+      m_Items: []
+  - m_Id: 42306733191168
+    m_Localized: + HP healed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 42318850535424
+    m_Localized: + Range
+    m_Metadata:
+      m_Items: []
+  - m_Id: 42332523966464
+    m_Localized: "Recover HP\t"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 42345434034176
+    m_Localized: + Player Speed
+    m_Metadata:
+      m_Items: []
+  - m_Id: 42355806547968
+    m_Localized: + Max HP
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []
