@@ -194,6 +194,26 @@ MonoBehaviour:
     m_Localized: HAS GANADO
     m_Metadata:
       m_Items: []
+  - m_Id: 64383101235200
+    m_Localized: Puedes conectar distintas acciones, pureba de acercarte y atacar
+      al enemigo!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 64291896094720
+    m_Localized: Pulsa 1 para seleccionar movimiento, clica donde quieres ir y plusa
+      E o ESPACIO para ejecutar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 64328524951552
+    m_Localized: Puedes secuenciar varias acciones, clica en los dos puntos, pulsa
+      E o ESPACIO para ejecutar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 64352214380544
+    m_Localized: Pulsa el 2 para cambiar a disparo. Apunta i clica al enemigo para
+      atacarlo!
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

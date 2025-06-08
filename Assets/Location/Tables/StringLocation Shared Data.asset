@@ -183,6 +183,22 @@ MonoBehaviour:
     m_Key: You Win
     m_Metadata:
       m_Items: []
+  - m_Id: 64291896094720
+    m_Key: TutorialLine1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 64328524951552
+    m_Key: TutorialLine2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 64352214380544
+    m_Key: TutorialLine3
+    m_Metadata:
+      m_Items: []
+  - m_Id: 64383101235200
+    m_Key: TutorialLine4
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

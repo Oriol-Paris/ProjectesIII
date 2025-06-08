@@ -188,6 +188,24 @@ MonoBehaviour:
     m_Localized: HAS GUANYAT
     m_Metadata:
       m_Items: []
+  - m_Id: 64383101235200
+    m_Localized: Pots connectar diferents accions, prova de moure't i atacar al enemic!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 64291896094720
+    m_Localized: Prem 1 per seleccionar accio de moure's, clica on anar i apreta
+      E o ESPAI per executar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 64328524951552
+    m_Localized: Pots sequenciar accions, clica a les dos ubicacions diferents, prem
+      E o ESPAI per executar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 64352214380544
+    m_Localized: Prem 2 per canviar a disparar. Apunta i clica al enemic per atacar-lo!
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

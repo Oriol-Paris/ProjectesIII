@@ -1,18 +1,25 @@
-using UnityEngine;
-using TMPro;
 using System.Collections;
-using System.Collections.Generic;
-using System;
+using TMPro;
+using UnityEngine;
+using UnityEngine.Localization.Components;
+using UnityEngine.Localization.Settings;
 
 public class Dialogue : MonoBehaviour
 {
     public TextMeshProUGUI textComponent;
     public string dialogueLines;
     public float textSpeed;
-    public TutorialManager tutorialManager; // Add this line
+    public TutorialManager tutorialManager;
     public bool textFullyDisplayed;
     private int index;
     public bool IsTyping { get; private set; }
+
+    public LocalizeStringEvent localizeEvent;
+    
+    void Awake()
+    {
+        localizeEvent = GetComponent<LocalizeStringEvent>();
+    }
 
     void Start()
     {
@@ -20,51 +27,41 @@ public class Dialogue : MonoBehaviour
         StartDialogue();
     }
 
-    void Update()
-    {
-
-        if (textComponent.text == dialogueLines)
-        {
-            
-            textFullyDisplayed = true;
-        }
-
-    }
-
-
     public void StartDialogue()
     {
         index = 0;
+        if (localizeEvent != null)
+        {
+            localizeEvent.StringReference.TableEntryReference = dialogueLines;
+            localizeEvent.RefreshString(); // Fuerza la actualización inmediata
+        }
+
         StartCoroutine(TypeLine());
     }
 
     IEnumerator TypeLine()
     {
         textFullyDisplayed = false;
+        IsTyping = true;
+
+        string fullText = textComponent.text;
         textComponent.text = string.Empty;
-        foreach (char c in dialogueLines.ToCharArray())
+
+        foreach (char c in fullText)
         {
-            IsTyping = true;
             textComponent.text += c;
-            textFullyDisplayed = false;
             yield return new WaitForSeconds(textSpeed);
         }
+
+        IsTyping = false;
+        textFullyDisplayed = true;
     }
 
-
-    void NextLine()
+    public void SetIsTyping(bool condition)
     {
-        if (index < dialogueLines.Length - 1)
-        {
-            index++;
-            textComponent.text = string.Empty;
-            StartCoroutine(TypeLine());
-        }
-        else
-        {
-            gameObject.SetActive(false);
-            tutorialManager.DisableCurrentPopup(); // Add this line
-        }
+        IsTyping = condition;
     }
-    public void SetIsTyping(bool condition) { IsTyping = condition; }
+
+    
+
 }

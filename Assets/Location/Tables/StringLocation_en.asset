@@ -186,6 +186,26 @@ MonoBehaviour:
     m_Localized: YOU WIN
     m_Metadata:
       m_Items: []
+  - m_Id: 64383101235200
+    m_Localized: You can also sequence various action types, like moving and shooting,
+      try to reach and shoot this enemy
+    m_Metadata:
+      m_Items: []
+  - m_Id: 64291896094720
+    m_Localized: 'Press 1 to select move action, then click where to go. Press E
+      or SPACE to execute your action. '
+    m_Metadata:
+      m_Items: []
+  - m_Id: 64328524951552
+    m_Localized: You can  sequence various actions, point and click to two different
+      positions to move twice. Press SPACE or E to execute your sequence.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 64352214380544
+    m_Localized: Press 2 to change to the shooting action, then point and shoot where
+      you want to shoot. Try aiming for the enemy!
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
