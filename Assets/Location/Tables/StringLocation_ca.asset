@@ -160,6 +160,34 @@ MonoBehaviour:
     m_Localized: "+ Vida m\xE0xima"
     m_Metadata:
       m_Items: []
+  - m_Id: 50580501147648
+    m_Localized: TORNA AL MENU PRINCIPAL
+    m_Metadata:
+      m_Items: []
+  - m_Id: 50871694897152
+    m_Localized: VOLUM PRINCIPAL
+    m_Metadata:
+      m_Items: []
+  - m_Id: 51046735785984
+    m_Localized: EFECTES DE SO
+    m_Metadata:
+      m_Items: []
+  - m_Id: 51205435666432
+    m_Localized: MUSICA
+    m_Metadata:
+      m_Items: []
+  - m_Id: 51582973358080
+    m_Localized: Executar sequencia
+    m_Metadata:
+      m_Items: []
+  - m_Id: 51842672078848
+    m_Localized: Restableix la sequencia
+    m_Metadata:
+      m_Items: []
+  - m_Id: 54544663687168
+    m_Localized: HAS GUANYAT
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

@@ -158,6 +158,34 @@ MonoBehaviour:
     m_Localized: + Max HP
     m_Metadata:
       m_Items: []
+  - m_Id: 50580501147648
+    m_Localized: RETURN TO MAIN MENU
+    m_Metadata:
+      m_Items: []
+  - m_Id: 50871694897152
+    m_Localized: MASTER VOLUME
+    m_Metadata:
+      m_Items: []
+  - m_Id: 51046735785984
+    m_Localized: SOUND EFFECTS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 51205435666432
+    m_Localized: MUSIC
+    m_Metadata:
+      m_Items: []
+  - m_Id: 51582973358080
+    m_Localized: Execute Sequence
+    m_Metadata:
+      m_Items: []
+  - m_Id: 51842672078848
+    m_Localized: Reset Sequence
+    m_Metadata:
+      m_Items: []
+  - m_Id: 54544663687168
+    m_Localized: YOU WIN
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

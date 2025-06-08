@@ -155,6 +155,34 @@ MonoBehaviour:
     m_Key: maxHpUpUpgradeLoc
     m_Metadata:
       m_Items: []
+  - m_Id: 50580501147648
+    m_Key: RETURN TO MAIN MENU
+    m_Metadata:
+      m_Items: []
+  - m_Id: 50871694897152
+    m_Key: MASTER VOLUME
+    m_Metadata:
+      m_Items: []
+  - m_Id: 51046735785984
+    m_Key: SOUND EFFECTS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 51205435666432
+    m_Key: MUSIC
+    m_Metadata:
+      m_Items: []
+  - m_Id: 51582973358080
+    m_Key: Execute Sequence
+    m_Metadata:
+      m_Items: []
+  - m_Id: 51842672078848
+    m_Key: Reset Sequence
+    m_Metadata:
+      m_Items: []
+  - m_Id: 54544663687168
+    m_Key: You Win
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

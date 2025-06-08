@@ -315,6 +315,7 @@ public class ShopManager : MonoBehaviour
         }
         else if (actionData.action == PlayerBase.ActionEnum.MOVE)
         {
+            Debug.Log("afgiewq");
             return moveLoc;
         }
         else if (actionData.action == PlayerBase.ActionEnum.RECOVERY)
@@ -329,7 +330,7 @@ public class ShopManager : MonoBehaviour
         {
             return maxHpUpLoc;
         }
-        return new LocalizedString { TableReference = "General", TableEntryReference = actionData.action.ToString() };
+        return null;
     }
 
     public Sprite GetActionImage(PlayerData.ActionData actionData)
