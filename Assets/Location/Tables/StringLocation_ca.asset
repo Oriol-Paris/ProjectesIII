@@ -206,6 +206,102 @@ MonoBehaviour:
     m_Localized: Prem 2 per canviar a disparar. Apunta i clica al enemic per atacar-lo!
     m_Metadata:
       m_Items: []
+  - m_Id: 79138973085696
+    m_Localized: "TROBES UN HOME QUE ET PROPOSA LLAN\xC7AR UNA MONEDA"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 79317121953792
+    m_Localized: CARA O CREU?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 79479760285696
+    m_Localized: "LLAN\xC7A LA MONEDA I CAU EN... {0}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 82046997295104
+    m_Localized: GUANYES! LA TEVA EXP ES DOBLA!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 82253352857600
+    m_Localized: HAS PERDUT! PERDS LA MEITAT DE EXP!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 84173417148416
+    m_Localized: "UN HOME SIN\xCDSTER T'OFEREIX UNA MISTERIOSA CAIXA"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 84633020592128
+    m_Localized: QUE FAS AMB LA CAIXA?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 84857445216256
+    m_Localized: COMPRES LA CAIXA. TROBES  XP! +{0} XP
+    m_Metadata:
+      m_Items: []
+  - m_Id: 85207745097728
+    m_Localized: NO TENS PROU XP PER COMPRAR LA CAIXA
+    m_Metadata:
+      m_Items: []
+  - m_Id: 85346127769600
+    m_Localized: ROBES LA CAIXA I ET FAN MAL. -1HP +{0} XP
+    m_Metadata:
+      m_Items: []
+  - m_Id: 85611572686848
+    m_Localized: ROBES LA CAIXA SENSE PROBLEMES! +{0}XP
+    m_Metadata:
+      m_Items: []
+  - m_Id: 85857782525952
+    m_Localized: REFUSES LA OFERTA I TE'N VAS.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 90182680375296
+    m_Localized: 'TROBES UN POBLE PLAGAT DE MALALTIES '
+    m_Metadata:
+      m_Items: []
+  - m_Id: 90470833254400
+    m_Localized: NOMES UN PODER CURADOR POTS AJUDAR-LOS...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 90844688347136
+    m_Localized: CURES AL POBLAT. ET DONEN UN REGAL DE RECOMPENSA
+    m_Metadata:
+      m_Items: []
+  - m_Id: 91185127419904
+    m_Localized: NO TENS EL PODER PER CURAR-LOS. EL POBLAT SOFREIX.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 91908128960512
+    m_Localized: CARA
+    m_Metadata:
+      m_Items: []
+  - m_Id: 91966392037376
+    m_Localized: CREU
+    m_Metadata:
+      m_Items: []
+  - m_Id: 92029776359424
+    m_Localized: COMPRAR
+    m_Metadata:
+      m_Items: []
+  - m_Id: 92121572896768
+    m_Localized: ROBAR
+    m_Metadata:
+      m_Items: []
+  - m_Id: 92178149863424
+    m_Localized: MARXAR
+    m_Metadata:
+      m_Items: []
+  - m_Id: 92233401430016
+    m_Localized: AJUDAR
+    m_Metadata:
+      m_Items: []
+  - m_Id: 92360203628544
+    m_Localized: MARXAR
+    m_Metadata:
+      m_Items: []
+  - m_Id: 93378639360000
+    m_Localized: SORTIR
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

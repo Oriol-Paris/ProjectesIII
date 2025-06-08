@@ -199,6 +199,102 @@ MonoBehaviour:
     m_Key: TutorialLine4
     m_Metadata:
       m_Items: []
+  - m_Id: 79138973085696
+    m_Key: FlipCoin_Intro
+    m_Metadata:
+      m_Items: []
+  - m_Id: 79317121953792
+    m_Key: FlipCoin_Choose
+    m_Metadata:
+      m_Items: []
+  - m_Id: 79479760285696
+    m_Key: FlipCoin_Result
+    m_Metadata:
+      m_Items: []
+  - m_Id: 82046997295104
+    m_Key: FlipCoin_Win
+    m_Metadata:
+      m_Items: []
+  - m_Id: 82253352857600
+    m_Key: FlipCoin_Lose
+    m_Metadata:
+      m_Items: []
+  - m_Id: 84173417148416
+    m_Key: MysteryBox_Intro
+    m_Metadata:
+      m_Items: []
+  - m_Id: 84633020592128
+    m_Key: MysteryBox_Choose
+    m_Metadata:
+      m_Items: []
+  - m_Id: 84857445216256
+    m_Key: MysteryBox_Buy_Success
+    m_Metadata:
+      m_Items: []
+  - m_Id: 85207745097728
+    m_Key: MysteryBox_Buy_Fail
+    m_Metadata:
+      m_Items: []
+  - m_Id: 85346127769600
+    m_Key: MysteryBox_Steal_Hurt
+    m_Metadata:
+      m_Items: []
+  - m_Id: 85611572686848
+    m_Key: MysteryBox_Steal_Success
+    m_Metadata:
+      m_Items: []
+  - m_Id: 85857782525952
+    m_Key: MysteryBox_Leave
+    m_Metadata:
+      m_Items: []
+  - m_Id: 90182680375296
+    m_Key: InfectedTown_Intro
+    m_Metadata:
+      m_Items: []
+  - m_Id: 90470833254400
+    m_Key: InfectedTown_Choose
+    m_Metadata:
+      m_Items: []
+  - m_Id: 90844688347136
+    m_Key: InfectedTown_Outcome_Heal
+    m_Metadata:
+      m_Items: []
+  - m_Id: 91185127419904
+    m_Key: InfectedTown_Outcome_NoHeal
+    m_Metadata:
+      m_Items: []
+  - m_Id: 91908128960512
+    m_Key: HEADS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 91966392037376
+    m_Key: TAILS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 92029776359424
+    m_Key: BUY
+    m_Metadata:
+      m_Items: []
+  - m_Id: 92121572896768
+    m_Key: STEAL
+    m_Metadata:
+      m_Items: []
+  - m_Id: 92178149863424
+    m_Key: LEAVE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 92233401430016
+    m_Key: HELP
+    m_Metadata:
+      m_Items: []
+  - m_Id: 92360203628544
+    m_Key: LEAV
+    m_Metadata:
+      m_Items: []
+  - m_Id: 93378639360000
+    m_Key: EXIT
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

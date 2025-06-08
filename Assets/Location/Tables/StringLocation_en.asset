@@ -206,6 +206,102 @@ MonoBehaviour:
       you want to shoot. Try aiming for the enemy!
     m_Metadata:
       m_Items: []
+  - m_Id: 79138973085696
+    m_Localized: YOU FIND A MAN WHO PROPOSES TO FLIP A COIN
+    m_Metadata:
+      m_Items: []
+  - m_Id: 79317121953792
+    m_Localized: HEADS OR TAILS?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 79479760285696
+    m_Localized: YOU FLIP THE COIN AND IT LANDS ON... {0}
+    m_Metadata:
+      m_Items: []
+  - m_Id: 82046997295104
+    m_Localized: YOU WIN! YOUR EXP IS DOUBLED!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 82253352857600
+    m_Localized: YOU LOSE! YOU LOSE HALF YOUR EXP
+    m_Metadata:
+      m_Items: []
+  - m_Id: 84173417148416
+    m_Localized: A SYNISTER MAN OFFERS YOU A MYSTERIOUS BOX
+    m_Metadata:
+      m_Items: []
+  - m_Id: 84633020592128
+    m_Localized: WHAT WILL YOU DO?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 84857445216256
+    m_Localized: YOU BUY THE BOX AND FIND XP! +{0} XP
+    m_Metadata:
+      m_Items: []
+  - m_Id: 85207745097728
+    m_Localized: YOU DON'T HAVE ENOUGH XP TO BUY IT
+    m_Metadata:
+      m_Items: []
+  - m_Id: 85346127769600
+    m_Localized: YOU STEAL THE BOX AND GET HURT. -1HP +{0} XP
+    m_Metadata:
+      m_Items: []
+  - m_Id: 85611572686848
+    m_Localized: YOU STEAL THE BOX SUCCESSFULLY! +{0} XP
+    m_Metadata:
+      m_Items: []
+  - m_Id: 85857782525952
+    m_Localized: YOU REFUSE THE OFFER AND LEAVE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 90182680375296
+    m_Localized: YOU FIND A TOWN PLAGUED BY DISEASE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 90470833254400
+    m_Localized: ONLY A HEALING POWER COULD HELP...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 90844688347136
+    m_Localized: YOU CURE THE VILLAGERS. THEY THANK YOU WITH A REWARD
+    m_Metadata:
+      m_Items: []
+  - m_Id: 91185127419904
+    m_Localized: YOU LACK THE POWER TO HEAL THEM. THE VILLAGERS SUFFER.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 91908128960512
+    m_Localized: HEADS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 91966392037376
+    m_Localized: TAILS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 92029776359424
+    m_Localized: BUY
+    m_Metadata:
+      m_Items: []
+  - m_Id: 92121572896768
+    m_Localized: STEAL
+    m_Metadata:
+      m_Items: []
+  - m_Id: 92178149863424
+    m_Localized: LEAVE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 92233401430016
+    m_Localized: HELP
+    m_Metadata:
+      m_Items: []
+  - m_Id: 92360203628544
+    m_Localized: LEAVE
+    m_Metadata:
+      m_Items: []
+  - m_Id: 93378639360000
+    m_Localized: EXIT
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

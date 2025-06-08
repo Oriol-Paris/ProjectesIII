@@ -2,6 +2,7 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Localization.Settings;
 
 public class InfectedTownEvent : MonoBehaviour
 {
@@ -14,12 +15,12 @@ public class InfectedTownEvent : MonoBehaviour
     public enum eventState { INTRODUCTION, DECISION, OUTCOME }
     private eventState currentState;
     private bool hasHealingSkill;
+    private string localizedOutcome;
 
     void Awake()
     {
         currentState = eventState.INTRODUCTION;
         buttonCanvas.SetActive(false);
-
         exitCanvas.enabled = false;
         UpdateCurrentState();
     }
@@ -44,47 +45,64 @@ public class InfectedTownEvent : MonoBehaviour
         switch (currentState)
         {
             case eventState.INTRODUCTION:
+                eventText.dialogueLines = "InfectedTown_Intro";
                 eventText.StartDialogue();
-                eventText.dialogueLines = "YOU ENCOUNTER A VILLAGE PLAGUED BY DISEASE...";
-
                 break;
 
             case eventState.DECISION:
-                eventText.dialogueLines = "DO YOU HELP THEM?";
+                eventText.dialogueLines = "InfectedTown_Choose";
                 eventText.StartDialogue();
                 buttonCanvas.SetActive(false);
-
                 StartCoroutine(EnableButtonsWhenReady());
                 break;
 
             case eventState.OUTCOME:
                 buttonCanvas.SetActive(false);
                 exitCanvas.enabled = true;
-                for (int i = 0; i < playerData.availableActions.Count; i++)
+
+                // Verificar si el jugador tiene la habilidad HEAL
+                hasHealingSkill = false;
+                foreach (var action in playerData.availableActions)
                 {
-                    if (playerData.availableActions[i].action == PlayerBase.ActionEnum.HEAL)
+                    if (action.action == PlayerBase.ActionEnum.HEAL)
                     {
                         hasHealingSkill = true;
                         break;
                     }
-                    else
-                    {
-                        hasHealingSkill = false;
-                    }
                 }
-                string outcome = hasHealingSkill
-                    ? "YOU CURE THE VILLAGERS. THEY THANK YOU.\n+100 XP"
-                    : "YOU LACK THE SKILL TO HELP.\nTHE VILLAGERS SUFFER.";
+
                 if (hasHealingSkill)
                 {
                     playerData.exp += 100;
+                    localizedOutcome = LocalizationSettings.StringDatabase
+                        .GetLocalizedString("StringLocation", "InfectedTown_Outcome_Heal");
                 }
-                eventText.dialogueLines = outcome + "\nCurrent XP: " + playerData.exp;
+                else
+                {
+                    localizedOutcome = LocalizationSettings.StringDatabase
+                        .GetLocalizedString("StringLocation", "InfectedTown_Outcome_NoHeal");
+                }
 
-                eventText.StartDialogue();
-
+                StartCoroutine(TypeOutcomeText());
                 break;
         }
+    }
+
+    IEnumerator TypeOutcomeText()
+    {
+        string finalText = localizedOutcome + $"\nCurrent XP: {playerData.exp}";
+        eventText.textComponent.text = "";
+        eventText.textFullyDisplayed = false;
+        eventText.SetIsTyping(true);
+
+        foreach (char c in finalText)
+        {
+            eventText.textComponent.text += c;
+            yield return new WaitForSeconds(eventText.textSpeed);
+        }
+
+        eventText.textFullyDisplayed = true;
+        eventText.SetIsTyping(false);
     }
 
     IEnumerator EnableButtonsWhenReady()
@@ -94,7 +112,6 @@ public class InfectedTownEvent : MonoBehaviour
             yield return null;
         }
         buttonCanvas.SetActive(true);
-
     }
 
     public void HelpVillage()

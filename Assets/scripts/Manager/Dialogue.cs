@@ -1,8 +1,7 @@
-using System.Collections;
+﻿using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Localization.Components;
-using UnityEngine.Localization.Settings;
 
 public class Dialogue : MonoBehaviour
 {
@@ -14,26 +13,21 @@ public class Dialogue : MonoBehaviour
     private int index;
     public bool IsTyping { get; private set; }
 
-    public LocalizeStringEvent localizeEvent;
-    
+    private LocalizeStringEvent localizeEvent;
+
     void Awake()
     {
         localizeEvent = GetComponent<LocalizeStringEvent>();
     }
 
-    void Start()
-    {
-        textComponent.text = string.Empty;
-        StartDialogue();
-    }
-
     public void StartDialogue()
     {
         index = 0;
+
         if (localizeEvent != null)
         {
             localizeEvent.StringReference.TableEntryReference = dialogueLines;
-            localizeEvent.RefreshString(); // Fuerza la actualizaci�n inmediata
+            localizeEvent.RefreshString();
         }
 
         StartCoroutine(TypeLine());
@@ -44,8 +38,12 @@ public class Dialogue : MonoBehaviour
         textFullyDisplayed = false;
         IsTyping = true;
 
-        string fullText = textComponent.text;
-        textComponent.text = string.Empty;
+        // Esperamos a que se resuelva la localización
+        var localized = localizeEvent.StringReference.GetLocalizedStringAsync();
+        yield return localized;
+
+        string fullText = localized.Result;
+        textComponent.text = "";
 
         foreach (char c in fullText)
         {
@@ -53,15 +51,9 @@ public class Dialogue : MonoBehaviour
             yield return new WaitForSeconds(textSpeed);
         }
 
-        IsTyping = false;
         textFullyDisplayed = true;
+        IsTyping = false;
     }
 
-    public void SetIsTyping(bool condition)
-    {
-        IsTyping = condition;
-    }
-
-    
-
+    public void SetIsTyping(bool condition) => IsTyping = condition;
 }
