@@ -51,14 +51,12 @@ public class FlipCoinEvent : MonoBehaviour
         switch (currentState)
         {
             case eventState.INTRODUCTION:
-                eventText.dialogueLines = LocalizationSettings.StringDatabase
-                    .GetLocalizedString("StringLocation", "FlipCoin_Intro", new[] { prizeSide.ToString() });
+                eventText.dialogueLines = "FlipCoin_Intro";
                 eventText.StartDialogue();
                 break;
 
             case eventState.DECISION:
-                eventText.dialogueLines = LocalizationSettings.StringDatabase
-                    .GetLocalizedString("StringLocation", "FlipCoin_Choose", new[] { prizeSide.ToString() });
+                eventText.dialogueLines = "FlipCoin_Choose";
                 eventText.StartDialogue();
                 buttonCanvas.SetActive(false);
                 StartCoroutine(EnableButtonsWhenReady());
