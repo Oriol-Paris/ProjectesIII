@@ -160,12 +160,14 @@ public class ShopManager : MonoBehaviour
                 hotbarManager.TriggerUpgradeAnimation(actionData);
             }
 
+            player.SaveCurrentState();
+
             // Update prices after the item has been bought
             UpdatePrices();
         }
         else if (player.exp < pricePool[index])
             SetLocalizedText(locNotEnoughExp, boughtItem);
-        //boughtItem.text = "Not enough experience";
+            //boughtItem.text = "Not enough experience";
     }
 
     private void EquipNewAction(ActionData actionData)
