@@ -87,7 +87,10 @@ public class EnemyBase : MonoBehaviour
     }
     void Movment()
     {
-
+        if (PlayerPos == null || Player == null)
+        {
+            return;
+        }
         PlayerPos = Player.transform.position;
         float distanceToPlayer = Vector3.Distance(transform.position, PlayerPos);
         if (Player.GetIsExecuting())
@@ -194,7 +197,7 @@ public class EnemyBase : MonoBehaviour
         StartCoroutine(Shake(0.2f, 0.3f));
         SoundEffectsManager.instance.PlaySoundFXClip(damageClips, transform, 1f);
         yield return new WaitForSeconds(duration);
-        if (Player.GetIsExecuting() && !isResting)
+        if (Player.GetIsExecuting() && !isResting &&Player != null)
         {
             agent.isStopped = false;
             animator.SetBool("isMoving", true);

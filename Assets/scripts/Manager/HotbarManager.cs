@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Localization;
+using UnityEngine.Localization.Components;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using static PlayerData;
@@ -88,7 +90,9 @@ public class HotbarManager : MonoBehaviour
 
             if (SceneManager.GetActiveScene().name == "ShopScene")
             {
-                slot.transform.Find("Texts").transform.Find("Action Name").GetComponent<TextMeshProUGUI>().text = FindAnyObjectByType<ShopManager>().GetActionDisplayName(action);
+                LocalizedString localizedString = FindAnyObjectByType<ShopManager>().GetActionDisplayName(action);
+                slot.transform.Find("Texts").transform.Find("Action Name").GetComponent<TextMeshProUGUI>().text = localizedString.GetLocalizedString();
+
                 slot.transform.Find("Action Image").GetComponent<Image>().overrideSprite = FindAnyObjectByType<ShopManager>().GetActionImage(action);
                 slot.transform.Find("Action Image").GetComponent<Image>().preserveAspect = true;
 

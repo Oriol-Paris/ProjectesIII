@@ -1,0 +1,307 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: StringLocation_ca
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: ca
+  m_SharedData: {fileID: 11400000, guid: 3aa954cc0f81ffe43904f88fe4e818a5, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 25489682432
+    m_Localized: CONTINUAR
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2006904057856
+    m_Localized: ' JOC NOU'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2407929851904
+    m_Localized: CONFIGURACIO
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2587731275776
+    m_Localized: CREDITS
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2776265240576
+    m_Localized: SORTIR
+    m_Metadata:
+      m_Items: []
+  - m_Id: 12695995527168
+    m_Localized: IDIOMA
+    m_Metadata:
+      m_Items: []
+  - m_Id: 13514308431872
+    m_Localized: TORNAR
+    m_Metadata:
+      m_Items: []
+  - m_Id: 14472279076864
+    m_Localized: "ESTADISTIQUES \nDEL JUGADOR"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 15950335029248
+    m_Localized: 'Salut:'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16163669913600
+    m_Localized: "Punts d'acci\xF3"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 16366795862016
+    m_Localized: "Prem fora d\u2019aquest menu per sortir"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 42024230039552
+    m_Localized: 'Dany millorat
+
+'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 42044891181056
+    m_Localized: Cura millorada
+    m_Metadata:
+      m_Items: []
+  - m_Id: 42059457998848
+    m_Localized: Movimiento mejorado
+    m_Metadata:
+      m_Items: []
+  - m_Id: 42072900743168
+    m_Localized: Jugador curat
+    m_Metadata:
+      m_Items: []
+  - m_Id: 42103682740224
+    m_Localized: Velocitat augmentada
+    m_Metadata:
+      m_Items: []
+  - m_Id: 42120371875840
+    m_Localized: "Vida m\xE0xima augmentada"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 42134145970176
+    m_Localized: No tens prou EXP
+    m_Metadata:
+      m_Items: []
+  - m_Id: 42148565987328
+    m_Localized: Comprat!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 42162675625984
+    m_Localized: Pistola
+    m_Metadata:
+      m_Items: []
+  - m_Id: 42176336474112
+    m_Localized: Escopeta
+    m_Metadata:
+      m_Items: []
+  - m_Id: 42189221376000
+    m_Localized: "L\xE0ser"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 42202936750080
+    m_Localized: "Curaci\xF3"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 42216484352000
+    m_Localized: Moviment
+    m_Metadata:
+      m_Items: []
+  - m_Id: 42231692898304
+    m_Localized: "Recuperaci\xF3 instant\xE0nia\n"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 42243680219136
+    m_Localized: Augment de velocitat
+    m_Metadata:
+      m_Items: []
+  - m_Id: 42255923392512
+    m_Localized: "Augment de vida m\xE0xima"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 42268309172224
+    m_Localized: + Dany
+    m_Metadata:
+      m_Items: []
+  - m_Id: 42281340874752
+    m_Localized: Dispara 3 bales en fila
+    m_Metadata:
+      m_Items: []
+  - m_Id: 42294607458304
+    m_Localized: Travessa obstacles i enemics
+    m_Metadata:
+      m_Items: []
+  - m_Id: 42306733191168
+    m_Localized: + Vida curada
+    m_Metadata:
+      m_Items: []
+  - m_Id: 42318850535424
+    m_Localized: + Abast
+    m_Metadata:
+      m_Items: []
+  - m_Id: 42332523966464
+    m_Localized: Recupera HP
+    m_Metadata:
+      m_Items: []
+  - m_Id: 42345434034176
+    m_Localized: + Velocitat del jugador
+    m_Metadata:
+      m_Items: []
+  - m_Id: 42355806547968
+    m_Localized: "+ Vida m\xE0xima"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 50580501147648
+    m_Localized: TORNA AL MENU PRINCIPAL
+    m_Metadata:
+      m_Items: []
+  - m_Id: 50871694897152
+    m_Localized: VOLUM PRINCIPAL
+    m_Metadata:
+      m_Items: []
+  - m_Id: 51046735785984
+    m_Localized: EFECTES DE SO
+    m_Metadata:
+      m_Items: []
+  - m_Id: 51205435666432
+    m_Localized: MUSICA
+    m_Metadata:
+      m_Items: []
+  - m_Id: 51582973358080
+    m_Localized: Executar sequencia
+    m_Metadata:
+      m_Items: []
+  - m_Id: 51842672078848
+    m_Localized: Restableix la sequencia
+    m_Metadata:
+      m_Items: []
+  - m_Id: 54544663687168
+    m_Localized: HAS GUANYAT
+    m_Metadata:
+      m_Items: []
+  - m_Id: 64383101235200
+    m_Localized: Pots connectar diferents accions, prova de moure't i atacar al enemic!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 64291896094720
+    m_Localized: Prem 1 per seleccionar accio de moure's, clica on anar i apreta
+      E o ESPAI per executar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 64328524951552
+    m_Localized: Pots sequenciar accions, clica a les dos ubicacions diferents, prem
+      E o ESPAI per executar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 64352214380544
+    m_Localized: Prem 2 per canviar a disparar. Apunta i clica al enemic per atacar-lo!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 79138973085696
+    m_Localized: "TROBES UN HOME QUE ET PROPOSA LLAN\xC7AR UNA MONEDA"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 79317121953792
+    m_Localized: CARA O CREU?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 79479760285696
+    m_Localized: "LLAN\xC7A LA MONEDA I CAU EN... {0}"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 82046997295104
+    m_Localized: GUANYES! LA TEVA EXP ES DOBLA!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 82253352857600
+    m_Localized: HAS PERDUT! PERDS LA MEITAT DE EXP!
+    m_Metadata:
+      m_Items: []
+  - m_Id: 84173417148416
+    m_Localized: "UN HOME SIN\xCDSTER T'OFEREIX UNA MISTERIOSA CAIXA"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 84633020592128
+    m_Localized: QUE FAS AMB LA CAIXA?
+    m_Metadata:
+      m_Items: []
+  - m_Id: 84857445216256
+    m_Localized: COMPRES LA CAIXA. TROBES  XP! +{0} XP
+    m_Metadata:
+      m_Items: []
+  - m_Id: 85207745097728
+    m_Localized: NO TENS PROU XP PER COMPRAR LA CAIXA
+    m_Metadata:
+      m_Items: []
+  - m_Id: 85346127769600
+    m_Localized: ROBES LA CAIXA I ET FAN MAL. -1HP +{0} XP
+    m_Metadata:
+      m_Items: []
+  - m_Id: 85611572686848
+    m_Localized: ROBES LA CAIXA SENSE PROBLEMES! +{0}XP
+    m_Metadata:
+      m_Items: []
+  - m_Id: 85857782525952
+    m_Localized: REFUSES LA OFERTA I TE'N VAS.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 90182680375296
+    m_Localized: 'TROBES UN POBLE PLAGAT DE MALALTIES '
+    m_Metadata:
+      m_Items: []
+  - m_Id: 90470833254400
+    m_Localized: NOMES UN PODER CURADOR POTS AJUDAR-LOS...
+    m_Metadata:
+      m_Items: []
+  - m_Id: 90844688347136
+    m_Localized: CURES AL POBLAT. ET DONEN UN REGAL DE RECOMPENSA
+    m_Metadata:
+      m_Items: []
+  - m_Id: 91185127419904
+    m_Localized: NO TENS EL PODER PER CURAR-LOS. EL POBLAT SOFREIX.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 91908128960512
+    m_Localized: CARA
+    m_Metadata:
+      m_Items: []
+  - m_Id: 91966392037376
+    m_Localized: CREU
+    m_Metadata:
+      m_Items: []
+  - m_Id: 92029776359424
+    m_Localized: COMPRAR
+    m_Metadata:
+      m_Items: []
+  - m_Id: 92121572896768
+    m_Localized: ROBAR
+    m_Metadata:
+      m_Items: []
+  - m_Id: 92178149863424
+    m_Localized: MARXAR
+    m_Metadata:
+      m_Items: []
+  - m_Id: 92233401430016
+    m_Localized: AJUDAR
+    m_Metadata:
+      m_Items: []
+  - m_Id: 92360203628544
+    m_Localized: MARXAR
+    m_Metadata:
+      m_Items: []
+  - m_Id: 93378639360000
+    m_Localized: SORTIR
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

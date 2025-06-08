@@ -877,6 +877,7 @@ GameObject:
   - component: {fileID: 692337696}
   - component: {fileID: 692337698}
   - component: {fileID: 692337697}
+  - component: {fileID: 692337699}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -893,7 +894,7 @@ RectTransform:
   m_GameObject: {fileID: 692337695}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.67296, z: 0.67296}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1167280344}
@@ -923,7 +924,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "PLAYER \nSTATS"
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3fe0eb6918950e74283f4f926376cc9d, type: 2}
   m_sharedMaterial: {fileID: -7990055617794105862, guid: 3fe0eb6918950e74283f4f926376cc9d, type: 2}
@@ -988,7 +989,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 17.354187, z: 0, w: 15.618774}
+  m_margin: {x: -51.389336, y: -2.6897812, z: -53.952927, w: -3.3991776}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -1002,6 +1003,46 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 692337695}
   m_CullTransparentMesh: 1
+--- !u!114 &692337699
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 692337695}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56eb0353ae6e5124bb35b17aff880f16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_StringReference:
+    m_TableReference:
+      m_TableCollectionName: GUID:3aa954cc0f81ffe43904f88fe4e818a5
+    m_TableEntryReference:
+      m_KeyId: 14472279076864
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  m_FormatArguments: []
+  m_UpdateString:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 692337697}
+        m_TargetAssemblyTypeName: TMPro.TMP_Text, Unity.TextMeshPro
+        m_MethodName: set_text
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  references:
+    version: 2
+    RefIds: []
 --- !u!1 &825487306
 GameObject:
   m_ObjectHideFlags: 0
@@ -1113,6 +1154,7 @@ GameObject:
   - component: {fileID: 832926978}
   - component: {fileID: 832926980}
   - component: {fileID: 832926979}
+  - component: {fileID: 832926981}
   m_Layer: 5
   m_Name: ExitTest
   m_TagString: Untagged
@@ -1238,6 +1280,46 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 832926977}
   m_CullTransparentMesh: 1
+--- !u!114 &832926981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 832926977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56eb0353ae6e5124bb35b17aff880f16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_StringReference:
+    m_TableReference:
+      m_TableCollectionName: GUID:3aa954cc0f81ffe43904f88fe4e818a5
+    m_TableEntryReference:
+      m_KeyId: 16366795862016
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  m_FormatArguments: []
+  m_UpdateString:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 832926979}
+        m_TargetAssemblyTypeName: TMPro.TMP_Text, Unity.TextMeshPro
+        m_MethodName: set_text
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  references:
+    version: 2
+    RefIds: []
 --- !u!82 &904970632 stripped
 AudioSource:
   m_CorrespondingSourceObject: {fileID: 5297226955300494981, guid: 409dfeb6c58253a41be741064f47110f, type: 3}
@@ -1482,6 +1564,7 @@ GameObject:
   - component: {fileID: 1053872133}
   - component: {fileID: 1053872135}
   - component: {fileID: 1053872134}
+  - component: {fileID: 1053872136}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -1607,6 +1690,46 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1053872132}
   m_CullTransparentMesh: 1
+--- !u!114 &1053872136
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1053872132}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56eb0353ae6e5124bb35b17aff880f16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_StringReference:
+    m_TableReference:
+      m_TableCollectionName: GUID:3aa954cc0f81ffe43904f88fe4e818a5
+    m_TableEntryReference:
+      m_KeyId: 15950335029248
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  m_FormatArguments: []
+  m_UpdateString:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1053872134}
+        m_TargetAssemblyTypeName: TMPro.TMP_Text, Unity.TextMeshPro
+        m_MethodName: set_text
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  references:
+    version: 2
+    RefIds: []
 --- !u!1 &1167280343
 GameObject:
   m_ObjectHideFlags: 0
@@ -1635,7 +1758,7 @@ RectTransform:
   m_GameObject: {fileID: 1167280343}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.6471328, y: 1.3101931, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 692337696}
@@ -1643,7 +1766,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 813, y: 426}
+  m_AnchoredPosition: {x: 786.5, y: 426}
   m_SizeDelta: {x: 160, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1167280345
@@ -1797,6 +1920,9 @@ MonoBehaviour:
   laserImage: {fileID: 0}
   healImage: {fileID: 0}
   weaponPickupImage: {fileID: 0}
+  shootColor: {r: 0, g: 0, b: 0, a: 0}
+  healColor: {r: 0, g: 0, b: 0, a: 0}
+  moveColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!114 &1206168422
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1994,6 +2120,222 @@ MonoBehaviour:
   player: {fileID: 435037521}
   boughtItem: {fileID: 2008536727}
   currentXP: {fileID: 1208965283}
+  locBoughtDamage:
+    m_TableReference:
+      m_TableCollectionName: GUID:3aa954cc0f81ffe43904f88fe4e818a5
+    m_TableEntryReference:
+      m_KeyId: 42024230039552
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  locBoughtHeal:
+    m_TableReference:
+      m_TableCollectionName: GUID:3aa954cc0f81ffe43904f88fe4e818a5
+    m_TableEntryReference:
+      m_KeyId: 42044891181056
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  locBoughtMove:
+    m_TableReference:
+      m_TableCollectionName: GUID:3aa954cc0f81ffe43904f88fe4e818a5
+    m_TableEntryReference:
+      m_KeyId: 42059457998848
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  locPlayerHealed:
+    m_TableReference:
+      m_TableCollectionName: GUID:3aa954cc0f81ffe43904f88fe4e818a5
+    m_TableEntryReference:
+      m_KeyId: 42072900743168
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  locPlayerSpeedUp:
+    m_TableReference:
+      m_TableCollectionName: GUID:3aa954cc0f81ffe43904f88fe4e818a5
+    m_TableEntryReference:
+      m_KeyId: 42103682740224
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  locMaxHPUp:
+    m_TableReference:
+      m_TableCollectionName: GUID:3aa954cc0f81ffe43904f88fe4e818a5
+    m_TableEntryReference:
+      m_KeyId: 42120371875840
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  locNotEnoughExp:
+    m_TableReference:
+      m_TableCollectionName: GUID:3aa954cc0f81ffe43904f88fe4e818a5
+    m_TableEntryReference:
+      m_KeyId: 42134145970176
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  locJustBought:
+    m_TableReference:
+      m_TableCollectionName: GUID:3aa954cc0f81ffe43904f88fe4e818a5
+    m_TableEntryReference:
+      m_KeyId: 42148565987328
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  gunLoc:
+    m_TableReference:
+      m_TableCollectionName: GUID:3aa954cc0f81ffe43904f88fe4e818a5
+    m_TableEntryReference:
+      m_KeyId: 42162675625984
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  shotgunLoc:
+    m_TableReference:
+      m_TableCollectionName: GUID:3aa954cc0f81ffe43904f88fe4e818a5
+    m_TableEntryReference:
+      m_KeyId: 42176336474112
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  laserLoc:
+    m_TableReference:
+      m_TableCollectionName: GUID:3aa954cc0f81ffe43904f88fe4e818a5
+    m_TableEntryReference:
+      m_KeyId: 42189221376000
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  healLoc:
+    m_TableReference:
+      m_TableCollectionName: GUID:3aa954cc0f81ffe43904f88fe4e818a5
+    m_TableEntryReference:
+      m_KeyId: 42202936750080
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  moveLoc:
+    m_TableReference:
+      m_TableCollectionName: GUID:3aa954cc0f81ffe43904f88fe4e818a5
+    m_TableEntryReference:
+      m_KeyId: 42216484352000
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  recoveryLoc:
+    m_TableReference:
+      m_TableCollectionName: GUID:3aa954cc0f81ffe43904f88fe4e818a5
+    m_TableEntryReference:
+      m_KeyId: 42231692898304
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  speedUpLoc:
+    m_TableReference:
+      m_TableCollectionName: GUID:3aa954cc0f81ffe43904f88fe4e818a5
+    m_TableEntryReference:
+      m_KeyId: 42243680219136
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  maxHpUpLoc:
+    m_TableReference:
+      m_TableCollectionName: GUID:3aa954cc0f81ffe43904f88fe4e818a5
+    m_TableEntryReference:
+      m_KeyId: 42255923392512
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  gunUpgradeLoc:
+    m_TableReference:
+      m_TableCollectionName: GUID:3aa954cc0f81ffe43904f88fe4e818a5
+    m_TableEntryReference:
+      m_KeyId: 42268309172224
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  shotgunUpgradeLoc:
+    m_TableReference:
+      m_TableCollectionName: GUID:3aa954cc0f81ffe43904f88fe4e818a5
+    m_TableEntryReference:
+      m_KeyId: 42281340874752
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  laserUpgradeLoc:
+    m_TableReference:
+      m_TableCollectionName: GUID:3aa954cc0f81ffe43904f88fe4e818a5
+    m_TableEntryReference:
+      m_KeyId: 42294607458304
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  healUpgradeLoc:
+    m_TableReference:
+      m_TableCollectionName: GUID:3aa954cc0f81ffe43904f88fe4e818a5
+    m_TableEntryReference:
+      m_KeyId: 42306733191168
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  moveUpgradeLoc:
+    m_TableReference:
+      m_TableCollectionName: GUID:3aa954cc0f81ffe43904f88fe4e818a5
+    m_TableEntryReference:
+      m_KeyId: 42318850535424
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  recoveryUpgradeLoc:
+    m_TableReference:
+      m_TableCollectionName: GUID:3aa954cc0f81ffe43904f88fe4e818a5
+    m_TableEntryReference:
+      m_KeyId: 42332523966464
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  speedUpUpgradeLoc:
+    m_TableReference:
+      m_TableCollectionName: GUID:3aa954cc0f81ffe43904f88fe4e818a5
+    m_TableEntryReference:
+      m_KeyId: 42345434034176
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  maxHpUpUpgradeLoc:
+    m_TableReference:
+      m_TableCollectionName: GUID:3aa954cc0f81ffe43904f88fe4e818a5
+    m_TableEntryReference:
+      m_KeyId: 42355806547968
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
   moveImage: {fileID: 21300000, guid: 80a31360147518a4c878052c987d2472, type: 3}
   gunImage: {fileID: 21300000, guid: 04c9e5448c757a54a9482dd91faef38a, type: 3}
   shotgunImage: {fileID: 21300000, guid: 982cfee97721db245a0c0ea21a8fbddc, type: 3}
@@ -2005,6 +2347,9 @@ MonoBehaviour:
   laserImage: {fileID: 21300000, guid: e80a286d54d378e4fab7e89e4f5b70a5, type: 3}
   hotbarManager: {fileID: 2105453032}
   buyItemSfx: {fileID: 1531387145}
+  references:
+    version: 2
+    RefIds: []
 --- !u!114 &1232424836
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2255,6 +2600,7 @@ GameObject:
   - component: {fileID: 1279833771}
   - component: {fileID: 1279833773}
   - component: {fileID: 1279833772}
+  - component: {fileID: 1279833774}
   m_Layer: 5
   m_Name: Text (TMP) (1)
   m_TagString: Untagged
@@ -2380,6 +2726,46 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1279833770}
   m_CullTransparentMesh: 1
+--- !u!114 &1279833774
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1279833770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56eb0353ae6e5124bb35b17aff880f16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_StringReference:
+    m_TableReference:
+      m_TableCollectionName: GUID:3aa954cc0f81ffe43904f88fe4e818a5
+    m_TableEntryReference:
+      m_KeyId: 16163669913600
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  m_FormatArguments: []
+  m_UpdateString:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1279833772}
+        m_TargetAssemblyTypeName: TMPro.TMP_Text, Unity.TextMeshPro
+        m_MethodName: set_text
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  references:
+    version: 2
+    RefIds: []
 --- !u!1 &1310272436
 GameObject:
   m_ObjectHideFlags: 0
@@ -3140,6 +3526,7 @@ GameObject:
   - component: {fileID: 1937123774}
   - component: {fileID: 1937123776}
   - component: {fileID: 1937123775}
+  - component: {fileID: 1937123777}
   m_Layer: 5
   m_Name: Name
   m_TagString: Untagged
@@ -3265,6 +3652,46 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1937123773}
   m_CullTransparentMesh: 1
+--- !u!114 &1937123777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1937123773}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56eb0353ae6e5124bb35b17aff880f16, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_StringReference:
+    m_TableReference:
+      m_TableCollectionName: GUID:3aa954cc0f81ffe43904f88fe4e818a5
+    m_TableEntryReference:
+      m_KeyId: 25489682432
+      m_Key: 
+    m_FallbackState: 0
+    m_WaitForCompletion: 0
+    m_LocalVariables: []
+  m_FormatArguments: []
+  m_UpdateString:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1937123775}
+        m_TargetAssemblyTypeName: TMPro.TMP_Text, Unity.TextMeshPro
+        m_MethodName: set_text
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  references:
+    version: 2
+    RefIds: []
 --- !u!1 &2008536726
 GameObject:
   m_ObjectHideFlags: 0

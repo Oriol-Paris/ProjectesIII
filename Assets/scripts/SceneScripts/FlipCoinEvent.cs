@@ -1,6 +1,7 @@
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Localization.Settings;
 using UnityEngine.SceneManagement;
 
 public class FlipCoinEvent : MonoBehaviour
@@ -50,12 +51,12 @@ public class FlipCoinEvent : MonoBehaviour
         switch (currentState)
         {
             case eventState.INTRODUCTION:
+                eventText.dialogueLines = "FlipCoin_Intro";
                 eventText.StartDialogue();
-                eventText.dialogueLines = "YOU FIND A MAN WHO PROPOSES TO FLIP A COIN";
                 break;
 
             case eventState.DECISION:
-                eventText.dialogueLines = "HEADS OR TAILS?";
+                eventText.dialogueLines = "FlipCoin_Choose";
                 eventText.StartDialogue();
                 buttonCanvas.SetActive(false);
                 StartCoroutine(EnableButtonsWhenReady());
@@ -64,24 +65,49 @@ public class FlipCoinEvent : MonoBehaviour
             case eventState.OUTCOME:
                 buttonCanvas.SetActive(false);
 
-                string resultText = $"YOU FLIP A COIN AND IT LANDS ON {prizeSide}.\n";
+                prizeSide = (Random.value > 0.5f) ? coinSide.HEADS : coinSide.TAILS;
+
+                string resultText = LocalizationSettings.StringDatabase
+                    .GetLocalizedString("StringLocation", "FlipCoin_Result", new[] { prizeSide.ToString() });
+
                 if (playerSide == prizeSide)
                 {
                     ReceivePrize();
-                    resultText += "YOU WIN! YOUR XP DOUBLES.\n";
+                    resultText += "\n" + LocalizationSettings.StringDatabase.GetLocalizedString("StringLocation", "FlipCoin_Win");
                 }
                 else
                 {
                     playerData.exp /= 2;
-                    resultText += "YOU LOSE! YOUR XP IS HALVED.\n";
+                    resultText += "\n" + LocalizationSettings.StringDatabase.GetLocalizedString("StringLocation", "FlipCoin_Lose");
                 }
-                resultText += "Current XP: " + playerData.exp;
-                eventText.dialogueLines = resultText;
-                eventText.StartDialogue();
+
+                resultText += $"\nCurrent XP: {playerData.exp}";
+
+                eventText.textComponent.text = ""; // Limpieza por seguridad
+                StartCoroutine(TypeLineExternalText(resultText));
                 exitCanvas.enabled = true;
                 break;
+
         }
     }
+
+    IEnumerator TypeLineExternalText(string fullText)
+    {
+        eventText.textFullyDisplayed = false;
+        eventText.SetIsTyping(true);
+        eventText.textComponent.text = "";
+
+        foreach (char c in fullText)
+        {
+            eventText.textComponent.text += c;
+            yield return new WaitForSeconds(eventText.textSpeed);
+        }
+
+        eventText.SetIsTyping(false);
+        eventText.textFullyDisplayed = true;
+    }
+
+
     void ReceivePrize()
     {
         int original = playerData.exp;

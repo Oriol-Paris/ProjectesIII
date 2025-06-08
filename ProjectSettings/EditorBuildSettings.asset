@@ -51,5 +51,7 @@ EditorBuildSettings:
     path: Assets/Scenes/EventScene.unity
     guid: e266ce5524989f24fa2ea8306f471f84
   m_configObjects:
+    com.unity.addressableassets: {fileID: 11400000, guid: d73406327c30a6241976cc99cc417394, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+    com.unity.localization.settings: {fileID: 11400000, guid: 8b44d6f600c76d54898256c9b0bb718e, type: 2}
   m_UseUCBPForAssetBundles: 0

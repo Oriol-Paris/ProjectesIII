@@ -12,9 +12,9 @@ scopes = {
 	"last_search.66F56946" = ""
 	"OpenInspectorPreview.66F56946" = "0"
 	"currentGroup.66F56946" = "all"
-	"picker_window_position_offset.075BCD15" = "72,80005;323,2;320;550,4"
+	"picker_window_position_offset.075BCD15" = "-1056,8;-48;1351,2;550,4"
 	"picker_visibility_flags.075BCD15" = "264"
-	"picker_item_size.075BCD15" = "96"
+	"picker_item_size.075BCD15" = "32"
 	"picker_inspector.075BCD15" = "0"
 }
 providers = {
@@ -68,10 +68,29 @@ providers = {
 		priority = 210
 		defaultAction = null
 	}
+	at = {
+		active = true
+		priority = 100
+		defaultAction = null
+	}
+	st = {
+		active = true
+		priority = 100
+		defaultAction = null
+	}
 }
 objectSelectors = {
 }
 recentSearches = [
+	"st: leave"
+	"st: Secuencia de ejecución"
+	"st: MÚSICA"
+	"st: EFECTOS SONOROS"
+	"st: VOLUM PRINCIPAL"
+	"st: VOLVER AL MENÚ PRINCIPAL"
+	"st: gunUpgradeLoc"
+	"st: gunLoc"
+	"st: loc bo"
 	"h: ref=\"Assets/scripts/Manager/HotbarManager.cs\""
 	"h: ref=<$object:none$>"
 	"skybox"
@@ -84,7 +103,7 @@ showSavedSearchPanel = false
 hideTabs = false
 expandedQueries = [
 ]
-queryBuilder = false
+queryBuilder = true
 ignoredProperties = "id;name;classname;imagecontentshash"
 helperWidgetCurrentArea = "all"
 disabledIndexers = ""
