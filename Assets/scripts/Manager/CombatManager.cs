@@ -74,7 +74,7 @@ public class CombatManager : MonoBehaviour
                 }
                 
                 Debug.Log($"Player {i} EXP after calculation: {playerParty[i].playerData.exp}");
-                playerParty[i].playerData.Save();
+                playerParty[i].SaveCurrentState();
                 
             }
 
@@ -88,8 +88,6 @@ public class CombatManager : MonoBehaviour
             {
                 PlayerPrefs.SetString("LastLevelCleared", SceneManager.GetActiveScene().name);
             }
-
-            playerParty[0].SaveCurrentState();
 
             hasCalculatedExp = true;
         }
