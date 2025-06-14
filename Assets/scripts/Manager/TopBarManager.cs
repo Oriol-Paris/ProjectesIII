@@ -274,34 +274,33 @@ public class TopBarManager : MonoBehaviour
 
     private Sprite GetActionImage(PlayerBase.Action action)
     {
-        if (action.m_action == PlayerBase.ActionEnum.SHOOT)
+        switch (action.m_action)
         {
-            if(action.m_style.bulletType == BulletType.GUN)
-            {
-                return gunImage;
-            }
-            else if (action.m_style.bulletType == BulletType.SHOTGUN)
-            {
-                return shotgunImage;
-            }
-            else if (action.m_style.bulletType == BulletType.LASER)
-            {
-                return laserImage;
-            }
+            case PlayerBase.ActionEnum.SHOOT:
+                switch (action.m_style.bulletType)
+                {
+                    case BulletType.GUN:
+                        return gunImage;
+                    case BulletType.SHOTGUN:
+                        return shotgunImage;
+                    case BulletType.LASER:
+                        return laserImage;
+                    default:
+                        return null;
+                }
+
+            case PlayerBase.ActionEnum.HEAL:
+                return healImage;
+
+            case PlayerBase.ActionEnum.MOVE:
+                return runImage;
+
+            case PlayerBase.ActionEnum.ESPECIALSHOOT:
+                return weaponPickupImage;
+
+            default:
+                return null;
         }
-        else if (action.m_action == PlayerBase.ActionEnum.HEAL)
-        {
-            return healImage;
-        }
-        else if (action.m_action == PlayerBase.ActionEnum.MOVE)
-        {
-            return runImage;
-        }
-        else if (action.m_action == PlayerBase.ActionEnum.ESPECIALSHOOT)
-        {
-            return weaponPickupImage;
-        }
-        return null;
     }
 
   

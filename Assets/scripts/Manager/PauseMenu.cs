@@ -6,12 +6,12 @@ public class PauseMenu : MonoBehaviour
     public GameObject pauseMenu;
     public GameObject combatUI;
 
-    private PlayerActionManager playerActionManager;
+    [SerializeField] private PlayerActionManager playerActionManager;
 
     private void Start()
     {
         pauseMenu.SetActive(false);
-        playerActionManager = FindAnyObjectByType<PlayerActionManager>();
+       
     }
 
     void Update()

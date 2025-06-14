@@ -894,6 +894,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthBarPrefab: {fileID: 0}
+  player: {fileID: 11400000, guid: 662eee5fd8a873f478dccf0dfc86e8c7, type: 2}
   startPos: {x: 0, y: 0, z: 0}
   scale: {x: 0, y: 0, z: 0}
   xOffset: 0
@@ -1278,6 +1279,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthBarPrefab: {fileID: 6632909104858812616, guid: b919ece06175c7942b1399f5716de3c0, type: 3}
+  player: {fileID: 0}
   startPos: {x: -841, y: 475, z: 0}
   scale: {x: 1, y: 1, z: 1}
   xOffset: 90
@@ -1585,17 +1587,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 558f731a995bd9b4d846fec44b83e801, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerBase: {fileID: 0}
+  controlLiniarRender: {fileID: 0}
   topPanel: {fileID: 5022733225106074532}
   actions:
-  - {fileID: 5011869461815753447}
-  - {fileID: 5937386069960288750}
-  - {fileID: 8053872357225382379}
-  - {fileID: 8646500748383836429}
-  - {fileID: 9099028019562476474}
-  - {fileID: 5661227579037106774}
+  - image: {fileID: 8435665325368419742}
+    key: {fileID: 480941705186998670}
+    border: {fileID: 1647257955115034308}
+  - image: {fileID: 3093588118940908765}
+    key: {fileID: 6143620657686825302}
+    border: {fileID: 6480125800965723263}
+  - image: {fileID: 4667138628686895934}
+    key: {fileID: 6294558724084804927}
+    border: {fileID: 2013205537666951583}
+  - image: {fileID: 5866697840821601024}
+    key: {fileID: 1456162853208568334}
+    border: {fileID: 5228638234909162773}
+  - image: {fileID: 2798685597532222323}
+    key: {fileID: 6983977186030259321}
+    border: {fileID: 5783196196173925441}
+  - image: {fileID: 1476890185461399994}
+    key: {fileID: 6596406108881971306}
+    border: {fileID: 4822470413316057759}
   costIndicatorPrefab: {fileID: 8655032155819557984, guid: 6fc74242154bd1740b2982e70cb9b938, type: 3}
   topActionPrefab: {fileID: 8655032155819557984, guid: 78e37625c1b26a647a1561622e4a2754, type: 3}
   bottomActionPrefab: {fileID: 8655032155819557984, guid: 6fc74242154bd1740b2982e70cb9b938, type: 3}
+  actionSlotsAnimator: []
   runImage: {fileID: 21300000, guid: 80a31360147518a4c878052c987d2472, type: 3}
   gunImage: {fileID: 21300000, guid: 04c9e5448c757a54a9482dd91faef38a, type: 3}
   shotgunImage: {fileID: 21300000, guid: 982cfee97721db245a0c0ea21a8fbddc, type: 3}
@@ -3516,7 +3533,8 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3686668931775204525, guid: 7ccf08d1ffd93904ea8cdfaab44636aa, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

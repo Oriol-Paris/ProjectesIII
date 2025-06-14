@@ -51,6 +51,10 @@ public class PlayerBase : MonoBehaviour
     public bool godMode = false;
     
     public PlayerActionManager turnsDone;
+    public ControlLiniarRender controlLiniarRender;
+    public BulletCollection bulletCollection;
+    public Animator playerAnimator;
+    public SpriteRenderer spriteRenderer;
 
     public Action activeAction { get; private set; }
     public List<Action> availableActions = new List<Action>();
@@ -70,11 +74,11 @@ public class PlayerBase : MonoBehaviour
 
     private void Awake()
     {
-        // Load saved data before Start() is called
+       
         PlayerData loadedData = PlayerData.LoadFromDisk();
         if (loadedData != null)
         {
-            // Copy the loaded data to our scriptable object
+            
             playerData.health = loadedData.health;
             playerData.maxHealth = loadedData.maxHealth;
             playerData.actionPoints = loadedData.actionPoints;
@@ -90,7 +94,7 @@ public class PlayerBase : MonoBehaviour
             playerData.victory = loadedData.victory;
             playerData.healAmount = loadedData.healAmount;
 
-            // Clear and copy actions
+           
             playerData.availableActions.Clear();
             foreach (var action in loadedData.availableActions)
             {
@@ -99,7 +103,7 @@ public class PlayerBase : MonoBehaviour
         }
         else
         {
-            // If no saved data exists, this might be the first time playing
+            
             playerData.SaveOriginalPlayerIfNotExists();
         }
     }
@@ -118,18 +122,15 @@ public class PlayerBase : MonoBehaviour
         }
 
         isInAction = false;
-        turnsDone = GetComponent<PlayerActionManager>();
-        
-        
 
-        // Only save level start state if this is a new level
+       
         if (playerData.lastLevel != SceneManager.GetActiveScene().name)
         {
             playerData.lastLevel = SceneManager.GetActiveScene().name;
             playerData.SavePlayerAtLevelStart();
         }
 
-        this.GetComponent<ControlLiniarRender>().ChangeLineColor(activeAction);
+        controlLiniarRender.ChangeLineColor(activeAction);
     }
 
 
@@ -137,7 +138,7 @@ public class PlayerBase : MonoBehaviour
 
     private void LoadPlayerData()
     {
-        // Load health, range, and other properties from the ScriptableObject
+        
         maxHealth = playerData.maxHealth;
         health = playerData.health;
         actionPoints = playerData.actionPoints;
@@ -146,18 +147,18 @@ public class PlayerBase : MonoBehaviour
         isAlive = playerData.isAlive;
         victory = playerData.victory;
 
-        // Clear existing actions before loading
+        
         availableActions.Clear();
 
-        // Load available actions from playerData and populate availableActions list
+        
         foreach (var actionData in playerData.availableActions)
         {
             if (actionData.action == ActionEnum.SHOOT)
             {
-                // Only get the bullet style if it hasn't been set yet
+                
                 if (actionData.style == null)
                 {
-                    actionData.style = FindAnyObjectByType<BulletCollection>().GetBullet(actionData.bulletType);
+                    actionData.style = bulletCollection.GetBullet(actionData.bulletType);
                 }
             }
 
@@ -210,16 +211,16 @@ public class PlayerBase : MonoBehaviour
 
             if (activeAction.m_action == ActionEnum.HEAL)
             {
-                Heal(playerData.healAmount); // Use healAmount from playerData
+                Heal(playerData.healAmount);
             }
         }
         else
         {
             activeAction = Action.nothing;
-            //Debug.Log("Doing nothing");
+            
         }
 
-        // Check for death condition
+      
         if (health <= 0 || playerData.health <= 0)
         {
             if (isAlive)
@@ -228,20 +229,7 @@ public class PlayerBase : MonoBehaviour
                 StartCoroutine(DeathCoroutine());
             }
         }
-        //Debug.LogWarning((float)_camera.colorPostProces.intensity);
-
-        //if (health <= 2 && (float)_camera.colorPostProces.intensity < cameraPostProcesIntensity / 2)
-        //{
-        //    Debug.LogWarning("FadeIN");
-        //    StartCoroutine(_camera.FadeInVignette(cameraPostProcesIntensity, cameraPostProcesLength, Color.red));
-        //}
-
-        
-        //if (health > 2 && (float)_camera.colorPostProces.intensity > cameraPostProcesIntensity / 2)
-        //{
-        //    Debug.LogWarning("FadeOUT");
-        //    StartCoroutine(_camera.Flash(cameraPostProcesIntensity, cameraPostProcesLength, Color.red));
-        //}
+       
     }
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -249,7 +237,7 @@ public class PlayerBase : MonoBehaviour
         if (collision.gameObject.GetComponent<EnemyMovement>() != null)
         {
             collision.gameObject.GetComponent<EnemyMovement>().Attack();
-            this.GetComponent<Animator>().SetTrigger("hit");
+            playerAnimator.SetTrigger("hit");
 
             if (health > 0 || playerData.health > 0)
             {
@@ -266,7 +254,7 @@ public class PlayerBase : MonoBehaviour
 
     IEnumerator DeathCoroutine()
     {
-        this.GetComponent<Animator>().SetBool("isDead", true);
+        playerAnimator.SetBool("isDead", true);
         activeAction = Action.nothing;
         isAlive = false;
 
@@ -279,12 +267,12 @@ public class PlayerBase : MonoBehaviour
         while (elapsed < hitFeedBackTime)
         {
             yield return null;
-            GetComponent<SpriteRenderer>().color = new Color(1, GetComponent<SpriteRenderer>().color.b + Time.deltaTime, GetComponent<SpriteRenderer>().color.b + Time.deltaTime);
+            spriteRenderer.color = new Color(1, spriteRenderer.color.b + Time.deltaTime, spriteRenderer.color.b + Time.deltaTime);
 
 
             elapsed += Time.deltaTime;
         }
-        GetComponent<SpriteRenderer>().color = Color.white;
+        spriteRenderer.color = Color.white;
     }
 
     public void SaveCurrentState()
@@ -382,7 +370,7 @@ public class PlayerBase : MonoBehaviour
             health -= val;
             playerData.health -= val;
 
-            GetComponent<SpriteRenderer>().color = Color.red;
+            spriteRenderer.color = Color.red;
             StartCoroutine(whitecolor());
 
             SoundEffectsManager.instance.PlaySoundFXClip(damageClips, transform, 1f);
@@ -405,7 +393,7 @@ public class PlayerBase : MonoBehaviour
                 StartCoroutine(_camera.FadeInVignette(cameraPostProcesIntensity, cameraPostProcesLength, Color.red));
             }
 
-            FindAnyObjectByType<UIBarManager>().UpdateHealthbar();
+            healthManager.UpdateHealthbar();
             SaveCurrentState();
         }
     }

@@ -657,6 +657,7 @@ MonoBehaviour:
   player: {fileID: 8584045141074783902}
   dialogueManager: {fileID: 0}
   fx: {fileID: 6904931311285059048}
+  playerData: {fileID: 11400000, guid: 662eee5fd8a873f478dccf0dfc86e8c7, type: 2}
   isMoving: 0
   isShooting: 0
   isHealing: 0
@@ -664,7 +665,9 @@ MonoBehaviour:
   turnsDone: 0
   costShoot: 0.4
   walkSoundDelay: 0.1
+  combatManager: {fileID: 0}
   movePlayer: {fileID: 4476756505495577889}
+  animationToExecute: {fileID: 73541132482798089}
   shootClip:
   - {fileID: 8300000, guid: 44afddfb3c1b5a446ab6f9d9a5d59aa3, type: 3}
   walkingClips:
@@ -694,6 +697,8 @@ MonoBehaviour:
   exp: 0
   godMode: 0
   turnsDone: {fileID: 1251202436317223770}
+  controlLiniarRender: {fileID: 0}
+  bulletCollection: {fileID: 0}
   availableActions: []
   isExecuting: {fileID: 7189739028029077113}
   victory: 0

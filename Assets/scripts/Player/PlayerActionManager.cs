@@ -34,7 +34,7 @@ public class PlayerActionManager : MonoBehaviour
     [SerializeField] private PlayerBase player;
     [SerializeField] private Dialogue dialogueManager;
     public Animator fx;
-    private PlayerData playerData;
+    [SerializeField] private PlayerData playerData;
 
     // Dictionaries to store actions by type
     public Dictionary<PlayerBase.ActionEnum, ActiveAction> activeActions;
@@ -56,11 +56,11 @@ public class PlayerActionManager : MonoBehaviour
 
     [SerializeField] private float walkSoundDelay;
     float actualWalkSoundDelay;
-    private CombatManager combatManager;
+    [SerializeField] private CombatManager combatManager;
     [SerializeField] MovPlayer movePlayer;
     private bool hasShot = false; // Flag to track if a shot has been fired
     private bool actionPointReduced;
-    private Animator animationToExecute;
+    [SerializeField] private Animator animationToExecute;
     [SerializeField] public AudioClip[] shootClip;
     [SerializeField] AudioClip[] walkingClips;
 
@@ -71,19 +71,17 @@ public class PlayerActionManager : MonoBehaviour
 
     private void Awake()
     {
-        activeActions = new Dictionary<PlayerBase.ActionEnum, ActiveAction>();
-        passiveActions = new Dictionary<PlayerBase.ActionEnum, PassiveAction>();
-        animationToExecute = GetComponent<Animator>();
+        //activeActions = new Dictionary<PlayerBase.ActionEnum, ActiveAction>();
+        //passiveActions = new Dictionary<PlayerBase.ActionEnum, PassiveAction>();
+       
     }
 
     private void Start()
     {
-        player = GetComponent<PlayerBase>();
+ 
        
 
-        playerData = player.playerData; // Load playerData from PlayerBase
-
-        combatManager = FindAnyObjectByType<CombatManager>();
+       
     }
 
   
@@ -108,13 +106,13 @@ public class PlayerActionManager : MonoBehaviour
 
         var currentAction = player.GetAction();
 
-        if (currentAction.m_action == PlayerBase.ActionEnum.MOVE && (!player.GetComponent<TimeSecuence>().isExecuting || isMoving))
+        if (currentAction.m_action == PlayerBase.ActionEnum.MOVE && (!timeSceuence.isExecuting || isMoving))
         {
             isMoving = true;
             movePlayer.PreStartMov();
         }
 
-        if (currentAction.m_action == PlayerBase.ActionEnum.SHOOT && (!player.GetComponent<TimeSecuence>().isExecuting || isShooting))
+        if (currentAction.m_action == PlayerBase.ActionEnum.SHOOT && (!timeSceuence.isExecuting || isShooting))
         {
    
             isShooting = true;
@@ -135,7 +133,7 @@ public class PlayerActionManager : MonoBehaviour
 
         }
 
-        if (currentAction.m_action == PlayerBase.ActionEnum.MELEE && (!player.GetComponent<TimeSecuence>().isExecuting || isMoving))
+        if (currentAction.m_action == PlayerBase.ActionEnum.MELEE && (!timeSceuence.isExecuting || isMoving))
         {
             if (currentAction.m_cost <= playerData.actionPoints)
             {
@@ -154,57 +152,52 @@ public class PlayerActionManager : MonoBehaviour
         {
             ResetFlags();
 
-            foreach (EnemyMovementShooter enemy in FindObjectsByType<EnemyMovementShooter>(FindObjectsSortMode.None))
-            {
-                enemy.ResetTurnAction();
-                enemy.DecideAction();
-            }
         }
     }
 
-    private void UpdateLineRendererr()
-    {
-        lineRenderer.enabled = true;
-        lineRenderer.positionCount = curvePoints.Count;
-        lineRenderer.SetPositions(curvePoints.ToArray());
+    //private void UpdateLineRendererr()
+    //{
+    //    lineRenderer.enabled = true;
+    //    lineRenderer.positionCount = curvePoints.Count;
+    //    lineRenderer.SetPositions(curvePoints.ToArray());
         
-    }
+    //}
 
    
 
-    private IEnumerator MoveCoroutine(Vector3 newPos)
-    {
-        activeActions[PlayerBase.ActionEnum.MOVE].Execute(player, newPos);
-        if (actualWalkSoundDelay < 0)
-        {
-            //SoundEffectsManager.instance.PlaySoundFXClip(walkingClips, transform, 1f);
-            actualWalkSoundDelay = walkSoundDelay;
-        }
-        else
-        {
-            actualWalkSoundDelay -= Time.deltaTime;
-        }
-        if (!actionPointReduced)
-        {
-            actionPointReduced = true;
-            player.actionPoints++;
-            player.actionPoints = MathF.Min(player.actionPoints, player.maxActionPoints);
-            playerData.actionPoints++;
-            playerData.actionPoints = Mathf.Min(playerData.actionPoints, playerData.maxActionPoints);
-        }
+    //private IEnumerator MoveCoroutine(Vector3 newPos)
+    //{
+    //    activeActions[PlayerBase.ActionEnum.MOVE].Execute(player, newPos);
+    //    if (actualWalkSoundDelay < 0)
+    //    {
+    //        //SoundEffectsManager.instance.PlaySoundFXClip(walkingClips, transform, 1f);
+    //        actualWalkSoundDelay = walkSoundDelay;
+    //    }
+    //    else
+    //    {
+    //        actualWalkSoundDelay -= Time.deltaTime;
+    //    }
+    //    if (!actionPointReduced)
+    //    {
+    //        actionPointReduced = true;
+    //        player.actionPoints++;
+    //        player.actionPoints = MathF.Min(player.actionPoints, player.maxActionPoints);
+    //        playerData.actionPoints++;
+    //        playerData.actionPoints = Mathf.Min(playerData.actionPoints, playerData.maxActionPoints);
+    //    }
 
-        if (!hasMoved)
-        {
-            hasMoved = true;
-            yield return new WaitForSeconds(1.5f); // Adjust the delay as needed
+    //    if (!hasMoved)
+    //    {
+    //        hasMoved = true;
+    //        yield return new WaitForSeconds(1.5f); // Adjust the delay as needed
            
-        }
-    }
+    //    }
+    //}
     
     public IEnumerator AttackCoroutine(PlayerBase.ActionEnum action, Vector3 newPos, BulletStyle style)
     {
         shootLineRenderer.enabled = false;
-        this.GetComponent<Animator>().SetTrigger("attack");
+        animationToExecute.SetTrigger("attack");
         fx.SetTrigger("playFX");
 
         yield return new WaitForSeconds(0.4f);
