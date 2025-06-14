@@ -6,7 +6,7 @@ public class UIBarManager : MonoBehaviour
 {
     [SerializeField] private GameObject healthBarPrefab;
     private List<GameObject> healthBarSegments = new List<GameObject>();
-    private PlayerData player;
+    [SerializeField] private PlayerData player;
 
     public Vector3 startPos;
     public Vector3 scale;
@@ -14,7 +14,7 @@ public class UIBarManager : MonoBehaviour
 
     void Start()
     {
-        player = FindAnyObjectByType<PlayerBase>().playerData;
+       
 
         InitializeHealthbar();
         UpdateHealthbar();

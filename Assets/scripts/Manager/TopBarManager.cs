@@ -4,16 +4,28 @@ using TMPro;
 using System.Collections.Generic;
 using System.Collections;
 
+//el animator falta consultarlo
+
+[System.Serializable]
+public class ImageGroup
+{
+    public Image image;
+    public Image key;
+    public Image border;
+}
 
 public class TopBarManager : MonoBehaviour
 {
+    [SerializeField] private PlayerBase playerBase;
+    [SerializeField] private ControlLiniarRender controlLiniarRender;
+
     public GridLayoutGroup topPanel;
-    public List<GameObject> actions;
+    public List<ImageGroup> actions;
     public GameObject costIndicatorPrefab;
     public GameObject topActionPrefab;
     public GameObject bottomActionPrefab;
-    private PlayerBase playerData;
-    private List<GameObject> actionSlots = new List<GameObject>();
+
+    [SerializeField] private List<Animator> actionSlotsAnimator = new List<Animator>();
     private List<PlayerBase.Action> actionsDisplayed = new List<PlayerBase.Action>();
 
     public Sprite runImage;
@@ -25,9 +37,9 @@ public class TopBarManager : MonoBehaviour
 
     void Start()
     {
-        playerData = FindAnyObjectByType<PlayerBase>();
+       
 
-        if (playerData == null)
+        if (playerBase == null)
         {
             Debug.LogError("Player is null in HotbarManager.");
             return;
@@ -49,17 +61,17 @@ public class TopBarManager : MonoBehaviour
             UpdateBottomHotbar();
         }
 
-        // Check for key presses to trigger animations
+        
         CheckForActionKeyPress();
     }
 
     private void CheckForActionKeyPress()
     {
     
-        for (int i = 0; i < actionSlots.Count; i++)
+        for (int i = 0; i < actionSlotsAnimator.Count; i++)
         {
            
-            // Convert the index to the corresponding key (1-9)
+           
             KeyCode key = KeyCode.Alpha1 + i;
 
             if (Input.GetKeyDown(key))
@@ -72,15 +84,15 @@ public class TopBarManager : MonoBehaviour
     private void TriggerActionAnimation(int index)
     {
        
-        if (index >= 0 && index < actionSlots.Count)
+        if (index >= 0 && index < actionSlotsAnimator.Count)
         {
-            Animator animator = actionSlots[index].GetComponent<Animator>();
+            Animator animator = actionSlotsAnimator[index];
            
             if (animator != null)
             {
                 animator.SetBool("Upgrade", true);
               
-                // Optionally reset the animation after a short delay
+               
                 StartCoroutine(ResetUpgradeAnimation());
             }
         }
@@ -91,13 +103,13 @@ public class TopBarManager : MonoBehaviour
     public void AddAction(PlayerBase.ActionEnum action)
     {
         GameObject newAction = Instantiate(topActionPrefab, topPanel.transform);
-        newAction.GetComponent<Image>().overrideSprite = GetActionImage(playerData.activeAction);
+        newAction.GetComponent<Image>().overrideSprite = GetActionImage(playerBase.activeAction);
     }
 
 
     public void UpdateBottomHotbar()
     {
-        if (playerData == null)
+        if (playerBase == null)
         {
             Debug.LogError("Player is null in HotbarManager.");
             return;
@@ -105,38 +117,40 @@ public class TopBarManager : MonoBehaviour
 
         foreach (var action in actions)
         {
-            action.transform.Find("Image").gameObject.SetActive(false);
-            action.transform.Find("Key").gameObject.SetActive(false);
-            action.transform.Find("Border").GetComponent<Image>().color = Color.white;
+            action.image.gameObject.SetActive(false);
+            action.key.gameObject.SetActive(false);
+            action.border.color = Color.white;
 
-            // Limpiar indicadores de coste (por si quedaron residuos)
-            Transform costContainer = action.transform.Find("CostContainer");
-            if (costContainer != null)
-            {
-                foreach (Transform child in costContainer)
-                {
-                    Destroy(child.gameObject);
-                }
-            }
+            
+            //Transform costContainer = action.transform.Find("CostContainer");
+            //if (costContainer != null)
+            //{
+            //    foreach (Transform child in costContainer)
+            //    {
+            //        Destroy(child.gameObject);
+            //    }
+            //}
         }
 
-        var availableActions = playerData.availableActions;
+        var availableActions = playerBase.availableActions;
         int actionCount = availableActions.Count;
 
         for (int i = 0; i < actionCount; i++)
         {
-            actions[i].transform.Find("Image").gameObject.SetActive(true);
-            actions[i].transform.Find("Key").gameObject.SetActive(true);
 
-            Image actionImage = actions[i].transform.Find("Image").GetComponent<Image>();
-            Image actionBorder = actions[i].transform.Find("Border").GetComponent<Image>();
+            Image actionImage = actions[i].image;
+            Image actionKey = actions[i].image;
+            Image actionBorder = actions[i].border;
+
+            actionImage.gameObject.SetActive(true);
+            actionKey.gameObject.SetActive(true);
 
             var action = availableActions[i];
             PlayerBase player = FindAnyObjectByType<PlayerBase>();
 
             actionImage.overrideSprite = GetActionImage(action);
 
-            // Resaltar si es la acción seleccionada
+            
             if (action.m_action == player.GetAction().m_action)
             {
                 if (action.m_key == player.GetAction().m_key)
@@ -158,7 +172,7 @@ public class TopBarManager : MonoBehaviour
             actionImage.color = GetActionColor(action.m_action);
 
             
-            Transform costContainer = actions[i].transform.Find("Border");
+            Transform costContainer = actions[i].border.transform;
             
             if (costContainer != null && costIndicatorPrefab != null)
             {
@@ -203,16 +217,16 @@ public class TopBarManager : MonoBehaviour
 
     private bool HaveActionsChanged()
     {
-        if (playerData == null || playerData.playerData == null)
+        if (playerBase == null || playerBase.playerData == null)
             return false;
 
-        var availableActions = playerData.playerData.availableActions;
+        var availableActions = playerBase.playerData.availableActions;
 
-        // Check if count has changed
+       
         if (availableActions.Count != actionsDisplayed.Count)
             return true;
 
-        // Check if any action has changed
+       
         for (int i = 0; i < availableActions.Count; i++)
         {
             if (i >= actionsDisplayed.Count) return true;
@@ -229,11 +243,11 @@ public class TopBarManager : MonoBehaviour
             }
         }
 
-        // Check if selected action has changed
-        PlayerBase player = FindAnyObjectByType<PlayerBase>();
-        if (player != null)
+       
+       
+        if (playerBase != null)
         {
-            foreach (var slot in actionSlots)
+            foreach (var slot in actionSlotsAnimator)
             {
                 if (slot == null) continue;
 
@@ -242,10 +256,10 @@ public class TopBarManager : MonoBehaviour
 
                 for (int i = 0; i < availableActions.Count; i++)
                 {
-                    if (availableActions[i].action == player.GetAction().m_action &&
-                        BulletCollection.CompareBullets(availableActions[i].style, player.GetAction().m_style))
+                    if (availableActions[i].action == playerBase.GetAction().m_action &&
+                        BulletCollection.CompareBullets(availableActions[i].style, playerBase.GetAction().m_style))
                     {
-                        shouldBeHighlighted = (i == actionSlots.IndexOf(slot));
+                        shouldBeHighlighted = (i == actionSlotsAnimator.IndexOf(slot));
                         break;
                     }
                 }
@@ -294,9 +308,9 @@ public class TopBarManager : MonoBehaviour
 
     private Color GetActionColor(PlayerBase.ActionEnum action)
     {
-        ControlLiniarRender clr = FindAnyObjectByType<ControlLiniarRender>();
+        
 
-        foreach(var lineColor in clr.lineColors)
+        foreach(var lineColor in controlLiniarRender.lineColors)
         {
             if (lineColor.m_action == action)
             {
@@ -311,9 +325,9 @@ public class TopBarManager : MonoBehaviour
     {
         yield return new WaitForSeconds(.2f);
 
-        for (int i = 0; i < actionSlots.Count; i++)
+        for (int i = 0; i < actionSlotsAnimator.Count; i++)
         {
-            Animator animator = actionSlots[i].GetComponent<Animator>();
+            Animator animator = actionSlotsAnimator[i];
             if (animator != null)
             {
                 animator.SetBool("Upgrade", false);
