@@ -29,8 +29,8 @@ public class shootPlayer : MonoBehaviour
             if (Input.GetMouseButtonUp(0) && oneTime == true)
             {
 
-                controlListMovment.AddMovement(controlLiniarRender, GetComponent<PlayerBase>().GetAction().m_cost, 1.0f, PlayerBase.ActionEnum.ESPECIALSHOOT);
-                bulletPrefab.Add(GetComponent<PlayerBase>().GetAction().m_style.prefab);
+                controlListMovment.AddMovement(controlLiniarRender, GetComponent<PlayerBase>().GetAction()._cost, 1.0f, PlayerBase.ActionEnum.ONESHOT);
+                bulletPrefab.Add(GetComponent<PlayerBase>().GetAction()._style.prefab);
                 oneTime = false;
 
 
@@ -58,8 +58,8 @@ public class shootPlayer : MonoBehaviour
             if (Input.GetMouseButtonUp(0))
             {
 
-                controlListMovment.AddMovement(controlLiniarRender,1.0f, GetComponent<PlayerBase>().GetAction().m_cost, PlayerBase.ActionEnum.SHOOT);
-                bulletPrefab.Add(GetComponent<PlayerBase>().GetAction().m_style.prefab);
+                controlListMovment.AddMovement(controlLiniarRender,1.0f, GetComponent<PlayerBase>().GetAction()._cost, PlayerBase.ActionEnum.SHOOT);
+                bulletPrefab.Add(GetComponent<PlayerBase>().GetAction()._style.prefab);
 
             }
         }

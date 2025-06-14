@@ -9,8 +9,11 @@ using UnityEngine.Rendering;
 
 public class ExplosionHazard : MonoBehaviour
 {
+    [Header("Explosion Stats")]
     [SerializeField] private int explosionDamage;
     [SerializeField] public float explosionRadius;
+
+    [Header("Explosion Feedback")]
     [SerializeField] private ParticleSystem explosionEffects;
     [SerializeField] protected float explosionSpreadDelay;
     [SerializeField] private cameraManager cameraShake;
@@ -19,7 +22,7 @@ public class ExplosionHazard : MonoBehaviour
 
     private void Start()
     {
-        cameraShake = FindAnyObjectByType<cameraManager>();
+        
         explosionEffects.Stop();
         explosionSprite.SetActive(false);
 

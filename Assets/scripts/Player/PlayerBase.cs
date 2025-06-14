@@ -9,7 +9,7 @@ public class PlayerBase : MonoBehaviour
 {
     public PlayerData playerData; // Reference to the ScriptableObject containing player data
 
-    public enum ActionEnum { MOVE, SHOOT,ESPECIALSHOOT, HEAL, MELEE, RECOVERY, SPEED_UP, MAX_HP_INCREASE, NOTHING };
+    public enum ActionEnum { MOVE, SHOOT,ONESHOT, HEAL, MELEE, RECOVERY, SPEED_UP, MAX_HP_INCREASE, NOTHING };
     public enum ActionType { ACTIVE, PASSIVE, SINGLE_USE };
 
     [System.Serializable]
@@ -17,64 +17,74 @@ public class PlayerBase : MonoBehaviour
     {
         public Action(ActionType type, ActionEnum action, KeyCode key, int cost, BulletStyle style = null)
         {
-            m_action = action;
-            m_key = key;
-            m_style = style;
-            m_cost = cost;
+            _action = action;
+            _key = key;
+            _style = style;
+            _cost = cost;
         }
 
         public static Action nothing { get { return new Action(ActionType.ACTIVE, ActionEnum.NOTHING, KeyCode.None, 0); } }
 
-        public ActionEnum m_action { get; private set; }
-        public KeyCode m_key { get; private set; }
-        public BulletStyle m_style { get; private set; }
+        public ActionEnum _action { get; private set; }
+        public KeyCode _key { get; private set; }
+        public BulletStyle _style { get; private set; }
 
-        public int m_cost { get; private set; }
+        public int _cost { get; private set; }
 
-        public void ChangeKey(KeyCode newKey) { m_key = newKey; }
+        public void SetInputKey(KeyCode newKey) { _key = newKey; }
     }
 
     #region VARIABLES
-
+    [Header("Camera")]
     [SerializeField] private cameraManager _camera;
     private float cameraPostProcesLength = 0.5f;
     private float cameraPostProcesIntensity = 0.3f;
+
+    [Header("Action Style")]
     public BulletStyle activeStyle { get; private set; }
 
+    [Header("Stats")]
     public float health = 5;
     public float maxHealth;
     public float actionPoints;
     public float maxActionPoints;
     public float range;
     public float exp = 0;
+    [SerializeField] private UIBarManager healthManager;
 
+    [Header("GodMode")]
     public bool godMode = false;
+    [SerializeField] GameObject aro;
     
-    public PlayerActionManager turnsDone;
 
+    [Header("Current Actions Info")]
     public Action activeAction { get; private set; }
     public List<Action> availableActions = new List<Action>();
 
-    private float hitFeedBackTime = 0.3f;
+    [Header("Action Sequences Info")]
+    public PlayerActionManager turnsDone;
     [SerializeField] TimeSecuence isExecuting;
-    private bool isInAction;
+    private bool inAction;
     private bool isAlive;
     public bool victory;
     public bool defeat;
+
+    [Header("Feedback Info")]
+    private float hitDelay = 0.3f;
     [SerializeField] AudioClip[] damageClips;
     [SerializeField] GameObject bloodSplash;
-    [SerializeField] GameObject aro;
-    [SerializeField] private UIBarManager healthManager;
+    
+    
 
     #endregion
 
     private void Awake()
     {
-        // Load saved data before Start() is called
+        
         PlayerData loadedData = PlayerData.LoadFromDisk();
         if (loadedData != null)
         {
-            // Copy the loaded data to our scriptable object
+            
             playerData.health = loadedData.health;
             playerData.maxHealth = loadedData.maxHealth;
             playerData.actionPoints = loadedData.actionPoints;
@@ -90,7 +100,7 @@ public class PlayerBase : MonoBehaviour
             playerData.victory = loadedData.victory;
             playerData.healAmount = loadedData.healAmount;
 
-            // Clear and copy actions
+            
             playerData.availableActions.Clear();
             foreach (var action in loadedData.availableActions)
             {
@@ -99,7 +109,6 @@ public class PlayerBase : MonoBehaviour
         }
         else
         {
-            // If no saved data exists, this might be the first time playing
             playerData.SaveOriginalPlayerIfNotExists();
         }
     }
@@ -117,7 +126,7 @@ public class PlayerBase : MonoBehaviour
             activeAction = availableActions[0];
         }
 
-        isInAction = false;
+        inAction = false;
         turnsDone = GetComponent<PlayerActionManager>();
         
         
@@ -137,7 +146,7 @@ public class PlayerBase : MonoBehaviour
 
     private void LoadPlayerData()
     {
-        // Load health, range, and other properties from the ScriptableObject
+        
         maxHealth = playerData.maxHealth;
         health = playerData.health;
         actionPoints = playerData.actionPoints;
@@ -146,15 +155,15 @@ public class PlayerBase : MonoBehaviour
         isAlive = playerData.isAlive;
         victory = playerData.victory;
 
-        // Clear existing actions before loading
+        
         availableActions.Clear();
 
-        // Load available actions from playerData and populate availableActions list
+       
         foreach (var actionData in playerData.availableActions)
         {
             if (actionData.action == ActionEnum.SHOOT)
             {
-                // Only get the bullet style if it hasn't been set yet
+                
                 if (actionData.style == null)
                 {
                     actionData.style = FindAnyObjectByType<BulletCollection>().GetBullet(actionData.bulletType);
@@ -196,30 +205,30 @@ public class PlayerBase : MonoBehaviour
             {
                 foreach (Action action in availableActions)
                 {
-                    if (Input.GetKeyDown(action.m_key))
+                    if (Input.GetKeyDown(action._key))
                     {
                         activeAction = action;
 
-                        if (action.m_style != null)
-                            activeStyle = action.m_style;
+                        if (action._style != null)
+                            activeStyle = action._style;
                     }
                 }
             }
 
-            range = activeAction.m_style != null ? activeAction.m_style.range : playerData.moveRange;
+            range = activeAction._style != null ? activeAction._style.range : playerData.moveRange;
 
-            if (activeAction.m_action == ActionEnum.HEAL)
+            if (activeAction._action == ActionEnum.HEAL)
             {
-                Heal(playerData.healAmount); // Use healAmount from playerData
+                Heal(playerData.healAmount); 
             }
         }
         else
         {
             activeAction = Action.nothing;
-            //Debug.Log("Doing nothing");
+            
         }
 
-        // Check for death condition
+        
         if (health <= 0 || playerData.health <= 0)
         {
             if (isAlive)
@@ -228,20 +237,7 @@ public class PlayerBase : MonoBehaviour
                 StartCoroutine(DeathCoroutine());
             }
         }
-        //Debug.LogWarning((float)_camera.colorPostProces.intensity);
-
-        //if (health <= 2 && (float)_camera.colorPostProces.intensity < cameraPostProcesIntensity / 2)
-        //{
-        //    Debug.LogWarning("FadeIN");
-        //    StartCoroutine(_camera.FadeInVignette(cameraPostProcesIntensity, cameraPostProcesLength, Color.red));
-        //}
-
-        
-        //if (health > 2 && (float)_camera.colorPostProces.intensity > cameraPostProcesIntensity / 2)
-        //{
-        //    Debug.LogWarning("FadeOUT");
-        //    StartCoroutine(_camera.Flash(cameraPostProcesIntensity, cameraPostProcesLength, Color.red));
-        //}
+       
     }
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -276,7 +272,7 @@ public class PlayerBase : MonoBehaviour
     IEnumerator whitecolor()
     {
         float elapsed = 0;
-        while (elapsed < hitFeedBackTime)
+        while (elapsed < hitDelay)
         {
             yield return null;
             GetComponent<SpriteRenderer>().color = new Color(1, GetComponent<SpriteRenderer>().color.b + Time.deltaTime, GetComponent<SpriteRenderer>().color.b + Time.deltaTime);
@@ -334,7 +330,7 @@ public class PlayerBase : MonoBehaviour
     public float GetRange() { return range; }
     public bool GetIsAlive() { return isAlive; }
     public Action GetAction() { return activeAction; }
-    public bool GetInAction() { return isInAction; }
+    public bool GetInAction() { return inAction; }
 
     public List<Action> GetAvailableActions() { return availableActions; }
 
@@ -344,8 +340,8 @@ public class PlayerBase : MonoBehaviour
 
     public void Heal(int amount)
     {
-        actionPoints -= activeAction.m_cost;
-        playerData.actionPoints -= activeAction.m_cost;
+        actionPoints -= activeAction._cost;
+        playerData.actionPoints -= activeAction._cost;
         actionPoints = Mathf.Min(actionPoints, maxActionPoints);
         playerData.actionPoints = Mathf.Min(playerData.actionPoints, maxActionPoints);
         health += amount;
@@ -366,7 +362,7 @@ public class PlayerBase : MonoBehaviour
         playerData.actionPoints = Mathf.Min(playerData.actionPoints, maxActionPoints);
 
         activeAction = Action.nothing;
-        turnsDone.ResetFlags(); // End the turn after resting
+        turnsDone.ResetFlags();
 
         SaveCurrentState();
 
@@ -376,9 +372,7 @@ public class PlayerBase : MonoBehaviour
     {
         if (!godMode)
         {
-
-
-          
+         
             health -= val;
             playerData.health -= val;
 
@@ -390,7 +384,6 @@ public class PlayerBase : MonoBehaviour
             StartCoroutine(_camera.Shake(0.3f, 0.8f));
             Instantiate(bloodSplash, this.transform.position, hitObject.transform.rotation);
 
-            // Check for death condition immediately after taking damage
             if (health <= 0 || playerData.health <= 0)
             {
                 if (isAlive)
@@ -399,7 +392,7 @@ public class PlayerBase : MonoBehaviour
                     StartCoroutine(DeathCoroutine());
                 }
             }
-            if (health <= 2/* && (float)_camera.colorPostProces.intensity <= cameraPostProcesIntensity / 2*/)
+            if (health <= 2)
             {
 
                 StartCoroutine(_camera.FadeInVignette(cameraPostProcesIntensity, cameraPostProcesLength, Color.red));
@@ -438,7 +431,7 @@ public class PlayerBase : MonoBehaviour
 
     public void ResetActiveAction() { activeAction = availableActions[0]; }
     public void SetRange(float newRange) { range = newRange; }
-    public void SetInAction(bool newVal) { isInAction = newVal; }
+    public void SetInAction(bool newVal) { inAction = newVal; }
     public void AddNewAction(Action action) { availableActions.Add(action); playerData.Save(); }
     public void DeleteAction(int index) { availableActions.RemoveAt(index); playerData.Save(); }
 

@@ -7,14 +7,17 @@ using UnityEngine.UI;
 
 public class TitleScreenManager : MonoBehaviour
 {
+    [Header("Canvas Settings")]
     [SerializeField] private Canvas settings;
-    [SerializeField] private Canvas lenguage;
+    [SerializeField] private Canvas language;
     [SerializeField] private Canvas titleScreen;
     [SerializeField] private Canvas creditsScreen;
 
+    [Header("Button Settings")]
     [SerializeField] private Button continueButton;
     [SerializeField] private PlayerData playerData;
 
+    [Header("AudioSource Settings")]
     [SerializeField] private AudioSource enterSfxSource;
     [SerializeField] private AudioSource exitSfxSource;
 
@@ -39,7 +42,7 @@ public class TitleScreenManager : MonoBehaviour
         settings.enabled = true;
        
         titleScreen.enabled = false;
-        lenguage.enabled = false;
+        language.enabled = false;
     }
     public void BootCredits()
     {
@@ -47,13 +50,13 @@ public class TitleScreenManager : MonoBehaviour
         creditsScreen.enabled = true;
         settings.enabled = false;
         titleScreen.enabled = false;
-        lenguage.enabled = false;
+        language.enabled = false;
     }
-    public void BootLenguage()
+    public void BootLanguage()
     {
         enterSfxSource.Play();
         creditsScreen.enabled = false;
-        lenguage.enabled = true;
+        language.enabled = true;
         settings.enabled = false;
         titleScreen.enabled = false;
     }
@@ -65,7 +68,7 @@ public class TitleScreenManager : MonoBehaviour
             exitSfxSource.Play();
             settings.enabled = false;
             creditsScreen.enabled = false;
-            lenguage.enabled = false;
+            language.enabled = false;
             titleScreen.enabled = true;
         }
     } 
@@ -76,18 +79,18 @@ public class TitleScreenManager : MonoBehaviour
             exitSfxSource.Play();
             settings.enabled = false;
             creditsScreen.enabled = false;
-            lenguage.enabled = false;
+            language.enabled = false;
             titleScreen.enabled = true;
         }
     }
-    public void ExitLenguage()
+    public void ExitLanguage()
     {
-        if (lenguage.enabled)
+        if (language.enabled)
         {
             exitSfxSource.Play();
             settings.enabled = false;
             creditsScreen.enabled = false;
-            lenguage.enabled = false;
+            language.enabled = false;
             titleScreen.enabled = true;
         }
     }

@@ -8,12 +8,14 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "PlayerData", menuName = "ScriptableObjects/PlayerData")]
 public class PlayerData : ScriptableObject
 {
+    [Header("PlayerData to Copy")]
     [SerializeField] public PlayerData originalPlayer;
     [SerializeField] private PlayerData playerAtStartOfLevel;
 
     private const string ORIGINAL_PLAYER_PATH = "/OriginalPlayerData.json";
     private const string LEVEL_START_PATH = "/PlayerDataLevelStart.json";
 
+    [Header("Stats")]
     public float health;
     public float maxHealth;
     public float actionPoints;
@@ -28,9 +30,9 @@ public class PlayerData : ScriptableObject
     public int exp;
     public bool isAlive;
     public bool victory;
-
     public int healAmount = 10;
 
+    [Header("Actions & Bullets")]
     public List<SerializableBulletLevel> bulletLevels = new List<SerializableBulletLevel>();
     public List<ActionData> availableActions = new List<ActionData>();
 

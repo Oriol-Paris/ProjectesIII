@@ -9,13 +9,11 @@ using UnityEngine.Localization.Settings;
 
 public class ShopManager : MonoBehaviour
 {
-    [SerializeField] private GameObject buttonPrefab; // Reference to the button prefab
-    public Transform buttonContainer; // Reference to the container where buttons will be instantiated
-    [SerializeField] public PlayerBase player;
-    [SerializeField] public TextMeshProUGUI boughtItem;
-    [SerializeField] public TextMeshProUGUI currentXP;
+    [Header("Shop Button Prefab")]
+    [SerializeField] private GameObject buttonPrefab; 
+    public Transform buttonContainer;  
 
-
+    [Header("Localization Lines")]
     public LocalizedString locBoughtDamage;
     public LocalizedString locBoughtHeal;
     public LocalizedString locBoughtMove;
@@ -43,7 +41,7 @@ public class ShopManager : MonoBehaviour
     [SerializeField] private LocalizedString speedUpUpgradeLoc;
     [SerializeField] private LocalizedString maxHpUpUpgradeLoc;
 
-
+    [Header("Shop Canvas")]
     public Sprite moveImage;
     public Sprite gunImage;
     public Sprite shotgunImage;
@@ -53,18 +51,21 @@ public class ShopManager : MonoBehaviour
     public Sprite restImage;
     public Sprite maxHPImage;
     public Sprite laserImage;
+    [SerializeField] public TextMeshProUGUI boughtItem;
+    [SerializeField] public TextMeshProUGUI currentXP;
     [SerializeField] private HotbarManager hotbarManager;
     [SerializeField] private AudioSource buyItemSfx;
 
-
+    [Header("Shop Data Elements")]
+    [SerializeField] public PlayerBase player;
     private List<PlayerData.ActionData> actionPool;
     private List<PlayerData.ActionData> activeActions;
     private List<int> pricePool;
     private List<GameObject> buttons;
-
-
-    
     private Dictionary<PlayerData.ActionData, int> statIncreaseCount;
+
+
+
 
     public void Start()
     {
@@ -132,7 +133,7 @@ public class ShopManager : MonoBehaviour
                         boughtItem.enabled = true;
                         IncreaseStat(player.playerData.availableActions[i]);
                         
-                        // Trigger animation for the upgraded action slot
+                        
                         hotbarManager.TriggerUpgradeAnimation(repeatAction);
 
                         UpdatePrices();
@@ -156,13 +157,13 @@ public class ShopManager : MonoBehaviour
                 //boughtItem.text = "Just bought: " + itemName;
                 SetLocalizedText(locJustBought, boughtItem, "item", itemName);
 
-                // Trigger animation for the new action slot
+                
                 hotbarManager.TriggerUpgradeAnimation(actionData);
             }
 
             player.SaveCurrentState();
 
-            // Update prices after the item has been bought
+            
             UpdatePrices();
         }
         else if (player.exp < pricePool[index])
@@ -176,7 +177,7 @@ public class ShopManager : MonoBehaviour
         {
             actionData.key = (KeyCode)System.Enum.Parse(typeof(KeyCode), "Alpha" + (player.playerData.availableActions.Count + 1));
             player.playerData.availableActions.Add(actionData);
-            statIncreaseCount[actionData] = 0;  // Initialize the stat increase count
+            statIncreaseCount[actionData] = 0;  
             Debug.Log("Item equipped");
         }
     }

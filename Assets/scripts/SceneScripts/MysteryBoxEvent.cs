@@ -6,13 +6,15 @@ using UnityEngine.Localization.Settings;
 
 public class MysteryBoxEvent : MonoBehaviour
 {
+    [Header("Event's Canvas Components")]
     [SerializeField] private Dialogue eventText;
     [SerializeField] private GameObject buttonCanvas;
     [SerializeField] private Canvas exitCanvas;
-    [SerializeField] private PlayerData playerData;
     [SerializeField] private AudioSource audioSource;
 
-    public enum eventState { INTRODUCTION, DECISION, OUTCOME }
+    [Header("Event's Logic Components")]
+    [SerializeField] private PlayerData playerData;
+    [SerializeField]public enum eventState { INTRODUCTION, DECISION, OUTCOME }
     private eventState currentState;
 
     private string localizedOutcome = "";

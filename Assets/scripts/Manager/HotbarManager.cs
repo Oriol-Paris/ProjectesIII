@@ -120,13 +120,13 @@ public class HotbarManager : MonoBehaviour
             {
                 PlayerBase player = FindAnyObjectByType<PlayerBase>();
 
-                if (action.action == player.GetAction().m_action)
+                if (action.action == player.GetAction()._action)
                 {
                     if (action.style.bulletType != BulletType.GUN && action.style.bulletType != BulletType.SHOTGUN)
                     {
                         slot.GetComponent<Image>().color = Color.yellow;
                     }
-                    else if (BulletCollection.CompareBullets(action.style, player.GetAction().m_style))
+                    else if (BulletCollection.CompareBullets(action.style, player.GetAction()._style))
                     {
                         slot.GetComponent<Image>().color = Color.yellow;
                     }

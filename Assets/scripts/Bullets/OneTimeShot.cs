@@ -9,23 +9,23 @@ public class OneTimeShot : MonoBehaviour
         if (bulletPool != null)
         {
             BulletCollection collection = bulletPool.GetComponent<BulletCollection>();
-            ControlWapons controlWapons = player.GetComponent<ControlWapons>();
+            ControlWeapons controlWapons = player.GetComponent<ControlWeapons>();
             PlayerBase playerBase = player.GetComponent<PlayerBase>();
 
             if (collection != null && collection.prefabs.Count > 0)
             {
                
                 collection.prefabs.RemoveAt(collection.prefabs.Count - 1);
-                controlWapons.objetoObtenido = null;
-                controlWapons.hasSniper = false;
+                controlWapons.pickedWeapon = null;
+                controlWapons.hasWeapon = false;
 
                 playerBase.availableActions.RemoveAll(action =>
-                   action.m_style != null &&
-                   action.m_style.bulletType == BulletType.SNIPER
+                   action._style != null &&
+                   action._style.bulletType == BulletType.SNIPER
                );
                 
                 
-                KeyCode key = playerBase.activeAction.m_key;
+                KeyCode key = playerBase.activeAction._key;
 
                 if (key >= KeyCode.Alpha1 && key <= KeyCode.Alpha9)
                 {

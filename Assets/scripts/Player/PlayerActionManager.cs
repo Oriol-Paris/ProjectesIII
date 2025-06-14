@@ -108,13 +108,13 @@ public class PlayerActionManager : MonoBehaviour
 
         var currentAction = player.GetAction();
 
-        if (currentAction.m_action == PlayerBase.ActionEnum.MOVE && (!player.GetComponent<TimeSecuence>().isExecuting || isMoving))
+        if (currentAction._action == PlayerBase.ActionEnum.MOVE && (!player.GetComponent<TimeSecuence>().isExecuting || isMoving))
         {
             isMoving = true;
             movePlayer.PreStartMov();
         }
 
-        if (currentAction.m_action == PlayerBase.ActionEnum.SHOOT && (!player.GetComponent<TimeSecuence>().isExecuting || isShooting))
+        if (currentAction._action == PlayerBase.ActionEnum.SHOOT && (!player.GetComponent<TimeSecuence>().isExecuting || isShooting))
         {
    
             isShooting = true;
@@ -123,7 +123,7 @@ public class PlayerActionManager : MonoBehaviour
             shootP.preShoot();
 
         }
-        if (currentAction.m_action == PlayerBase.ActionEnum.ESPECIALSHOOT )
+        if (currentAction._action == PlayerBase.ActionEnum.ONESHOT )
         {
 
             isShooting = true;
@@ -135,16 +135,16 @@ public class PlayerActionManager : MonoBehaviour
 
         }
 
-        if (currentAction.m_action == PlayerBase.ActionEnum.MELEE && (!player.GetComponent<TimeSecuence>().isExecuting || isMoving))
+        if (currentAction._action == PlayerBase.ActionEnum.MELEE && (!player.GetComponent<TimeSecuence>().isExecuting || isMoving))
         {
-            if (currentAction.m_cost <= playerData.actionPoints)
+            if (currentAction._cost <= playerData.actionPoints)
             {
                 isMoving = false;
                 StartCoroutine(AttackCoroutine(PlayerBase.ActionEnum.MELEE, newPos, null));
             }
         }
 
-        if (currentAction.m_action == PlayerBase.ActionEnum.HEAL && isHealing)
+        if (currentAction._action == PlayerBase.ActionEnum.HEAL && isHealing)
         {
             isMoving = false;
             StartCoroutine(HealCoroutine(newPos));
@@ -227,8 +227,8 @@ public class PlayerActionManager : MonoBehaviour
         if (!actionPointReduced)
         {
             actionPointReduced = true;
-            player.actionPoints -= player.GetAction().m_cost;
-            playerData.actionPoints -= player.GetAction().m_cost;
+            player.actionPoints -= player.GetAction()._cost;
+            playerData.actionPoints -= player.GetAction()._cost;
         }
 
 
@@ -247,8 +247,8 @@ public class PlayerActionManager : MonoBehaviour
         if (!actionPointReduced && player.health < player.maxHealth)
         {
             actionPointReduced = true;
-            player.actionPoints -= player.GetAction().m_cost;
-            playerData.actionPoints -= player.GetAction().m_cost;
+            player.actionPoints -= player.GetAction()._cost;
+            playerData.actionPoints -= player.GetAction()._cost;
             
         }
         yield return new WaitForSeconds(1f); // Adjust the delay as needed

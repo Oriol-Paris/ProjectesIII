@@ -337,7 +337,7 @@ public class ControlLiniarRender : MonoBehaviour
     {
         foreach (var color in lineColors)
         {
-            if (color.m_action == action.m_action)
+            if (color.m_action == action._action)
             {
                 lineRenderer.material.SetColor("_Color", color.m_color);
                 break;

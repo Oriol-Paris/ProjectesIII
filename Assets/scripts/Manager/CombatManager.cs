@@ -5,15 +5,19 @@ using UnityEngine.SceneManagement;
 
 public class CombatManager : MonoBehaviour
 {
-    public List<PlayerBase> playerParty = new List<PlayerBase>();  // Lista para jugadores
-    public EnemyBase[] enemyParty;  // Array para enemigos
+    [Header("Entities List")]
+    public List<PlayerBase> playerParty = new List<PlayerBase>();  
+    public EnemyBase[] enemyParty;
+
+    [Header("Victory/Defeat Condition")]
     public bool allEnemiesDead;
     public bool allPlayersDead;
-    [SerializeField] public float enemyStatMultiplier = 1;
-    [SerializeField] private int numberOfTurns;
     [SerializeField] Canvas winCondition;
 
-    private bool hasCalculatedExp = false;  // Bandera para controlar que la suma de experiencia solo se haga una vez
+    [Header("Combat Stats")]
+    [SerializeField] public float enemyStatMultiplier = 1;
+    [SerializeField] private int numberOfTurns;
+    private bool hasCalculatedExp = false; 
 
     void Start()
     {

@@ -121,7 +121,7 @@ public class TutorialManager1 : MonoBehaviour
                     var requiredAction = requiredActions[popUpIndex].action;
                     var requiredCount = requiredActions[popUpIndex].count;
 
-                    if (playerBase.GetAction().m_action == requiredAction && (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)))
+                    if (playerBase.GetAction()._action == requiredAction && (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)))
                     {
                         actionCounts[popUpIndex]++;
                         Debug.Log($"{requiredAction} performed {actionCounts[popUpIndex]} times");
@@ -142,7 +142,7 @@ public class TutorialManager1 : MonoBehaviour
                     var requiredAction = requiredActions[popUpIndex].action;
                     var requiredCount = requiredActions[popUpIndex].count;
 
-                    if (playerBase.GetAction().m_action == requiredAction && (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)))
+                    if (playerBase.GetAction()._action == requiredAction && (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)))
                     {
                         actionCounts[popUpIndex]++;
                         Debug.Log($"{requiredAction} performed {actionCounts[popUpIndex]} times");
@@ -181,7 +181,7 @@ public class TutorialManager1 : MonoBehaviour
                     var requiredAction = requiredActions[popUpIndex].action;
                     var requiredCount = requiredActions[popUpIndex].count;
 
-                    if (playerBase.GetAction().m_action == requiredAction && (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)))
+                    if (playerBase.GetAction()._action == requiredAction && (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl)))
                     {
                         actionCounts[popUpIndex]++;
                         Debug.Log($"{requiredAction} performed {actionCounts[popUpIndex]} times");

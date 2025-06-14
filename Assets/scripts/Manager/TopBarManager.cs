@@ -137,9 +137,9 @@ public class TopBarManager : MonoBehaviour
             actionImage.overrideSprite = GetActionImage(action);
 
             // Resaltar si es la acción seleccionada
-            if (action.m_action == player.GetAction().m_action)
+            if (action._action == player.GetAction()._action)
             {
-                if (action.m_key == player.GetAction().m_key)
+                if (action._key == player.GetAction()._key)
                 {
                     actionBorder.color = Color.yellow;
                 }
@@ -155,7 +155,7 @@ public class TopBarManager : MonoBehaviour
 
             
             actionImage.overrideSprite = GetActionImage(action);
-            actionImage.color = GetActionColor(action.m_action);
+            actionImage.color = GetActionColor(action._action);
 
             
             Transform costContainer = actions[i].transform.Find("Border");
@@ -166,13 +166,13 @@ public class TopBarManager : MonoBehaviour
                     Destroy(child.gameObject);
 
                 float offset = 20f;
-                for (int c = 0; c < action.m_cost; c++)
+                for (int c = 0; c < action._cost; c++)
                 {
                     GameObject indicator = Instantiate(costIndicatorPrefab, costContainer);
                     RectTransform rt = indicator.GetComponent<RectTransform>();
 
                    
-                    float x = -(action.m_cost - 1.5f - c) * offset;
+                    float x = -(action._cost - 1.5f - c) * offset;
                     rt.anchoredPosition = new Vector2(x, 40);
                 }
 
@@ -220,10 +220,10 @@ public class TopBarManager : MonoBehaviour
             var current = availableActions[i];
             var displayed = actionsDisplayed[i];
 
-            if (current.action != displayed.m_action ||
+            if (current.action != displayed._action ||
                 current.GetType() != displayed.GetType() ||
-                current.cost != displayed.m_cost ||
-                !BulletCollection.CompareBullets(current.style, displayed.m_style))
+                current.cost != displayed._cost ||
+                !BulletCollection.CompareBullets(current.style, displayed._style))
             {
                 return true;
             }
@@ -242,8 +242,8 @@ public class TopBarManager : MonoBehaviour
 
                 for (int i = 0; i < availableActions.Count; i++)
                 {
-                    if (availableActions[i].action == player.GetAction().m_action &&
-                        BulletCollection.CompareBullets(availableActions[i].style, player.GetAction().m_style))
+                    if (availableActions[i].action == player.GetAction()._action &&
+                        BulletCollection.CompareBullets(availableActions[i].style, player.GetAction()._style))
                     {
                         shouldBeHighlighted = (i == actionSlots.IndexOf(slot));
                         break;
@@ -260,30 +260,30 @@ public class TopBarManager : MonoBehaviour
 
     private Sprite GetActionImage(PlayerBase.Action action)
     {
-        if (action.m_action == PlayerBase.ActionEnum.SHOOT)
+        if (action._action == PlayerBase.ActionEnum.SHOOT)
         {
-            if(action.m_style.bulletType == BulletType.GUN)
+            if(action._style.bulletType == BulletType.GUN)
             {
                 return gunImage;
             }
-            else if (action.m_style.bulletType == BulletType.SHOTGUN)
+            else if (action._style.bulletType == BulletType.SHOTGUN)
             {
                 return shotgunImage;
             }
-            else if (action.m_style.bulletType == BulletType.LASER)
+            else if (action._style.bulletType == BulletType.LASER)
             {
                 return laserImage;
             }
         }
-        else if (action.m_action == PlayerBase.ActionEnum.HEAL)
+        else if (action._action == PlayerBase.ActionEnum.HEAL)
         {
             return healImage;
         }
-        else if (action.m_action == PlayerBase.ActionEnum.MOVE)
+        else if (action._action == PlayerBase.ActionEnum.MOVE)
         {
             return runImage;
         }
-        else if (action.m_action == PlayerBase.ActionEnum.ESPECIALSHOOT)
+        else if (action._action == PlayerBase.ActionEnum.ONESHOT)
         {
             return weaponPickupImage;
         }

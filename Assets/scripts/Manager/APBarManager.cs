@@ -57,7 +57,7 @@ public class APBarManager : MonoBehaviour
     public void PaintAPCost()
     {
         var action = player.GetAction();
-        int cost = action.m_cost;
+        int cost = action._cost;
         Sprite actionSprite = GetActionImage(action);
         Color actionColor = GetActionColor(action);
 
@@ -92,24 +92,24 @@ public class APBarManager : MonoBehaviour
 
     private Sprite GetActionImage(PlayerBase.Action action)
     {
-        if (action.m_action == PlayerBase.ActionEnum.SHOOT)
+        if (action._action == PlayerBase.ActionEnum.SHOOT)
         {
-            switch (action.m_style.bulletType)
+            switch (action._style.bulletType)
             {
                 case BulletType.GUN: return gunImage;
                 case BulletType.SHOTGUN: return shotgunImage;
                 case BulletType.LASER: return laserImage;
             }
         }
-        else if (action.m_action == PlayerBase.ActionEnum.HEAL)
+        else if (action._action == PlayerBase.ActionEnum.HEAL)
         {
             return healImage;
         }
-        else if (action.m_action == PlayerBase.ActionEnum.MOVE)
+        else if (action._action == PlayerBase.ActionEnum.MOVE)
         {
             return runImage;
         }
-        else if (action.m_action == PlayerBase.ActionEnum.ESPECIALSHOOT)
+        else if (action._action == PlayerBase.ActionEnum.ONESHOT)
         {
             return weaponPickupImage;
         }
@@ -118,24 +118,24 @@ public class APBarManager : MonoBehaviour
     }
     private Color GetActionColor(PlayerBase.Action action)
     {
-        if (action.m_action == PlayerBase.ActionEnum.SHOOT)
+        if (action._action == PlayerBase.ActionEnum.SHOOT)
         {
-            switch (action.m_style.bulletType)
+            switch (action._style.bulletType)
             {
                 case BulletType.GUN: return shootColor;
                 case BulletType.SHOTGUN: return shootColor;
                 case BulletType.LASER: return shootColor;
             }
         }
-        else if (action.m_action == PlayerBase.ActionEnum.HEAL)
+        else if (action._action == PlayerBase.ActionEnum.HEAL)
         {
             return healColor;
         }
-        else if (action.m_action == PlayerBase.ActionEnum.MOVE)
+        else if (action._action == PlayerBase.ActionEnum.MOVE)
         {
             return moveColor;
         }
-        else if (action.m_action == PlayerBase.ActionEnum.ESPECIALSHOOT)
+        else if (action._action == PlayerBase.ActionEnum.ONESHOT)
         {
             return shootColor;
         }

@@ -6,18 +6,27 @@ using UnityEngine.SceneManagement;
 
 public class FlipCoinEvent : MonoBehaviour
 {
+    [Header("Dialogue Box")]
     [SerializeField] private Dialogue eventText;
-    private enum eventState { INTRODUCTION, DECISION, OUTCOME }
-    private enum coinSide { HEADS, TAILS }
 
+   
+    private enum eventState { INTRODUCTION, DECISION, OUTCOME }
+
+    private enum coinSide { HEADS, TAILS }
     private coinSide playerSide;
     private coinSide prizeSide;
 
+    [Header("Event Phase")]
     [SerializeField] private eventState currentState;
+
+    [Header("Event Canvas")]
     [SerializeField] private GameObject buttonCanvas;
     [SerializeField] private Canvas exitCanvas;
+
+    [Header("Player Data")]
     [SerializeField] private PlayerData playerData;
 
+    [Header("Canvas Audio Source")]
     [SerializeField] private AudioSource audioSource;
 
     // Start is called before the first frame update
@@ -83,7 +92,7 @@ public class FlipCoinEvent : MonoBehaviour
 
                 resultText += $"\nCurrent XP: {playerData.exp}";
 
-                eventText.textComponent.text = ""; // Limpieza por seguridad
+                eventText.textComponent.text = ""; 
                 StartCoroutine(TypeLineExternalText(resultText));
                 exitCanvas.enabled = true;
                 break;

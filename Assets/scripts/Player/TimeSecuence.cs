@@ -56,10 +56,10 @@ public class TimeSecuence : MonoBehaviour
             // Check for action selection
             foreach (var action in playerBase.availableActions)
             {
-                if (Input.GetKeyDown(action.m_key))
+                if (Input.GetKeyDown(action._key))
                 {
                     selectedAction = action;
-                    Debug.Log("Selected action: " + selectedAction.m_action);
+                    Debug.Log("Selected action: " + selectedAction._action);
 
                     this.GetComponent<ControlLiniarRender>().ChangeLineColor(action);
                 }
@@ -126,7 +126,7 @@ public class TimeSecuence : MonoBehaviour
                     movCount++;
                     break;
 
-                case PlayerBase.ActionEnum.ESPECIALSHOOT:
+                case PlayerBase.ActionEnum.ONESHOT:
                    
                     shootPl.UpdateShoot(movCount);
 

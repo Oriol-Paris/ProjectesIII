@@ -5,15 +5,21 @@ using UnityEngine.Localization.Components;
 
 public class Dialogue : MonoBehaviour
 {
+    [Header("Text Components")]
     public TextMeshProUGUI textComponent;
     public string dialogueLines;
-    public float textSpeed;
-    public TutorialManager tutorialManager;
+    private LocalizeStringEvent localizeEvent;
+    [Header("Typing Effect Components")]
     public bool textFullyDisplayed;
     private int index;
     public bool IsTyping { get; private set; }
+    public float textSpeed;
 
-    private LocalizeStringEvent localizeEvent;
+    [Header("Tutorial (Only use in Tutorial Scene)")]
+    public TutorialManager tutorialManager;
+    
+
+    
 
     void Awake()
     {
